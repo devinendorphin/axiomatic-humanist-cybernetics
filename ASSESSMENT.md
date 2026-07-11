@@ -38,7 +38,7 @@ The Crisis Cap is proved over `Valid : Cap → List Bool → Prop` traces; the S
 
 So the integrated guarantee the brief's Part I sentence promises — *"once the cap trips, only a full constitutional review … can restore emergency powers"* — is verified in two halves that are never joined. C1–C3 verify the arithmetic half; C4–C6 verify the automaton half; the conjunction is asserted by prose, not by Lean. This is exactly the F-2 "gaming path through the interaction" question, and the answer is: the interaction is currently unverified, so gaming it cannot be excluded *by the kernel*.
 
-**Disposition:** strengthening candidate (F-4). A combined semantics is order-theoretic enough to join the kernel: a product state `(Mode × List Bool)`, one step function consuming one `Event` per day, with `capTrip` *derived* (fires iff `load W trace ≥ T_cap` ∧ exceedance flag) rather than free, and the theorem *"in `structuralReview`, no reachable successor extends the trace with `true`."* This adds no new specification — it verifies the sentence of §12.3 the two halves already target — so it should survive Principle 19.2. Deliberately **not** added to the kernel here, to keep the circulated packet byte-stable under its published digest; route to Phase 2.
+**Disposition:** strengthening candidate (F-4). A combined semantics is order-theoretic enough to join the kernel: a product state `(Mode × List Bool)`, one step function consuming one `Event` per day, with `capTrip` *derived* (fires iff `load W trace ≥ T_cap` ∧ exceedance flag) rather than free, and the theorem *"in `structuralReview`, no reachable successor extends the trace with `true`."* This adds no new specification — it verifies the sentence of §12.3 the two halves already target — so it should survive Principle 19.2. Deliberately **not** added to the kernel here, to keep the circulated packet byte-stable under its published digest; route to Phase 2. **Drafted and machine-checked:** [`phase2-drafts/Phase2Drafts/CrisisCapComposition.lean`](phase2-drafts/Phase2Drafts/CrisisCapComposition.lean) (theorems G1–G7).
 
 ### AHC-P1-002 · F-1 · **Medium** — T9 `no_chatter` verifies less than the hysteresis intent
 
@@ -49,14 +49,14 @@ As formalized, `escalates p A ≡ Astar < A` and `deescalates p A ≡ A < Areset
 
 T9 is true and worth having (it rules out *simultaneous* contradictory directives), but the module summary's gloss — "makes single-signal panic **cycling** logically impossible" — overstates what was proved. Cycling is a property of trajectories, and there are no trajectories in T9.
 
-**Disposition:** strengthening candidate (F-4), one theorem: for any escalation at time *i* (`Astar < A_i`) and any de-escalation at time *j* (`A_j < Areset`), `A_i − A_j > Astar − Areset` — i.e. **each oscillation costs signal travel exceeding the gap width**, so N oscillations require total variation > N·gap. That is the honest formal content of hysteresis (chatter requires large real swings, not noise), it is core-`omega` provable, and it makes the gap field load-bearing. Also route a one-word edit: "cycling" → "simultaneous escalate/de-escalate" in the T9 gloss until the stronger theorem lands.
+**Disposition:** strengthening candidate (F-4), one theorem: for any escalation at time *i* (`Astar < A_i`) and any de-escalation at time *j* (`A_j < Areset`), `A_i − A_j > Astar − Areset` — i.e. **each oscillation costs signal travel exceeding the gap width**, so N oscillations require total variation > N·gap. That is the honest formal content of hysteresis (chatter requires large real swings, not noise), it is core-`omega` provable, and it makes the gap field load-bearing. Also route a one-word edit: "cycling" → "simultaneous escalate/de-escalate" in the T9 gloss until the stronger theorem lands. **Drafted and machine-checked:** [`phase2-drafts/Phase2Drafts/Hysteresis.lean`](phase2-drafts/Phase2Drafts/Hysteresis.lean) (S1 pointwise; S2 anchored machine bound; S3 headline `(flips − 1)·(gapWidth+1) ≤ total variation`).
 
 ### AHC-P1-003 · F-3 · **Low** — PIO discretization: two benign losses, one worth stating
 
 - **Mid-hour confirmation:** within the deadline hour, `pioStep` gives confirmation priority over expiry (`.issued 71` + `confirm=true` → `.confirmed`, even though `71+1 = 72`). This is the generous-to-confirmation reading of "within 72 hours"; it is defensible but is a modeling choice not listed in Part II.F — add it to the disclosures.
 - **Concurrent PIOs:** the machine is single-instance. Two overlapping PIOs for one subgraph (e.g. re-issue at hour 71 to reset the clock) are unrepresentable, so the kernel cannot yet refute the *re-issuance laundering* path: reversal at hour 72 followed by immediate re-issue on the same evidence. §5.4's English plausibly forbids it; the model neither forbids nor exhibits it.
 
-**Disposition:** the re-issuance question routes as F-4 (a `List PIO`-per-subgraph machine with a no-refresh-without-new-evidence side condition is order-theoretic enough); the confirmation-priority note routes as a Part II.F disclosure amendment.
+**Disposition:** the re-issuance question routes as F-4 (a `List PIO`-per-subgraph machine with a no-refresh-without-new-evidence side condition is order-theoretic enough); the confirmation-priority note routes as a Part II.F disclosure amendment. **Drafted and machine-checked** (contingent on the D-class ruling on the guard condition): [`phase2-drafts/Phase2Drafts/PIOReissuance.lean`](phase2-drafts/Phase2Drafts/PIOReissuance.lean) (R1 total unconfirmed protection ≤ 72h without new evidence; R2 at most one issuance).
 
 ### AHC-P1-004 · D-4 · **Low** — bracketing bounds position, not displacement
 
@@ -105,10 +105,11 @@ The kernel lives in a subdirectory of this repo, so the packet-internal workflow
 | Change | Path | Rationale |
 |---|---|---|
 | Installed circulation packet (kernel byte-identical to circulated digest) | `ahc-verified-kernel/` | requested install |
-| Installed brief + MANIFEST + reproduced audit log | `docs/` | provenance & evidence |
+| Installed brief + MANIFEST + reproduced audit logs | `docs/` | provenance & evidence |
 | Root CI workflow, hardened | `.github/workflows/verify.yml` | AHC-P1-007/008 |
 | Build-artifact ignore | `.gitignore` | hygiene |
 | This assessment | `ASSESSMENT.md` | requested analysis |
+| Phase 2 strengthening drafts (21 machine-checked theorems answering AHC-P1-001/002/003) | `phase2-drafts/` | requested drafts; kernel untouched |
 
 Kernel sources were deliberately **not** modified: every proof checks, so the only defensible in-kernel changes would be strengthenings (AHC-P1-001/002/003), and those belong to the packet's own Phase 2 amendment route — not silently inside a copy whose MANIFEST digest reviewers may still verify.
 

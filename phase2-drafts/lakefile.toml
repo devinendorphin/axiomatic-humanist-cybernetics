@@ -1,0 +1,10 @@
+name = "Phase2Drafts"
+version = "0.1.0"
+defaultTargets = ["Phase2Drafts"]
+
+[[require]]
+name = "AHCKernel"
+path = "../ahc-verified-kernel"
+
+[[lean_lib]]
+name = "Phase2Drafts"

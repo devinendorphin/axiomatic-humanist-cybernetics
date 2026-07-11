@@ -1,0 +1,29 @@
+✔ [3/10] Built AHCKernel.TieredProtocol
+✔ [4/10] Built AHCKernel.CrisisCap
+✔ [5/10] Built Phase2Drafts.CrisisCapComposition
+✔ [6/10] Built Phase2Drafts.PIOReissuance
+✔ [7/10] Built Phase2Drafts.Hysteresis
+ℹ [8/10] Built Phase2Drafts.Audit
+info: ././././Phase2Drafts/Audit.lean:14:0: 'AHC.Phase2.oscillation_travel' depends on axioms: [propext, Quot.sound]
+info: ././././Phase2Drafts/Audit.lean:15:0: 'AHC.Phase2.flip_anchored' depends on axioms: [propext]
+info: ././././Phase2Drafts/Audit.lean:16:0: 'AHC.Phase2.travel_reanchor' depends on axioms: [propext, Quot.sound]
+info: ././././Phase2Drafts/Audit.lean:17:0: 'AHC.Phase2.flips_travel_anchored' depends on axioms: [propext, Quot.sound]
+info: ././././Phase2Drafts/Audit.lean:18:0: 'AHC.Phase2.chatter_requires_travel' depends on axioms: [propext, Quot.sound]
+info: ././././Phase2Drafts/Audit.lean:21:0: 'AHC.Phase2.dayStep_valid' does not depend on any axioms
+info: ././././Phase2Drafts/Audit.lean:22:0: 'AHC.Phase2.dayRun_valid' does not depend on any axioms
+info: ././././Phase2Drafts/Audit.lean:23:0: 'AHC.Phase2.review_day_never_emergency' depends on axioms: [propext]
+info: ././././Phase2Drafts/Audit.lean:24:0: 'AHC.Phase2.review_exit_iff_output' depends on axioms: [propext]
+info: ././././Phase2Drafts/Audit.lean:25:0: 'AHC.Phase2.trip_forced' depends on axioms: [propext, Quot.sound]
+info: ././././Phase2Drafts/Audit.lean:26:0: 'AHC.Phase2.review_run' depends on axioms: [propext, Quot.sound]
+info: ././././Phase2Drafts/Audit.lean:27:0: 'AHC.Phase2.review_gate_composed' depends on axioms: [propext, Quot.sound]
+info: ././././Phase2Drafts/Audit.lean:28:0: 'AHC.Phase2.emergency_day_provenance' depends on axioms: [propext]
+info: ././././Phase2Drafts/Audit.lean:29:0: 'AHC.Phase2.composed_cap_safety' depends on axioms: [propext, Quot.sound]
+info: ././././Phase2Drafts/Audit.lean:30:0: 'AHC.Phase2.composed_no_permanent_emergency' depends on axioms: [propext, Quot.sound]
+info: ././././Phase2Drafts/Audit.lean:33:0: 'AHC.Phase2.pendingHours_confirmed' does not depend on any axioms
+info: ././././Phase2Drafts/Audit.lean:34:0: 'AHC.Phase2.pendingHours_spent' depends on axioms: [propext]
+info: ././././Phase2Drafts/Audit.lean:35:0: 'AHC.Phase2.pendingHours_pending' depends on axioms: [propext, Quot.sound]
+info: ././././Phase2Drafts/Audit.lean:36:0: 'AHC.Phase2.issuances_zero_of_ne_idle' depends on axioms: [propext]
+info: ././././Phase2Drafts/Audit.lean:37:0: 'AHC.Phase2.reissue_needs_new_evidence' depends on axioms: [propext]
+info: ././././Phase2Drafts/Audit.lean:38:0: 'AHC.Phase2.pio_no_relitigation' depends on axioms: [propext, Quot.sound]
+✔ [9/10] Built Phase2Drafts
+Build completed successfully.

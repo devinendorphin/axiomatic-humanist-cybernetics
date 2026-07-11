@@ -1,0 +1,12 @@
+{"version": "1.1.0",
+ "packagesDir": ".lake/packages",
+ "packages":
+ [{"type": "path",
+   "scope": "",
+   "name": "AHCKernel",
+   "manifestFile": "lake-manifest.json",
+   "inherited": false,
+   "dir": "./../ahc-verified-kernel",
+   "configFile": "lakefile.toml"}],
+ "name": "Phase2Drafts",
+ "lakeDir": ".lake"}

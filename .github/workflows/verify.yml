@@ -44,3 +44,13 @@ jobs:
           echo "audit entries: $total  axiom-free: $free"
           test "$total" -eq 35
           test "$free" -eq 22
+      - name: Build Phase 2 drafts
+        working-directory: phase2-drafts
+        run: lake build 2>&1 | tee build.log
+      - name: Phase 2 drafts guards
+        working-directory: phase2-drafts
+        run: |
+          ! grep -q sorryAx build.log
+          ! grep -q 'Classical.choice' build.log
+          ! grep 'depends on axioms' build.log | grep -Ev '\[propext(, Quot\.sound)?\]'
+          test "$(grep -c 'depend' build.log)" -eq 21
