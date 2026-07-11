@@ -24,6 +24,12 @@ open AHC
 #print axioms pio_reversible
 #print axioms pio_resolves
 #print axioms no_chatter
+-- Temporal hysteresis (S1-S3, adopted v0.2; finding AHC-P1-002)
+#print axioms oscillation_travel
+#print axioms flip_anchored
+#print axioms travel_reanchor
+#print axioms flips_travel_anchored
+#print axioms chatter_requires_travel
 
 -- Module 2: Crisis Frequency Cap & Structural Review (§12.3); Axiom II (§4.2)
 #print axioms window_head_bound
@@ -33,6 +39,17 @@ open AHC
 #print axioms review_absorbing
 #print axioms review_gate
 #print axioms axiomII_dichotomy
+-- Composed cap x review semantics (G1-G7, adopted v0.2; finding AHC-P1-001)
+#print axioms dayStep_valid
+#print axioms dayRun_valid
+#print axioms review_day_never_emergency
+#print axioms review_exit_iff_output
+#print axioms trip_forced
+#print axioms review_run
+#print axioms review_gate_composed
+#print axioms emergency_day_provenance
+#print axioms composed_cap_safety
+#print axioms composed_no_permanent_emergency
 
 -- Module 3: Byzantine Measurement Consensus (§8.3); Axiom I (§4.1, §1.1)
 #print axioms honest_strict_majority

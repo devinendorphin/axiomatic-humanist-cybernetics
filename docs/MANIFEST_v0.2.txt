@@ -1,0 +1,51 @@
+AHC VERIFIED CONSTITUTIONAL KERNEL — MANIFEST
+Version 0.2 — 2026-07-11
+Supersedes v0.1 (MANIFEST.txt); change record in ERRATA_AND_AMENDMENTS.md
+
+CONTENTS
+  ahc-verified-kernel/
+      Lean 4 project: 4 modules, 50 audited theorems, zero sorries,
+      core-only. v0.2 adopts two strengthening families from Phase 1
+      external review, per the packet's own disposition routing:
+      Module 1  TieredProtocol.lean   (AHC §5.4, §9.2–9.3)
+                + S1–S3 temporal hysteresis (finding AHC-P1-002):
+                  posture cycling requires repeated full-band signal
+                  traversals — (flips−1)·(gapWidth+1) ≤ total variation
+      Module 2  CrisisCap.lean        (Comp. A §12.3; AHC §4.2, §10.3)
+                + G1–G7 composed cap × review semantics (finding
+                  AHC-P1-001): one daily-step machine; the cap trip is
+                  derived from the window arithmetic; an emergency day
+                  during Structural Review is unconstructible
+      Module 3  SensorsAndKernel.lean (AHC §8.3, §4.1, §1.1)  [unchanged]
+      Module 4  PLOL.lean             (AHC §10.4; Comp. A §5, §19.4,
+                                       App. B)                [unchanged]
+      Audit.lean re-verifies the axiom footprint on every build.
+      CI workflow (hardened in v0.2, finding AHC-P1-007) fails any build
+      containing a sorry, any Classical.choice, any unexpected axiom, or
+      any deviation from the audit footprint below.
+
+VERIFY (requires elan; no other dependencies, no Mathlib):
+  cd ahc-verified-kernel && lake build
+
+EXPECTED: build succeeds; audit log shows 50 audited theorems, every one
+at most [propext, Quot.sound]; never Classical.choice; 24 of 50 depend on
+no axioms at all, including all nine PLOL theorems.
+
+COUNTING NOTE (finding AHC-P1-006): counts here are audit-log counts —
+one line per `#print axioms` result. `decCompliant` is a verified
+Decidable instance, checked by elaboration rather than axiom audit, and
+is additional to the 50.
+
+SOURCE INTEGRITY
+  sha256 over sorted source files (*.lean, lakefile.toml, lean-toolchain):
+  4d44fb1835c732c3cf876b50b0042ff8da793afdfd57f70c120da45a4fef651e
+  v0.1 digest (superseded): 2b51cac67e278c54003bbf2d5974da19d581caeaa4bc6f3f8f23043cffea7609
+  Per Module 4 (bridge_proves_origin_not_consistency): this digest
+  proves origin, not consistency. Consistency you verify by building.
+
+CIRCULATED UNDER
+  Companion A Principle 19.2 (Complexity Ceiling): v0.2 introduces no new
+  mechanism. Every adopted theorem verifies specification sentences
+  already present in §9.2 and §12.3; all translation choices are
+  disclosed in module headers and are named contestation targets.
+  Findings route per Phase 1 brief Part III, "Disposition of findings."

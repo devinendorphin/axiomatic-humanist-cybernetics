@@ -38,7 +38,7 @@ The Crisis Cap is proved over `Valid : Cap → List Bool → Prop` traces; the S
 
 So the integrated guarantee the brief's Part I sentence promises — *"once the cap trips, only a full constitutional review … can restore emergency powers"* — is verified in two halves that are never joined. C1–C3 verify the arithmetic half; C4–C6 verify the automaton half; the conjunction is asserted by prose, not by Lean. This is exactly the F-2 "gaming path through the interaction" question, and the answer is: the interaction is currently unverified, so gaming it cannot be excluded *by the kernel*.
 
-**Disposition:** strengthening candidate (F-4). A combined semantics is order-theoretic enough to join the kernel: a product state `(Mode × List Bool)`, one step function consuming one `Event` per day, with `capTrip` *derived* (fires iff `load W trace ≥ T_cap` ∧ exceedance flag) rather than free, and the theorem *"in `structuralReview`, no reachable successor extends the trace with `true`."* This adds no new specification — it verifies the sentence of §12.3 the two halves already target — so it should survive Principle 19.2. Deliberately **not** added to the kernel here, to keep the circulated packet byte-stable under its published digest; route to Phase 2. **Drafted and machine-checked:** [`phase2-drafts/Phase2Drafts/CrisisCapComposition.lean`](phase2-drafts/Phase2Drafts/CrisisCapComposition.lean) (theorems G1–G7).
+**Disposition:** strengthening candidate (F-4). A combined semantics is order-theoretic enough to join the kernel: a product state `(Mode × List Bool)`, one step function consuming one `Event` per day, with `capTrip` *derived* (fires iff `load W trace ≥ T_cap` ∧ exceedance flag) rather than free, and the theorem *"in `structuralReview`, no reachable successor extends the trace with `true`."* This adds no new specification — it verifies the sentence of §12.3 the two halves already target — so it should survive Principle 19.2. Deliberately **not** added to the kernel here, to keep the circulated packet byte-stable under its published digest; route to Phase 2. **Drafted, machine-checked, and — per the 2026-07-11 addendum below — adopted into kernel v0.2:** [`ahc-verified-kernel/AHCKernel/CrisisCap.lean`](ahc-verified-kernel/AHCKernel/CrisisCap.lean) (theorems G1–G7). **Resolved.**
 
 ### AHC-P1-002 · F-1 · **Medium** — T9 `no_chatter` verifies less than the hysteresis intent
 
@@ -49,7 +49,7 @@ As formalized, `escalates p A ≡ Astar < A` and `deescalates p A ≡ A < Areset
 
 T9 is true and worth having (it rules out *simultaneous* contradictory directives), but the module summary's gloss — "makes single-signal panic **cycling** logically impossible" — overstates what was proved. Cycling is a property of trajectories, and there are no trajectories in T9.
 
-**Disposition:** strengthening candidate (F-4), one theorem: for any escalation at time *i* (`Astar < A_i`) and any de-escalation at time *j* (`A_j < Areset`), `A_i − A_j > Astar − Areset` — i.e. **each oscillation costs signal travel exceeding the gap width**, so N oscillations require total variation > N·gap. That is the honest formal content of hysteresis (chatter requires large real swings, not noise), it is core-`omega` provable, and it makes the gap field load-bearing. Also route a one-word edit: "cycling" → "simultaneous escalate/de-escalate" in the T9 gloss until the stronger theorem lands. **Drafted and machine-checked:** [`phase2-drafts/Phase2Drafts/Hysteresis.lean`](phase2-drafts/Phase2Drafts/Hysteresis.lean) (S1 pointwise; S2 anchored machine bound; S3 headline `(flips − 1)·(gapWidth+1) ≤ total variation`).
+**Disposition:** strengthening candidate (F-4), one theorem: for any escalation at time *i* (`Astar < A_i`) and any de-escalation at time *j* (`A_j < Areset`), `A_i − A_j > Astar − Areset` — i.e. **each oscillation costs signal travel exceeding the gap width**, so N oscillations require total variation > N·gap. That is the honest formal content of hysteresis (chatter requires large real swings, not noise), it is core-`omega` provable, and it makes the gap field load-bearing. Also route a one-word edit: "cycling" → "simultaneous escalate/de-escalate" in the T9 gloss until the stronger theorem lands. **Drafted, machine-checked, and — per the 2026-07-11 addendum below — adopted into kernel v0.2:** [`ahc-verified-kernel/AHCKernel/TieredProtocol.lean`](ahc-verified-kernel/AHCKernel/TieredProtocol.lean) (S1 pointwise; S2 anchored machine bound; S3 headline `(flips − 1)·(gapWidth+1) ≤ total variation`), with the T9 gloss corrected. **Resolved.**
 
 ### AHC-P1-003 · F-3 · **Low** — PIO discretization: two benign losses, one worth stating
 
@@ -120,3 +120,36 @@ Kernel sources were deliberately **not** modified: every proof checks, so the on
 As a *verified kernel*, the artifact is high quality: self-contained core-only Lean with a clean axiom story, honest and unusually explicit modeling disclosures, constitutive constraints as structure fields (degenerate parameterizations unconstructible), and a self-limiting claim discipline ("origin, not consistency"; "specification, not the world") that its own theorems then formalize — `bridge_proves_origin_not_consistency` proving the limits of its own integrity mechanism is the strongest single design choice in the packet.
 
 The two findings that matter for Phase 2 are structural, not proofs: the **unjoined halves of Module 2** (AHC-P1-001) and the **temporal gap in T9** (AHC-P1-002). Both have small, Principle-19.2-compatible strengthenings sketched above. The one operational defect — CI capable of passing a failed build — is fixed in this repository and should be fixed upstream before further circulation, since the packet's entire trust argument routes through "the build would fail and say so."
+
+---
+
+## Addendum — kernel v0.2 (2026-07-11, post-assessment)
+
+The findings above were assessed against the circulated v0.1 packet; the
+body of this document is preserved as that record. Subsequently, per the
+brief's own disposition routing:
+
+- **Adopted into the kernel (v0.2):** the temporal-hysteresis family
+  (AHC-P1-002 → S1–S3 in `TieredProtocol.lean`, T9 gloss corrected) and
+  the composed cap × review semantics (AHC-P1-001 → G1–G7 in
+  `CrisisCap.lean`). Kernel footprint is now **50 audited theorems, 24
+  axiom-free**; new digest in [`docs/MANIFEST_v0.2.txt`](docs/MANIFEST_v0.2.txt).
+- **Packet errata applied:** the nested `ci.yml` pipefail defect
+  (AHC-P1-007) is fixed in place; brief amendments E3–E5 (Part II.F
+  confirmation-priority disclosure, Part I plain-language finding
+  routing, count normalization) are recorded in
+  [`docs/ERRATA_AND_AMENDMENTS.md`](docs/ERRATA_AND_AMENDMENTS.md), the
+  v0.1 docx being retained unmodified as the circulated artifact.
+- **Still open:** AHC-P1-003 (PIO re-issuance guard, in
+  [`phase2-drafts/`](phase2-drafts/), awaiting the D-class ruling on
+  whether auto-reversal consumes its evidence), AHC-P1-004 (trimmed-mean
+  counting property, deployment-conditional), AHC-P1-005 / D-2 (the
+  reversibility classification — a domain judgment, the highest-leverage
+  open review item), and the declared non-goals (statistical layer,
+  viability dynamics, Layer 0 extraction tooling).
+
+Statements in the body such as "kernel sources were deliberately not
+modified" and "byte-identical to the circulated packet" were true of the
+assessment date and remain true of the v0.1 record (git commit `ffed6c1`,
+digest `2b51cac6…ea7609`); they are superseded for the current tree by
+this addendum.

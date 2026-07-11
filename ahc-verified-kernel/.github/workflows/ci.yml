@@ -3,6 +3,12 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        # Explicit `shell: bash` makes Actions add `-o pipefail`; the
+        # implicit default lacks it, which let a failed `lake build | tee`
+        # pass silently (Phase 1 finding AHC-P1-007, fixed in v0.2).
+        shell: bash
     steps:
       - uses: actions/checkout@v4
       - name: Install elan
@@ -13,4 +19,18 @@ jobs:
       - name: Build and audit
         run: lake build 2>&1 | tee build.log
       - name: Fail on sorry
-        run: "! grep -q sorryAx build.log"
+        run: '! grep -q sorryAx build.log'
+      - name: Fail on classical choice or unexpected axioms
+        run: |
+          ! grep -q 'Classical.choice' build.log
+          ! grep 'depends on axioms' build.log | grep -Ev '\[propext(, Quot\.sound)?\]'
+      - name: Assert audit footprint
+        # 50 audited theorems, 24 of them axiom-free (v0.2). A theorem
+        # silently dropped from Audit.lean, or one acquiring an axiom,
+        # fails this step.
+        run: |
+          total=$(grep -c 'depend' build.log)
+          free=$(grep -c 'does not depend on any axioms' build.log)
+          echo "audit entries: $total  axiom-free: $free"
+          test "$total" -eq 50
+          test "$free" -eq 24

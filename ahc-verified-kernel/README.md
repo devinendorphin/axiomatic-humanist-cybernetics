@@ -1,16 +1,23 @@
 # AHC Verified Constitutional Kernel
 
+**Version 0.2** — adopts two strengthening families from Phase 1 external
+review (temporal hysteresis, composed cap × review semantics); change
+record in `../docs/ERRATA_AND_AMENDMENTS.md`, digest in
+`../docs/MANIFEST_v0.2.txt`.
+
 Machine-checked formalization (Lean 4) of the order-theoretic core of
 **Axiomatic Humanist Cybernetics v3.1** — the Tiered Evidence-Action
-Protocol, the Crisis Frequency Cap and Structural Review gate, Byzantine
-measurement consensus, Axioms I and II, and the Plain Language Output
-Layer's register-invariance guarantees.
+Protocol with temporal hysteresis, the Crisis Frequency Cap and Structural
+Review gate (including their composition), Byzantine measurement
+consensus, Axioms I and II, and the Plain Language Output Layer's
+register-invariance guarantees.
 
 **Toolchain:** Lean 4.15.0, core only — **no Mathlib dependency**. Every
 proof is self-contained. **Zero `sorry`s.** No theorem depends on
 `Classical.choice`; the complete axiom footprint is `propext` and
-`Quot.sound` (standard Lean kernel axioms), and twenty-two theorems depend
-on no axioms at all — including every theorem of the PLOL module.
+`Quot.sound` (standard Lean kernel axioms), and twenty-four of the fifty
+audited theorems depend on no axioms at all — including every theorem of
+the PLOL module.
 
 ## What is and is not verified
 
@@ -40,7 +47,10 @@ nothing here substitutes for it.
 | `pio_ceiling` (T6) | §5.4 (Tier 0-PIO) | No PIO state authorizes above Tier-1 severity |
 | `pio_reversible` (T7) | §5.4 | Everything a PIO authorizes is reversible |
 | `pio_resolves` (T8) | §5.4 | A PIO cannot remain pending past the 72h deadline: confirmed or auto-reversed |
-| `no_chatter` (T9) | §9.2 | The hysteresis gap makes simultaneous escalate/de-escalate unsatisfiable |
+| `no_chatter` (T9) | §9.2 | The hysteresis gap makes simultaneous escalate/de-escalate unsatisfiable (instantaneous; see S3 for the temporal claim) |
+| `oscillation_travel` (S1) | §9.2 | Escalating and de-escalating values are separated by more than the gap width |
+| `flips_travel_anchored` (S2) | §9.2 | Anchored bound: every posture flip costs the signal more than the gap width of travel |
+| `chatter_requires_travel` (S3) | §9.2 | (flips − 1)·(gapWidth+1) ≤ total variation: cycling requires repeated genuine full-band swings; sub-band noise flips the posture at most once |
 
 ### Module 2 — `AHCKernel/CrisisCap.lean`
 
@@ -53,6 +63,13 @@ nothing here substitutes for it.
 | `review_absorbing` (C5) | §12.3 | Review survives any event sequence lacking a Layer 0 output |
 | `review_gate` (C6) | §12.3 | Across any output-free span, emergency authority is never granted |
 | `axiomII_dichotomy` (A2a) | §4.2 | Every episode is exactly one of: reversibility-claim-valid, or locally terminal |
+| `dayStep_valid` / `dayRun_valid` (G1) | §12.3 | Every reachable trace of the composed cap × review machine is protocol-valid: C1–C3 apply verbatim |
+| `review_day_never_emergency` (G2) | §12.3 | In review, the appended day is `false` for every input: an emergency day during review is unconstructible |
+| `review_exit_iff_output` (G3) | §12.3 | Review closes exactly on a Layer 0 output |
+| `trip_forced` (G4) | §12.3 | Continued exceedance over a saturated window must trip into review: the trip is derived from the window arithmetic, not discretionary |
+| `review_run` / `review_gate_composed` (G5) | §12.3 | Across any output-free span, review persists and the trace extension is all-`false` |
+| `emergency_day_provenance` (G6) | §12.3 | Inversion: every emergency day was individually authorized — operational mode, actual request, window strictly below cap |
+| `composed_cap_safety` / `composed_no_permanent_emergency` (G7) | §12.3 | C1/C2/C3 restated of the composed machine from its initial state |
 
 ### Module 3 — `AHCKernel/SensorsAndKernel.lean`
 
@@ -116,13 +133,18 @@ The build elaborates all proofs and prints the axiom audit
 the `sorryAx` axiom in that output. Expected audit result:
 
 ```
-every theorem: at most [propext, Quot.sound]; never Classical.choice
-no axioms at all: broadcast_universal, tier_monotone, severity_le_evidence,
-  sub_causal_reversible, irreversible_iff_causal, pio_ceiling,
-  pio_reversible, no_emergency_in_review, review_absorbing,
+50 audited theorems: every one at most [propext, Quot.sound];
+never Classical.choice
+no axioms at all (24): broadcast_universal, tier_monotone,
+  severity_le_evidence, sub_causal_reversible, irreversible_iff_causal,
+  pio_ceiling, pio_reversible, no_emergency_in_review, review_absorbing,
   axiomI_null_kernel, axiomI_no_compensation, null_kernel_product,
-  globalSignal_pos_iff, and all nine PLOL theorems
+  globalSignal_pos_iff, dayStep_valid, dayRun_valid,
+  and all nine PLOL theorems
 ```
+
+(Counts are audit-log entries — one per `#print axioms` result;
+`decCompliant` is a verified `Decidable` instance additional to them.)
 
 ## Modeling disclosures
 
@@ -132,7 +154,10 @@ explicitly: discretization of time in days/hours; the strict (conservative)
 reading of the renewal condition where the spec admits an off-by-one; M3
 treated as the irreversibility-bearing mechanism the tier structure gates;
 the median characterized by its counting property rather than order
-statistics. These choices are the right places to aim contestation.
+statistics; the enforcement posture as a one-bit Schmitt trigger with
+total variation as "travel" (S1–S3); the composed machine's trip condition
+as exceedance ∧ failure of the renewal condition, with exceedance a free
+input (G1–G7). These choices are the right places to aim contestation.
 
 ## Status and non-goals
 
