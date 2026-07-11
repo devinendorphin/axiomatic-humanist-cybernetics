@@ -1,0 +1,6 @@
+name = "AHCKernel"
+version = "0.1.0"
+defaultTargets = ["AHCKernel"]
+
+[[lean_lib]]
+name = "AHCKernel"

@@ -1,0 +1,46 @@
+name: verify
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        # Explicit `shell: bash` makes Actions run with `-e -o pipefail`;
+        # the implicit default lacks pipefail, which would let a failed
+        # `lake build | tee` pass silently (see ASSESSMENT.md, AHC-P1-007).
+        shell: bash
+        working-directory: ahc-verified-kernel
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl -sSfL https://github.com/leanprover/elan/releases/latest/download/elan-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          ./elan-init -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> $GITHUB_PATH
+      - name: Report source integrity digest
+        # Digest over sorted sources, as recorded in docs/MANIFEST.txt.
+        # Informational: per Module 4 (bridge_proves_origin_not_consistency),
+        # the digest proves origin, not consistency — and legitimate
+        # amendments change it. Consistency is what the build verifies.
+        run: |
+          find . -path ./.lake -prune -o -type f \
+            \( -name '*.lean' -o -name 'lakefile.toml' -o -name 'lean-toolchain' \) -print \
+            | sort | xargs cat | sha256sum
+      - name: Build and audit
+        run: lake build 2>&1 | tee build.log
+      - name: Fail on sorry
+        run: '! grep -q sorryAx build.log'
+      - name: Fail on classical choice or unexpected axioms
+        run: |
+          ! grep -q 'Classical.choice' build.log
+          ! grep 'depends on axioms' build.log | grep -Ev '\[propext(, Quot\.sound)?\]'
+      - name: Assert audit coverage and axiom-free count
+        # 35 audited declarations, 22 of them axiom-free — the packet's
+        # exact published footprint. A theorem silently dropped from
+        # Audit.lean, or one acquiring an axiom, fails this step.
+        run: |
+          total=$(grep -c 'depend' build.log)
+          free=$(grep -c 'does not depend on any axioms' build.log)
+          echo "audit entries: $total  axiom-free: $free"
+          test "$total" -eq 35
+          test "$free" -eq 22

@@ -1,0 +1,33 @@
+AHC VERIFIED CONSTITUTIONAL KERNEL — PHASE 1 CIRCULATION PACKET
+Version 0.1 — 2026-07-11
+
+CONTENTS
+  AHC_VerifiedKernel_Phase1_Brief.docx
+      Plain Language Summary (PLOL-conformant, Appendix B fields)
+      Formal Appendix (theorem-specification map, modeling disclosures)
+      Phase 1 Reviewer Brief (solicitations F-1..F-4, D-1..D-4, L-1..L-3)
+  ahc-verified-kernel/
+      Lean 4 project: 4 modules, 34 theorems, zero sorries, core-only.
+      Module 1  TieredProtocol.lean     (AHC §5.4, §9.2–9.3)
+      Module 2  CrisisCap.lean          (Comp. A §12.3; AHC §4.2, §10.3)
+      Module 3  SensorsAndKernel.lean   (AHC §8.3, §4.1, §1.1)
+      Module 4  PLOL.lean               (AHC §10.4; Comp. A §5, §19.4, App. B)
+      Audit.lean re-verifies the axiom footprint on every build.
+      CI workflow fails any build containing a sorry.
+
+VERIFY (requires elan; no other dependencies, no Mathlib):
+  cd ahc-verified-kernel && lake build
+
+EXPECTED: build succeeds; audit log shows every theorem at most
+[propext, Quot.sound]; never Classical.choice; 22 of 34 theorems
+depend on no axioms at all, including all nine PLOL theorems.
+
+SOURCE INTEGRITY
+  sha256 over sorted source files (*.lean, lakefile.toml, lean-toolchain):
+  2b51cac67e278c54003bbf2d5974da19d581caeaa4bc6f3f8f23043cffea7609
+  Per Module 4 (bridge_proves_origin_not_consistency): this digest
+  proves origin, not consistency. Consistency you verify by building.
+
+CIRCULATED UNDER
+  Companion A Principle 19.2 (Complexity Ceiling): no new specification
+  is introduced. Findings route per Part III, "Disposition of findings."
