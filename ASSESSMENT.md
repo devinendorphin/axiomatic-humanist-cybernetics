@@ -141,12 +141,32 @@ brief's own disposition routing:
   [`docs/ERRATA_AND_AMENDMENTS.md`](docs/ERRATA_AND_AMENDMENTS.md), the
   v0.1 docx being retained unmodified as the circulated artifact.
 - **Still open:** AHC-P1-003 (PIO re-issuance guard, in
-  [`phase2-drafts/`](phase2-drafts/), awaiting the D-class ruling on
+  `phase2-drafts/`, awaiting the D-class ruling on
   whether auto-reversal consumes its evidence), AHC-P1-004 (trimmed-mean
   counting property, deployment-conditional), AHC-P1-005 / D-2 (the
   reversibility classification — a domain judgment, the highest-leverage
   open review item), and the declared non-goals (statistical layer,
   viability dynamics, Layer 0 extraction tooling).
+
+## Addendum 2 — kernel v0.3 (2026-07-12): the rulings
+
+Both open rulings were made by the project owner on 2026-07-12 and are
+implemented in kernel v0.3
+([`docs/ERRATA_AND_AMENDMENTS.md`](docs/ERRATA_AND_AMENDMENTS.md),
+[`docs/MANIFEST_v0.3.txt`](docs/MANIFEST_v0.3.txt)):
+
+- **AHC-P1-003 → Resolved.** Ruling D-R1: yes, with the freshness bar
+  generous — `fresh = novelClaim ∨ exceedance`. Adopted as R1–R4 in
+  `TieredProtocol.lean`; the new R3 (`ongoing_attack_reprotects`) closes
+  the protection-gap failure mode the strict reading would have had.
+  The `phase2-drafts/` package is retired.
+- **AHC-P1-005 / D-2 → Resolved (partially).** Ruling D-R2: Q1 yes,
+  Q3 regime-bound. Adopted as the `Action`/`RoutingRegime` split, V1–V7
+  in `TieredProtocol.lean`. Two follow-ups remain: **Q2 (severance
+  reversibility) is still unruled**, and the deployment value of
+  `RoutingRegime.bound` must be specified per deployment class.
+
+Kernel footprint after v0.3: **65 audited theorems, 28 axiom-free**.
 
 Statements in the body such as "kernel sources were deliberately not
 modified" and "byte-identical to the circulated packet" were true of the

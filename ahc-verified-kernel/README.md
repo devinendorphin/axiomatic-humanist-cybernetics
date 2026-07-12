@@ -1,9 +1,12 @@
 # AHC Verified Constitutional Kernel
 
-**Version 0.2** — adopts two strengthening families from Phase 1 external
-review (temporal hysteresis, composed cap × review semantics); change
-record in `../docs/ERRATA_AND_AMENDMENTS.md`, digest in
-`../docs/MANIFEST_v0.2.txt`.
+**Version 0.3** — v0.2 adopted two strengthening families from Phase 1
+external review (temporal hysteresis, composed cap × review semantics);
+v0.3 implements the two constitutional rulings of 2026-07-12 (PIO
+re-issuance guard with a generous freshness bar, ruling D-R1; regime-split
+capital routing, ruling D-R2). Change record in
+`../docs/ERRATA_AND_AMENDMENTS.md`, digest in `../docs/MANIFEST_v0.3.txt`.
+Open: question Q2 (severance reversibility) remains unruled.
 
 Machine-checked formalization (Lean 4) of the order-theoretic core of
 **Axiomatic Humanist Cybernetics v3.1** — the Tiered Evidence-Action
@@ -15,9 +18,9 @@ register-invariance guarantees.
 **Toolchain:** Lean 4.15.0, core only — **no Mathlib dependency**. Every
 proof is self-contained. **Zero `sorry`s.** No theorem depends on
 `Classical.choice`; the complete axiom footprint is `propext` and
-`Quot.sound` (standard Lean kernel axioms), and twenty-four of the fifty
-audited theorems depend on no axioms at all — including every theorem of
-the PLOL module.
+`Quot.sound` (standard Lean kernel axioms), and twenty-eight of the
+sixty-five audited theorems depend on no axioms at all — including every
+theorem of the PLOL module.
 
 ## What is and is not verified
 
@@ -51,6 +54,16 @@ nothing here substitutes for it.
 | `oscillation_travel` (S1) | §9.2 | Escalating and de-escalating values are separated by more than the gap width |
 | `flips_travel_anchored` (S2) | §9.2 | Anchored bound: every posture flip costs the signal more than the gap width of travel |
 | `chatter_requires_travel` (S3) | §9.2 | (flips − 1)·(gapWidth+1) ≤ total variation: cycling requires repeated genuine full-band swings; sub-band noise flips the posture at most once |
+| `pio_no_relitigation` (R1) | §5.4 | Stale evidence buys at most 72 unconfirmed protected hours, against any re-filing pattern |
+| `reissue_needs_new_evidence` (R2) | §5.4 | Under staleness, at most one PIO issuance, ever |
+| `ongoing_attack_reprotects` (R3) | §5.4 | Under ongoing exceedance a spent subgraph re-protects immediately: an ongoing attack is never locked out |
+| `reissue_blocked_iff_stale` (R4) | §5.4 | The guard blocks exactly stale claims and nothing else |
+| `action_tier_monotone` / `action_severity_le_evidence` (V1–V2) | §5.4 | T1/T2 lifted to magnitude-bearing actions |
+| `action_sub_causal_reversible` (V3) | §5.4 | Restored T3: every action authorized below Tier 3 is reversible — now a consequence of gating, not fiat |
+| `action_irreversible_iff_causal` (V4) | §5.4, §5.5 | T4 lifted to actions |
+| `unbounded_routing_needs_causal` (V5) | §5.4 | Capital routing beyond the regime bound is authorized only at Tier 3 |
+| `bounded_routing_at_t1` (V6) | §5.4 | Bounded routing stays available on correlational evidence: the graduated ladder is preserved |
+| `refinement_conservative` (V7) | §5.4 | The split only strengthens gating relative to the Phase 1 table |
 
 ### Module 2 — `AHCKernel/CrisisCap.lean`
 
@@ -133,14 +146,15 @@ The build elaborates all proofs and prints the axiom audit
 the `sorryAx` axiom in that output. Expected audit result:
 
 ```
-50 audited theorems: every one at most [propext, Quot.sound];
+65 audited theorems: every one at most [propext, Quot.sound];
 never Classical.choice
-no axioms at all (24): broadcast_universal, tier_monotone,
+no axioms at all (28): broadcast_universal, tier_monotone,
   severity_le_evidence, sub_causal_reversible, irreversible_iff_causal,
   pio_ceiling, pio_reversible, no_emergency_in_review, review_absorbing,
   axiomI_null_kernel, axiomI_no_compensation, null_kernel_product,
   globalSignal_pos_iff, dayStep_valid, dayRun_valid,
-  and all nine PLOL theorems
+  pendingHours_confirmed, action_tier_monotone, bounded_routing_at_t1,
+  refinement_conservative, and all nine PLOL theorems
 ```
 
 (Counts are audit-log entries — one per `#print axioms` result;
@@ -157,7 +171,10 @@ the median characterized by its counting property rather than order
 statistics; the enforcement posture as a one-bit Schmitt trigger with
 total variation as "travel" (S1–S3); the composed machine's trip condition
 as exceedance ∧ failure of the renewal condition, with exceedance a free
-input (G1–G7). These choices are the right places to aim contestation.
+input (G1–G7); PIO evidence freshness as novelClaim ∨ exceedance — the
+ruling D-R1 generous bar (R1–R4); the routing regime bound as a
+deployment-specified constitutive field, with magnitude units abstract
+(V1–V7). These choices are the right places to aim contestation.
 
 ## Status and non-goals
 

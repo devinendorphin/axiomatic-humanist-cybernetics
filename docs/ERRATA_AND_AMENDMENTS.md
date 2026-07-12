@@ -1,5 +1,65 @@
 # AHC Verified Constitutional Kernel — Errata & Amendments
 
+## v0.2 → v0.3 (2026-07-12)
+
+Two constitutional rulings were made by the project owner on 2026-07-12,
+resolving the questions the Phase 1/2 review had left to the amendment
+process. Both are implemented in `TieredProtocol.lean`; digest in
+`MANIFEST_v0.3.txt`.
+
+### Ruling D-R1 — PIO re-issuance guard (finding AHC-P1-003): **YES, generous bar**
+
+A failed confirmation consumes its evidence: re-issuance after
+auto-reversal requires *fresh* evidence, with freshness defined
+generously — `fresh = novelClaim || exceedance`, so ongoing threshold
+exceedance itself re-qualifies and only **stale** claims are blocked.
+Adopted as R1–R4 (the former `phase2-drafts` guard, upgraded with the
+generous bar):
+
+- **R1 `pio_no_relitigation`** — stale evidence buys at most 72
+  unconfirmed protected hours, against any re-filing pattern.
+- **R2 `reissue_needs_new_evidence`** — under staleness, at most one
+  issuance, ever.
+- **R3 `ongoing_attack_reprotects`** — *new, the generous bar's payoff:*
+  under ongoing exceedance a spent subgraph re-protects immediately on
+  request; the protection-gap failure mode of a strict bar is closed by
+  construction.
+- **R4 `reissue_blocked_iff_stale`** — the guard blocks exactly stale
+  claims and nothing else.
+
+The `phase2-drafts/` package is retired: nothing awaits ruling there
+any longer. (Its build logs remain in `docs/` as provenance.)
+
+### Ruling D-R2 — reversibility of capital routing (finding AHC-P1-005 / brief D-2): **Q1 yes, Q3 regime-bound**
+
+Graduated capital routing (M1) *can* bear irreversible harm, but only
+beyond an identifiable magnitude regime. Adopted as the `Action` /
+`RoutingRegime` split, V1–V7: routing at or below the
+deployment-specified `RoutingRegime.bound` is reversible and keeps its
+Tier-1 requirement (V6 preserves the graduated ladder); routing beyond
+the bound joins the irreversible class and requires Tier-3 causal
+identification (V5). The Phase 1 guarantee "everything below Tier 3 is
+reversible" — previously true of M1 by fiat — is now a consequence of
+the gating (V3), and the refinement is provably conservative (V7): no
+action authorized under the split was forbidden under the Phase 1 table.
+`bound_pos` is constitutive; **where the bound sits for a given
+deployment is the remaining amendment surface** and must be specified
+per deployment class.
+
+### Left open by the rulings
+
+- **Q2 of the D-2 review** — whether selective dimensional severance
+  (M2) is irreversible in any intended deployment — was not reached by
+  the ruling path (Q1-yes routed to Q3) and **remains unruled**. M2
+  keeps its Phase 1 reversible classification; V-theorems inherit it.
+  This should be ruled explicitly in a future pass rather than left
+  implicit.
+- **What counts as a `novelClaim`** is ATG / Layer 0 territory,
+  deliberately outside the machine (same seam discipline as claim
+  extraction in Module 4).
+
+---
+
 ## v0.1 → v0.2 (2026-07-11)
 
 This document is the change record between the circulated Phase 1 packet

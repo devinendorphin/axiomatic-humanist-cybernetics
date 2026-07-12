@@ -30,6 +30,23 @@ open AHC
 #print axioms travel_reanchor
 #print axioms flips_travel_anchored
 #print axioms chatter_requires_travel
+-- PIO re-issuance guard (R1-R4, adopted v0.3; ruling D-R1, finding AHC-P1-003)
+#print axioms pendingHours_confirmed
+#print axioms pendingHours_spent
+#print axioms pendingHours_pending
+#print axioms issuances_zero_of_ne_idle
+#print axioms reissue_needs_new_evidence
+#print axioms pio_no_relitigation
+#print axioms ongoing_attack_reprotects
+#print axioms reissue_blocked_iff_stale
+-- Regime-split capital routing (V1-V7, adopted v0.3; ruling D-R2, finding AHC-P1-005)
+#print axioms action_tier_monotone
+#print axioms action_severity_le_evidence
+#print axioms action_sub_causal_reversible
+#print axioms action_irreversible_iff_causal
+#print axioms unbounded_routing_needs_causal
+#print axioms bounded_routing_at_t1
+#print axioms refinement_conservative
 
 -- Module 2: Crisis Frequency Cap & Structural Review (§12.3); Axiom II (§4.2)
 #print axioms window_head_bound

@@ -1,0 +1,62 @@
+AHC VERIFIED CONSTITUTIONAL KERNEL — MANIFEST
+Version 0.3 — 2026-07-12
+Supersedes v0.2 (MANIFEST_v0.2.txt) and v0.1 (MANIFEST.txt);
+change record in ERRATA_AND_AMENDMENTS.md
+
+CONTENTS
+  ahc-verified-kernel/
+      Lean 4 project: 4 modules, 65 audited theorems, zero sorries,
+      core-only. v0.3 implements two constitutional rulings made
+      2026-07-12 on the questions the Phase 1/2 review posed:
+      Ruling D-R1 (PIO re-issuance, finding AHC-P1-003): YES — a failed
+        confirmation consumes its evidence — with the freshness bar set
+        GENEROUSLY: ongoing threshold exceedance itself counts as fresh
+        evidence. Adopted as R1–R4 in TieredProtocol.lean: stale claims
+        buy at most 72 unconfirmed protected hours against any re-filing
+        pattern (R1), and an ongoing attack can never be locked out (R3).
+      Ruling D-R2 (reversibility of capital routing, finding AHC-P1-005,
+        brief question D-2): Q1 YES, Q3 REGIME-BOUND — routing can bear
+        irreversible harm, but only beyond a deployment-specified
+        magnitude bound. Adopted as V1–V7 in TieredProtocol.lean: routing
+        within `RoutingRegime.bound` stays reversible at Tier 1;
+        routing beyond it requires Tier-3 causal identification. The
+        refinement is provably conservative (V7): it only strengthens
+        Phase 1's gating.
+      OPEN: question Q2 of the D-2 review — whether selective severance
+        (M2) is irreversible in any intended deployment — was not
+        reached by the ruling path and remains unruled; M2 keeps its
+        Phase 1 classification.
+      Module 1  TieredProtocol.lean   (§5.4, §9.2–9.3) + S1–S3, R1–R4, V1–V7
+      Module 2  CrisisCap.lean        (§12.3; §4.2, §10.3) + G1–G7
+      Module 3  SensorsAndKernel.lean (§8.3, §4.1, §1.1)   [unchanged]
+      Module 4  PLOL.lean             (§10.4; Comp. A §5, §19.4, App. B)
+                                                            [unchanged]
+      Audit.lean re-verifies the axiom footprint on every build.
+      CI fails any build containing a sorry, any Classical.choice, any
+      unexpected axiom, or any deviation from the footprint below.
+
+VERIFY (requires elan; no other dependencies, no Mathlib):
+  cd ahc-verified-kernel && lake build
+
+EXPECTED: build succeeds; audit log shows 65 audited theorems, every one
+at most [propext, Quot.sound]; never Classical.choice; 28 of 65 depend on
+no axioms at all, including all nine PLOL theorems. (decCompliant is a
+verified Decidable instance additional to the count.)
+
+SOURCE INTEGRITY
+  sha256 over sorted source files (*.lean, lakefile.toml, lean-toolchain):
+  82d22e5865811a45331b8b206cb8d8dd6a51817ca14299ab1cd133e1a1e3790b
+  v0.2 digest (superseded): 4d44fb1835c732c3cf876b50b0042ff8da793afdfd57f70c120da45a4fef651e
+  v0.1 digest (superseded): 2b51cac67e278c54003bbf2d5974da19d581caeaa4bc6f3f8f23043cffea7609
+  Per Module 4 (bridge_proves_origin_not_consistency): this digest
+  proves origin, not consistency. Consistency you verify by building.
+
+CIRCULATED UNDER
+  Companion A Principle 19.2 (Complexity Ceiling). v0.3's additions
+  follow, not precede, review: both families implement rulings on
+  questions Phase 1 circulation surfaced, made through the disposition
+  routing the packet itself prescribes. The rulings' translation choices
+  (the generous freshness bar; the regime bound as a constitutive
+  structure field) are disclosed in the module header and are named
+  contestation targets. Findings route per Part III, "Disposition of
+  findings."
