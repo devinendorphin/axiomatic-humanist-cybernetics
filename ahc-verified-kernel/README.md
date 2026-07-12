@@ -1,12 +1,15 @@
 # AHC Verified Constitutional Kernel
 
-**Version 0.3** — v0.2 adopted two strengthening families from Phase 1
+**Version 0.3.1** — v0.2 adopted two strengthening families from Phase 1
 external review (temporal hysteresis, composed cap × review semantics);
 v0.3 implements the two constitutional rulings of 2026-07-12 (PIO
 re-issuance guard with a generous freshness bar, ruling D-R1; regime-split
 capital routing, ruling D-R2). Change record in
 `../docs/ERRATA_AND_AMENDMENTS.md`, digest in `../docs/MANIFEST_v0.3.txt`.
-Open: question Q2 (severance reversibility) remains unruled.
+v0.3.1 closes external-review
+finding CG-1 (theorem R5: freshness is consumed by issuance, never
+banked). Open: proposed dispositions CG-2..CG-5 (see errata) await
+ruling, including Q2 (severance reversibility).
 
 Machine-checked formalization (Lean 4) of the order-theoretic core of
 **Axiomatic Humanist Cybernetics v3.1** — the Tiered Evidence-Action
@@ -19,7 +22,7 @@ register-invariance guarantees.
 proof is self-contained. **Zero `sorry`s.** No theorem depends on
 `Classical.choice`; the complete axiom footprint is `propext` and
 `Quot.sound` (standard Lean kernel axioms), and twenty-eight of the
-sixty-five audited theorems depend on no axioms at all — including every
+sixty-six audited theorems depend on no axioms at all — including every
 theorem of the PLOL module.
 
 ## What is and is not verified
@@ -58,6 +61,7 @@ nothing here substitutes for it.
 | `reissue_needs_new_evidence` (R2) | §5.4 | Under staleness, at most one PIO issuance, ever |
 | `ongoing_attack_reprotects` (R3) | §5.4 | Under ongoing exceedance a spent subgraph re-protects immediately: an ongoing attack is never locked out |
 | `reissue_blocked_iff_stale` (R4) | §5.4 | The guard blocks exactly stale claims and nothing else |
+| `freshness_consumed_not_banked` (R5) | §5.4 | A fresh pulse without a filing changes nothing: `spent` never returns to `idle`, closing the CG-1 laundering path |
 | `action_tier_monotone` / `action_severity_le_evidence` (V1–V2) | §5.4 | T1/T2 lifted to magnitude-bearing actions |
 | `action_sub_causal_reversible` (V3) | §5.4 | Restored T3: every action authorized below Tier 3 is reversible — now a consequence of gating, not fiat |
 | `action_irreversible_iff_causal` (V4) | §5.4, §5.5 | T4 lifted to actions |
@@ -146,7 +150,7 @@ The build elaborates all proofs and prints the axiom audit
 the `sorryAx` axiom in that output. Expected audit result:
 
 ```
-65 audited theorems: every one at most [propext, Quot.sound];
+66 audited theorems: every one at most [propext, Quot.sound];
 never Classical.choice
 no axioms at all (28): broadcast_universal, tier_monotone,
   severity_le_evidence, sub_causal_reversible, irreversible_iff_causal,

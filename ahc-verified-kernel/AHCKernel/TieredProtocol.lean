@@ -55,6 +55,10 @@
                                   ongoing attack can never be locked out
     R4  reissue_blocked_iff_stale — re-issuance is blocked EXACTLY when
                                   the claim is stale
+    R5  freshness_consumed_not_banked — (v0.3.1) freshness is consumed by
+                                  the issuance it authorizes: a fresh
+                                  pulse without a filing changes nothing,
+                                  and `spent` never returns to `idle`
 
   Regime-split capital routing (adopted in v0.3 under constitutional
   ruling D-R2, 2026-07-12; finding AHC-P1-005 / brief question D-2):
@@ -109,7 +113,7 @@
   hysteresis band. Whether measured signals track real harm is an empirical
   question outside the kernel (§2.2, §2.3).
 
-  Toolchain: Lean 4.15.0, core only (no Mathlib). Checked 2026-07-12 (v0.3).
+  Toolchain: Lean 4.15.0, core only (no Mathlib). Checked 2026-07-12 (v0.3.1).
 -/
 
 namespace AHC
@@ -601,14 +605,19 @@ deriving DecidableEq, Repr
 def PInput.fresh (i : PInput) : Bool := i.novelClaim || i.exceedance
 
 /-- One hour of the guarded lifecycle. From `spent`, nothing moves
-    without fresh evidence — that is the guard. -/
+    unless fresh evidence and an issuance request arrive TOGETHER:
+    freshness is consumed by the issuance it authorizes, never banked.
+    (v0.3.1, closing external-review finding CG-1: an earlier reading let
+    a fresh pulse without an issuance return the machine to `idle`,
+    laundering the spent marker for an arbitrarily later stale filing.
+    There is no path from `spent` back to `idle`.) -/
 def pstep : PState → PInput → PState
   | .idle, i => cond i.issue (.pending 0) .idle
   | .pending h, i =>
       cond i.confirm .confirmed
         (if h + 1 < reviewDeadline then .pending (h + 1) else .spent)
   | .confirmed, _ => .confirmed
-  | .spent, i => cond i.fresh (cond i.issue (.pending 0) .idle) .spent
+  | .spent, i => cond (i.fresh && i.issue) (.pending 0) .spent
 
 /-- Whether this hour's input issues a fresh order from this state. -/
 def isIssue : PState → PInput → Bool
@@ -776,6 +785,17 @@ theorem reissue_blocked_iff_stale (i : PInput) (hi : i.issue = true) :
     pstep .spent i = .spent ↔ (i.novelClaim = false ∧ i.exceedance = false) := by
   cases hn : i.novelClaim <;> cases hx : i.exceedance <;>
     simp [pstep, PInput.fresh, hn, hx, hi]
+
+/-- **R5 (Freshness Is Consumed, Never Banked).** From `spent`, any hour
+    that does not carry fresh evidence AND an issuance request together
+    leaves the subgraph `spent`. In particular a transient fresh pulse
+    without a filing changes nothing: there is no path from `spent` back
+    to `idle`, so the spent marker cannot be laundered to admit a later
+    stale filing (external-review finding CG-1). With R4, a stale filing
+    from `spent` fails no matter what history preceded it. -/
+theorem freshness_consumed_not_banked (i : PInput)
+    (h : (i.fresh && i.issue) = false) : pstep .spent i = .spent := by
+  simp [pstep, h]
 
 /-! ## Regime-split capital routing (§5.4, §9.3 M1) — adopted v0.3, ruling D-R2
 

@@ -39,6 +39,7 @@ open AHC
 #print axioms pio_no_relitigation
 #print axioms ongoing_attack_reprotects
 #print axioms reissue_blocked_iff_stale
+#print axioms freshness_consumed_not_banked
 -- Regime-split capital routing (V1-V7, adopted v0.3; ruling D-R2, finding AHC-P1-005)
 #print axioms action_tier_monotone
 #print axioms action_severity_le_evidence

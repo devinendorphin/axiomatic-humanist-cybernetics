@@ -1,5 +1,75 @@
 # AHC Verified Constitutional Kernel — Errata & Amendments
 
+## v0.3 → v0.3.1 (2026-07-12) — external review, findings register
+
+A Phase 2 external review (ChatGPT; archived at
+`external-reviews/2026-07-12-phase2-external-review-chatgpt.txt`) was
+received against v0.3. Findings are registered CG-1..CG-6 with
+dispositions per Part III routing.
+
+**CG-1 — `pstep` transition loophole (F-class, against the
+implementation): FIXED in v0.3.1.** From `spent`, a fresh input with no
+issuance request moved the machine to `idle`; from `idle` a later STALE
+filing was accepted. A one-hour fresh pulse could therefore launder the
+spent marker for an arbitrarily delayed stale filing — a two-step trace
+outside R1/R2's all-stale hypotheses and R4's single-step scope. Fix:
+`spent` now moves only on `fresh && issue` together — freshness is
+consumed by the issuance it authorizes, never banked, and there is no
+path from `spent` back to `idle`. New theorem **R5
+`freshness_consumed_not_banked`** verifies the closure. Footprint:
+66 audited theorems, 28 axiom-free. R1–R4 re-verify unchanged.
+
+**CG-2 — D-R1 conflates the hazard clock with the epistemic clock
+(D-class, proposed disposition D-R1A): PENDING OWNER RULING.** Under the
+generous bar, persistent exceedance can cycle successive 72h Tier-1
+protections indefinitely without the evidentiary record ever advancing
+to confirmation — the order expires but the authority functionally
+continues. Proposal: split `riskPersistent` (prevents a protection
+vacuum; does NOT restart the clock) from `evidenceFresh` (restarts a
+full PIO); after an episode's unconfirmed budget is exhausted,
+continuing risk enters a constrained continuity-hold that only Layer 0
+review can resolve — mirroring Module 2's cap → Structural Review
+pattern. Assessment concurs: recommended ADOPT.
+
+**CG-3 — scalar positive bound too strong (D-class, proposed D-R2A):
+PENDING OWNER RULING.** (a) `bound_pos` makes a zero-safe-routing
+deployment unconstructible, yet payroll/medication/settlement-critical
+systems may have no presumptively reversible routing quantum;
+(b) irreversibility is not monotone in one scalar (concentration,
+duration, criticality, rollback latency, cascade). Proposal: replace the
+scalar bound with a deployment-certified reversibility ENVELOPE —
+sub-causal routing authorized only with a certificate that the action
+lies inside it; no certificate ⇒ no presumptive reversibility.
+Assessment concurs (the scalar bound is the degenerate one-dimensional
+envelope): recommended ADOPT.
+
+**CG-4 — Q2 answered: severance can be irreversible (D-class, proposed
+D-R3): PENDING OWNER RULING.** Reconnection does not reverse missed
+care, lost income, divergent state: reversibility should be evaluated
+against the affected human/institutional state, not machine topology.
+Proposal: severance is irreversibility-bearing UNLESS certified soft
+(time-bounded, state-preserving, essential-service floor, tested
+restoration); certified soft severance stays Tier 2, otherwise Tier 3.
+Assessment concurs: recommended ADOPT, using the same certificate
+machinery as CG-3.
+
+**CG-5 — novelClaim needs constitutional structure (proposed D-R4):
+PENDING OWNER RULING.** Novelty attaches to a structured claim/incident
+identity with disclosed lineage; rewording or repetition is not novelty;
+the T+0 semantic record must state the authorization basis
+(freshness / continuing risk / both), the episode's cumulative
+unconfirmed protection, and the falsification condition; determinations
+contestable via Layer 0. Assessment concurs; formalization would ride on
+CG-2's episode identity. Recommended ADOPT as constitutional text,
+formalize with D-R1A.
+
+**CG-6 — trimmed means confer no status (deployment rule): CONCURS WITH
+EXISTING POSITION.** An estimator receives B3's Byzantine guarantee only
+after its two-sided counting property is separately proved — already the
+kernel's stance (AHC-P1-004); adopt the sentence into deployment rules.
+
+---
+
 ## v0.2 → v0.3 (2026-07-12)
 
 Two constitutional rulings were made by the project owner on 2026-07-12,

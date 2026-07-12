@@ -1,0 +1,100 @@
+Thank you. I have now read the current v0.3 repository beyond the top-level README: the assessment, amendment record, manifest, and the relevant Lean definitions. I have not independently rebuilt the Lean project in this environment, so this is principally a constitutional and semantic review rather than a fresh proof audit.
+Overall judgment
+The framework is unusually strong where many governance frameworks are weak: it distinguishes what can be mechanically guaranteed from what remains an empirical, semantic, or institutional judgment. The verified kernel constrains the action channel without pretending that sensors, causal inference, textual interpretation, or Layer 0 institutions have thereby been proved trustworthy. The PLOL module’s explicit location of the “seam” between natural-language meaning and mechanically comparable claim sets is especially important.
+I also think the architecture is internally coherent in three important ways:
+The evidence ladder makes “force cannot outrun proof” an authorization invariant. The crisis cap prevents exceptional authority from quietly becoming permanent, and prolonged exception routes into an explicit Layer 0 constitutional process. The tripartite output system makes contestability contemporaneous with action rather than an after-the-fact disclosure exercise.
+The remaining issues are therefore not failures of the project. They are precisely the normative pressure points that a constitutional kernel should expose.
+D-R1: the PIO ruling is humane, but it currently conflates two clocks
+The intention behind “yes, generous bar” is sound. An evidentiary safeguard should not create a period during which a visibly ongoing attack is left entirely unprotected. The adopted ruling therefore defines freshness as:
+novelClaim ∨ exceedance
+and proves that an ongoing exceedance can immediately reprotect a spent subgraph.
+But persistence of danger and advancement of evidence are not the same thing.
+An ongoing exceedance is evidence that the hazard persists. It is not necessarily evidence that the causal or correlational case has advanced. Under the current machine, repeated exceedance can support successive 72-hour periods of Tier-1 protection without ever reaching Tier-1 confirmation. R1 limits total protection only when every subsequent input is stale, while R3 deliberately permits immediate reprotection whenever exceedance continues.
+That means the order expires, but the authority can functionally continue. The deadline bounds each filing rather than the unresolved evidentiary episode.
+I would preserve the humane result while separating:
+• riskPersistent: enough to prevent an abrupt safety vacuum.
+• evidenceFresh: enough to restart the full constitutional authorization clock.
+The same signal should be able to preserve a protective floor, but not silently preserve the same degree of authority.
+After 72 unconfirmed hours, continuing risk should move the system into a distinct state: a narrowly constrained continuity hold, with only the least harmful reversible measures available, while mandatory Layer 0 or structural review decides what follows. A genuinely new claim, independent corroboration, or a material evidentiary change could restart a full PIO.
+This would align Module 1 with Module 2’s deeper principle: when an exceptional condition persists beyond its ordinary constitutional budget, the system changes decision procedure rather than repeatedly resetting the budget. Module 2 already makes prolonged emergency authority terminate into Structural Review, which only an explicit Layer 0 output may close.
+A transition-level loophole in the present implementation
+There is also a narrower issue in pstep.
+From .spent, a fresh input with no issuance request moves the state to .idle. Once idle, a later issue request is accepted without checking freshness:
+spent + fresh + no issue → idle idle + stale + issue → pending 0 
+The code therefore allows a one-hour fresh pulse to clear the spent marker, followed by an arbitrarily delayed stale filing. There is no evidence identity or freshness lifetime connecting that later filing to the earlier fresh observation.
+The direct-transition theorem R4 remains true, but it does not cover this two-step trace. I would either keep the system in .spent unless fresh && issue occur together, or introduce an explicit available evidenceID expiry state. Freshness should be consumed by an issuance transition, not erase constitutional history by returning the machine to an undifferentiated idle state.
+D-R2: the routing split is correct, but the scalar positive bound is too strong
+The decision that capital routing can become irreversible, and that sufficiently consequential routing therefore requires Tier 3, is directionally correct. It repairs the earlier situation in which M1 was simply declared reversible.
+Two parts need further constitutional attention.
+First, bound_pos makes it impossible to instantiate a deployment in which no positive capital routing is presumptively reversible.
+That is not merely a technical convenience. It constitutionally requires every deployment to identify some nonzero amount of routing that Tier-1 evidence may authorize. In certain tightly coupled systems—payroll, medication supply, housing support, settlement infrastructure, or a liquidity-sensitive network—even a small intervention may trigger irreversible downstream consequences. A zero-safe-routing deployment should be constructible.
+Second, irreversibility is unlikely to be monotonic in a single scalar called “magnitude.” A small routing action concentrated on a critical node can be worse than a larger diversified action. Relevant dimensions include concentration, duration, dependency criticality, rollback latency, liquidity, timing, and third-party cascade.
+I would therefore replace the constitutional concept of a positive numerical bound with a deployment-certified reversibility envelope. The formal kernel need not prove that the envelope describes reality. It can formally guarantee that subcausal routing is authorized only when an externally supplied certificate says the action lies inside that envelope. That preserves the project’s seam discipline.
+No certificate should mean no presumptively reversible capital routing. The graduated ladder remains available where reversibility has been demonstrated, rather than being guaranteed by construction everywhere.
+Q2: selective dimensional severance can be irreversible
+My recommended answer to the remaining Q2 is yes.
+Selective severance may be technically reconnectable while remaining humanly irreversible. Restoring a connection does not reverse missed medical care, lost housing, lost income, interrupted legal status, educational exclusion, identity invalidation, reputational damage, or divergent system state. The original assessment already identifies network partition and state divergence as examples where the current classification can satisfy the theorem while violating the intended meaning of reversibility.
+I would not classify all severance as Tier 3. I would adopt a regime split, but with a presumption opposite to the present one:
+Severance is irreversibility-bearing unless a deployment-specific certificate establishes that it is soft, bounded, and state-preserving.
+A certified reversible severance should require, at minimum:
+• bounded duration and rollback time;
+• preservation of identity, entitlements, data, and system state;
+• continuation of an essential-service floor;
+• no unbounded dependency cascade;
+• tested restoration rather than merely theoretical reconnection;
+• a mechanism for repairing transient harms that cannot be undone technically.
+Soft severance satisfying those conditions could remain at Tier 2. Hard, state-destructive, essential-service-affecting, or uncertified severance should require Tier 3.
+The humanist definition of reversibility should concern restoration of the affected person or community, not merely restoration of the machine’s topology.
+Two other decisions should be made explicitly
+The first concerns novelClaim. The amendment record correctly leaves its definition at the ATG/Layer 0 seam. But leaving it outside the machine should not mean leaving it undefined constitutionally.
+Novelty should be attached to a structured incident or claim identity. Rephrasing, republishing, changing a model’s wording, or refreshing the same sensor value should not constitute novelty. A materially new target, affected cohort, mechanism, evidence source, causal pathway, falsification condition, or independently attested observation could. Layer 0 should be able to contest that classification, and the T+0 semantic record should disclose the claim identity, novelty basis, remaining PIO budget, and evidence lineage.
+The second concerns trimmed means. The assessment correctly notes that the median-bracketing theorem does not automatically cover every trimmed mean. I would make the deployment rule simple: an estimator receives the kernel’s Byzantine-resilience guarantee only after its required two-sided counting property has been separately proved. “Trimmed mean” as a label should confer no constitutional status.
+Here is the disposition language I would put before the next constitutional pass.
+
+---
+
+Proposed Constitutional Dispositions
+
+D-R1A — Evidentiary Freshness and Hazard Persistence
+
+The Constitution distinguishes persistence of a hazard from advancement of the evidentiary basis for intervention.
+
+An ongoing threshold exceedance constitutes "riskPersistent". It is sufficient to prevent an abrupt withdrawal of all protective measures, but it does not by itself constitute "evidenceFresh" and does not restart the full PIO review period.
+
+"evidenceFresh" requires a materially new acute claim, independent corroboration, or another publicly specified advancement in the evidentiary record. Freshness must be associated with an identifiable claim or incident and must be consumed by the issuance it authorizes.
+
+After the cumulative unconfirmed PIO budget for an evidentiary episode is exhausted, continuing risk places the system in a constrained continuity-hold state. That state may authorize only the minimum reversible measures necessary to prevent an immediate protection gap and must initiate explicit Layer 0 review. It may not be renewed indefinitely through repeated filings.
+
+D-R2A — Capital-Routing Reversibility Envelopes
+
+No positive quantity of capital routing is constitutionally presumed reversible in every deployment.
+
+Each deployment class may establish a public, contestable, and revocable reversibility envelope. The envelope must account for magnitude, concentration, duration, dependency criticality, rollback latency, and foreseeable third-party cascades.
+
+Capital routing inside a valid envelope may remain available at Tier 1. Routing outside the envelope, or routing in a deployment lacking a valid envelope, is treated as irreversibility-bearing and requires Tier 3 causal identification.
+
+The absence of a reversibility certificate is not evidence of reversibility.
+
+D-R3 — Selective Dimensional Severance
+
+Selective dimensional severance can produce irreversible harm.
+
+Severance is therefore treated as irreversibility-bearing unless a deployment-specific certificate establishes that the proposed action is time-bounded, state-preserving, fully restorable within a specified period, protective of essential services, and incapable of producing an unbounded dependency cascade.
+
+Certified soft severance may remain available at Tier 2. Hard severance, uncertified severance, state-destructive severance, or severance affecting an essential-service floor requires Tier 3 causal identification.
+
+Reversibility is evaluated in relation to the affected human and institutional state, not merely the technical possibility of reconnection.
+
+D-R4 — Claim Novelty and Evidence Lineage
+
+Every PIO filing must identify the claim or incident on which it relies and disclose its evidence lineage.
+
+A claim is novel only when at least one contestation-critical component has materially changed. Rewording, republication, model regeneration, or repetition of the same observation does not constitute novelty.
+
+The T+0 semantic record must state whether authorization rests on evidentiary freshness, continuing risk, or both; the basis of any novelty determination; the cumulative unconfirmed protection already granted to the incident; and the condition that would falsify continued eligibility.
+
+Novelty determinations remain contestable through Layer 0 and may not be made solely by the enforcing system.
+
+---
+
+My strongest recommendation is to adopt Q2 as “yes, certificate-bound,” permit a zero routing envelope, and reopen D-R1 only enough to separate the hazard clock from the epistemic clock. That would retain the generosity of the recent rulings without allowing continuity of a signal to become continuity of unreviewed authority.
