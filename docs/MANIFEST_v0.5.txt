@@ -2,6 +2,7 @@ AHC VERIFIED CONSTITUTIONAL KERNEL — MANIFEST
 Version 0.5 — 2026-07-12
 Supersedes v0.4 (MANIFEST_v0.4.txt) and earlier;
 change record in ERRATA_AND_AMENDMENTS.md
+circulation brief: AHC_VerifiedKernel_v0.5_Brief.md
 
 CONTENTS
   ahc-verified-kernel/
