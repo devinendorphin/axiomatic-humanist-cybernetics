@@ -30,24 +30,35 @@ open AHC
 #print axioms travel_reanchor
 #print axioms flips_travel_anchored
 #print axioms chatter_requires_travel
--- PIO re-issuance guard (R1-R4, adopted v0.3; ruling D-R1, finding AHC-P1-003)
-#print axioms pendingHours_confirmed
-#print axioms pendingHours_spent
-#print axioms pendingHours_pending
-#print axioms issuances_zero_of_ne_idle
-#print axioms reissue_needs_new_evidence
-#print axioms pio_no_relitigation
-#print axioms ongoing_attack_reprotects
-#print axioms reissue_blocked_iff_stale
-#print axioms freshness_consumed_not_banked
--- Regime-split capital routing (V1-V7, adopted v0.3; ruling D-R2, finding AHC-P1-005)
-#print axioms action_tier_monotone
-#print axioms action_severity_le_evidence
-#print axioms action_sub_causal_reversible
-#print axioms action_irreversible_iff_causal
-#print axioms unbounded_routing_needs_causal
-#print axioms bounded_routing_at_t1
-#print axioms refinement_conservative
+-- Episode machine: PIO with two clocks (E1-E11, adopted v0.4; ruling D-R1A + D-R4)
+#print axioms epPendingHours_exhausted
+#print axioms epIssuances_exhausted
+#print axioms epPendingHours_pending
+#print axioms epIssuances_pending_zero
+#print axioms episode_no_relitigation
+#print axioms episode_single_issuance
+#print axioms expiry_routes_by_risk
+#print axioms reonset_refloors
+#print axioms hold_persists
+#print axioms hold_resolution_iff
+#print axioms novel_restart_from_spent
+#print axioms novel_restart_from_hold
+#print axioms exceedance_cannot_restart
+#print axioms hold_floor_reversible
+#print axioms hold_floor_severity
+#print axioms hold_grants_no_more_than_pio
+-- Certified reversibility envelopes (W1-W9, adopted v0.4; rulings D-R2A + D-R3)
+#print axioms cert_tier_monotone
+#print axioms cert_severity_le_evidence
+#print axioms cert_sub_causal_reversible
+#print axioms cert_irreversible_iff_causal
+#print axioms uncertified_routing_needs_causal
+#print axioms uncertified_severance_needs_causal
+#print axioms certified_route_at_t1
+#print axioms certified_severance_at_t2
+#print axioms cert_refinement_conservative
+#print axioms no_certificate_no_presumption
+#print axioms zero_envelope_constructible
 
 -- Module 2: Crisis Frequency Cap & Structural Review (§12.3); Axiom II (§4.2)
 #print axioms window_head_bound

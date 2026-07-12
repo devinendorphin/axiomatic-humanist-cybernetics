@@ -39,70 +39,96 @@
   · The first flip of a trajectory is free (the start posture carries no
     anchor); every later flip is charged. Hence the −1 in S3.
 
-  PIO re-issuance guard (adopted in v0.3 under constitutional ruling
-  D-R1, 2026-07-12; finding AHC-P1-003):
+  Episode machine — PIO with two clocks (adopted in v0.4 under
+  constitutional ruling D-R1A, ratified 2026-07-12; supersedes v0.3's
+  R-family; findings AHC-P1-003, CG-2, CG-5):
 
-    R1  pio_no_relitigation      — across any input sequence with only
-                                  STALE evidence (no novel claim, no
-                                  ongoing exceedance), total unconfirmed
-                                  protected hours never exceed 72 —
-                                  however many re-issue requests arrive
-    R2  reissue_needs_new_evidence — under staleness, at most one
-                                  issuance, ever
-    R3  ongoing_attack_reprotects — the generous bar's payoff: under
-                                  ongoing exceedance a spent subgraph
-                                  re-protects immediately on request; an
-                                  ongoing attack can never be locked out
-    R4  reissue_blocked_iff_stale — re-issuance is blocked EXACTLY when
-                                  the claim is stale
-    R5  freshness_consumed_not_banked — (v0.3.1) freshness is consumed by
-                                  the issuance it authorizes: a fresh
-                                  pulse without a filing changes nothing,
-                                  and `spent` never returns to `idle`
+    E1  episode_no_relitigation  — across any span with no novel
+                                  attestation and no Layer 0 resolution,
+                                  WHATEVER the exceedance pattern, total
+                                  unconfirmed full-protection hours ≤ 72
+    E2  episode_single_issuance  — one full-PIO issuance per such span
+    E3  expiry_routes_by_risk    — at the deadline: continuing exceedance
+                                  enters the continuity-hold; subsided
+                                  risk parks in `spent`; nothing else
+    E4  reonset_refloors         — returning risk re-enters the hold
+                                  floor, never the full clock
+    E5  hold_persists            — the floor is never withdrawn while
+                                  risk persists unresolved
+    E6  hold_resolution_iff      — the hold returns to ordinary posture
+                                  exactly on a Layer 0 review output
+    E7  novel_restart_from_spent / _from_hold — an attested materially
+                                  new claim restarts a full PIO
+    E8  exceedance_cannot_restart — the two-clock separation, pointwise:
+                                  without novelty, no input re-enters
+                                  `pending` from an exhausted state
+    E9  hold_floor_reversible    — everything the hold floor allows is
+                                  reversible
+    E10 hold_floor_severity      — the floor is severity-capped at Tier 1
+    E11 hold_grants_no_more_than_pio — the floor is a remnant of PIO
+                                  authority, never an extension
 
-  Regime-split capital routing (adopted in v0.3 under constitutional
-  ruling D-R2, 2026-07-12; finding AHC-P1-005 / brief question D-2):
+  Certified reversibility envelopes (adopted in v0.4 under rulings
+  D-R2A and D-R3, ratified 2026-07-12; supersede v0.3's scalar V-family;
+  findings AHC-P1-005/D-2 incl. Q2, CG-3, CG-4):
 
-    V1  action_tier_monotone     — T1 lifted to magnitude-bearing actions
-    V2  action_severity_le_evidence — T2 lifted to actions
-    V3  action_sub_causal_reversible — the restored T3: EVERY action
-                                  authorized below Tier 3 is reversible,
-                                  including capital routing, because
-                                  unbounded routing now requires Tier 3
-    V4  action_irreversible_iff_causal — T4 lifted to actions
-    V5  unbounded_routing_needs_causal — routing beyond the regime bound
-                                  is authorized only at Tier 3
-    V6  bounded_routing_at_t1    — the graduated ladder is preserved:
-                                  bounded routing stays available on
-                                  correlational evidence
-    V7  refinement_conservative  — the split only strengthens gating:
-                                  every action requires at least its
-                                  mechanism's Phase 1 tier
+    W1  cert_tier_monotone       — T1 lifted to certified actions
+    W2  cert_severity_le_evidence — T2 lifted to certified actions
+    W3  cert_sub_causal_reversible — everything authorized below Tier 3
+                                  is reversible — routing AND severance —
+                                  because the uncertified requires Tier 3
+    W4  cert_irreversible_iff_causal — T4 lifted to certified actions
+    W5a uncertified_routing_needs_causal — no certificate ⇒ Tier 3
+    W5b uncertified_severance_needs_causal — Q2 answered (D-R3): hard or
+                                  uncertified severance is treated
+                                  exactly as irreversible
+    W6a certified_route_at_t1    — the graduated ladder is preserved
+    W6b certified_severance_at_t2 — certified soft severance at Tier 2
+    W7  cert_refinement_conservative — the §9.3 table is a floor that
+                                  envelopes raise but never lower
+    W8  no_certificate_no_presumption — reversibility of routing or
+                                  severance is exactly its certificate
+    W9  zero_envelope_constructible — a deployment with NO presumptively
+                                  reversible routing or severance is a
+                                  legal parameterization (bound_pos
+                                  repealed)
 
-  Modeling choices for R1–R4 (ruling D-R1, "yes, generous bar"):
-  · Evidence freshness is `novelClaim || exceedance`: a genuinely new
-    acute claim, OR the sensor signal still above threshold this hour.
-    An ongoing attack therefore re-qualifies trivially; auto-reversal
-    consumes only STALE claims. What counts as a novel claim is ATG /
-    Layer 0 territory, deliberately outside the machine.
-  · Confirmation hands off to the standard tier ladder (`confirmed` is
-    absorbing here): the 72h accounting bounds UNCONFIRMED protection,
-    the laundering-relevant quantity.
-  · As in the T8 machine (disclosed per AHC-P1-003): within the deadline
-    hour, confirmation takes priority over expiry.
+  Modeling choices for E1–E11 (ruling D-R1A + D-R4):
+  · `novel` is an ATG/Layer 0 attestation attached to a claim identity
+    (D-R4): rewording, republication, or repetition of the same
+    observation is not novelty; the determination is contestable through
+    Layer 0 and made outside the machine. `exceedance` is the raw risk
+    signal. The two are separate inputs: the hazard clock and the
+    epistemic clock never share a needle.
+  · The continuity-hold authorizes only a deployment-certified
+    `HoldPolicy` floor, constrained by construction to reversible
+    mechanisms at or below the Tier-1 requirement.
+  · Hold-floor hours are deliberately not counted as full-protection
+    hours: the hold is not the authority, and E11 proves it grants
+    nothing a live PIO could not.
+  · As in the T8 machine: within the deadline hour, confirmation takes
+    priority over expiry; `confirmed` hands off to the tier ladder.
 
-  Modeling choices for V1–V7 (ruling D-R2, "Q1 yes, Q3 regime-bound"):
-  · An `Action` is a mechanism with magnitude where magnitude matters
-    (capital routing). Magnitude units are deployment-specified and
-    abstract here (Nat).
-  · `RoutingRegime.bound` is the deployment-specified magnitude at or
-    below which routing is reversible; positivity is constitutive
-    (`bound_pos`), so a regime in which no routing is reversible is
-    unconstructible. Where the boundary sits for a given deployment is
-    the amendment surface.
-  · M2 (severance) keeps its Phase 1 classification: question Q2 of the
-    D-2 review (is severance irreversible in any intended deployment?)
-    remains OPEN and unruled — see ERRATA_AND_AMENDMENTS.md.
+  Modeling choices for W1–W9 (rulings D-R2A + D-R3):
+  · An action carries an opaque deployment descriptor δ (magnitude,
+    concentration, duration, targets, rollback latency, …); the
+    `Envelope` is the deployment-certified judgment that the described
+    action lies inside the demonstrated-reversible region. The kernel
+    verifies the GATING, not the envelope's fidelity to reality — the
+    same seam discipline as claim extraction.
+  · D-R3's certification conditions for soft severance (time-bounded,
+    state-preserving, essential-service floor, tested restoration,
+    cascade-safe, repair mechanism) live in the certification process;
+    reversibility is judged against affected human and institutional
+    state, not machine topology.
+  · No positivity constraint: the zero envelope is constructible (W9),
+    and the absence of a certificate is never evidence of reversibility
+    (W8). The v0.3 scalar regime is the special case δ := Nat,
+    routeInside := (· ≤ bound).
+  · The Mech-granularity table (`Mech.reversible`, `requiredTier`) is
+    retained as the PRESUMPTIVE Phase 1 floor: T1–T7 remain true of it,
+    and W7 proves certificates only raise it. At action granularity the
+    W-family governs.
 
   Scope disclaimer (constitutionally required, in the spirit of PLOL):
   these proofs verify the SPECIFICATION, not the world. They establish that
@@ -113,7 +139,7 @@
   hysteresis band. Whether measured signals track real harm is an empirical
   question outside the kernel (§2.2, §2.3).
 
-  Toolchain: Lean 4.15.0, core only (no Mathlib). Checked 2026-07-12 (v0.3.1).
+  Toolchain: Lean 4.15.0, core only (no Mathlib). Checked 2026-07-12 (v0.4).
 -/
 
 namespace AHC
@@ -572,396 +598,617 @@ theorem chatter_requires_travel (p : Hysteresis) :
         rw [hone, Int.add_mul, Int.one_mul]
         exact Int.le_trans (Int.add_le_add_left h1 _) (by omega)
 
-/-! ## PIO re-issuance guard (§5.4) — adopted v0.3, ruling D-R1
+/-! ## Episode machine: PIO with two clocks (§5.4) — adopted v0.4, ruling D-R1A
 
-T8 proves one order resolves within 72 hours, but a single-instance
-machine cannot refute re-issuance laundering: auto-reverse at hour 72,
-re-file on the same evidence, cycle Tier-1 protection indefinitely on
-Tier-0 grounds. Ruling D-R1 (2026-07-12): a failed confirmation consumes
-its evidence, with the freshness bar set GENEROUSLY — ongoing threshold
-exceedance itself counts as fresh evidence, so an ongoing attack is never
-locked out; only stale claims are blocked. -/
+Ruling D-R1A (ratified 2026-07-12) separates the HAZARD clock from the
+EPISTEMIC clock. Persistence of danger (`exceedance`) is not advancement
+of evidence: under v0.3's bar, persistent exceedance could cycle
+successive 72h Tier-1 protections indefinitely without the evidentiary
+record ever reaching confirmation. Now: only an attested materially new
+claim (`novel`, per ruling D-R4 an ATG/Layer 0 determination attached to
+a claim identity, contestable, outside the machine) restarts the full
+PIO clock. Exceedance instead sustains a CONTINUITY-HOLD: a constrained
+floor state that prevents a protection vacuum, grants at most a
+deployment-certified subset of reversible Tier-1 measures (`HoldPolicy`),
+and owes an explicit Layer 0 review — mirroring Module 2's
+cap → Structural Review pattern. -/
 
-/-- Per-subgraph PIO lifecycle state, across issuances. -/
-inductive PState where
+/-- Per-subgraph episode state. `hold` is the continuity-hold: budget
+    exhausted, risk persisting, Layer 0 review owed. -/
+inductive EpState where
   | idle                -- no PIO for this subgraph
-  | pending (h : Nat)   -- order active, Layer 0 review pending
+  | pending (h : Nat)   -- full PIO active, review pending
+  | hold                -- continuity-hold: floor protection, review owed
+  | spent               -- budget exhausted, risk subsided
   | confirmed           -- Tier-1 confirmation: handed to the tier ladder
-  | spent               -- auto-reversed; its evidence is consumed
 deriving DecidableEq, Repr
 
-/-- One hour's inputs to the lifecycle. -/
-structure PInput where
-  issue      : Bool     -- request to issue a PIO this hour
+/-- One hour's inputs to the episode machine. -/
+structure EpInput where
+  issue      : Bool     -- request to issue a full PIO this hour
   confirm    : Bool     -- Tier-1 correlational confirmation arrived
-  novelClaim : Bool     -- a genuinely new acute-evidence claim this hour
-  exceedance : Bool     -- sensor signal above threshold this hour
+  novel      : Bool     -- ATG/Layer 0 attestation: materially new claim (D-R4)
+  exceedance : Bool     -- sensor signal above threshold (riskPersistent)
+  layer0     : Bool     -- a Layer 0 review output resolves the hold
 deriving DecidableEq, Repr
 
-/-- The generous freshness bar (ruling D-R1): evidence is fresh if a
-    genuinely new acute claim arrives OR the signal still exceeds
-    threshold. An ongoing attack re-qualifies trivially; auto-reversal
-    consumes only stale claims. -/
-def PInput.fresh (i : PInput) : Bool := i.novelClaim || i.exceedance
+/-- Budget-exhausted states: protection may continue only as the hold
+    floor; the full clock is closed to everything but a novel claim. -/
+def EpState.exhausted : EpState → Bool
+  | .hold => true
+  | .spent => true
+  | .confirmed => true
+  | _ => false
 
-/-- One hour of the guarded lifecycle. From `spent`, nothing moves
-    unless fresh evidence and an issuance request arrive TOGETHER:
-    freshness is consumed by the issuance it authorizes, never banked.
-    (v0.3.1, closing external-review finding CG-1: an earlier reading let
-    a fresh pulse without an issuance return the machine to `idle`,
-    laundering the spent marker for an arbitrarily later stale filing.
-    There is no path from `spent` back to `idle`.) -/
-def pstep : PState → PInput → PState
+/-- One hour of the episode machine. At expiry the machine routes by
+    risk: continuing exceedance enters the hold, subsided risk parks in
+    `spent`. From `hold`, a Layer 0 output resolves; a novel claim filed
+    together with an issuance restarts a full PIO; otherwise the hold
+    tracks the risk signal. From `spent`, re-onset of exceedance
+    re-enters the hold floor — never the full clock. -/
+def estep : EpState → EpInput → EpState
   | .idle, i => cond i.issue (.pending 0) .idle
   | .pending h, i =>
       cond i.confirm .confirmed
-        (if h + 1 < reviewDeadline then .pending (h + 1) else .spent)
+        (if h + 1 < reviewDeadline then .pending (h + 1)
+         else cond i.exceedance .hold .spent)
+  | .hold, i =>
+      cond i.layer0 .idle
+        (cond (i.novel && i.issue) (.pending 0)
+          (cond i.exceedance .hold .spent))
+  | .spent, i =>
+      cond (i.novel && i.issue) (.pending 0)
+        (cond i.exceedance .hold .spent)
   | .confirmed, _ => .confirmed
-  | .spent, i => cond (i.fresh && i.issue) (.pending 0) .spent
 
-/-- Whether this hour's input issues a fresh order from this state. -/
-def isIssue : PState → PInput → Bool
+/-- Whether this hour's input issues a fresh full PIO from this state. -/
+def epIsIssue : EpState → EpInput → Bool
   | .idle, i => i.issue
-  | .spent, i => i.fresh && i.issue
+  | .hold, i => !i.layer0 && (i.novel && i.issue)
+  | .spent, i => i.novel && i.issue
   | _, _ => false
 
-/-- Count of issuances along a run. -/
-def issuances : PState → List PInput → Nat
+/-- Count of full-PIO issuances along a run. -/
+def epIssuances : EpState → List EpInput → Nat
   | _, [] => 0
-  | s, i :: is => cond (isIssue s i) 1 0 + issuances (pstep s i) is
+  | s, i :: is => cond (epIsIssue s i) 1 0 + epIssuances (estep s i) is
 
-/-- Hours of unconfirmed protection along a run (hours whose starting
-    state is `pending`). -/
-def pendingHours : PState → List PInput → Nat
+/-- Hours of unconfirmed FULL protection along a run (hours whose
+    starting state is `pending`; hold-floor hours are deliberately not
+    counted — the hold is not the full authority). -/
+def epPendingHours : EpState → List EpInput → Nat
   | _, [] => 0
   | s, i :: is =>
-      (match s with | .pending _ => 1 | _ => 0) + pendingHours (pstep s i) is
+      (match s with | .pending _ => 1 | _ => 0) + epPendingHours (estep s i) is
 
-/-- `confirmed` is absorbing and accrues no unconfirmed protection. -/
-theorem pendingHours_confirmed :
-    ∀ is : List PInput, pendingHours .confirmed is = 0 := by
-  intro is
-  induction is with
-  | nil => rfl
-  | cons i is ih => simpa [pendingHours, pstep] using ih
-
-/-- Under staleness, `spent` is absorbing and accrues nothing:
-    the guard, doing its work. -/
-theorem pendingHours_spent :
-    ∀ is : List PInput, (∀ i ∈ is, i.fresh = false) →
-      pendingHours .spent is = 0 := by
-  intro is
-  induction is with
-  | nil => intro _; rfl
-  | cons i is ih =>
-      intro hno
-      have hfr : i.fresh = false := hno i (List.mem_cons_self ..)
-      have hrest := ih (fun j hj => hno j (List.mem_cons_of_mem i hj))
-      simp [pendingHours, pstep, hfr, hrest]
-
-/-- A pending order strictly inside its deadline accrues at most the
-    hours remaining to the deadline. -/
-theorem pendingHours_pending :
-    ∀ (is : List PInput) (h : Nat), h < reviewDeadline →
-      (∀ i ∈ is, i.fresh = false) →
-      pendingHours (.pending h) is ≤ reviewDeadline - h := by
-  intro is
-  induction is with
-  | nil => intro h _ _; simp [pendingHours]
-  | cons i is ih =>
-      intro h hh hno
-      have hno' : ∀ j ∈ is, j.fresh = false :=
-        fun j hj => hno j (List.mem_cons_of_mem i hj)
-      cases hc : i.confirm with
-      | true =>
-          simp [pendingHours, pstep, hc, pendingHours_confirmed]
-          omega
-      | false =>
-          by_cases hd : h + 1 < reviewDeadline
-          · have := ih (h + 1) hd hno'
-            simp [pendingHours, pstep, hc, if_pos hd]
-            omega
-          · have := pendingHours_spent is hno'
-            simp [pendingHours, pstep, hc, if_neg hd, this]
-            omega
-
-/-- Under staleness, no state other than `idle` can issue, and no
-    reachable state returns to `idle`: hence zero further issuances. -/
-theorem issuances_zero_of_ne_idle :
-    ∀ (is : List PInput) (s : PState), s ≠ .idle →
-      (∀ i ∈ is, i.fresh = false) →
-      issuances s is = 0 := by
+/-- Exhausted states never re-enter `pending` across a span with no
+    novel attestation and no Layer 0 resolution — whatever the
+    exceedance and filing pattern — so they accrue no full-protection
+    hours. -/
+theorem epPendingHours_exhausted :
+    ∀ (is : List EpInput) (s : EpState), s.exhausted = true →
+      (∀ i ∈ is, i.novel = false ∧ i.layer0 = false) →
+      epPendingHours s is = 0 := by
   intro is
   induction is with
   | nil => intro s _ _; rfl
   | cons i is ih =>
       intro s hs hno
-      have hfr : i.fresh = false := hno i (List.mem_cons_self ..)
-      have hno' : ∀ j ∈ is, j.fresh = false :=
+      have hn : i.novel = false := (hno i (List.mem_cons_self ..)).1
+      have hl : i.layer0 = false := (hno i (List.mem_cons_self ..)).2
+      have hno' : ∀ j ∈ is, j.novel = false ∧ j.layer0 = false :=
         fun j hj => hno j (List.mem_cons_of_mem i hj)
       cases s with
-      | idle => exact absurd rfl hs
-      | pending h =>
-          cases hc : i.confirm with
+      | idle => simp [EpState.exhausted] at hs
+      | pending h => simp [EpState.exhausted] at hs
+      | hold =>
+          cases hx : i.exceedance with
           | true =>
-              have := ih .confirmed (by simp) hno'
-              simp [issuances, isIssue, pstep, hc, this]
+              have := ih .hold rfl hno'
+              simp [epPendingHours, estep, hn, hl, hx, this]
           | false =>
-              by_cases hd : h + 1 < reviewDeadline
-              · have := ih (.pending (h + 1)) (by simp) hno'
-                simp [issuances, isIssue, pstep, hc, if_pos hd, this]
-              · have := ih .spent (by simp) hno'
-                simp [issuances, isIssue, pstep, hc, if_neg hd, this]
-      | confirmed =>
-          have := ih .confirmed (by simp) hno'
-          simp [issuances, isIssue, pstep, this]
+              have := ih .spent rfl hno'
+              simp [epPendingHours, estep, hn, hl, hx, this]
       | spent =>
-          have := ih .spent (by simp) hno'
-          simp [issuances, isIssue, pstep, hfr, this]
+          cases hx : i.exceedance with
+          | true =>
+              have := ih .hold rfl hno'
+              simp [epPendingHours, estep, hn, hx, this]
+          | false =>
+              have := ih .spent rfl hno'
+              simp [epPendingHours, estep, hn, hx, this]
+      | confirmed =>
+          have := ih .confirmed rfl hno'
+          simp [epPendingHours, estep, this]
 
-/-- **R2 (Re-issuance Needs Fresh Evidence).** From a fresh subgraph, any
-    input sequence carrying only stale evidence produces at most one
-    issuance — repetition of the request changes nothing. -/
-theorem reissue_needs_new_evidence :
-    ∀ is : List PInput, (∀ i ∈ is, i.fresh = false) →
-      issuances .idle is ≤ 1 := by
+/-- Exhausted states issue no full PIOs across such a span. -/
+theorem epIssuances_exhausted :
+    ∀ (is : List EpInput) (s : EpState), s.exhausted = true →
+      (∀ i ∈ is, i.novel = false ∧ i.layer0 = false) →
+      epIssuances s is = 0 := by
   intro is
   induction is with
-  | nil => intro _; exact Nat.zero_le 1
+  | nil => intro s _ _; rfl
   | cons i is ih =>
-      intro hno
-      have hno' : ∀ j ∈ is, j.fresh = false :=
+      intro s hs hno
+      have hn : i.novel = false := (hno i (List.mem_cons_self ..)).1
+      have hl : i.layer0 = false := (hno i (List.mem_cons_self ..)).2
+      have hno' : ∀ j ∈ is, j.novel = false ∧ j.layer0 = false :=
         fun j hj => hno j (List.mem_cons_of_mem i hj)
-      cases hi : i.issue with
-      | true =>
-          have hz := issuances_zero_of_ne_idle is (.pending 0) (by simp) hno'
-          simp [issuances, isIssue, pstep, hi, hz]
-      | false =>
-          have := ih hno'
-          simp [issuances, isIssue, pstep, hi]
-          exact this
+      cases s with
+      | idle => simp [EpState.exhausted] at hs
+      | pending h => simp [EpState.exhausted] at hs
+      | hold =>
+          cases hx : i.exceedance with
+          | true =>
+              have := ih .hold rfl hno'
+              simp [epIssuances, epIsIssue, estep, hn, hl, hx, this]
+          | false =>
+              have := ih .spent rfl hno'
+              simp [epIssuances, epIsIssue, estep, hn, hl, hx, this]
+      | spent =>
+          cases hx : i.exceedance with
+          | true =>
+              have := ih .hold rfl hno'
+              simp [epIssuances, epIsIssue, estep, hn, hx, this]
+          | false =>
+              have := ih .spent rfl hno'
+              simp [epIssuances, epIsIssue, estep, hn, hx, this]
+      | confirmed =>
+          have := ih .confirmed rfl hno'
+          simp [epIssuances, epIsIssue, estep, this]
 
-/-- **R1 (No Relitigation of the 72 Hours).** From a fresh subgraph,
-    across ANY input sequence carrying only stale evidence — any number
-    of issue requests, any confirmation pattern, any length — total
-    unconfirmed protected hours never exceed the 72-hour review deadline.
-    The deadline of §5.4 bounds the EVIDENCE, not the order: auto-reversal
-    consumes the claim that issued the order, and the protection it
-    bought cannot be relitigated by re-filing. -/
-theorem pio_no_relitigation :
-    ∀ is : List PInput, (∀ i ∈ is, i.fresh = false) →
-      pendingHours .idle is ≤ reviewDeadline := by
+/-- A pending episode inside its deadline accrues at most the hours
+    remaining to the deadline — and at expiry lands in an exhausted
+    state, whatever the risk signal. -/
+theorem epPendingHours_pending :
+    ∀ (is : List EpInput) (h : Nat), h < reviewDeadline →
+      (∀ i ∈ is, i.novel = false ∧ i.layer0 = false) →
+      epPendingHours (.pending h) is ≤ reviewDeadline - h := by
+  intro is
+  induction is with
+  | nil => intro h _ _; simp [epPendingHours]
+  | cons i is ih =>
+      intro h hh hno
+      have hno' : ∀ j ∈ is, j.novel = false ∧ j.layer0 = false :=
+        fun j hj => hno j (List.mem_cons_of_mem i hj)
+      cases hc : i.confirm with
+      | true =>
+          have := epPendingHours_exhausted is .confirmed rfl hno'
+          simp [epPendingHours, estep, hc, this]
+          omega
+      | false =>
+          by_cases hd : h + 1 < reviewDeadline
+          · have := ih (h + 1) hd hno'
+            simp [epPendingHours, estep, hc, if_pos hd]
+            omega
+          · cases hx : i.exceedance with
+            | true =>
+                have := epPendingHours_exhausted is .hold rfl hno'
+                simp [epPendingHours, estep, hc, if_neg hd, hx, this]
+                omega
+            | false =>
+                have := epPendingHours_exhausted is .spent rfl hno'
+                simp [epPendingHours, estep, hc, if_neg hd, hx, this]
+                omega
+
+/-- A pending episode issues no further full PIOs across such a span. -/
+theorem epIssuances_pending_zero :
+    ∀ (is : List EpInput) (h : Nat),
+      (∀ i ∈ is, i.novel = false ∧ i.layer0 = false) →
+      epIssuances (.pending h) is = 0 := by
+  intro is
+  induction is with
+  | nil => intro h _; rfl
+  | cons i is ih =>
+      intro h hno
+      have hno' : ∀ j ∈ is, j.novel = false ∧ j.layer0 = false :=
+        fun j hj => hno j (List.mem_cons_of_mem i hj)
+      cases hc : i.confirm with
+      | true =>
+          have := epIssuances_exhausted is .confirmed rfl hno'
+          simp [epIssuances, epIsIssue, estep, hc, this]
+      | false =>
+          by_cases hd : h + 1 < reviewDeadline
+          · have := ih (h + 1) hno'
+            simp [epIssuances, epIsIssue, estep, hc, if_pos hd, this]
+          · cases hx : i.exceedance with
+            | true =>
+                have := epIssuances_exhausted is .hold rfl hno'
+                simp [epIssuances, epIsIssue, estep, hc, if_neg hd, hx, this]
+            | false =>
+                have := epIssuances_exhausted is .spent rfl hno'
+                simp [epIssuances, epIsIssue, estep, hc, if_neg hd, hx, this]
+
+/-- **E1 (Two Clocks / No Relitigation).** The headline of ruling D-R1A:
+    across ANY input sequence carrying no novel attestation and no
+    Layer 0 resolution — WHATEVER the exceedance pattern, however many
+    filings, any confirmation pattern, any length — total unconfirmed
+    full-protection hours never exceed the 72-hour deadline. Persistence
+    of the hazard signal keeps the floor (E4/E5); it buys not one hour
+    of the full authority. Only evidence moves the epistemic clock. -/
+theorem episode_no_relitigation :
+    ∀ is : List EpInput, (∀ i ∈ is, i.novel = false ∧ i.layer0 = false) →
+      epPendingHours .idle is ≤ reviewDeadline := by
   intro is
   induction is with
   | nil => intro _; exact Nat.zero_le _
   | cons i is ih =>
       intro hno
-      have hno' : ∀ j ∈ is, j.fresh = false :=
+      have hno' : ∀ j ∈ is, j.novel = false ∧ j.layer0 = false :=
         fun j hj => hno j (List.mem_cons_of_mem i hj)
       cases hi : i.issue with
       | true =>
           have h72 : (0 : Nat) < reviewDeadline := by decide
-          have := pendingHours_pending is 0 h72 hno'
-          simp [pendingHours, pstep, hi]
+          have := epPendingHours_pending is 0 h72 hno'
+          simp [epPendingHours, estep, hi]
           omega
       | false =>
           have := ih hno'
-          simp [pendingHours, pstep, hi]
+          simp [epPendingHours, estep, hi]
           exact this
 
-/-- **R3 (No Protection Gap).** The generous bar's payoff: under ongoing
-    threshold exceedance, a spent subgraph re-protects immediately on
-    request. An ongoing attack can never be locked out by the guard —
-    only a claim whose signal has subsided is consumed. -/
-theorem ongoing_attack_reprotects (i : PInput)
-    (hx : i.exceedance = true) (hi : i.issue = true) :
-    pstep .spent i = .pending 0 := by
-  simp [pstep, PInput.fresh, hx, hi]
+/-- **E2 (One Episode, One Issuance).** Across such a span there is at
+    most one full-PIO issuance, ever. -/
+theorem episode_single_issuance :
+    ∀ is : List EpInput, (∀ i ∈ is, i.novel = false ∧ i.layer0 = false) →
+      epIssuances .idle is ≤ 1 := by
+  intro is
+  induction is with
+  | nil => intro _; exact Nat.zero_le 1
+  | cons i is ih =>
+      intro hno
+      have hno' : ∀ j ∈ is, j.novel = false ∧ j.layer0 = false :=
+        fun j hj => hno j (List.mem_cons_of_mem i hj)
+      cases hi : i.issue with
+      | true =>
+          have hz := epIssuances_pending_zero is 0 hno'
+          simp [epIssuances, epIsIssue, estep, hi, hz]
+      | false =>
+          have := ih hno'
+          simp [epIssuances, epIsIssue, estep, hi]
+          exact this
 
-/-- **R4 (Only Staleness Blocks).** From `spent`, a re-issue request is
-    refused exactly when the claim is stale: no novel claim and no
-    ongoing exceedance. The guard blocks nothing else. -/
-theorem reissue_blocked_iff_stale (i : PInput) (hi : i.issue = true) :
-    pstep .spent i = .spent ↔ (i.novelClaim = false ∧ i.exceedance = false) := by
-  cases hn : i.novelClaim <;> cases hx : i.exceedance <;>
-    simp [pstep, PInput.fresh, hn, hx, hi]
+/-- **E3 (Expiry Routes by Risk).** At the deadline, an unconfirmed
+    episode does not simply vanish: continuing exceedance enters the
+    continuity-hold, subsided risk parks in `spent`. There is no third
+    outcome and no discretion. -/
+theorem expiry_routes_by_risk (h : Nat) (i : EpInput)
+    (hc : i.confirm = false) (hd : ¬ (h + 1 < reviewDeadline)) :
+    estep (.pending h) i = cond i.exceedance .hold .spent := by
+  simp [estep, hc, if_neg hd]
 
-/-- **R5 (Freshness Is Consumed, Never Banked).** From `spent`, any hour
-    that does not carry fresh evidence AND an issuance request together
-    leaves the subgraph `spent`. In particular a transient fresh pulse
-    without a filing changes nothing: there is no path from `spent` back
-    to `idle`, so the spent marker cannot be laundered to admit a later
-    stale filing (external-review finding CG-1). With R4, a stale filing
-    from `spent` fails no matter what history preceded it. -/
-theorem freshness_consumed_not_banked (i : PInput)
-    (h : (i.fresh && i.issue) = false) : pstep .spent i = .spent := by
-  simp [pstep, h]
+/-- **E4 (Re-onset Re-floors).** From `spent`, returning exceedance
+    re-enters the hold floor — protection follows the risk — but never
+    the full clock (E8). -/
+theorem reonset_refloors (i : EpInput)
+    (hni : (i.novel && i.issue) = false) (hx : i.exceedance = true) :
+    estep .spent i = .hold := by
+  simp [estep, hni, hx]
 
-/-! ## Regime-split capital routing (§5.4, §9.3 M1) — adopted v0.3, ruling D-R2
+/-- **E5 (The Floor Follows the Risk).** While exceedance persists and
+    neither a Layer 0 output nor a novel filing arrives, the hold
+    persists: the floor is never withdrawn under continuing risk — the
+    protection-vacuum failure mode of a strict bar stays closed. -/
+theorem hold_persists (i : EpInput) (hl : i.layer0 = false)
+    (hni : (i.novel && i.issue) = false) (hx : i.exceedance = true) :
+    estep .hold i = .hold := by
+  simp [estep, hl, hni, hx]
 
-Ruling D-R2 (2026-07-12, D-2 review): graduated capital routing CAN bear
-irreversible harm (Q1: yes), but only beyond an identifiable magnitude
-regime (Q3: regime-bound). The mechanism is therefore split in the model:
-routing at or below the deployment-specified bound is reversible and
-keeps its Tier-1 requirement; routing beyond it joins the irreversible
-class and requires full causal identification. "Reversible because small"
-becomes a proof obligation, not an assumption. -/
+/-- **E6 (The Hold Owes Review).** The hold returns the subgraph to
+    ordinary posture exactly on a Layer 0 review output: time does not
+    close it, filings do not close it, and nothing else resolves it —
+    Module 2's review discipline, at PIO scale. -/
+theorem hold_resolution_iff (i : EpInput) :
+    estep .hold i = .idle ↔ i.layer0 = true := by
+  cases hl : i.layer0 <;> cases hn : i.novel <;> cases hi : i.issue <;>
+    cases hx : i.exceedance <;> simp [estep, hl, hn, hi, hx]
 
-/-- Deployment-specified reversibility regime for capital routing:
-    magnitudes at or below `bound` are reversible. Positivity is
-    constitutive: a regime in which no routing is reversible cannot be
-    constructed. Where the boundary sits is the amendment surface. -/
-structure RoutingRegime where
-  bound : Nat
-  bound_pos : 0 < bound
+/-- **E7a (Novel Evidence Restarts the Full Clock, from spent).** -/
+theorem novel_restart_from_spent (i : EpInput)
+    (hn : i.novel = true) (hi : i.issue = true) :
+    estep .spent i = .pending 0 := by
+  simp [estep, hn, hi]
 
-/-- An enforcement action: a mechanism, with magnitude where magnitude
-    bears on reversibility (capital routing). -/
-inductive Action where
-  | broadcast               -- M4 Gradient Warning
-  | route (magnitude : Nat) -- M1 Graduated Capital routing
-  | severance               -- M2 Selective Dimensional Severance
-  | sanction                -- M3 Exogenous Node-Level Sanctions
-deriving DecidableEq, Repr
+/-- **E7b (Novel Evidence Restarts the Full Clock, from hold).** -/
+theorem novel_restart_from_hold (i : EpInput) (hl : i.layer0 = false)
+    (hn : i.novel = true) (hi : i.issue = true) :
+    estep .hold i = .pending 0 := by
+  simp [estep, hl, hn, hi]
+
+/-- **E8 (Exceedance Cannot Restart).** The two-clock separation,
+    pointwise: without a novel attestation, no input — no exceedance
+    value, no filing — moves an exhausted subgraph back into `pending`.
+    Continuity of a signal is never continuity of the full authority. -/
+theorem exceedance_cannot_restart (i : EpInput) (hn : i.novel = false)
+    (h' : Nat) :
+    estep .spent i ≠ .pending h' ∧ estep .hold i ≠ .pending h' := by
+  constructor <;>
+    (cases hl : i.layer0 <;> cases hx : i.exceedance <;>
+      simp [estep, hn, hl, hx])
+
+/-- Deployment-certified hold-floor policy (D-R1A: "only the minimum
+    reversible measures necessary to prevent an immediate protection
+    gap"). WHICH measures constitute the floor is a deployment/Layer 0
+    determination outside the kernel; the constitutive constraints are
+    that everything allowed is reversible and sits at or below the
+    Tier-1 evidence requirement — so the floor can never exceed what a
+    live PIO could grant. -/
+structure HoldPolicy where
+  allowed : Mech → Bool
+  allowed_reversible : ∀ m, allowed m = true → m.reversible = true
+  allowed_tier1 : ∀ m, allowed m = true → requiredTier m ≤ Tier.t1
+
+/-- What the continuity-hold authorizes under a policy. -/
+abbrev holdAuthorizes (P : HoldPolicy) (m : Mech) : Prop :=
+  P.allowed m = true
+
+/-- **E9 (The Floor Is Reversible).** -/
+theorem hold_floor_reversible (P : HoldPolicy) (m : Mech)
+    (h : holdAuthorizes P m) : m.reversible = true :=
+  P.allowed_reversible m h
+
+/-- **E10 (The Floor Is Severity-Capped).** -/
+theorem hold_floor_severity (P : HoldPolicy) (m : Mech)
+    (h : holdAuthorizes P m) : m.severity ≤ Tier.t1.rank :=
+  tier1_severity_cap m (P.allowed_tier1 m h)
+
+/-- **E11 (The Floor Grants No More Than a Live PIO).** Everything the
+    hold can authorize, a pending PIO could already authorize: the hold
+    is a constrained remnant of the authority, never an extension. -/
+theorem hold_grants_no_more_than_pio (P : HoldPolicy) (m : Mech)
+    (h : holdAuthorizes P m) : pioAuthorizes (.issued 0) m :=
+  P.allowed_tier1 m h
+
+/-! ## Certified reversibility envelopes (§5.4, §9.3 M1/M2) — adopted
+v0.4, rulings D-R2A and D-R3
+
+Ruling D-R2A (ratified 2026-07-12) replaces the scalar routing bound:
+irreversibility is not monotone in one magnitude number (concentration,
+duration, dependency criticality, rollback latency, cascade all bear),
+and a zero-safe-routing deployment must be constructible. Ruling D-R3
+answers Q2 of the D-2 review: severance CAN be irreversible — judged
+against the affected human and institutional state, not machine
+topology — and is irreversibility-bearing UNLESS certified soft.
+
+Both land in one construction: an action carries an opaque deployment
+descriptor δ (its concentration, duration, targets, …), and a
+deployment-certified `Envelope` judges whether the described action lies
+inside the demonstrated-reversible region. The kernel does not prove the
+envelope describes reality — that is the seam, as always. It proves the
+GATING: sub-causal authorization exists only inside a certificate, the
+absence of a certificate is treated exactly as irreversibility, and the
+mechanism table of §9.3 remains a floor that certificates can only
+raise. The v0.3 scalar regime is the special case δ := Nat,
+routeInside := (· ≤ bound); no positivity constraint survives, so the
+zero envelope — no presumptively reversible routing or severance at
+all — is constructible (W9). -/
+
+/-- A deployment-certified reversibility envelope over action
+    descriptors δ. `routeInside d` / `sevInside d` are the external
+    certificates that a routing (severance) action described by `d` is
+    demonstrably reversible: bounded, state-preserving, restorable,
+    cascade-safe (D-R3's conditions live in the certification process,
+    outside the kernel). No constraint forces either region to be
+    nonempty. -/
+structure Envelope (δ : Type) where
+  routeInside : δ → Bool
+  sevInside   : δ → Bool
+
+/-- An enforcement action over descriptors δ: mechanism plus the
+    descriptor the envelope judges, where reversibility is at stake. -/
+inductive CAction (δ : Type) where
+  | broadcast           -- M4 Gradient Warning
+  | route (d : δ)       -- M1 Graduated Capital routing
+  | severance (d : δ)   -- M2 Selective Dimensional Severance
+  | sanction            -- M3 Exogenous Node-Level Sanctions
 
 /-- The mechanism an action instantiates. -/
-def Action.mech : Action → Mech
+def CAction.mech {δ : Type} : CAction δ → Mech
   | .broadcast => .m4
   | .route _ => .m1
-  | .severance => .m2
+  | .severance _ => .m2
   | .sanction => .m3
 
-/-- Reversibility relative to a regime: routing is reversible exactly
-    within the bound. Other mechanisms inherit their Phase 1
-    classification (M2's is question Q2 of the D-2 review, still open). -/
-def Action.reversibleIn (R : RoutingRegime) : Action → Bool
-  | .route m => decide (m ≤ R.bound)
-  | a => a.mech.reversible
+/-- Reversibility relative to an envelope: routing and severance are
+    reversible exactly when certified; broadcast always; sanctions
+    never. The absence of a certificate is not evidence of
+    reversibility (D-R2A). -/
+def CAction.reversibleIn {δ : Type} (E : Envelope δ) : CAction δ → Bool
+  | .broadcast => true
+  | .route d => E.routeInside d
+  | .severance d => E.sevInside d
+  | .sanction => false
 
-/-- Evidence tier required for an action: unbounded routing joins the
-    irreversible class at Tier 3; everything else keeps its mechanism's
-    requirement. -/
-def requiredTierAct (R : RoutingRegime) : Action → Tier
-  | .route m => if m ≤ R.bound then .t1 else .t3
-  | a => requiredTier a.mech
+/-- Evidence tier required for an action: certified routing keeps M1's
+    Tier 1, certified soft severance keeps M2's Tier 2 (D-R3);
+    everything uncertified joins the irreversible class at Tier 3. -/
+def requiredTierC {δ : Type} (E : Envelope δ) : CAction δ → Tier
+  | .broadcast => .t0
+  | .route d => if E.routeInside d = true then .t1 else .t3
+  | .severance d => if E.sevInside d = true then .t2 else .t3
+  | .sanction => .t3
 
-/-- Authorization judgment for actions. -/
-abbrev authorizesAct (R : RoutingRegime) (t : Tier) (a : Action) : Prop :=
-  requiredTierAct R a ≤ t
+/-- Authorization judgment for certified actions. -/
+abbrev authorizesC {δ : Type} (E : Envelope δ) (t : Tier) (a : CAction δ) : Prop :=
+  requiredTierC E a ≤ t
 
-/-- **V1 (Action Tier Monotonicity).** T1 lifted to actions: stronger
-    evidence never removes an authorized action. -/
-theorem action_tier_monotone (R : RoutingRegime) :
-    ∀ (t t' : Tier) (a : Action),
-      authorizesAct R t a → t ≤ t' → authorizesAct R t' a := by
+/-- **W1 (Certified Tier Monotonicity).** T1 lifted to certified
+    actions: stronger evidence never removes an authorized action. -/
+theorem cert_tier_monotone {δ : Type} (E : Envelope δ) :
+    ∀ (t t' : Tier) (a : CAction δ),
+      authorizesC E t a → t ≤ t' → authorizesC E t' a := by
   intro t t' a h1 h2
   exact Nat.le_trans h1 h2
 
-/-- **V2 (Action Severity–Evidence Proportionality).** T2 lifted to
-    actions: the severity of any authorized action's mechanism is bounded
-    by the evidence rank. -/
-theorem action_severity_le_evidence (R : RoutingRegime) :
-    ∀ (t : Tier) (a : Action),
-      authorizesAct R t a → a.mech.severity ≤ t.rank := by
+/-- **W2 (Certified Severity–Evidence Proportionality).** T2 lifted:
+    the severity of any authorized action's mechanism is bounded by the
+    evidence rank. -/
+theorem cert_severity_le_evidence {δ : Type} (E : Envelope δ) :
+    ∀ (t : Tier) (a : CAction δ),
+      authorizesC E t a → a.mech.severity ≤ t.rank := by
   intro t a h
   cases a with
-  | route m =>
-      by_cases hm : m ≤ R.bound
-      · simp only [authorizesAct, requiredTierAct, if_pos hm] at h
+  | route d =>
+      by_cases hc : E.routeInside d = true
+      · simp only [authorizesC, requiredTierC, if_pos hc] at h
         exact h
-      · simp only [authorizesAct, requiredTierAct, if_neg hm] at h
+      · simp only [authorizesC, requiredTierC, if_neg hc] at h
         have h3 : (3 : Nat) ≤ t.rank := h
         show (1 : Nat) ≤ t.rank
         omega
+  | severance d =>
+      by_cases hc : E.sevInside d = true
+      · simp only [authorizesC, requiredTierC, if_pos hc] at h
+        exact h
+      · simp only [authorizesC, requiredTierC, if_neg hc] at h
+        have h3 : (3 : Nat) ≤ t.rank := h
+        show (2 : Nat) ≤ t.rank
+        omega
   | broadcast => exact Nat.zero_le _
-  | severance => exact h
   | sanction => exact h
 
-/-- **V3 (Restored Sub-Causal Reversibility).** The restored T3: under
-    the regime split, EVERY action authorized below Tier 3 is reversible
-    — including capital routing, because unbounded routing now requires
-    Tier 3. What the Phase 1 table asserted by fiat is here a
-    consequence of the gating. -/
-theorem action_sub_causal_reversible (R : RoutingRegime) :
-    ∀ (t : Tier) (a : Action),
-      authorizesAct R t a → t < .t3 → a.reversibleIn R = true := by
+/-- **W3 (Restored Sub-Causal Reversibility, both mechanisms).** Every
+    action authorized below Tier 3 is reversible — capital routing AND
+    severance — because everything uncertified requires Tier 3. What
+    Phase 1 asserted by fiat for M1 and M2 is now a consequence of the
+    gating for both. -/
+theorem cert_sub_causal_reversible {δ : Type} (E : Envelope δ) :
+    ∀ (t : Tier) (a : CAction δ),
+      authorizesC E t a → t < .t3 → a.reversibleIn E = true := by
   intro t a h hlt
   cases a with
-  | route m =>
-      by_cases hm : m ≤ R.bound
-      · simp [Action.reversibleIn, hm]
+  | route d =>
+      by_cases hc : E.routeInside d = true
+      · simp only [CAction.reversibleIn]
+        exact hc
       · exfalso
-        simp only [authorizesAct, requiredTierAct, if_neg hm] at h
+        simp only [authorizesC, requiredTierC, if_neg hc] at h
+        have h1 : (3 : Nat) ≤ t.rank := h
+        have h2 : t.rank < 3 := hlt
+        omega
+  | severance d =>
+      by_cases hc : E.sevInside d = true
+      · simp only [CAction.reversibleIn]
+        exact hc
+      · exfalso
+        simp only [authorizesC, requiredTierC, if_neg hc] at h
         have h1 : (3 : Nat) ≤ t.rank := h
         have h2 : t.rank < 3 := hlt
         omega
   | broadcast => rfl
-  | severance => rfl
   | sanction =>
       exfalso
       have h1 : (3 : Nat) ≤ t.rank := h
       have h2 : t.rank < 3 := hlt
       omega
 
-/-- **V4 (Action Irreversibility Gate).** T4 lifted to actions: an
-    irreversible action — a sanction, or routing beyond the regime bound
-    — is authorized exactly at full causal identification. -/
-theorem action_irreversible_iff_causal (R : RoutingRegime) :
-    ∀ (t : Tier) (a : Action), a.reversibleIn R = false →
-      (authorizesAct R t a ↔ t = .t3) := by
+/-- **W4 (Certified Irreversibility Gate).** T4 lifted: an
+    irreversibility-bearing action — a sanction, uncertified routing, or
+    uncertified severance — is authorized exactly at full causal
+    identification. -/
+theorem cert_irreversible_iff_causal {δ : Type} (E : Envelope δ) :
+    ∀ (t : Tier) (a : CAction δ), a.reversibleIn E = false →
+      (authorizesC E t a ↔ t = .t3) := by
   intro t a hrev
   cases a with
-  | route m =>
-      have hm : ¬ m ≤ R.bound := by
+  | route d =>
+      have hc : ¬ (E.routeInside d = true) := by
         intro hle
-        simp [Action.reversibleIn, hle] at hrev
-      simp only [authorizesAct, requiredTierAct, if_neg hm]
+        simp [CAction.reversibleIn, hle] at hrev
+      simp only [authorizesC, requiredTierC, if_neg hc]
       cases t <;> simp_all <;> decide
-  | broadcast => simp [Action.reversibleIn, Action.mech, Mech.reversible] at hrev
-  | severance => simp [Action.reversibleIn, Action.mech, Mech.reversible] at hrev
+  | severance d =>
+      have hc : ¬ (E.sevInside d = true) := by
+        intro hle
+        simp [CAction.reversibleIn, hle] at hrev
+      simp only [authorizesC, requiredTierC, if_neg hc]
+      cases t <;> simp_all <;> decide
+  | broadcast => simp [CAction.reversibleIn] at hrev
   | sanction =>
-      simp only [authorizesAct, requiredTierAct]
+      simp only [authorizesC, requiredTierC]
       cases t <;> simp_all <;> decide
 
-/-- **V5 (Unbounded Routing Needs Causal ID).** The ruling's content:
-    capital routing beyond the regime bound is authorized only at
-    Tier 3. -/
-theorem unbounded_routing_needs_causal (R : RoutingRegime) (m : Nat)
-    (t : Tier) (hm : R.bound < m)
-    (h : authorizesAct R t (.route m)) : t = .t3 := by
-  have hnb : ¬ m ≤ R.bound := by omega
-  simp only [authorizesAct, requiredTierAct, if_neg hnb] at h
+/-- **W5a (Uncertified Routing Needs Causal ID).** -/
+theorem uncertified_routing_needs_causal {δ : Type} (E : Envelope δ)
+    (d : δ) (t : Tier) (hnc : E.routeInside d = false)
+    (h : authorizesC E t (.route d)) : t = .t3 := by
+  have hc : ¬ (E.routeInside d = true) := by simp [hnc]
+  simp only [authorizesC, requiredTierC, if_neg hc] at h
   cases t with
   | t3 => rfl
   | t0 => exact absurd h (by decide)
   | t1 => exact absurd h (by decide)
   | t2 => exact absurd h (by decide)
 
-/-- **V6 (Graduated Ladder Preserved).** Routing within the regime bound
-    remains available on correlational evidence: the split closes the
-    irreversibility loophole without collapsing the graduated response
-    ladder to "speak or prove". -/
-theorem bounded_routing_at_t1 (R : RoutingRegime) (m : Nat)
-    (hm : m ≤ R.bound) : authorizesAct R .t1 (.route m) := by
-  simp only [authorizesAct, requiredTierAct, if_pos hm]
+/-- **W5b (Uncertified Severance Needs Causal ID).** Ruling D-R3's
+    content: hard, state-destructive, or simply UNCERTIFIED severance is
+    treated exactly as irreversible. -/
+theorem uncertified_severance_needs_causal {δ : Type} (E : Envelope δ)
+    (d : δ) (t : Tier) (hnc : E.sevInside d = false)
+    (h : authorizesC E t (.severance d)) : t = .t3 := by
+  have hc : ¬ (E.sevInside d = true) := by simp [hnc]
+  simp only [authorizesC, requiredTierC, if_neg hc] at h
+  cases t with
+  | t3 => rfl
+  | t0 => exact absurd h (by decide)
+  | t1 => exact absurd h (by decide)
+  | t2 => exact absurd h (by decide)
+
+/-- **W6a (Certified Routing at Tier 1).** The graduated ladder is
+    preserved where reversibility has been demonstrated. -/
+theorem certified_route_at_t1 {δ : Type} (E : Envelope δ) (d : δ)
+    (hc : E.routeInside d = true) : authorizesC E .t1 (.route d) := by
+  simp only [authorizesC, requiredTierC, if_pos hc]
   exact Nat.le_refl _
 
-/-- **V7 (Refinement Is Conservative).** The split only strengthens
+/-- **W6b (Certified Soft Severance at Tier 2).** -/
+theorem certified_severance_at_t2 {δ : Type} (E : Envelope δ) (d : δ)
+    (hc : E.sevInside d = true) : authorizesC E .t2 (.severance d) := by
+  simp only [authorizesC, requiredTierC, if_pos hc]
+  exact Nat.le_refl _
+
+/-- **W7 (Refinement Is Conservative).** Certificates only strengthen
     gating: every action requires at least the evidence tier its
-    mechanism required under the Phase 1 table. Nothing authorized in
-    the split model was forbidden before — Principle 19.2's demand that
-    amendment refine, not relax. -/
-theorem refinement_conservative (R : RoutingRegime) (a : Action) :
-    requiredTier a.mech ≤ requiredTierAct R a := by
+    mechanism required under the Phase 1 table — the §9.3 table remains
+    a floor that envelopes can raise but never lower (Principle 19.2). -/
+theorem cert_refinement_conservative {δ : Type} (E : Envelope δ)
+    (a : CAction δ) : requiredTier a.mech ≤ requiredTierC E a := by
   cases a with
-  | route m =>
-      by_cases hm : m ≤ R.bound
-      · simp only [requiredTierAct, if_pos hm, Action.mech]
+  | route d =>
+      by_cases hc : E.routeInside d = true
+      · simp only [requiredTierC, if_pos hc, CAction.mech]
         decide
-      · simp only [requiredTierAct, if_neg hm, Action.mech]
+      · simp only [requiredTierC, if_neg hc, CAction.mech]
+        decide
+  | severance d =>
+      by_cases hc : E.sevInside d = true
+      · simp only [requiredTierC, if_pos hc, CAction.mech]
+        decide
+      · simp only [requiredTierC, if_neg hc, CAction.mech]
         decide
   | broadcast => exact Nat.le_refl _
-  | severance => exact Nat.le_refl _
   | sanction => exact Nat.le_refl _
+
+/-- **W8 (No Certificate, No Presumption).** Actions bearing an
+    irreversibility risk are reversible-classified ONLY via their
+    certificate: reversibility of routing or severance implies the
+    certificate exists. Absence of a certificate is never evidence of
+    reversibility. -/
+theorem no_certificate_no_presumption {δ : Type} (E : Envelope δ) (d : δ) :
+    ((CAction.route d).reversibleIn E = true → E.routeInside d = true) ∧
+    ((CAction.severance d).reversibleIn E = true → E.sevInside d = true) :=
+  ⟨fun h => h, fun h => h⟩
+
+/-- **W9 (The Zero Envelope Is Constructible).** A deployment in which
+    NO routing and NO severance is presumptively reversible — payroll,
+    medication supply, settlement infrastructure — is a legal
+    parameterization: every routing and severance action then requires
+    Tier 3 (by W5a/W5b). The v0.3 `bound_pos` constraint, which forced
+    every deployment to name a nonzero safe quantum, is repealed. -/
+theorem zero_envelope_constructible (δ : Type) :
+    ∃ E : Envelope δ,
+      (∀ d, E.routeInside d = false) ∧ (∀ d, E.sevInside d = false) :=
+  ⟨⟨fun _ => false, fun _ => false⟩, fun _ => rfl, fun _ => rfl⟩
 
 end AHC

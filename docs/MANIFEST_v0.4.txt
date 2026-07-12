@@ -1,0 +1,78 @@
+AHC VERIFIED CONSTITUTIONAL KERNEL — MANIFEST
+Version 0.4 — 2026-07-12
+Supersedes v0.3.1 (MANIFEST_v0.3.txt), v0.2 (MANIFEST_v0.2.txt), and
+v0.1 (MANIFEST.txt); change record in ERRATA_AND_AMENDMENTS.md
+
+CONTENTS
+  ahc-verified-kernel/
+      Lean 4 project: 4 modules, 77 audited theorems, zero sorries,
+      core-only. v0.4 implements the four constitutional dispositions
+      ratified by the project owner on 2026-07-12, as proposed by the
+      Phase 2 external review (docs/external-reviews/):
+
+      Ruling D-R1A (with D-R4) — Two Clocks. The hazard clock and the
+        epistemic clock are separated. Persistence of threshold
+        exceedance sustains only a constrained CONTINUITY-HOLD floor
+        (deployment-certified, reversible, Tier-1-capped, Layer 0 review
+        owed); only an attested materially new claim restarts the full
+        72h PIO. Episode machine theorems E1-E11 replace v0.3's
+        R-family: whatever the exceedance pattern, unconfirmed full
+        protection never exceeds 72 hours per evidentiary episode (E1),
+        the floor is never withdrawn under continuing risk (E5), and
+        continuity of a signal is never continuity of the full
+        authority (E8).
+
+      Rulings D-R2A + D-R3 — Certified Reversibility Envelopes. The
+        scalar routing bound is repealed. Routing AND severance (Q2 of
+        the D-2 review: answered YES) are irreversibility-bearing unless
+        a deployment certificate places the described action inside a
+        demonstrated-reversible envelope; reversibility is judged
+        against affected human and institutional state, not machine
+        topology. Envelope theorems W1-W9 replace v0.3's V-family:
+        certified routing keeps Tier 1, certified soft severance keeps
+        Tier 2, everything uncertified requires Tier-3 causal
+        identification (W5a/W5b), the mechanism table remains a floor
+        certificates can only raise (W7), the absence of a certificate
+        is never evidence of reversibility (W8), and the zero envelope
+        is a legal parameterization (W9 - bound_pos repealed).
+
+      Module 1  TieredProtocol.lean   (§5.4, §9.2-9.3)
+                T1-T9 + S1-S3 + E1-E11 + W1-W9
+      Module 2  CrisisCap.lean        (§12.3; §4.2, §10.3) + G1-G7
+      Module 3  SensorsAndKernel.lean (§8.3, §4.1, §1.1)   [unchanged]
+      Module 4  PLOL.lean             (§10.4; Comp. A §5, §19.4, App. B)
+                                                            [unchanged]
+      Audit.lean re-verifies the axiom footprint on every build.
+      CI fails any build containing a sorry, any Classical.choice, any
+      unexpected axiom, or any deviation from the footprint below.
+
+VERIFY (requires elan; no other dependencies, no Mathlib):
+  cd ahc-verified-kernel && lake build
+
+EXPECTED: build succeeds; audit log shows 77 audited theorems, every one
+at most [propext, Quot.sound]; never Classical.choice; 33 of 77 depend on
+no axioms at all, including all nine PLOL theorems. (decCompliant is a
+verified Decidable instance additional to the count.)
+
+SOURCE INTEGRITY
+  sha256 over sorted source files (*.lean, lakefile.toml, lean-toolchain):
+  fc7c5c6727dfe671364b38d3c51effc76b88b06f9a388e268e7b57f7864cf1c0
+  v0.3.1 digest (superseded): 324a11065b4891ae0b0310d51f912fbd27ecd2239739f190ca15baa0df74104b
+  v0.3.0 digest (superseded): 82d22e5865811a45331b8b206cb8d8dd6a51817ca14299ab1cd133e1a1e3790b
+  v0.2 digest (superseded):   4d44fb1835c732c3cf876b50b0042ff8da793afdfd57f70c120da45a4fef651e
+  v0.1 digest (superseded):   2b51cac67e278c54003bbf2d5974da19d581caeaa4bc6f3f8f23043cffea7609
+  Per Module 4 (bridge_proves_origin_not_consistency): this digest
+  proves origin, not consistency. Consistency you verify by building.
+
+CIRCULATED UNDER
+  Companion A Principle 19.2 (Complexity Ceiling). v0.4's changes
+  follow, not precede, review: all four dispositions originate in
+  external review findings (CG-2..CG-5), were routed per Part III, and
+  were ratified before implementation. Superseded formalizations (the
+  v0.3 R-family and scalar V-family) are REMOVED, not retained: dead
+  constitutional text is complexity. Their record is git history and
+  the errata. All translation choices are disclosed in the module
+  header and are named contestation targets. What remains outside the
+  machine, deliberately: what counts as a novel claim (D-R4, Layer 0),
+  which measures constitute the hold floor (HoldPolicy certification),
+  and whether an envelope describes reality (deployment certification).

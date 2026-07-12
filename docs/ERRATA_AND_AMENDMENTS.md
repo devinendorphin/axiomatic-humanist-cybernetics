@@ -1,5 +1,65 @@
 # AHC Verified Constitutional Kernel — Errata & Amendments
 
+## v0.3.1 → v0.4 (2026-07-12) — ratification of the external-review dispositions
+
+The project owner ratified all four proposed constitutional dispositions
+of the Phase 2 external review **as proposed**, in the order received:
+D-R1A adopt · D-R2A adopt · D-R3 adopt · D-R4 adopt as text, formalize
+with D-R1A. Implemented in `TieredProtocol.lean`; digest in
+`MANIFEST_v0.4.txt`. Footprint: **77 audited theorems, 33 axiom-free**.
+
+### D-R1A + D-R4 → the episode machine (E1–E11; resolves CG-2, CG-5)
+
+The hazard clock and the epistemic clock are separated. `exceedance`
+(riskPersistent) no longer restarts the full PIO: at budget expiry,
+continuing risk enters a **continuity-hold** — a floor state
+(`HoldPolicy`: deployment-certified, provably reversible-only and
+Tier-1-capped, E9–E11) that persists while risk persists (E5) and owes
+an explicit Layer 0 review, which is the only thing that returns the
+subgraph to ordinary posture (E6). Only an attested materially new claim
+(`novel`, per D-R4 attached to a claim identity, contestable through
+Layer 0, determined outside the machine) restarts a full PIO (E7).
+Headlines: **E1** — across any span without novelty or Layer 0
+resolution, whatever the exceedance and filing pattern, unconfirmed full
+protection ≤ 72 hours; **E8** — continuity of a signal is never
+continuity of the full authority. The v0.3 R-family (R1–R5) is
+superseded and removed: its `fresh = novelClaim || exceedance` bar is
+unconstitutional under D-R1A. D-R4's disclosure obligations for the T+0
+record (authorization basis, novelty basis, cumulative episode
+protection, falsification condition) are adopted as constitutional text;
+their PLOL field formalization is deferred to the next Module 4 pass.
+
+### D-R2A + D-R3 → certified reversibility envelopes (W1–W9; resolves CG-3, CG-4, and Q2)
+
+The scalar `RoutingRegime` (and its `bound_pos`) is repealed; the v0.3
+V-family is superseded and removed. An action now carries an opaque
+deployment descriptor δ (magnitude, concentration, duration, rollback
+latency, cascade …) judged by a deployment-certified `Envelope`.
+**Q2 is answered: yes** — severance can be irreversible, judged against
+affected human and institutional state, not machine topology. Certified
+routing keeps Tier 1 (W6a); certified soft severance keeps Tier 2 (W6b);
+everything uncertified — including *uncertified* severance — requires
+Tier-3 causal identification (W5a/W5b). The §9.3 mechanism table remains
+a presumptive floor that certificates can only raise (W7); the absence
+of a certificate is never evidence of reversibility (W8); and the zero
+envelope — no presumptively reversible routing or severance at all — is
+a legal parameterization (W9). D-R3's soft-severance certification
+conditions (time-bounded, state-preserving, essential-service floor,
+tested restoration, cascade-safe, repair mechanism) are adopted as
+constitutional text governing the certification process.
+
+### Remaining amendment surfaces after v0.4
+
+- Deployment certification processes: who issues, contests, and revokes
+  `Envelope` and `HoldPolicy` certificates (public, contestable,
+  revocable per D-R2A) — institutional, Layer 0 / Companion B territory.
+- D-R4's T+0 record fields → Module 4 formalization (next PLOL pass).
+- Trimmed-mean rule (CG-6): estimator guarantees require a separately
+  proved two-sided counting property — deployment rule text, no kernel
+  change.
+
+---
+
 ## v0.3 → v0.3.1 (2026-07-12) — external review, findings register
 
 A Phase 2 external review (ChatGPT; archived at

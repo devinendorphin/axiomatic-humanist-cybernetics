@@ -1,15 +1,12 @@
 # AHC Verified Constitutional Kernel
 
-**Version 0.3.1** — v0.2 adopted two strengthening families from Phase 1
-external review (temporal hysteresis, composed cap × review semantics);
-v0.3 implements the two constitutional rulings of 2026-07-12 (PIO
-re-issuance guard with a generous freshness bar, ruling D-R1; regime-split
-capital routing, ruling D-R2). Change record in
-`../docs/ERRATA_AND_AMENDMENTS.md`, digest in `../docs/MANIFEST_v0.3.txt`.
-v0.3.1 closes external-review
-finding CG-1 (theorem R5: freshness is consumed by issuance, never
-banked). Open: proposed dispositions CG-2..CG-5 (see errata) await
-ruling, including Q2 (severance reversibility).
+**Version 0.4** — implements the four constitutional dispositions
+ratified 2026-07-12 from Phase 2 external review: the two-clock episode
+machine with continuity-hold (D-R1A/D-R4, theorems E1–E11) and certified
+reversibility envelopes covering routing and severance (D-R2A/D-R3,
+theorems W1–W9; Q2 answered yes). v0.2 adopted the Phase 1 review
+strengthenings; v0.3/v0.3.1 are superseded. Change record in
+`../docs/ERRATA_AND_AMENDMENTS.md`, digest in `../docs/MANIFEST_v0.4.txt`.
 
 Machine-checked formalization (Lean 4) of the order-theoretic core of
 **Axiomatic Humanist Cybernetics v3.1** — the Tiered Evidence-Action
@@ -21,8 +18,8 @@ register-invariance guarantees.
 **Toolchain:** Lean 4.15.0, core only — **no Mathlib dependency**. Every
 proof is self-contained. **Zero `sorry`s.** No theorem depends on
 `Classical.choice`; the complete axiom footprint is `propext` and
-`Quot.sound` (standard Lean kernel axioms), and twenty-eight of the
-sixty-six audited theorems depend on no axioms at all — including every
+`Quot.sound` (standard Lean kernel axioms), and thirty-three of the
+seventy-seven audited theorems depend on no axioms at all — including every
 theorem of the PLOL module.
 
 ## What is and is not verified
@@ -57,17 +54,22 @@ nothing here substitutes for it.
 | `oscillation_travel` (S1) | §9.2 | Escalating and de-escalating values are separated by more than the gap width |
 | `flips_travel_anchored` (S2) | §9.2 | Anchored bound: every posture flip costs the signal more than the gap width of travel |
 | `chatter_requires_travel` (S3) | §9.2 | (flips − 1)·(gapWidth+1) ≤ total variation: cycling requires repeated genuine full-band swings; sub-band noise flips the posture at most once |
-| `pio_no_relitigation` (R1) | §5.4 | Stale evidence buys at most 72 unconfirmed protected hours, against any re-filing pattern |
-| `reissue_needs_new_evidence` (R2) | §5.4 | Under staleness, at most one PIO issuance, ever |
-| `ongoing_attack_reprotects` (R3) | §5.4 | Under ongoing exceedance a spent subgraph re-protects immediately: an ongoing attack is never locked out |
-| `reissue_blocked_iff_stale` (R4) | §5.4 | The guard blocks exactly stale claims and nothing else |
-| `freshness_consumed_not_banked` (R5) | §5.4 | A fresh pulse without a filing changes nothing: `spent` never returns to `idle`, closing the CG-1 laundering path |
-| `action_tier_monotone` / `action_severity_le_evidence` (V1–V2) | §5.4 | T1/T2 lifted to magnitude-bearing actions |
-| `action_sub_causal_reversible` (V3) | §5.4 | Restored T3: every action authorized below Tier 3 is reversible — now a consequence of gating, not fiat |
-| `action_irreversible_iff_causal` (V4) | §5.4, §5.5 | T4 lifted to actions |
-| `unbounded_routing_needs_causal` (V5) | §5.4 | Capital routing beyond the regime bound is authorized only at Tier 3 |
-| `bounded_routing_at_t1` (V6) | §5.4 | Bounded routing stays available on correlational evidence: the graduated ladder is preserved |
-| `refinement_conservative` (V7) | §5.4 | The split only strengthens gating relative to the Phase 1 table |
+| `episode_no_relitigation` (E1) | §5.4 | Two clocks: without novel evidence or Layer 0 resolution, whatever the exceedance pattern, unconfirmed full protection ≤ 72h |
+| `episode_single_issuance` (E2) | §5.4 | One full-PIO issuance per such span |
+| `expiry_routes_by_risk` (E3) | §5.4 | At the deadline: continuing risk → continuity-hold; subsided risk → spent |
+| `reonset_refloors` / `hold_persists` (E4–E5) | §5.4 | The hold floor follows the risk and is never withdrawn while it persists |
+| `hold_resolution_iff` (E6) | §5.4 | Only a Layer 0 review output returns the hold to ordinary posture |
+| `novel_restart_from_spent` / `_from_hold` (E7) | §5.4 | An attested materially new claim restarts the full clock |
+| `exceedance_cannot_restart` (E8) | §5.4 | Continuity of a signal is never continuity of the full authority |
+| `hold_floor_reversible` / `_severity` / `hold_grants_no_more_than_pio` (E9–E11) | §5.4 | The hold floor is reversible, Tier-1-capped, and a remnant of PIO authority — never an extension |
+| `cert_tier_monotone` / `cert_severity_le_evidence` (W1–W2) | §5.4 | T1/T2 lifted to certificate-bearing actions |
+| `cert_sub_causal_reversible` (W3) | §5.4 | Everything authorized below Tier 3 is reversible — routing AND severance — as a consequence of gating |
+| `cert_irreversible_iff_causal` (W4) | §5.4, §5.5 | T4 lifted to certificate-bearing actions |
+| `uncertified_routing_needs_causal` / `uncertified_severance_needs_causal` (W5) | §5.4 | No certificate ⇒ Tier 3; Q2 answered: uncertified severance is treated exactly as irreversible |
+| `certified_route_at_t1` / `certified_severance_at_t2` (W6) | §5.4 | The graduated ladder is preserved where reversibility is demonstrated |
+| `cert_refinement_conservative` (W7) | §5.4 | The §9.3 table is a floor envelopes raise but never lower |
+| `no_certificate_no_presumption` (W8) | §5.4 | Reversibility of routing/severance is exactly its certificate |
+| `zero_envelope_constructible` (W9) | §5.4 | A deployment with no presumptively reversible routing or severance is a legal parameterization |
 
 ### Module 2 — `AHCKernel/CrisisCap.lean`
 
@@ -150,15 +152,18 @@ The build elaborates all proofs and prints the axiom audit
 the `sorryAx` axiom in that output. Expected audit result:
 
 ```
-66 audited theorems: every one at most [propext, Quot.sound];
+77 audited theorems: every one at most [propext, Quot.sound];
 never Classical.choice
-no axioms at all (28): broadcast_universal, tier_monotone,
+no axioms at all (33): broadcast_universal, tier_monotone,
   severity_le_evidence, sub_causal_reversible, irreversible_iff_causal,
   pio_ceiling, pio_reversible, no_emergency_in_review, review_absorbing,
   axiomI_null_kernel, axiomI_no_compensation, null_kernel_product,
   globalSignal_pos_iff, dayStep_valid, dayRun_valid,
-  pendingHours_confirmed, action_tier_monotone, bounded_routing_at_t1,
-  refinement_conservative, and all nine PLOL theorems
+  hold_floor_reversible, hold_floor_severity, hold_grants_no_more_than_pio,
+  cert_tier_monotone, cert_refinement_conservative,
+  no_certificate_no_presumption, zero_envelope_constructible,
+  certified_route_at_t1, certified_severance_at_t2,
+  and all nine PLOL theorems
 ```
 
 (Counts are audit-log entries — one per `#print axioms` result;
@@ -175,10 +180,11 @@ the median characterized by its counting property rather than order
 statistics; the enforcement posture as a one-bit Schmitt trigger with
 total variation as "travel" (S1–S3); the composed machine's trip condition
 as exceedance ∧ failure of the renewal condition, with exceedance a free
-input (G1–G7); PIO evidence freshness as novelClaim ∨ exceedance — the
-ruling D-R1 generous bar (R1–R4); the routing regime bound as a
-deployment-specified constitutive field, with magnitude units abstract
-(V1–V7). These choices are the right places to aim contestation.
+input (G1–G7); the two-clock separation with `novel` as a contestable
+Layer 0 attestation and the hold floor as a deployment-certified policy
+(E1–E11); reversibility envelopes over opaque deployment descriptors,
+judged by external certificates the kernel gates on but does not verify
+(W1–W9). These choices are the right places to aim contestation.
 
 ## Status and non-goals
 
