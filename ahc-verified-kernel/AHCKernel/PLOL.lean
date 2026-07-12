@@ -67,6 +67,30 @@
                                    record's number inherits the machine's
                                    constitutional bound
 
+  Later-register compliance theorems (adopted in v0.7; §19.4, App. B.4;
+  reviewer solicitation F-4). Phase 1 obliged only the T+0 semantic
+  record at release; the civic (T+72h) and technical (T+30d) registers
+  are checked WHEN THEY SHIP. `ShippedTripartite` carries their
+  compliance as proof obligations, extending register invariance across
+  the full release:
+
+    P10 tripartite_critical_consensus — the three registers of a shipped
+                                   compliant release agree on the ENTIRE
+                                   contestation-critical fragment: one
+                                   event, three voices, same findings
+    P11 later_registers_no_hostage — every critical claim is present in
+                                   the civic and technical records too;
+                                   a later register cannot drop what the
+                                   semantic record carried
+    P12 shipped_pio_disclosure_all_registers — the four D-R4 fields
+                                   appear in ALL THREE registers of a
+                                   shipped PIO release, not the T+0
+                                   record alone
+    P13 later_residual_divergence_harmless — any claim differing between
+                                   the civic and technical records is
+                                   provably non-critical: later-register
+                                   differences are framing, never findings
+
   ── THE SEAM (what this module does not and cannot prove) ──────────────
 
   Every theorem above operates on claim sets: abstract, register-neutral
@@ -116,7 +140,7 @@
 
   Scope disclaimer: these proofs verify the specification, not the world.
 
-  Toolchain: Lean 4.15.0, core only (no Mathlib). Checked 2026-07-12 (v0.5).
+  Toolchain: Lean 4.15.0, core only (no Mathlib). Checked 2026-07-12 (v0.7).
 -/
 import AHCKernel.TieredProtocol
 
@@ -392,5 +416,92 @@ theorem attested_budget_bounded (B : BudgetAttestation)
     B.claimedHours ≤ reviewDeadline := by
   rw [B.accurate]
   exact episode_no_relitigation B.history hno
+
+/-! ## Later-register compliance (§19.4, App. B.4) — adopted v0.7
+
+Phase 1 made only the T+0 semantic record a compliance obligation of a
+valid release; the civic and technical registers, which ship later, were
+"checked when they ship". `ShippedTripartite` records that both have
+shipped and carries their B.4 compliance as proof obligations, so the
+register-invariance guarantees (P3, P3', P4) and the D-R4 disclosures
+(P7) extend across the full tripartite release. -/
+
+/-- A fully-shipped tripartite release: the later registers have shipped
+    and their B.4 compliance is now a proof obligation. A shipped release
+    that ships a non-compliant civic or technical record is
+    unconstructible. -/
+structure ShippedTripartite (Claim : Type) (H : HashScheme (Event Claim))
+    extends Tripartite Claim H where
+  civic_compliant : Compliant event civic
+  tech_compliant  : Compliant event tech
+
+/-- **P10 (Tripartite Critical Consensus).** The three registers of a
+    shipped compliant release agree on the entire contestation-critical
+    fragment: a critical claim is in the semantic record iff in the civic
+    record iff in the technical record. One classification event, three
+    registers, no divergence on anything that matters for contestation —
+    now proved for the full release, not the T+0 record alone. -/
+theorem tripartite_critical_consensus {Claim : Type}
+    {H : HashScheme (Event Claim)} (T : ShippedTripartite Claim H) :
+    ∀ c ∈ T.event.critical,
+      (c ∈ T.scr.claims ↔ c ∈ T.civic.claims) ∧
+      (c ∈ T.civic.claims ↔ c ∈ T.tech.claims) := by
+  intro c hc
+  exact ⟨compliant_registers_agree T.event T.scr T.civic
+           T.scr_compliant T.civic_compliant c hc,
+         compliant_registers_agree T.event T.civic T.tech
+           T.civic_compliant T.tech_compliant c hc⟩
+
+/-- **P11 (Later Registers Take No Hostage).** Every contestation-critical
+    claim is present in the civic and technical records: a later register
+    cannot narrow the contestable set by dropping what the semantic
+    record already made public. `no_hostage` (P5), extended down the
+    release timeline. -/
+theorem later_registers_no_hostage {Claim : Type}
+    {H : HashScheme (Event Claim)} (T : ShippedTripartite Claim H) :
+    ∀ c ∈ T.event.critical, c ∈ T.civic.claims ∧ c ∈ T.tech.claims :=
+  fun c hc => ⟨T.civic_compliant.1 c hc, T.tech_compliant.1 c hc⟩
+
+/-- The four D-R4 fields are present in any register compliant against a
+    PIO-related event. -/
+theorem pio_fields_in_compliant {Claim : Type} (D : PIOEvent Claim)
+    (r : Record Claim) (hc : Compliant D.toEvent r) :
+    D.basisClaim ∈ r.claims ∧ D.noveltyClaim ∈ r.claims ∧
+    D.budgetClaim ∈ r.claims ∧ D.falsifier ∈ r.claims :=
+  ⟨hc.1 _ D.basis_critical, hc.1 _ D.novelty_critical,
+   hc.1 _ D.budget_critical, hc.1 _ D.toEvent.falsifier_critical⟩
+
+/-- **P12 (D-R4 Disclosures in Every Register).** For a shipped PIO
+    release, all four D-R4 fields — authorization basis, novelty basis,
+    episode budget, falsification condition — appear in all three
+    registers, not the T+0 record alone. Whichever register a contestant
+    reads, the accountability fields are there. -/
+theorem shipped_pio_disclosure_all_registers {Claim : Type}
+    {H : HashScheme (Event Claim)} (D : PIOEvent Claim)
+    (T : ShippedTripartite Claim H) (hT : T.event = D.toEvent) :
+    (D.basisClaim ∈ T.scr.claims ∧ D.noveltyClaim ∈ T.scr.claims ∧
+      D.budgetClaim ∈ T.scr.claims ∧ D.falsifier ∈ T.scr.claims) ∧
+    (D.basisClaim ∈ T.civic.claims ∧ D.noveltyClaim ∈ T.civic.claims ∧
+      D.budgetClaim ∈ T.civic.claims ∧ D.falsifier ∈ T.civic.claims) ∧
+    (D.basisClaim ∈ T.tech.claims ∧ D.noveltyClaim ∈ T.tech.claims ∧
+      D.budgetClaim ∈ T.tech.claims ∧ D.falsifier ∈ T.tech.claims) := by
+  refine ⟨pio_fields_in_compliant D T.scr ?_,
+          pio_fields_in_compliant D T.civic ?_,
+          pio_fields_in_compliant D T.tech ?_⟩
+  · rw [← hT]; exact T.scr_compliant
+  · rw [← hT]; exact T.civic_compliant
+  · rw [← hT]; exact T.tech_compliant
+
+/-- **P13 (Later Residual Divergence Is Harmless).** Any claim present in
+    the civic record but absent from the technical record (or vice versa)
+    is provably a genuine, non-critical claim: differences between the
+    later registers are framing, never findings. `residual_divergence_
+    harmless` (P4), applied across the release timeline. -/
+theorem later_residual_divergence_harmless {Claim : Type}
+    {H : HashScheme (Event Claim)} (T : ShippedTripartite Claim H)
+    (c : Claim) (hin : c ∈ T.civic.claims) (hout : c ∉ T.tech.claims) :
+    c ∈ T.event.claims ∧ c ∉ T.event.critical :=
+  residual_divergence_harmless T.event T.civic T.tech
+    T.civic_compliant T.tech_compliant c hin hout
 
 end AHC.PLOL

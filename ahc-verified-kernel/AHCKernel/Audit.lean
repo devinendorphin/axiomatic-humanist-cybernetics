@@ -108,6 +108,11 @@ open AHC
 #print axioms AHC.PLOL.pio_disclosure_divergence_convicts
 #print axioms AHC.PLOL.attested_budget_accurate
 #print axioms AHC.PLOL.attested_budget_bounded
+-- Later-register compliance (P10-P13, adopted v0.7)
+#print axioms AHC.PLOL.tripartite_critical_consensus
+#print axioms AHC.PLOL.later_registers_no_hostage
+#print axioms AHC.PLOL.shipped_pio_disclosure_all_registers
+#print axioms AHC.PLOL.later_residual_divergence_harmless
 -- Exceedance derivation: Module 1 x Module 3 (X1-X4, adopted v0.6)
 #print axioms AHC.derived_exceedance_honest_witnessed
 #print axioms AHC.derived_exceedance_not_forgeable

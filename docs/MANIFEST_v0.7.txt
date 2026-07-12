@@ -1,0 +1,64 @@
+AHC VERIFIED CONSTITUTIONAL KERNEL — MANIFEST
+Version 0.7 — 2026-07-12
+Supersedes v0.6 (MANIFEST_v0.6.txt) and earlier;
+change record in ERRATA_AND_AMENDMENTS.md
+circulation brief: AHC_VerifiedKernel_v0.5_Brief.md (Part III F-4 candidate)
+
+CONTENTS
+  ahc-verified-kernel/
+      Lean 4 project: 5 source modules, 89 audited theorems, zero
+      sorries, core-only. v0.7 closes the second F-4 reviewer
+      solicitation: later-register compliance. Phase 1 obliged only the
+      T+0 semantic record at release; the civic (T+72h) and technical
+      (T+30d) registers were checked when they ship. Module 4 now carries
+      that obligation as proof.
+
+      ShippedTripartite records that both later registers have shipped
+      and carries their B.4 compliance as proof obligations. P10: the
+      three registers agree on the ENTIRE contestation-critical fragment
+      (one event, three voices, same findings). P11: every critical
+      claim is in the civic and technical records too (a later register
+      cannot drop what the semantic record carried). P12: the four D-R4
+      fields appear in ALL THREE registers of a shipped PIO release. P13:
+      any claim differing between the later registers is provably
+      non-critical (framing, never findings).
+
+      Module 1  TieredProtocol.lean   (§5.4, §9.2-9.3)
+                T1-T9 + S1-S3 + E1-E11 + W1-W9
+      Module 2  CrisisCap.lean        (§12.3; §4.2, §10.3) + G1-G7
+      Module 3  SensorsAndKernel.lean (§8.3, §4.1, §1.1)   [unchanged]
+      Module 4  PLOL.lean             (§10.4; Comp. A §5, §19.4, App. B)
+                P1-P6 + P7-P9 + P10-P13
+      Bridge    ExceedanceBridge.lean (§5.4 x §8.3)        X1-X4
+      Audit.lean re-verifies the axiom footprint on every build.
+      CI fails any build containing a sorry, any Classical.choice, any
+      unexpected axiom, or any deviation from the footprint below.
+
+VERIFY (requires elan; no other dependencies, no Mathlib):
+  cd ahc-verified-kernel && lake build
+
+EXPECTED: build succeeds; audit log shows 89 audited theorems, every one
+at most [propext, Quot.sound]; never Classical.choice; 40 of 89 depend on
+no axioms at all, including all thirteen PLOL disclosure/invariance
+theorems P1-P13 except the cross-module attested_budget_bounded (P9).
+(decCompliant is a verified Decidable instance additional to the count.)
+
+SOURCE INTEGRITY
+  sha256 over sorted source files (*.lean, lakefile.toml, lean-toolchain):
+  8d262152c5f9036b20de9ea1c395a8edf31b4bfd2df893e8a4466d65b56736d0
+  v0.6 digest (superseded):   ec3dc5ade185f48644e6d662aa0b28b9dab16c096e776fe2f5270a3408311f93
+  v0.5 digest (superseded):   a49ec2bc8f4a1490679a1842e3a2dee85c0594277aca621da4a63c23d750e5a9
+  v0.4 digest (superseded):   fc7c5c6727dfe671364b38d3c51effc76b88b06f9a388e268e7b57f7864cf1c0
+  v0.3.1 digest (superseded): 324a11065b4891ae0b0310d51f912fbd27ecd2239739f190ca15baa0df74104b
+  v0.3.0 digest (superseded): 82d22e5865811a45331b8b206cb8d8dd6a51817ca14299ab1cd133e1a1e3790b
+  v0.2 digest (superseded):   4d44fb1835c732c3cf876b50b0042ff8da793afdfd57f70c120da45a4fef651e
+  v0.1 digest (superseded):   2b51cac67e278c54003bbf2d5974da19d581caeaa4bc6f3f8f23043cffea7609
+  Per Module 4 (bridge_proves_origin_not_consistency): this digest
+  proves origin, not consistency. Consistency you verify by building.
+
+CIRCULATED UNDER
+  Companion A Principle 19.2 (Complexity Ceiling): v0.7 introduces no new
+  mechanism — it makes the later-register compliance the spec already
+  required ("checked when they ship") a proof obligation. What remains
+  outside the machine: claim extraction from each register's text (the
+  seam), unchanged.

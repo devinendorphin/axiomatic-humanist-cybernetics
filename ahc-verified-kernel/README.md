@@ -1,12 +1,14 @@
 # AHC Verified Constitutional Kernel
 
-**Version 0.5** — completes ruling D-R4: Module 4 gains the T+0
-disclosure theorems (P7–P9), including the kernel's first cross-module
-theorem — the disclosed episode budget provably equals and inherits the
-bound of Module 1's episode-machine accounting. v0.4 implemented the four
-ratified dispositions (two-clock episode machine E1–E11; certified
-reversibility envelopes W1–W9). Change record in
-`../docs/ERRATA_AND_AMENDMENTS.md`, digest in `../docs/MANIFEST_v0.5.txt`.
+**Version 0.7** — closes the two F-4 formalization candidates from the
+v0.5 circulation brief: v0.6 derives the episode machine's `exceedance`
+hazard signal from Module 3's Byzantine measurement layer (bridge module
+`ExceedanceBridge.lean`, X1–X4), and v0.7 extends register invariance to
+the later civic and technical records (P10–P13). v0.4 implemented the
+four ratified dispositions (episode machine E1–E11; reversibility
+envelopes W1–W9); v0.5 formalized the D-R4 disclosures (P7–P9). Change
+record in `../docs/ERRATA_AND_AMENDMENTS.md`, digest in
+`../docs/MANIFEST_v0.7.txt`.
 
 Machine-checked formalization (Lean 4) of the order-theoretic core of
 **Axiomatic Humanist Cybernetics v3.1** — the Tiered Evidence-Action
@@ -121,6 +123,19 @@ nothing here substitutes for it.
 | `pio_disclosure_divergence_convicts` (P7') | D-R4 | Omission of any D-R4 field from any register convicts that register |
 | `attested_budget_accurate` (P8) | D-R4 | The budget figure carries a proof it equals the episode machine's accounting |
 | `attested_budget_bounded` (P9) | D-R4 | Cross-module: an attested budget over a novelty-free, review-free span is ≤ 72h, by E1 |
+| `tripartite_critical_consensus` (P10) | §19.4 | The three registers of a shipped compliant release agree on the entire contestation-critical fragment |
+| `later_registers_no_hostage` (P11) | §19.4 | Every critical claim is present in the civic and technical records too |
+| `shipped_pio_disclosure_all_registers` (P12) | D-R4 | The four D-R4 fields appear in all three registers of a shipped PIO release |
+| `later_residual_divergence_harmless` (P13) | §19.4.1 | Any claim differing between the later registers is provably non-critical |
+
+### Bridge — `AHCKernel/ExceedanceBridge.lean` (Module 1 × Module 3)
+
+| Theorem | Spec | Statement |
+|---|---|---|
+| `derived_exceedance_honest_witnessed` (X1) | §5.4 × §8.3 | A certified exceedance (f+1 sensors ≥ threshold) always has an honest witness, by B2 |
+| `derived_exceedance_not_forgeable` (X2) | §5.4 × §8.3 | Honest sensors all below threshold ⇒ exceedance cannot be certified: a captured minority cannot raise the hazard signal alone |
+| `hold_sustained_only_by_witnessed_danger` (X3) | §5.4 × §8.3 | Whenever the episode machine keeps a subgraph in a continuity-hold on a derived input, honest sensors corroborate the danger |
+| `manufactured_danger_cannot_sustain_hold` (X4) | §5.4 × §8.3 | Fabricated alarm drops the subgraph out of the hold to `spent`: the laundering path closed at the measurement layer |
 
 Module 4 also formally locates **the seam**: every theorem operates on
 claim sets, and the relation between a natural-language text and the
@@ -156,19 +171,19 @@ The build elaborates all proofs and prints the axiom audit
 the `sorryAx` axiom in that output. Expected audit result:
 
 ```
-81 audited theorems: every one at most [propext, Quot.sound];
+89 audited theorems: every one at most [propext, Quot.sound];
 never Classical.choice
-no axioms at all (36): broadcast_universal, tier_monotone,
-  severity_le_evidence, sub_causal_reversible, irreversible_iff_causal,
-  pio_ceiling, pio_reversible, no_emergency_in_review, review_absorbing,
-  axiomI_null_kernel, axiomI_no_compensation, null_kernel_product,
-  globalSignal_pos_iff, dayStep_valid, dayRun_valid,
-  hold_floor_reversible, hold_floor_severity, hold_grants_no_more_than_pio,
-  cert_tier_monotone, cert_refinement_conservative,
-  no_certificate_no_presumption, zero_envelope_constructible,
-  certified_route_at_t1, certified_severance_at_t2,
-  pio_disclosure_at_breach, pio_disclosure_divergence_convicts,
-  attested_budget_accurate, and all nine Phase 1 PLOL theorems
+no axioms at all (40): the T1–T7 gating theorems, the hold-floor and
+  certificate-envelope theorems (hold_floor_reversible, hold_floor_severity,
+  hold_grants_no_more_than_pio, cert_tier_monotone,
+  cert_refinement_conservative, no_certificate_no_presumption,
+  zero_envelope_constructible, certified_route_at_t1,
+  certified_severance_at_t2), the composed-machine soundness theorems
+  (dayStep_valid, dayRun_valid), the Axiom I intersection theorems, and
+  all thirteen PLOL invariance/disclosure theorems P1–P8, P10–P13.
+  The four exceedance-bridge theorems (X1–X4) and the cross-module
+  attested_budget_bounded (P9) route through Module 3 / Module 1 and
+  carry [propext, Quot.sound].
 ```
 
 (Counts are audit-log entries — one per `#print axioms` result;

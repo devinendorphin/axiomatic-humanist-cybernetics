@@ -1,5 +1,35 @@
 # AHC Verified Constitutional Kernel — Errata & Amendments
 
+## v0.6 → v0.7 (2026-07-12) — later-register compliance (Module 4)
+
+Closes the second F-4 reviewer solicitation. Phase 1 made only the T+0
+semantic record a compliance obligation of a valid release; the civic
+(T+72h) and technical (T+30d) registers were "checked when they ship".
+`PLOL.lean` gains `ShippedTripartite` (a release in which both later
+registers have shipped, carrying their B.4 compliance as proof
+obligations) and four theorems extending register invariance across the
+full timeline:
+
+- **P10 `tripartite_critical_consensus`** — the three registers agree on
+  the entire contestation-critical fragment.
+- **P11 `later_registers_no_hostage`** — every critical claim is present
+  in the civic and technical records; a later register cannot narrow the
+  contestable set.
+- **P12 `shipped_pio_disclosure_all_registers`** — the four D-R4 fields
+  appear in all three registers of a shipped PIO release, not the T+0
+  record alone.
+- **P13 `later_residual_divergence_harmless`** — any claim differing
+  between the later registers is provably non-critical.
+
+Footprint: **89 audited theorems, 40 axiom-free** (P10–P13 all
+axiom-free). Digest in `MANIFEST_v0.7.txt`. This completes both F-4
+formalization candidates named in the v0.5 brief (exceedance derivation
+in v0.6, later-register compliance in v0.7); the remaining open surfaces
+are institutional (certificate and hold-policy governance) rather than
+order-theoretic.
+
+---
+
 ## v0.5 → v0.6 (2026-07-12) — exceedance derivation (Module 1 × Module 3)
 
 Closes the F-4 reviewer solicitation to derive the episode machine's
