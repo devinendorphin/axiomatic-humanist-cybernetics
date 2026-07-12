@@ -1,0 +1,93 @@
+✔ [2/9] Built AHCKernel.SensorsAndKernel
+✔ [3/9] Built AHCKernel.CrisisCap
+✔ [4/9] Built AHCKernel.TieredProtocol
+✔ [5/9] Built AHCKernel.ExceedanceBridge
+✔ [6/9] Built AHCKernel.PLOL
+ℹ [7/9] Built AHCKernel.Audit
+info: ././././AHCKernel/Audit.lean:19:0: 'AHC.tier_monotone' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:20:0: 'AHC.severity_le_evidence' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:21:0: 'AHC.sub_causal_reversible' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:22:0: 'AHC.irreversible_iff_causal' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:23:0: 'AHC.broadcast_universal' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:24:0: 'AHC.pio_ceiling' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:25:0: 'AHC.pio_reversible' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:26:0: 'AHC.pio_resolves' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:27:0: 'AHC.no_chatter' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:29:0: 'AHC.oscillation_travel' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:30:0: 'AHC.flip_anchored' depends on axioms: [propext]
+info: ././././AHCKernel/Audit.lean:31:0: 'AHC.travel_reanchor' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:32:0: 'AHC.flips_travel_anchored' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:33:0: 'AHC.chatter_requires_travel' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:35:0: 'AHC.epPendingHours_exhausted' depends on axioms: [propext]
+info: ././././AHCKernel/Audit.lean:36:0: 'AHC.epIssuances_exhausted' depends on axioms: [propext]
+info: ././././AHCKernel/Audit.lean:37:0: 'AHC.epPendingHours_pending' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:38:0: 'AHC.epIssuances_pending_zero' depends on axioms: [propext]
+info: ././././AHCKernel/Audit.lean:39:0: 'AHC.episode_no_relitigation' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:40:0: 'AHC.episode_single_issuance' depends on axioms: [propext]
+info: ././././AHCKernel/Audit.lean:41:0: 'AHC.expiry_routes_by_risk' depends on axioms: [propext]
+info: ././././AHCKernel/Audit.lean:42:0: 'AHC.reonset_refloors' depends on axioms: [propext]
+info: ././././AHCKernel/Audit.lean:43:0: 'AHC.hold_persists' depends on axioms: [propext]
+info: ././././AHCKernel/Audit.lean:44:0: 'AHC.hold_resolution_iff' depends on axioms: [propext]
+info: ././././AHCKernel/Audit.lean:45:0: 'AHC.novel_restart_from_spent' depends on axioms: [propext]
+info: ././././AHCKernel/Audit.lean:46:0: 'AHC.novel_restart_from_hold' depends on axioms: [propext]
+info: ././././AHCKernel/Audit.lean:47:0: 'AHC.exceedance_cannot_restart' depends on axioms: [propext]
+info: ././././AHCKernel/Audit.lean:48:0: 'AHC.hold_floor_reversible' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:49:0: 'AHC.hold_floor_severity' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:50:0: 'AHC.hold_grants_no_more_than_pio' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:52:0: 'AHC.cert_tier_monotone' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:53:0: 'AHC.cert_severity_le_evidence' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:54:0: 'AHC.cert_sub_causal_reversible' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:55:0: 'AHC.cert_irreversible_iff_causal' depends on axioms: [propext]
+info: ././././AHCKernel/Audit.lean:56:0: 'AHC.uncertified_routing_needs_causal' depends on axioms: [propext]
+info: ././././AHCKernel/Audit.lean:57:0: 'AHC.uncertified_severance_needs_causal' depends on axioms: [propext]
+info: ././././AHCKernel/Audit.lean:58:0: 'AHC.certified_route_at_t1' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:59:0: 'AHC.certified_severance_at_t2' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:60:0: 'AHC.cert_refinement_conservative' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:61:0: 'AHC.no_certificate_no_presumption' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:62:0: 'AHC.zero_envelope_constructible' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:65:0: 'AHC.window_head_bound' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:66:0: 'AHC.rolling_window_bound' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:67:0: 'AHC.no_permanent_emergency' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:68:0: 'AHC.no_emergency_in_review' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:69:0: 'AHC.review_absorbing' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:70:0: 'AHC.review_gate' depends on axioms: [propext]
+info: ././././AHCKernel/Audit.lean:71:0: 'AHC.axiomII_dichotomy' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:73:0: 'AHC.dayStep_valid' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:74:0: 'AHC.dayRun_valid' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:75:0: 'AHC.review_day_never_emergency' depends on axioms: [propext]
+info: ././././AHCKernel/Audit.lean:76:0: 'AHC.review_exit_iff_output' depends on axioms: [propext]
+info: ././././AHCKernel/Audit.lean:77:0: 'AHC.trip_forced' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:78:0: 'AHC.review_run' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:79:0: 'AHC.review_gate_composed' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:80:0: 'AHC.emergency_day_provenance' depends on axioms: [propext]
+info: ././././AHCKernel/Audit.lean:81:0: 'AHC.composed_cap_safety' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:82:0: 'AHC.composed_no_permanent_emergency' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:85:0: 'AHC.honest_strict_majority' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:86:0: 'AHC.exists_honest_le' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:87:0: 'AHC.exists_honest_ge' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:88:0: 'AHC.median_bracketed' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:89:0: 'AHC.no_corrupt_certificate' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:90:0: 'AHC.axiomI_null_kernel' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:91:0: 'AHC.axiomI_no_compensation' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:92:0: 'AHC.null_kernel_product' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:93:0: 'AHC.globalSignal_pos_iff' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:94:0: 'AHC.sum_admits_masking' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:97:0: 'AHC.PLOL.hash_bridge_origin' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:98:0: 'AHC.PLOL.bridge_proves_origin_not_consistency' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:99:0: 'AHC.PLOL.compliant_registers_agree' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:100:0: 'AHC.PLOL.divergence_convicts' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:101:0: 'AHC.PLOL.residual_divergence_harmless' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:102:0: 'AHC.PLOL.tripartite_single_origin' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:103:0: 'AHC.PLOL.no_hostage' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:104:0: 'AHC.PLOL.contestability_at_breach' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:105:0: 'AHC.PLOL.scr_no_fabrication' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:107:0: 'AHC.PLOL.pio_disclosure_at_breach' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:108:0: 'AHC.PLOL.pio_disclosure_divergence_convicts' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:109:0: 'AHC.PLOL.attested_budget_accurate' does not depend on any axioms
+info: ././././AHCKernel/Audit.lean:110:0: 'AHC.PLOL.attested_budget_bounded' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:112:0: 'AHC.derived_exceedance_honest_witnessed' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:113:0: 'AHC.derived_exceedance_not_forgeable' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:114:0: 'AHC.hold_sustained_only_by_witnessed_danger' depends on axioms: [propext, Quot.sound]
+info: ././././AHCKernel/Audit.lean:115:0: 'AHC.manufactured_danger_cannot_sustain_hold' depends on axioms: [propext, Quot.sound]
+✔ [8/9] Built AHCKernel
+Build completed successfully.

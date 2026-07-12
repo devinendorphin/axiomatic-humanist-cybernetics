@@ -1,5 +1,36 @@
 # AHC Verified Constitutional Kernel — Errata & Amendments
 
+## v0.5 → v0.6 (2026-07-12) — exceedance derivation (Module 1 × Module 3)
+
+Closes the F-4 reviewer solicitation to derive the episode machine's
+`exceedance` hazard signal from Module 3's Byzantine measurement layer.
+New source module `ExceedanceBridge.lean` imports both Module 1 and
+Module 3 and introduces `SensorHour` (the ensemble and danger threshold
+that derive the exceedance bit, plus the pass-through episode inputs) and
+`SensorHour.toEpInput`.
+
+- **X1 `derived_exceedance_honest_witnessed`** — a certified exceedance
+  (f+1 sensors at/above the danger threshold) always has an honest
+  witness, by B2 (`exists_honest_ge`).
+- **X2 `derived_exceedance_not_forgeable`** — if every honest sensor
+  reads below threshold, exceedance cannot be certified: a captured
+  minority cannot raise the hazard signal on its own.
+- **X3 `hold_sustained_only_by_witnessed_danger`** — the direct
+  Module 1 × Module 3 guarantee: whenever the episode machine keeps a
+  subgraph in a continuity-hold on a derived input, honest sensors
+  corroborate the danger.
+- **X4 `manufactured_danger_cannot_sustain_hold`** — the dual: fabricated
+  alarm drops the subgraph out of the hold to `spent`; the laundering
+  path is closed at the measurement layer.
+
+Footprint: **85 audited theorems, 36 axiom-free** (X1–X4 route through
+the Module 3 pigeonhole core and carry `[propext, Quot.sound]`). Digest
+in `MANIFEST_v0.6.txt`. Seam unchanged: whether the ≤ f fault bound holds
+is institutional (OP.1); the theorems quantify over all placements of at
+most f corrupted sensors.
+
+---
+
 ## v0.4 → v0.5 (2026-07-12) — D-R4 disclosure formalization (Module 4)
 
 Completes ruling D-R4: the T+0 record obligations adopted as

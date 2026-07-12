@@ -11,6 +11,7 @@ import AHCKernel.TieredProtocol
 import AHCKernel.CrisisCap
 import AHCKernel.SensorsAndKernel
 import AHCKernel.PLOL
+import AHCKernel.ExceedanceBridge
 
 open AHC
 
@@ -107,3 +108,8 @@ open AHC
 #print axioms AHC.PLOL.pio_disclosure_divergence_convicts
 #print axioms AHC.PLOL.attested_budget_accurate
 #print axioms AHC.PLOL.attested_budget_bounded
+-- Exceedance derivation: Module 1 x Module 3 (X1-X4, adopted v0.6)
+#print axioms AHC.derived_exceedance_honest_witnessed
+#print axioms AHC.derived_exceedance_not_forgeable
+#print axioms AHC.hold_sustained_only_by_witnessed_danger
+#print axioms AHC.manufactured_danger_cannot_sustain_hold

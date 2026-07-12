@@ -25,12 +25,12 @@ jobs:
           ! grep -q 'Classical.choice' build.log
           ! grep 'depends on axioms' build.log | grep -Ev '\[propext(, Quot\.sound)?\]'
       - name: Assert audit footprint
-        # 81 audited theorems, 36 of them axiom-free (v0.5). A theorem
+        # 85 audited theorems, 36 of them axiom-free (v0.6). A theorem
         # silently dropped from Audit.lean, or one acquiring an axiom,
         # fails this step.
         run: |
           total=$(grep -c 'depend' build.log)
           free=$(grep -c 'does not depend on any axioms' build.log)
           echo "audit entries: $total  axiom-free: $free"
-          test "$total" -eq 81
+          test "$total" -eq 85
           test "$free" -eq 36

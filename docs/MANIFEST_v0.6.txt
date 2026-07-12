@@ -1,0 +1,62 @@
+AHC VERIFIED CONSTITUTIONAL KERNEL — MANIFEST
+Version 0.6 — 2026-07-12
+Supersedes v0.5 (MANIFEST_v0.5.txt) and earlier;
+change record in ERRATA_AND_AMENDMENTS.md
+circulation brief: AHC_VerifiedKernel_v0.5_Brief.md (Part III F-4 candidate)
+
+CONTENTS
+  ahc-verified-kernel/
+      Lean 4 project: 5 source modules, 85 audited theorems, zero
+      sorries, core-only. v0.6 closes the last free input in the
+      emergency loop (reviewer solicitation F-4): the episode machine's
+      `exceedance` hazard signal, previously a free Boolean, is DERIVED
+      from the Byzantine measurement layer.
+
+      New bridge module ExceedanceBridge.lean (Module 1 x Module 3): a
+      certified exceedance requires f+1 sensors at or above the danger
+      threshold, so by B2 (exists_honest_ge) it is always honest-
+      witnessed. A captured minority of at most f sensors can neither
+      fabricate the exceedance that would sustain a continuity-hold (X4)
+      nor stand as the sole basis of any exceedance the machine acts on
+      (X1, X2); and whenever the machine keeps a subgraph in protective
+      hold on a derived input, honest sensors corroborate the danger
+      (X3, the direct cross-module statement).
+
+      Module 1  TieredProtocol.lean   (§5.4, §9.2-9.3)
+                T1-T9 + S1-S3 + E1-E11 + W1-W9
+      Module 2  CrisisCap.lean        (§12.3; §4.2, §10.3) + G1-G7
+      Module 3  SensorsAndKernel.lean (§8.3, §4.1, §1.1)   [unchanged]
+      Module 4  PLOL.lean             (§10.4; Comp. A §5, §19.4, App. B)
+                P1-P6 + P7-P9
+      Bridge    ExceedanceBridge.lean (§5.4 x §8.3)        X1-X4  [new]
+      Audit.lean re-verifies the axiom footprint on every build.
+      CI fails any build containing a sorry, any Classical.choice, any
+      unexpected axiom, or any deviation from the footprint below.
+
+VERIFY (requires elan; no other dependencies, no Mathlib):
+  cd ahc-verified-kernel && lake build
+
+EXPECTED: build succeeds; audit log shows 85 audited theorems, every one
+at most [propext, Quot.sound]; never Classical.choice; 36 of 85 depend on
+no axioms at all. (The four exceedance-bridge theorems route through the
+Module 3 pigeonhole core and carry [propext, Quot.sound]. decCompliant is
+a verified Decidable instance additional to the count.)
+
+SOURCE INTEGRITY
+  sha256 over sorted source files (*.lean, lakefile.toml, lean-toolchain):
+  ec3dc5ade185f48644e6d662aa0b28b9dab16c096e776fe2f5270a3408311f93
+  v0.5 digest (superseded):   a49ec2bc8f4a1490679a1842e3a2dee85c0594277aca621da4a63c23d750e5a9
+  v0.4 digest (superseded):   fc7c5c6727dfe671364b38d3c51effc76b88b06f9a388e268e7b57f7864cf1c0
+  v0.3.1 digest (superseded): 324a11065b4891ae0b0310d51f912fbd27ecd2239739f190ca15baa0df74104b
+  v0.3.0 digest (superseded): 82d22e5865811a45331b8b206cb8d8dd6a51817ca14299ab1cd133e1a1e3790b
+  v0.2 digest (superseded):   4d44fb1835c732c3cf876b50b0042ff8da793afdfd57f70c120da45a4fef651e
+  v0.1 digest (superseded):   2b51cac67e278c54003bbf2d5974da19d581caeaa4bc6f3f8f23043cffea7609
+  Per Module 4 (bridge_proves_origin_not_consistency): this digest
+  proves origin, not consistency. Consistency you verify by building.
+
+CIRCULATED UNDER
+  Companion A Principle 19.2 (Complexity Ceiling): v0.6 introduces no new
+  mechanism — it grounds an input the episode machine already consumed in
+  a measurement guarantee the kernel already proved. What remains outside
+  the machine: whether the sensors are in fact independent (the <= f
+  fault bound, OP.1), and what danger threshold a deployment sets.
