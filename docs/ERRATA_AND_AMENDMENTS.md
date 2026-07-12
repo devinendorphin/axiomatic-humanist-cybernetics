@@ -1,5 +1,35 @@
 # AHC Verified Constitutional Kernel — Errata & Amendments
 
+## v0.4 → v0.5 (2026-07-12) — D-R4 disclosure formalization (Module 4)
+
+Completes ruling D-R4: the T+0 record obligations adopted as
+constitutional text in v0.4 are now theorems. `PLOL.lean` gains
+`PIOEvent` (the four D-R4 fields — authorization basis, novelty basis
+and lineage, cumulative episode protection, falsification condition —
+as mandatory members of the contestation-critical set: a withholding
+event is unconstructible) and `BudgetAttestation` (the budget figure
+carried with a proof it equals Module 1's `epPendingHours` accounting).
+
+- **P7 `pio_disclosure_at_breach`** — all four D-R4 fields are in the
+  T+0 semantic record at hour zero: contestation of a PIO, including of
+  the novelty determination itself, never waits on a later register.
+- **P7' `pio_disclosure_divergence_convicts`** — omission of any D-R4
+  field from any register proves that register non-compliant.
+- **P8 `attested_budget_accurate`** — the figure carries its proof:
+  given the incident history, a misstated budget is unconstructible.
+- **P9 `attested_budget_bounded`** — the kernel's first cross-module
+  theorem (Module 1 × Module 4): an attested budget over a span with no
+  novel evidence and no Layer 0 resolution is ≤ 72 hours, by E1. The
+  disclosure layer and the authorization layer cannot drift apart on
+  the one figure that measures unreviewed protection.
+
+Footprint: **81 audited theorems, 36 axiom-free**. Digest in
+`MANIFEST_v0.5.txt`. Seam disclosures: what the claims SAY remains at
+claim extraction; whether the recorded history is the true history is
+institutional (append-only logs, Layer 0 audit).
+
+---
+
 ## v0.3.1 → v0.4 (2026-07-12) — ratification of the external-review dispositions
 
 The project owner ratified all four proposed constitutional dispositions

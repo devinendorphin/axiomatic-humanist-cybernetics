@@ -1,0 +1,65 @@
+AHC VERIFIED CONSTITUTIONAL KERNEL — MANIFEST
+Version 0.5 — 2026-07-12
+Supersedes v0.4 (MANIFEST_v0.4.txt) and earlier;
+change record in ERRATA_AND_AMENDMENTS.md
+
+CONTENTS
+  ahc-verified-kernel/
+      Lean 4 project: 4 modules, 81 audited theorems, zero sorries,
+      core-only. v0.5 completes ruling D-R4 (ratified 2026-07-12):
+      the T+0 disclosure obligations, adopted as constitutional text in
+      v0.4, are now formalized in Module 4.
+
+      A PIO-related classification event (`PIOEvent`) must carry, in its
+      contestation-critical set: the authorization basis (fresh evidence
+      / continuing risk / both), the basis and lineage of any novelty
+      determination, the incident's cumulative unconfirmed protection,
+      and the falsification condition. These are structure fields —
+      proof obligations — so a withholding event is unconstructible.
+      P7: all four ship in the T+0 semantic record at hour zero.
+      P7': omission from any register convicts that register.
+      P8/P9 (`BudgetAttestation`): the budget figure carries a proof it
+      equals Module 1's episode-machine accounting, and — the kernel's
+      first cross-module theorem — inherits E1's 72-hour bound: the
+      disclosure layer and the authorization layer cannot drift apart
+      on the figure that measures unreviewed protection.
+
+      Module 1  TieredProtocol.lean   (§5.4, §9.2-9.3)
+                T1-T9 + S1-S3 + E1-E11 + W1-W9
+      Module 2  CrisisCap.lean        (§12.3; §4.2, §10.3) + G1-G7
+      Module 3  SensorsAndKernel.lean (§8.3, §4.1, §1.1)   [unchanged]
+      Module 4  PLOL.lean             (§10.4; Comp. A §5, §19.4, App. B)
+                P1-P6 + P7, P7', P8, P9 (D-R4 disclosures)
+      Audit.lean re-verifies the axiom footprint on every build.
+      CI fails any build containing a sorry, any Classical.choice, any
+      unexpected axiom, or any deviation from the footprint below.
+
+VERIFY (requires elan; no other dependencies, no Mathlib):
+  cd ahc-verified-kernel && lake build
+
+EXPECTED: build succeeds; audit log shows 81 audited theorems, every one
+at most [propext, Quot.sound]; never Classical.choice; 36 of 81 depend on
+no axioms at all, including all PLOL theorems except the cross-module
+attested_budget_bounded (which inherits E1's [propext, Quot.sound]).
+(decCompliant is a verified Decidable instance additional to the count.)
+
+SOURCE INTEGRITY
+  sha256 over sorted source files (*.lean, lakefile.toml, lean-toolchain):
+  a49ec2bc8f4a1490679a1842e3a2dee85c0594277aca621da4a63c23d750e5a9
+  v0.4 digest (superseded):   fc7c5c6727dfe671364b38d3c51effc76b88b06f9a388e268e7b57f7864cf1c0
+  v0.3.1 digest (superseded): 324a11065b4891ae0b0310d51f912fbd27ecd2239739f190ca15baa0df74104b
+  v0.3.0 digest (superseded): 82d22e5865811a45331b8b206cb8d8dd6a51817ca14299ab1cd133e1a1e3790b
+  v0.2 digest (superseded):   4d44fb1835c732c3cf876b50b0042ff8da793afdfd57f70c120da45a4fef651e
+  v0.1 digest (superseded):   2b51cac67e278c54003bbf2d5974da19d581caeaa4bc6f3f8f23043cffea7609
+  Per Module 4 (bridge_proves_origin_not_consistency): this digest
+  proves origin, not consistency. Consistency you verify by building.
+
+CIRCULATED UNDER
+  Companion A Principle 19.2 (Complexity Ceiling): v0.5 introduces no
+  new mechanism — it verifies disclosure obligations already ratified as
+  constitutional text (D-R4). What remains outside the machine,
+  deliberately: what the basis and novelty claims SAY (claim extraction,
+  Layer 0), and whether an attestation's recorded input history is the
+  true history (append-only logs, institutional audit). Given the
+  history, the figure cannot lie; given the fields, their absence
+  convicts.

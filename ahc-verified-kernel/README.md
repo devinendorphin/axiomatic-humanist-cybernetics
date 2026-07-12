@@ -1,12 +1,12 @@
 # AHC Verified Constitutional Kernel
 
-**Version 0.4** — implements the four constitutional dispositions
-ratified 2026-07-12 from Phase 2 external review: the two-clock episode
-machine with continuity-hold (D-R1A/D-R4, theorems E1–E11) and certified
-reversibility envelopes covering routing and severance (D-R2A/D-R3,
-theorems W1–W9; Q2 answered yes). v0.2 adopted the Phase 1 review
-strengthenings; v0.3/v0.3.1 are superseded. Change record in
-`../docs/ERRATA_AND_AMENDMENTS.md`, digest in `../docs/MANIFEST_v0.4.txt`.
+**Version 0.5** — completes ruling D-R4: Module 4 gains the T+0
+disclosure theorems (P7–P9), including the kernel's first cross-module
+theorem — the disclosed episode budget provably equals and inherits the
+bound of Module 1's episode-machine accounting. v0.4 implemented the four
+ratified dispositions (two-clock episode machine E1–E11; certified
+reversibility envelopes W1–W9). Change record in
+`../docs/ERRATA_AND_AMENDMENTS.md`, digest in `../docs/MANIFEST_v0.5.txt`.
 
 Machine-checked formalization (Lean 4) of the order-theoretic core of
 **Axiomatic Humanist Cybernetics v3.1** — the Tiered Evidence-Action
@@ -18,8 +18,8 @@ register-invariance guarantees.
 **Toolchain:** Lean 4.15.0, core only — **no Mathlib dependency**. Every
 proof is self-contained. **Zero `sorry`s.** No theorem depends on
 `Classical.choice`; the complete axiom footprint is `propext` and
-`Quot.sound` (standard Lean kernel axioms), and thirty-three of the
-seventy-seven audited theorems depend on no axioms at all — including every
+`Quot.sound` (standard Lean kernel axioms), and thirty-six of the
+eighty-one audited theorems depend on no axioms at all — including every
 theorem of the PLOL module.
 
 ## What is and is not verified
@@ -117,6 +117,10 @@ nothing here substitutes for it.
 | `no_hostage` (P5) | §19.4 | Every critical claim is public at hour zero; contestation never waits on the litigation track |
 | `contestability_at_breach` (P5') | App. B.2 | The falsification condition ships in the T+0 record: the key ships with the lock |
 | `decCompliant` (P6) | App. B.4 | Compliance is decidable: given extracted claim sets, the divergence audit is mechanical |
+| `pio_disclosure_at_breach` (P7) | D-R4 | A valid PIO release ships authorization basis, novelty basis, episode budget, and falsification condition in the T+0 record at hour zero |
+| `pio_disclosure_divergence_convicts` (P7') | D-R4 | Omission of any D-R4 field from any register convicts that register |
+| `attested_budget_accurate` (P8) | D-R4 | The budget figure carries a proof it equals the episode machine's accounting |
+| `attested_budget_bounded` (P9) | D-R4 | Cross-module: an attested budget over a novelty-free, review-free span is ≤ 72h, by E1 |
 
 Module 4 also formally locates **the seam**: every theorem operates on
 claim sets, and the relation between a natural-language text and the
@@ -152,9 +156,9 @@ The build elaborates all proofs and prints the axiom audit
 the `sorryAx` axiom in that output. Expected audit result:
 
 ```
-77 audited theorems: every one at most [propext, Quot.sound];
+81 audited theorems: every one at most [propext, Quot.sound];
 never Classical.choice
-no axioms at all (33): broadcast_universal, tier_monotone,
+no axioms at all (36): broadcast_universal, tier_monotone,
   severity_le_evidence, sub_causal_reversible, irreversible_iff_causal,
   pio_ceiling, pio_reversible, no_emergency_in_review, review_absorbing,
   axiomI_null_kernel, axiomI_no_compensation, null_kernel_product,
@@ -163,7 +167,8 @@ no axioms at all (33): broadcast_universal, tier_monotone,
   cert_tier_monotone, cert_refinement_conservative,
   no_certificate_no_presumption, zero_envelope_constructible,
   certified_route_at_t1, certified_severance_at_t2,
-  and all nine PLOL theorems
+  pio_disclosure_at_breach, pio_disclosure_divergence_convicts,
+  attested_budget_accurate, and all nine Phase 1 PLOL theorems
 ```
 
 (Counts are audit-log entries — one per `#print axioms` result;

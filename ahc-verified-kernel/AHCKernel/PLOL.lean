@@ -43,6 +43,30 @@
                                    is a mechanical check requiring no
                                    expertise and no discretion
 
+  D-R4 disclosure theorems (adopted in v0.5 under constitutional ruling
+  D-R4, ratified 2026-07-12; formalizing the deferred T+0 record
+  obligations):
+
+    P7  pio_disclosure_at_breach — a valid release over a PIO-related
+                                   event ships all four D-R4 fields —
+                                   authorization basis, novelty basis,
+                                   cumulative episode protection, and the
+                                   falsification condition — in the T+0
+                                   semantic record, at hour zero
+    P7' pio_disclosure_divergence_convicts — a register omitting ANY of
+                                   the four D-R4 fields is thereby proved
+                                   non-compliant: the omission convicts
+    P8  attested_budget_accurate — a well-formed budget attestation
+                                   cannot misstate the episode machine's
+                                   accounting: the figure carries its
+                                   proof
+    P9  attested_budget_bounded  — CROSS-MODULE (Module 1 × Module 4):
+                                   any attested budget over a span with
+                                   no novel evidence and no Layer 0
+                                   resolution is ≤ 72 hours, by E1. The
+                                   record's number inherits the machine's
+                                   constitutional bound
+
   ── THE SEAM (what this module does not and cannot prove) ──────────────
 
   Every theorem above operates on claim sets: abstract, register-neutral
@@ -74,10 +98,27 @@
     T+0 compliance as proof obligations — a release violating §19.4's
     sequencing or B.4's semantic-record requirement is unconstructible.
 
+  Modeling choices for P7–P9 (ruling D-R4, v0.5):
+  · The four mandatory disclosures are abstract claims REQUIRED (as
+    structure fields, hence proof obligations) to sit in the
+    contestation-critical set of a `PIOEvent`: a PIO-related event that
+    withholds any of them is unconstructible. WHAT the basis or novelty
+    claims say is at the seam, as always; that they are present,
+    critical, and public at T+0 is what the kernel proves.
+  · `BudgetAttestation` bridges to Module 1: the claimed cumulative
+    unconfirmed protection carries a proof it equals `epPendingHours`
+    over the incident's input history. Whether the recorded history is
+    the true history is an institutional question (append-only logs,
+    Layer 0 audit); given the history, the figure cannot lie.
+  · Novelty determinations are contestable through Layer 0 (D-R4): the
+    kernel's contribution is P7 — the novelty basis is public at hour
+    zero, so contestation never waits.
+
   Scope disclaimer: these proofs verify the specification, not the world.
 
-  Toolchain: Lean 4.15.0, core only (no Mathlib). Checked 2026-07-11.
+  Toolchain: Lean 4.15.0, core only (no Mathlib). Checked 2026-07-12 (v0.5).
 -/
+import AHCKernel.TieredProtocol
 
 namespace AHC.PLOL
 
@@ -261,5 +302,95 @@ theorem scr_no_fabrication {Claim : Type} {H : HashScheme (Event Claim)}
     (T : Tripartite Claim H) :
     ∀ c ∈ T.scr.claims, c ∈ T.event.claims :=
   T.scr_compliant.2
+
+/-! ## D-R4 disclosures (§10.4; ruling D-R4) — adopted v0.5
+
+Ruling D-R4 (ratified 2026-07-12) obliges the T+0 semantic record of any
+PIO-related classification to state: the authorization basis (fresh
+evidence, continuing risk, or both), the basis of any novelty
+determination with its lineage, the cumulative unconfirmed protection
+already granted to the incident, and the falsification condition. Here
+those obligations are structure fields: an event that withholds them is
+unconstructible, and by the Module 4 invariance theorems they are public
+at hour zero and their omission from any register convicts it. -/
+
+/-- A PIO-related classification event: an `Event` whose
+    contestation-critical set is REQUIRED to contain the D-R4 fields.
+    `basisClaim` states whether authorization rests on evidentiary
+    freshness, continuing risk, or both; `noveltyClaim` states the basis
+    and lineage of any novelty determination (contestable through
+    Layer 0); `budgetClaim` states the incident's cumulative unconfirmed
+    protection. The falsification condition is already mandatory on
+    every `Event`. -/
+structure PIOEvent (Claim : Type) extends Event Claim where
+  basisClaim   : Claim
+  noveltyClaim : Claim
+  budgetClaim  : Claim
+  basis_critical   : basisClaim ∈ critical
+  novelty_critical : noveltyClaim ∈ critical
+  budget_critical  : budgetClaim ∈ critical
+
+/-- **P7 (D-R4 Disclosure at Breach).** A valid tripartite release over
+    a PIO-related event ships all four D-R4 fields in the T+0 semantic
+    record, at hour zero: the authorization basis, the novelty basis,
+    the episode budget, and the falsification condition are public
+    before any later register exists. Contestation of a PIO — including
+    of the novelty determination itself — never waits. -/
+theorem pio_disclosure_at_breach {Claim : Type} {H : HashScheme (Event Claim)}
+    (D : PIOEvent Claim) (T : Tripartite Claim H)
+    (hT : T.event = D.toEvent) :
+    (D.basisClaim ∈ T.scr.claims ∧ D.noveltyClaim ∈ T.scr.claims ∧
+     D.budgetClaim ∈ T.scr.claims ∧ D.falsifier ∈ T.scr.claims)
+    ∧ T.scr.releaseHour = 0 := by
+  have hc := T.scr_compliant.1
+  rw [hT] at hc
+  exact ⟨⟨hc _ D.basis_critical, hc _ D.novelty_critical,
+          hc _ D.budget_critical, hc _ D.toEvent.falsifier_critical⟩,
+         T.scr_at_breach⟩
+
+/-- **P7' (D-R4 Omission Convicts).** A register from which ANY of the
+    four D-R4 fields is absent is thereby proved non-compliant — the
+    omission is a conviction, not an editorial difference (P3',
+    instantiated at the fields ruling D-R4 makes mandatory). -/
+theorem pio_disclosure_divergence_convicts {Claim : Type}
+    (D : PIOEvent Claim) (r : Record Claim)
+    (h : D.basisClaim ∉ r.claims ∨ D.noveltyClaim ∉ r.claims ∨
+         D.budgetClaim ∉ r.claims ∨ D.falsifier ∉ r.claims) :
+    ¬ Compliant D.toEvent r :=
+  fun hc => match h with
+  | .inl h => h (hc.1 _ D.basis_critical)
+  | .inr (.inl h) => h (hc.1 _ D.novelty_critical)
+  | .inr (.inr (.inl h)) => h (hc.1 _ D.budget_critical)
+  | .inr (.inr (.inr h)) => h (hc.1 _ D.toEvent.falsifier_critical)
+
+/-- A machine-checkable budget attestation: the claimed cumulative
+    unconfirmed protection for an incident, carried WITH the proof that
+    it equals the episode machine's accounting over the incident's input
+    history. Given the history, a misstated figure is unconstructible;
+    whether the history is true is an institutional question (append-only
+    logs, Layer 0 audit) at the seam. -/
+structure BudgetAttestation where
+  history : List EpInput
+  claimedHours : Nat
+  accurate : claimedHours = epPendingHours .idle history
+
+/-- **P8 (The Figure Carries Its Proof).** A well-formed budget
+    attestation cannot misstate the episode machine's accounting. -/
+theorem attested_budget_accurate (B : BudgetAttestation) :
+    B.claimedHours = epPendingHours .idle B.history :=
+  B.accurate
+
+/-- **P9 (Attested Budget Is Bounded — Module 1 × Module 4).** Any
+    attested budget over an incident span containing no novel evidence
+    and no Layer 0 resolution is at most the 72-hour deadline: the
+    number the community reads in the T+0 record inherits the episode
+    machine's constitutional bound (E1). The disclosure layer and the
+    authorization layer cannot drift apart on the one figure that
+    measures how much unreviewed protection an incident has consumed. -/
+theorem attested_budget_bounded (B : BudgetAttestation)
+    (hno : ∀ i ∈ B.history, i.novel = false ∧ i.layer0 = false) :
+    B.claimedHours ≤ reviewDeadline := by
+  rw [B.accurate]
+  exact episode_no_relitigation B.history hno
 
 end AHC.PLOL

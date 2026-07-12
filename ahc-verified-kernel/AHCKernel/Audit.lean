@@ -102,3 +102,8 @@ open AHC
 #print axioms AHC.PLOL.no_hostage
 #print axioms AHC.PLOL.contestability_at_breach
 #print axioms AHC.PLOL.scr_no_fabrication
+-- D-R4 disclosures (P7-P9, adopted v0.5; ruling D-R4)
+#print axioms AHC.PLOL.pio_disclosure_at_breach
+#print axioms AHC.PLOL.pio_disclosure_divergence_convicts
+#print axioms AHC.PLOL.attested_budget_accurate
+#print axioms AHC.PLOL.attested_budget_bounded
