@@ -1,5 +1,64 @@
 # AHC Verified Constitutional Kernel — Errata & Amendments
 
+## v0.9 → v0.10 (2026-07-13) — typed dispositions and the clocked hold (Module 1; findings R2-03, R2-06)
+
+Closes the two remaining High-severity model findings of the Reviewer #2
+report by revising the episode machine IN PLACE — after R2-01, a second
+machine alongside the first would recreate the parallel-interface
+failure the report is about.
+
+- **R2-03 (High):** `layer0 : Bool` collapsed every Layer 0 review
+  outcome — denial, continue, close, new-episode authorization — into
+  one reset transition, permitting the two-step stale restart
+  `hold → idle → pending 0` with no novelty anywhere.
+- **R2-06 (High):** `EpState.hold` carried no clock; with continuing
+  exceedance and no Layer 0 output, `hold_persists` permitted an
+  infinite unreviewed hold.
+
+The machine now carries **typed dispositions**
+(`Layer0Disposition = continueHold | close | newEpisode`, the input
+field becoming `Option Layer0Disposition`) and a **clocked hold**
+(`hold (k : Nat)` with `holdReviewDeadline := 72`, set equal to the PIO
+review deadline pending a constitutional ruling). A hold left
+unreviewed for the deadline under continuing risk lands in the new
+flagged `overdue` state: the floor persists (no protection vacuum), but
+full authority is unavailable and only a disposition moves the subgraph.
+
+Revised theorems: **E1/E2 are STRENGTHENED** — their hypothesis weakens
+from "no Layer 0 output" to "no new-episode disposition", so the
+72-hour bound now holds even across close and continue dispositions
+(the reviewer's counterexample class is inside the theorem, not outside
+it). E5 becomes `floor_persists` (floor-active states persist under
+unreviewed risk — including across the review deadline). E6 becomes:
+the hold reaches `idle` EXACTLY on `some .newEpisode`. E8 extends to
+`overdue`. E3/E4/E7 adjust to the clocked hold. X3/X4 and the PLOL
+budget bounds (P9/P17) carry the corresponding hypothesis updates.
+
+New theorems:
+
+- **E12 `close_cannot_launder`** — the R2-03 witness, negated: a close
+  disposition followed by a stale filing cannot reach the full clock.
+- **E13 `hold_clock_bounded`** — no reachable hold state carries a
+  clock at or past the mandatory-review deadline.
+- **E14 `unreviewed_hold_expires`** — under continuing exceedance with
+  no disposition, the hold reaches `overdue` within the deadline and
+  stays there: an infinite SILENT hold is unconstructible.
+- **E15 `overdue_absorbing` / `overdue_resolution_iff`** — while risk
+  persists only a disposition exits `overdue`, and only `newEpisode`
+  reaches ordinary posture — Module 2's review discipline at PIO scale.
+
+Modeling disclosures: the basis of a `newEpisode` authorization is
+recorded through D-R4's disclosure obligations, outside the machine;
+`holdReviewDeadline = 72` is flagged as a deployment constant pending
+ratification; from `overdue`, novel filings wait on the owed review
+(Layer 0 can authorize immediately via `newEpisode` — the same body
+that attests novelty under D-R4).
+
+Footprint: **107 audited theorems, 46 axiom-free**. Digest in
+`MANIFEST_v0.10.txt`.
+
+---
+
 ## v0.8 → v0.9 (2026-07-13) — certified PIO and hold authorization (Module 1; finding R2-01)
 
 Closes the Reviewer #2 report's most severe finding. R2-01 (Critical)

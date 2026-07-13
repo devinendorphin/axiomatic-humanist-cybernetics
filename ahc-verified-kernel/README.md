@@ -1,11 +1,17 @@
 # AHC Verified Constitutional Kernel
 
-**Version 0.9** — closes Reviewer #2 finding R2-01, the report's most
-severe: PIO and continuity-hold authorization are lifted onto the
-certificate-bearing action layer (`pioAuthorizesC`, `CHoldPolicy`;
-W10–W18), so the emergency path can no longer authorize routing outside
-an envelope certificate, and the legacy mechanism-granularity table is
-quarantined to a proved outer bound (W17). v0.8 closed R2-02/R2-04: a
+**Version 0.10** — closes Reviewer #2 findings R2-03 and R2-06: Layer 0
+review outputs are typed dispositions (a denial or close can never reach
+the restart-permitting state; only an explicit new-episode authorization
+can), and the continuity-hold carries a mandatory-review clock — an
+unreviewed hold under continuing risk lands in the flagged `overdue`
+state within 72 hours (E12–E15; E1/E2 strengthened). v0.9 closed R2-01,
+the report's most severe: PIO and continuity-hold authorization are
+lifted onto the certificate-bearing action layer (`pioAuthorizesC`,
+`CHoldPolicy`; W10–W18), so the emergency path can no longer authorize
+routing outside an envelope certificate, and the legacy
+mechanism-granularity table is quarantined to a proved outer bound
+(W17). v0.8 closed R2-02/R2-04: a
 typed D-R4 claim language ties the disclosed episode budget to the
 attestation that proves it — disclosed, attested, and machine-computed
 are one term — and makes the four disclosure roles distinct by
@@ -16,7 +22,7 @@ technical records, P10–P13); v0.4 implemented the four ratified
 dispositions (episode machine E1–E11; reversibility envelopes W1–W9);
 v0.5 formalized the D-R4 disclosures (P7–P9). Change record in
 `ERRATA_AND_AMENDMENTS.md`; source digest and audit footprint in the
-version manifest — `docs/MANIFEST_v0.9.txt` in the source repository,
+version manifest — `docs/MANIFEST_v0.10.txt` in the source repository,
 shipped as `MANIFEST.txt` alongside this project directory in the
 circulation packet.
 
@@ -31,7 +37,7 @@ register-invariance guarantees.
 proof is self-contained. **Zero `sorry`s.** No theorem depends on
 `Classical.choice`; the complete axiom footprint is `propext` and
 `Quot.sound` (standard Lean kernel axioms), and forty-six of the
-one hundred two audited theorems depend on no axioms at all — including the
+one hundred seven audited theorems depend on no axioms at all — including the
 PLOL module's register-invariance and disclosure theorems (P1–P8,
 P10–P16; the two cross-module budget bounds P9 and P17 route through
 Module 1 and so carry `[propext, Quot.sound]`).
@@ -68,14 +74,18 @@ nothing here substitutes for it.
 | `oscillation_travel` (S1) | §9.2 | Escalating and de-escalating values are separated by more than the gap width |
 | `flips_travel_anchored` (S2) | §9.2 | Anchored bound: every posture flip costs the signal more than the gap width of travel |
 | `chatter_requires_travel` (S3) | §9.2 | (flips − 1)·(gapWidth+1) ≤ total variation: cycling requires repeated genuine full-band swings; sub-band noise flips the posture at most once |
-| `episode_no_relitigation` (E1) | §5.4 | Two clocks: without novel evidence or Layer 0 resolution, whatever the exceedance pattern, unconfirmed full protection ≤ 72h |
+| `episode_no_relitigation` (E1) | §5.4 | Two clocks: without novel evidence or a new-episode disposition — close/continue dispositions may flow freely — whatever the exceedance pattern, unconfirmed full protection ≤ 72h |
 | `episode_single_issuance` (E2) | §5.4 | One full-PIO issuance per such span |
 | `expiry_routes_by_risk` (E3) | §5.4 | At the deadline: continuing risk → continuity-hold; subsided risk → spent |
-| `reonset_refloors` / `hold_persists` (E4–E5) | §5.4 | The hold floor follows the risk and is never withdrawn while it persists |
-| `hold_resolution_iff` (E6) | §5.4 | Only a Layer 0 review output returns the hold to ordinary posture |
+| `reonset_refloors` / `floor_persists` (E4–E5) | §5.4 | The floor follows the risk and is never withdrawn while it persists unreviewed — `overdue` keeps the floor |
+| `hold_resolution_iff` (E6) | §5.4 | Only an explicit new-episode disposition returns the hold to the restart-permitting posture — a denial or close cannot (R2-03) |
 | `novel_restart_from_spent` / `_from_hold` (E7) | §5.4 | An attested materially new claim restarts the full clock |
-| `exceedance_cannot_restart` (E8) | §5.4 | Continuity of a signal is never continuity of the full authority |
+| `exceedance_cannot_restart` (E8) | §5.4 | Continuity of a signal is never continuity of the full authority — from `hold`, `spent`, or `overdue` |
 | `hold_floor_reversible` / `_severity` / `hold_grants_no_more_than_pio` (E9–E11) | §5.4 | The hold floor is reversible, Tier-1-capped, and a remnant of PIO authority — never an extension |
+| `close_cannot_launder` (E12) | §5.4 | A close disposition followed by a stale filing cannot reach the full clock: the R2-03 witness, negated |
+| `hold_clock_bounded` (E13) | §5.4 | No reachable hold state carries a clock at or past the mandatory-review deadline |
+| `unreviewed_hold_expires` (E14) | §5.4 | Under continuing exceedance with no disposition, the hold reaches flagged `overdue` within its deadline and stays there (R2-06) |
+| `overdue_absorbing` / `overdue_resolution_iff` (E15) | §5.4 | While risk persists only a disposition exits `overdue`, and only new-episode reaches ordinary posture |
 | `cert_tier_monotone` / `cert_severity_le_evidence` (W1–W2) | §5.4 | T1/T2 lifted to certificate-bearing actions |
 | `cert_sub_causal_reversible` (W3) | §5.4 | Everything authorized below Tier 3 is reversible — routing AND severance — as a consequence of gating |
 | `cert_irreversible_iff_causal` (W4) | §5.4, §5.5 | T4 lifted to certificate-bearing actions |
@@ -194,7 +204,7 @@ The build elaborates all proofs and prints the axiom audit
 the `sorryAx` axiom in that output. Expected audit result:
 
 ```
-102 audited theorems: every one at most [propext, Quot.sound];
+107 audited theorems: every one at most [propext, Quot.sound];
 never Classical.choice
 no axioms at all (46): the T1–T7 gating theorems, the hold-floor and
   certificate-envelope theorems (hold_floor_reversible, hold_floor_severity,
@@ -229,7 +239,9 @@ total variation as "travel" (S1–S3); the composed machine's trip condition
 as exceedance ∧ failure of the renewal condition, with exceedance a free
 input (G1–G7); the two-clock separation with `novel` as a contestable
 Layer 0 attestation and the hold floor as a deployment-certified policy
-(E1–E11); reversibility envelopes over opaque deployment descriptors,
+(E1–E11), with Layer 0 outputs as typed dispositions and the hold under
+a mandatory-review clock whose constant (72h) is a flagged deployment
+choice pending ratification (E12–E15); reversibility envelopes over opaque deployment descriptors,
 judged by external certificates the kernel gates on but does not verify
 (W1–W9), with the PIO and hold floor authorizing only certified
 actions under those envelopes since v0.9 (W10–W18); the typed D-R4

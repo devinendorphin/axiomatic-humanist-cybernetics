@@ -41,10 +41,15 @@
 
   Episode machine — PIO with two clocks (adopted in v0.4 under
   constitutional ruling D-R1A, ratified 2026-07-12; supersedes v0.3's
-  R-family; findings AHC-P1-003, CG-2, CG-5):
+  R-family; findings AHC-P1-003, CG-2, CG-5. REVISED in v0.10 under
+  findings R2-03/R2-06: Layer 0 outputs are typed dispositions, the
+  hold carries a mandatory-review clock, and an unreviewed hold expires
+  into the flagged `overdue` state):
 
     E1  episode_no_relitigation  — across any span with no novel
-                                  attestation and no Layer 0 resolution,
+                                  attestation and no NEW-EPISODE
+                                  disposition — close and continue
+                                  dispositions may flow freely —
                                   WHATEVER the exceedance pattern, total
                                   unconfirmed full-protection hours ≤ 72
     E2  episode_single_issuance  — one full-PIO issuance per such span
@@ -53,20 +58,46 @@
                                   risk parks in `spent`; nothing else
     E4  reonset_refloors         — returning risk re-enters the hold
                                   floor, never the full clock
-    E5  hold_persists            — the floor is never withdrawn while
-                                  risk persists unresolved
+    E5  floor_persists           — the floor (hold or overdue) is never
+                                  withdrawn while risk persists without
+                                  a review disposition
     E6  hold_resolution_iff      — the hold returns to ordinary posture
-                                  exactly on a Layer 0 review output
+                                  exactly on an explicit NEW-EPISODE
+                                  disposition: a denial or a close can
+                                  never reach the restart-permitting
+                                  state (R2-03)
     E7  novel_restart_from_spent / _from_hold — an attested materially
                                   new claim restarts a full PIO
     E8  exceedance_cannot_restart — the two-clock separation, pointwise:
                                   without novelty, no input re-enters
-                                  `pending` from an exhausted state
+                                  `pending` from an exhausted state —
+                                  including `overdue`
     E9  hold_floor_reversible    — everything the hold floor allows is
                                   reversible
     E10 hold_floor_severity      — the floor is severity-capped at Tier 1
     E11 hold_grants_no_more_than_pio — the floor is a remnant of PIO
                                   authority, never an extension
+
+  Typed dispositions and the clocked hold (adopted in v0.10; external
+  review findings R2-03 and R2-06, Reviewer #2 report 2026-07-13):
+
+    E12 close_cannot_launder     — the R2-03 witness, negated: a CLOSE
+                                  disposition followed by a stale filing
+                                  cannot reach the full clock
+    E13 hold_clock_bounded       — no reachable hold state carries a
+                                  clock at or past the mandatory-review
+                                  deadline
+    E14 unreviewed_hold_expires  — under continuing exceedance with no
+                                  disposition, the hold reaches the
+                                  flagged `overdue` state in at most
+                                  holdReviewDeadline hours and stays
+                                  there: an infinite SILENT hold is
+                                  unconstructible (R2-06)
+    E15 overdue_absorbing / overdue_resolution_iff — while risk persists
+                                  only a Layer 0 disposition exits
+                                  `overdue`, and only NEW-EPISODE reaches
+                                  ordinary posture — Module 2's review
+                                  discipline, at PIO scale
 
   Certified reversibility envelopes (adopted in v0.4 under rulings
   D-R2A and D-R3, ratified 2026-07-12; supersede v0.3's scalar V-family;
@@ -649,16 +680,48 @@ claim (`novel`, per ruling D-R4 an ATG/Layer 0 determination attached to
 a claim identity, contestable, outside the machine) restarts the full
 PIO clock. Exceedance instead sustains a CONTINUITY-HOLD: a constrained
 floor state that prevents a protection vacuum, grants at most a
-deployment-certified subset of reversible Tier-1 measures (`HoldPolicy`),
-and owes an explicit Layer 0 review — mirroring Module 2's
-cap → Structural Review pattern. -/
+deployment-certified subset of reversible Tier-1 measures (`HoldPolicy`;
+at action granularity, `CHoldPolicy`), and owes an explicit Layer 0
+review — mirroring Module 2's cap → Structural Review pattern.
 
-/-- Per-subgraph episode state. `hold` is the continuity-hold: budget
-    exhausted, risk persisting, Layer 0 review owed. -/
+v0.10 (findings R2-03/R2-06) makes that owed review mechanical: Layer 0
+outputs are TYPED dispositions rather than a reset Boolean — a denial or
+close can never reach the restart-permitting `idle`; only an explicit
+`newEpisode` authorization can — and the hold carries a mandatory-review
+clock. A hold left unreviewed for `holdReviewDeadline` hours under
+continuing risk lands in the flagged `overdue` state: the floor persists
+(no vacuum), but full authority is unavailable and nothing but a
+disposition moves the subgraph — the review cannot be waited out. -/
+
+/-- Mandatory hold-review period, in hours (v0.10, finding R2-06). Set
+    equal to the PIO review deadline pending a constitutional ruling on
+    the constant; the E12–E15 theorems are insensitive to its value
+    provided it is positive. -/
+def holdReviewDeadline : Nat := 72
+
+/-- A typed Layer 0 review disposition (v0.10, finding R2-03). The v0.4
+    machine carried a single `layer0 : Bool` reset bit, collapsing a
+    denial, a direction to continue, a close-out, and the authorization
+    of a new episode into one transition. Now the disposition is part of
+    the input's TYPE; the basis of a `newEpisode` authorization is
+    recorded through D-R4's disclosure obligations, outside the machine. -/
+inductive Layer0Disposition where
+  | continueHold  -- review conducted: continue the floor; the clock re-arms
+  | close         -- review conducted: close to ordinary posture (novelty
+                  -- required for any new full clock, as from `spent`)
+  | newEpisode    -- review conducted: a fresh full-PIO episode is
+                  -- explicitly authorized
+deriving DecidableEq, Repr
+
+/-- Per-subgraph episode state. `hold k` is the continuity-hold with its
+    mandatory-review clock; `overdue` is the flagged breach state: the
+    floor persists, but the owed review never arrived and only a Layer 0
+    disposition can move the subgraph anywhere else. -/
 inductive EpState where
   | idle                -- no PIO for this subgraph
   | pending (h : Nat)   -- full PIO active, review pending
-  | hold                -- continuity-hold: floor protection, review owed
+  | hold (k : Nat)      -- continuity-hold: floor protection, review owed
+  | overdue             -- review deadline breached: floor persists, flagged
   | spent               -- budget exhausted, risk subsided
   | confirmed           -- Tier-1 confirmation: handed to the tier ladder
 deriving DecidableEq, Repr
@@ -669,44 +732,81 @@ structure EpInput where
   confirm    : Bool     -- Tier-1 correlational confirmation arrived
   novel      : Bool     -- ATG/Layer 0 attestation: materially new claim (D-R4)
   exceedance : Bool     -- sensor signal above threshold (riskPersistent)
-  layer0     : Bool     -- a Layer 0 review output resolves the hold
+  layer0     : Option Layer0Disposition  -- a typed review disposition, if any
 deriving DecidableEq, Repr
 
 /-- Budget-exhausted states: protection may continue only as the hold
-    floor; the full clock is closed to everything but a novel claim. -/
+    floor; the full clock is closed to everything but a novel claim or
+    an explicit new-episode disposition. -/
 def EpState.exhausted : EpState → Bool
-  | .hold => true
+  | .hold _ => true
+  | .overdue => true
   | .spent => true
   | .confirmed => true
   | _ => false
 
-/-- One hour of the episode machine. At expiry the machine routes by
-    risk: continuing exceedance enters the hold, subsided risk parks in
-    `spent`. From `hold`, a Layer 0 output resolves; a novel claim filed
-    together with an issuance restarts a full PIO; otherwise the hold
-    tracks the risk signal. From `spent`, re-onset of exceedance
-    re-enters the hold floor — never the full clock. -/
+/-- Floor-active states: the continuity-hold floor (a `CHoldPolicy`) is
+    in force. `overdue` keeps the floor — a review breach must not
+    become a protection vacuum (D-R1A). -/
+def EpState.floorActive : EpState → Bool
+  | .hold _ => true
+  | .overdue => true
+  | _ => false
+
+/-- One hour of the episode machine (v0.10). At expiry the machine
+    routes by risk: continuing exceedance enters the hold with a fresh
+    review clock, subsided risk parks in `spent`. From the hold, a typed
+    disposition takes priority: `newEpisode` returns to `idle` (the only
+    path back to the restart-permitting state), `close` parks in
+    `spent`, `continueHold` re-arms the clock while risk persists. With
+    no disposition, a novel claim filed with an issuance restarts a full
+    PIO; otherwise the hold tracks the risk signal until its
+    mandatory-review deadline, where continuing risk lands in `overdue`.
+    From `overdue`, only a disposition moves the subgraph anywhere while
+    risk persists — filings and novelty wait on the owed review. From
+    `spent`, re-onset of exceedance re-enters the hold floor — never the
+    full clock. -/
 def estep : EpState → EpInput → EpState
   | .idle, i => cond i.issue (.pending 0) .idle
   | .pending h, i =>
       cond i.confirm .confirmed
         (if h + 1 < reviewDeadline then .pending (h + 1)
-         else cond i.exceedance .hold .spent)
-  | .hold, i =>
-      cond i.layer0 .idle
-        (cond (i.novel && i.issue) (.pending 0)
-          (cond i.exceedance .hold .spent))
+         else cond i.exceedance (.hold 0) .spent)
+  | .hold k, i =>
+      match i.layer0 with
+      | some .newEpisode   => .idle
+      | some .close        => .spent
+      | some .continueHold => cond i.exceedance (.hold 0) .spent
+      | none =>
+          cond (i.novel && i.issue) (.pending 0)
+            (if k + 1 < holdReviewDeadline then
+               cond i.exceedance (.hold (k + 1)) .spent
+             else cond i.exceedance .overdue .spent)
+  | .overdue, i =>
+      match i.layer0 with
+      | some .newEpisode   => .idle
+      | some .close        => .spent
+      | some .continueHold => cond i.exceedance (.hold 0) .spent
+      | none => cond i.exceedance .overdue .spent
   | .spent, i =>
       cond (i.novel && i.issue) (.pending 0)
-        (cond i.exceedance .hold .spent)
+        (cond i.exceedance (.hold 0) .spent)
   | .confirmed, _ => .confirmed
 
 /-- Whether this hour's input issues a fresh full PIO from this state. -/
 def epIsIssue : EpState → EpInput → Bool
   | .idle, i => i.issue
-  | .hold, i => !i.layer0 && (i.novel && i.issue)
+  | .hold _, i =>
+      match i.layer0 with
+      | none => i.novel && i.issue
+      | some _ => false
   | .spent, i => i.novel && i.issue
   | _, _ => false
+
+/-- Run the episode machine over a sequence of hourly inputs. -/
+def epRun : EpState → List EpInput → EpState
+  | s, [] => s
+  | s, i :: is => epRun (estep s i) is
 
 /-- Count of full-PIO issuances along a run. -/
 def epIssuances : EpState → List EpInput → Nat
@@ -721,96 +821,121 @@ def epPendingHours : EpState → List EpInput → Nat
   | s, i :: is =>
       (match s with | .pending _ => 1 | _ => 0) + epPendingHours (estep s i) is
 
+/-- Single-step invariant: with no novel attestation and no new-episode
+    disposition, an exhausted state steps to an exhausted state — close
+    and continue dispositions included. Only `some .newEpisode` can
+    reach `idle`. -/
+theorem estep_exhausted (s : EpState) (i : EpInput) (hs : s.exhausted = true)
+    (hn : i.novel = false) (hne : i.layer0 ≠ some .newEpisode) :
+    (estep s i).exhausted = true := by
+  cases s with
+  | idle => simp [EpState.exhausted] at hs
+  | pending h => simp [EpState.exhausted] at hs
+  | confirmed => rfl
+  | hold k =>
+      cases hl : i.layer0 with
+      | none =>
+          by_cases hd : k + 1 < holdReviewDeadline <;>
+            cases hx : i.exceedance <;>
+              simp [estep, hl, hn, hd, hx, EpState.exhausted]
+      | some d =>
+          cases d with
+          | newEpisode => exact absurd hl hne
+          | close => simp [estep, hl, EpState.exhausted]
+          | continueHold =>
+              cases hx : i.exceedance <;>
+                simp [estep, hl, hx, EpState.exhausted]
+  | overdue =>
+      cases hl : i.layer0 with
+      | none =>
+          cases hx : i.exceedance <;>
+            simp [estep, hl, hx, EpState.exhausted]
+      | some d =>
+          cases d with
+          | newEpisode => exact absurd hl hne
+          | close => simp [estep, hl, EpState.exhausted]
+          | continueHold =>
+              cases hx : i.exceedance <;>
+                simp [estep, hl, hx, EpState.exhausted]
+  | spent =>
+      cases hx : i.exceedance <;>
+        simp [estep, hn, hx, EpState.exhausted]
+
+/-- Exhausted states issue nothing without novelty. -/
+theorem epIsIssue_exhausted (s : EpState) (i : EpInput)
+    (hs : s.exhausted = true) (hn : i.novel = false) :
+    epIsIssue s i = false := by
+  cases s with
+  | idle => simp [EpState.exhausted] at hs
+  | pending h => simp [EpState.exhausted] at hs
+  | hold k => cases hl : i.layer0 <;> simp [epIsIssue, hl, hn]
+  | overdue => rfl
+  | spent => simp [epIsIssue, hn]
+  | confirmed => rfl
+
 /-- Exhausted states never re-enter `pending` across a span with no
-    novel attestation and no Layer 0 resolution — whatever the
-    exceedance and filing pattern — so they accrue no full-protection
-    hours. -/
+    novel attestation and no NEW-EPISODE disposition — whatever the
+    exceedance, filing, close, and continue pattern — so they accrue no
+    full-protection hours. -/
 theorem epPendingHours_exhausted :
     ∀ (is : List EpInput) (s : EpState), s.exhausted = true →
-      (∀ i ∈ is, i.novel = false ∧ i.layer0 = false) →
+      (∀ i ∈ is, i.novel = false ∧ i.layer0 ≠ some .newEpisode) →
       epPendingHours s is = 0 := by
   intro is
   induction is with
   | nil => intro s _ _; rfl
   | cons i is ih =>
       intro s hs hno
-      have hn : i.novel = false := (hno i (List.mem_cons_self ..)).1
-      have hl : i.layer0 = false := (hno i (List.mem_cons_self ..)).2
-      have hno' : ∀ j ∈ is, j.novel = false ∧ j.layer0 = false :=
+      have hn := (hno i (List.mem_cons_self ..)).1
+      have hne := (hno i (List.mem_cons_self ..)).2
+      have hno' : ∀ j ∈ is, j.novel = false ∧ j.layer0 ≠ some .newEpisode :=
         fun j hj => hno j (List.mem_cons_of_mem i hj)
+      have htail := ih (estep s i) (estep_exhausted s i hs hn hne) hno'
       cases s with
       | idle => simp [EpState.exhausted] at hs
       | pending h => simp [EpState.exhausted] at hs
-      | hold =>
-          cases hx : i.exceedance with
-          | true =>
-              have := ih .hold rfl hno'
-              simp [epPendingHours, estep, hn, hl, hx, this]
-          | false =>
-              have := ih .spent rfl hno'
-              simp [epPendingHours, estep, hn, hl, hx, this]
-      | spent =>
-          cases hx : i.exceedance with
-          | true =>
-              have := ih .hold rfl hno'
-              simp [epPendingHours, estep, hn, hx, this]
-          | false =>
-              have := ih .spent rfl hno'
-              simp [epPendingHours, estep, hn, hx, this]
-      | confirmed =>
-          have := ih .confirmed rfl hno'
-          simp [epPendingHours, estep, this]
+      | hold k => simpa [epPendingHours] using htail
+      | overdue => simpa [epPendingHours] using htail
+      | spent => simpa [epPendingHours] using htail
+      | confirmed => simpa [epPendingHours] using htail
 
 /-- Exhausted states issue no full PIOs across such a span. -/
 theorem epIssuances_exhausted :
     ∀ (is : List EpInput) (s : EpState), s.exhausted = true →
-      (∀ i ∈ is, i.novel = false ∧ i.layer0 = false) →
+      (∀ i ∈ is, i.novel = false ∧ i.layer0 ≠ some .newEpisode) →
       epIssuances s is = 0 := by
   intro is
   induction is with
   | nil => intro s _ _; rfl
   | cons i is ih =>
       intro s hs hno
-      have hn : i.novel = false := (hno i (List.mem_cons_self ..)).1
-      have hl : i.layer0 = false := (hno i (List.mem_cons_self ..)).2
-      have hno' : ∀ j ∈ is, j.novel = false ∧ j.layer0 = false :=
+      have hn := (hno i (List.mem_cons_self ..)).1
+      have hne := (hno i (List.mem_cons_self ..)).2
+      have hno' : ∀ j ∈ is, j.novel = false ∧ j.layer0 ≠ some .newEpisode :=
         fun j hj => hno j (List.mem_cons_of_mem i hj)
+      have htail := ih (estep s i) (estep_exhausted s i hs hn hne) hno'
+      have hiss := epIsIssue_exhausted s i hs hn
       cases s with
       | idle => simp [EpState.exhausted] at hs
       | pending h => simp [EpState.exhausted] at hs
-      | hold =>
-          cases hx : i.exceedance with
-          | true =>
-              have := ih .hold rfl hno'
-              simp [epIssuances, epIsIssue, estep, hn, hl, hx, this]
-          | false =>
-              have := ih .spent rfl hno'
-              simp [epIssuances, epIsIssue, estep, hn, hl, hx, this]
-      | spent =>
-          cases hx : i.exceedance with
-          | true =>
-              have := ih .hold rfl hno'
-              simp [epIssuances, epIsIssue, estep, hn, hx, this]
-          | false =>
-              have := ih .spent rfl hno'
-              simp [epIssuances, epIsIssue, estep, hn, hx, this]
-      | confirmed =>
-          have := ih .confirmed rfl hno'
-          simp [epIssuances, epIsIssue, estep, this]
+      | hold k => simpa [epIssuances, hiss] using htail
+      | overdue => simpa [epIssuances, hiss] using htail
+      | spent => simpa [epIssuances, hiss] using htail
+      | confirmed => simpa [epIssuances, hiss] using htail
 
 /-- A pending episode inside its deadline accrues at most the hours
     remaining to the deadline — and at expiry lands in an exhausted
     state, whatever the risk signal. -/
 theorem epPendingHours_pending :
     ∀ (is : List EpInput) (h : Nat), h < reviewDeadline →
-      (∀ i ∈ is, i.novel = false ∧ i.layer0 = false) →
+      (∀ i ∈ is, i.novel = false ∧ i.layer0 ≠ some .newEpisode) →
       epPendingHours (.pending h) is ≤ reviewDeadline - h := by
   intro is
   induction is with
   | nil => intro h _ _; simp [epPendingHours]
   | cons i is ih =>
       intro h hh hno
-      have hno' : ∀ j ∈ is, j.novel = false ∧ j.layer0 = false :=
+      have hno' : ∀ j ∈ is, j.novel = false ∧ j.layer0 ≠ some .newEpisode :=
         fun j hj => hno j (List.mem_cons_of_mem i hj)
       cases hc : i.confirm with
       | true =>
@@ -824,7 +949,7 @@ theorem epPendingHours_pending :
             omega
           · cases hx : i.exceedance with
             | true =>
-                have := epPendingHours_exhausted is .hold rfl hno'
+                have := epPendingHours_exhausted is (.hold 0) rfl hno'
                 simp [epPendingHours, estep, hc, if_neg hd, hx, this]
                 omega
             | false =>
@@ -835,14 +960,14 @@ theorem epPendingHours_pending :
 /-- A pending episode issues no further full PIOs across such a span. -/
 theorem epIssuances_pending_zero :
     ∀ (is : List EpInput) (h : Nat),
-      (∀ i ∈ is, i.novel = false ∧ i.layer0 = false) →
+      (∀ i ∈ is, i.novel = false ∧ i.layer0 ≠ some .newEpisode) →
       epIssuances (.pending h) is = 0 := by
   intro is
   induction is with
   | nil => intro h _; rfl
   | cons i is ih =>
       intro h hno
-      have hno' : ∀ j ∈ is, j.novel = false ∧ j.layer0 = false :=
+      have hno' : ∀ j ∈ is, j.novel = false ∧ j.layer0 ≠ some .newEpisode :=
         fun j hj => hno j (List.mem_cons_of_mem i hj)
       cases hc : i.confirm with
       | true =>
@@ -854,28 +979,31 @@ theorem epIssuances_pending_zero :
             simp [epIssuances, epIsIssue, estep, hc, if_pos hd, this]
           · cases hx : i.exceedance with
             | true =>
-                have := epIssuances_exhausted is .hold rfl hno'
+                have := epIssuances_exhausted is (.hold 0) rfl hno'
                 simp [epIssuances, epIsIssue, estep, hc, if_neg hd, hx, this]
             | false =>
                 have := epIssuances_exhausted is .spent rfl hno'
                 simp [epIssuances, epIsIssue, estep, hc, if_neg hd, hx, this]
 
-/-- **E1 (Two Clocks / No Relitigation).** The headline of ruling D-R1A:
-    across ANY input sequence carrying no novel attestation and no
-    Layer 0 resolution — WHATEVER the exceedance pattern, however many
-    filings, any confirmation pattern, any length — total unconfirmed
-    full-protection hours never exceed the 72-hour deadline. Persistence
-    of the hazard signal keeps the floor (E4/E5); it buys not one hour
-    of the full authority. Only evidence moves the epistemic clock. -/
+/-- **E1 (Two Clocks / No Relitigation).** The headline of ruling D-R1A,
+    STRENGTHENED in v0.10: across ANY input sequence carrying no novel
+    attestation and no NEW-EPISODE disposition — close and continue
+    dispositions may flow freely, WHATEVER the exceedance pattern,
+    however many filings, any confirmation pattern, any length — total
+    unconfirmed full-protection hours never exceed the 72-hour deadline.
+    Persistence of the hazard signal keeps the floor (E4/E5); it buys
+    not one hour of the full authority. Only evidence, or an explicit
+    Layer 0 authorization, moves the epistemic clock. -/
 theorem episode_no_relitigation :
-    ∀ is : List EpInput, (∀ i ∈ is, i.novel = false ∧ i.layer0 = false) →
+    ∀ is : List EpInput,
+      (∀ i ∈ is, i.novel = false ∧ i.layer0 ≠ some .newEpisode) →
       epPendingHours .idle is ≤ reviewDeadline := by
   intro is
   induction is with
   | nil => intro _; exact Nat.zero_le _
   | cons i is ih =>
       intro hno
-      have hno' : ∀ j ∈ is, j.novel = false ∧ j.layer0 = false :=
+      have hno' : ∀ j ∈ is, j.novel = false ∧ j.layer0 ≠ some .newEpisode :=
         fun j hj => hno j (List.mem_cons_of_mem i hj)
       cases hi : i.issue with
       | true =>
@@ -891,14 +1019,15 @@ theorem episode_no_relitigation :
 /-- **E2 (One Episode, One Issuance).** Across such a span there is at
     most one full-PIO issuance, ever. -/
 theorem episode_single_issuance :
-    ∀ is : List EpInput, (∀ i ∈ is, i.novel = false ∧ i.layer0 = false) →
+    ∀ is : List EpInput,
+      (∀ i ∈ is, i.novel = false ∧ i.layer0 ≠ some .newEpisode) →
       epIssuances .idle is ≤ 1 := by
   intro is
   induction is with
   | nil => intro _; exact Nat.zero_le 1
   | cons i is ih =>
       intro hno
-      have hno' : ∀ j ∈ is, j.novel = false ∧ j.layer0 = false :=
+      have hno' : ∀ j ∈ is, j.novel = false ∧ j.layer0 ≠ some .newEpisode :=
         fun j hj => hno j (List.mem_cons_of_mem i hj)
       cases hi : i.issue with
       | true =>
@@ -911,38 +1040,57 @@ theorem episode_single_issuance :
 
 /-- **E3 (Expiry Routes by Risk).** At the deadline, an unconfirmed
     episode does not simply vanish: continuing exceedance enters the
-    continuity-hold, subsided risk parks in `spent`. There is no third
-    outcome and no discretion. -/
+    continuity-hold with a fresh review clock, subsided risk parks in
+    `spent`. There is no third outcome and no discretion. -/
 theorem expiry_routes_by_risk (h : Nat) (i : EpInput)
     (hc : i.confirm = false) (hd : ¬ (h + 1 < reviewDeadline)) :
-    estep (.pending h) i = cond i.exceedance .hold .spent := by
-  simp [estep, hc, if_neg hd]
+    estep (.pending h) i = cond i.exceedance (.hold 0) .spent := by
+  simp [estep, hc, hd]
 
 /-- **E4 (Re-onset Re-floors).** From `spent`, returning exceedance
     re-enters the hold floor — protection follows the risk — but never
     the full clock (E8). -/
 theorem reonset_refloors (i : EpInput)
     (hni : (i.novel && i.issue) = false) (hx : i.exceedance = true) :
-    estep .spent i = .hold := by
+    estep .spent i = .hold 0 := by
   simp [estep, hni, hx]
 
 /-- **E5 (The Floor Follows the Risk).** While exceedance persists and
-    neither a Layer 0 output nor a novel filing arrives, the hold
-    persists: the floor is never withdrawn under continuing risk — the
-    protection-vacuum failure mode of a strict bar stays closed. -/
-theorem hold_persists (i : EpInput) (hl : i.layer0 = false)
+    neither a disposition nor a novel filing arrives, a floor-active
+    state steps to a floor-active state: the floor is never withdrawn
+    under continuing unreviewed risk — the protection-vacuum failure
+    mode of a strict bar stays closed, even across the hold's review
+    deadline (`overdue` keeps the floor). -/
+theorem floor_persists (s : EpState) (i : EpInput)
+    (hf : s.floorActive = true) (hl : i.layer0 = none)
     (hni : (i.novel && i.issue) = false) (hx : i.exceedance = true) :
-    estep .hold i = .hold := by
-  simp [estep, hl, hni, hx]
+    (estep s i).floorActive = true := by
+  cases s with
+  | idle => simp [EpState.floorActive] at hf
+  | pending h => simp [EpState.floorActive] at hf
+  | spent => simp [EpState.floorActive] at hf
+  | confirmed => simp [EpState.floorActive] at hf
+  | hold k =>
+      by_cases hd : k + 1 < holdReviewDeadline <;>
+        simp [estep, hl, hni, hx, hd, EpState.floorActive]
+  | overdue => simp [estep, hl, hx, EpState.floorActive]
 
-/-- **E6 (The Hold Owes Review).** The hold returns the subgraph to
-    ordinary posture exactly on a Layer 0 review output: time does not
-    close it, filings do not close it, and nothing else resolves it —
-    Module 2's review discipline, at PIO scale. -/
-theorem hold_resolution_iff (i : EpInput) :
-    estep .hold i = .idle ↔ i.layer0 = true := by
-  cases hl : i.layer0 <;> cases hn : i.novel <;> cases hi : i.issue <;>
-    cases hx : i.exceedance <;> simp [estep, hl, hn, hi, hx]
+/-- **E6 (Only Authorization Reopens the Gate).** The hold returns the
+    subgraph to the restart-permitting ordinary posture exactly on an
+    explicit NEW-EPISODE disposition: time does not do it, filings do
+    not do it, exceedance does not do it — and neither does a denial, a
+    close, or a continue disposition (finding R2-03). A close parks in
+    `spent`, where only novelty reopens the full clock. -/
+theorem hold_resolution_iff (k : Nat) (i : EpInput) :
+    estep (.hold k) i = .idle ↔ i.layer0 = some .newEpisode := by
+  cases hl : i.layer0 with
+  | none =>
+      cases hni : (i.novel && i.issue) <;>
+        by_cases hd : k + 1 < holdReviewDeadline <;>
+          cases hx : i.exceedance <;>
+            simp [estep, hl, hni, hd, hx]
+  | some d =>
+      cases d <;> cases hx : i.exceedance <;> simp [estep, hl, hx]
 
 /-- **E7a (Novel Evidence Restarts the Full Clock, from spent).** -/
 theorem novel_restart_from_spent (i : EpInput)
@@ -951,21 +1099,158 @@ theorem novel_restart_from_spent (i : EpInput)
   simp [estep, hn, hi]
 
 /-- **E7b (Novel Evidence Restarts the Full Clock, from hold).** -/
-theorem novel_restart_from_hold (i : EpInput) (hl : i.layer0 = false)
-    (hn : i.novel = true) (hi : i.issue = true) :
-    estep .hold i = .pending 0 := by
+theorem novel_restart_from_hold (k : Nat) (i : EpInput)
+    (hl : i.layer0 = none) (hn : i.novel = true) (hi : i.issue = true) :
+    estep (.hold k) i = .pending 0 := by
   simp [estep, hl, hn, hi]
 
 /-- **E8 (Exceedance Cannot Restart).** The two-clock separation,
     pointwise: without a novel attestation, no input — no exceedance
-    value, no filing — moves an exhausted subgraph back into `pending`.
-    Continuity of a signal is never continuity of the full authority. -/
+    value, no filing, no disposition — moves an exhausted subgraph back
+    into `pending` in one step. Continuity of a signal is never
+    continuity of the full authority. (A `newEpisode` disposition
+    reaches `idle`, never `pending` directly; the span theorems E1/E2
+    govern what follows.) -/
 theorem exceedance_cannot_restart (i : EpInput) (hn : i.novel = false)
-    (h' : Nat) :
-    estep .spent i ≠ .pending h' ∧ estep .hold i ≠ .pending h' := by
-  constructor <;>
-    (cases hl : i.layer0 <;> cases hx : i.exceedance <;>
-      simp [estep, hn, hl, hx])
+    (h' k : Nat) :
+    estep .spent i ≠ .pending h' ∧ estep (.hold k) i ≠ .pending h' ∧
+    estep .overdue i ≠ .pending h' := by
+  refine ⟨?_, ?_, ?_⟩
+  · cases hx : i.exceedance <;> simp [estep, hn, hx]
+  · cases hl : i.layer0 with
+    | none =>
+        by_cases hd : k + 1 < holdReviewDeadline <;>
+          cases hx : i.exceedance <;>
+            simp [estep, hl, hn, hd, hx]
+    | some d =>
+        cases d <;> cases hx : i.exceedance <;> simp [estep, hl, hx]
+  · cases hl : i.layer0 with
+    | none => cases hx : i.exceedance <;> simp [estep, hl, hx]
+    | some d =>
+        cases d <;> cases hx : i.exceedance <;> simp [estep, hl, hx]
+
+/-! ### Typed dispositions and the clocked hold (E12–E15) — adopted
+v0.10, findings R2-03/R2-06
+
+R2-03 exhibited the two-step stale restart
+`hold --(layer0)--> idle --(issue)--> pending 0` — legal in the v0.4
+machine because a single Boolean collapsed every review outcome into a
+reset. R2-06 exhibited the unbounded hold: with continuing exceedance
+and no Layer 0 output, `hold_persists` permitted an infinite unreviewed
+hold. The typed dispositions and the review clock close both, and the
+theorems below state the closures. -/
+
+/-- **E12 (A Close Cannot Launder).** The R2-03 witness, negated: a
+    CLOSE disposition followed by a stale filing — any exceedance, any
+    issuance — cannot reach the full clock. Only `newEpisode` reaches
+    `idle`, and that is an explicit, typed, D-R4-disclosed
+    authorization, not a reset bit. -/
+theorem close_cannot_launder (k : Nat) (i j : EpInput)
+    (hc : i.layer0 = some .close) (hjn : j.novel = false) (h' : Nat) :
+    estep (estep (.hold k) i) j ≠ .pending h' := by
+  have h1 : estep (.hold k) i = .spent := by simp [estep, hc]
+  rw [h1]
+  cases hx : j.exceedance <;> simp [estep, hjn, hx]
+
+/-- **E13 (The Hold Clock Is Bounded).** No transition produces a hold
+    state at or past the mandatory-review deadline: every hold the
+    machine can ever occupy has strictly fewer unreviewed hours than
+    `holdReviewDeadline` on its clock. -/
+theorem hold_clock_bounded (s : EpState) (i : EpInput) (k : Nat)
+    (h : estep s i = .hold k) : k < holdReviewDeadline := by
+  have hpos : 0 < holdReviewDeadline := by decide
+  cases s with
+  | idle => cases hi : i.issue <;> simp [estep, hi] at h
+  | confirmed => simp [estep] at h
+  | pending hh =>
+      cases hc : i.confirm <;> by_cases hd : hh + 1 < reviewDeadline <;>
+        cases hx : i.exceedance <;> simp [estep, hc, hd, hx] at h <;> omega
+  | spent =>
+      cases hni : (i.novel && i.issue) <;> cases hx : i.exceedance <;>
+        simp [estep, hni, hx] at h <;> omega
+  | hold k' =>
+      cases hl : i.layer0 with
+      | none =>
+          cases hni : (i.novel && i.issue) <;>
+            by_cases hd : k' + 1 < holdReviewDeadline <;>
+              cases hx : i.exceedance <;>
+                simp [estep, hl, hni, hd, hx] at h <;> omega
+      | some d =>
+          cases d <;> cases hx : i.exceedance <;>
+            simp [estep, hl, hx] at h <;> omega
+  | overdue =>
+      cases hl : i.layer0 with
+      | none => cases hx : i.exceedance <;> simp [estep, hl, hx] at h
+      | some d =>
+          cases d <;> cases hx : i.exceedance <;>
+            simp [estep, hl, hx] at h <;> omega
+
+/-- **E15a (Overdue Absorbs Under Unreviewed Risk).** While exceedance
+    persists and no disposition arrives, `overdue` persists: the breach
+    state cannot be waited out. -/
+theorem overdue_absorbing (i : EpInput) (hl : i.layer0 = none)
+    (hx : i.exceedance = true) : estep .overdue i = .overdue := by
+  simp [estep, hl, hx]
+
+/-- **E15b (Only Authorization Exits Overdue to Ordinary Posture).** -/
+theorem overdue_resolution_iff (i : EpInput) :
+    estep .overdue i = .idle ↔ i.layer0 = some .newEpisode := by
+  cases hl : i.layer0 with
+  | none => cases hx : i.exceedance <;> simp [estep, hl, hx]
+  | some d => cases d <;> cases hx : i.exceedance <;> simp [estep, hl, hx]
+
+/-- Overdue absorbs across any disposition-free span of continuing
+    exceedance. -/
+theorem overdue_run : ∀ (is : List EpInput),
+    (∀ i ∈ is, i.layer0 = none ∧ i.exceedance = true) →
+    epRun .overdue is = .overdue := by
+  intro is
+  induction is with
+  | nil => intro _; rfl
+  | cons i is ih =>
+      intro h
+      have hi := h i (List.mem_cons_self ..)
+      show epRun (estep .overdue i) is = .overdue
+      rw [overdue_absorbing i hi.1 hi.2]
+      exact ih (fun j hj => h j (List.mem_cons_of_mem i hj))
+
+/-- **E14 (An Unreviewed Hold Expires).** The R2-06 closure: under
+    continuing exceedance with no disposition and no novel filing —
+    exactly the conditions under which the v0.4 hold persisted forever —
+    the hold reaches the flagged `overdue` state within its
+    mandatory-review deadline and stays there until a disposition
+    arrives. The floor persists throughout (E5); what is impossible is
+    an over-deadline hold that LOOKS like an ordinary hold. -/
+theorem unreviewed_hold_expires :
+    ∀ (is : List EpInput) (k : Nat), k < holdReviewDeadline →
+      (∀ i ∈ is, i.layer0 = none ∧ i.exceedance = true ∧
+        (i.novel && i.issue) = false) →
+      holdReviewDeadline ≤ k + is.length →
+      epRun (.hold k) is = .overdue := by
+  intro is
+  induction is with
+  | nil =>
+      intro k hk _ hlen
+      exact absurd hk (by simp at hlen; omega)
+  | cons i is ih =>
+      intro k hk hno hlen
+      have hi := hno i (List.mem_cons_self ..)
+      have hno' : ∀ j ∈ is, j.layer0 = none ∧ j.exceedance = true ∧
+          (j.novel && j.issue) = false :=
+        fun j hj => hno j (List.mem_cons_of_mem i hj)
+      by_cases hd : k + 1 < holdReviewDeadline
+      · have hstep : estep (.hold k) i = .hold (k + 1) := by
+          simp [estep, hi.1, hi.2.1, hi.2.2, hd]
+        show epRun (estep (.hold k) i) is = .overdue
+        rw [hstep]
+        refine ih (k + 1) hd hno' ?_
+        simp only [List.length_cons] at hlen
+        omega
+      · have hstep : estep (.hold k) i = .overdue := by
+          simp [estep, hi.1, hi.2.1, hi.2.2, hd]
+        show epRun (estep (.hold k) i) is = .overdue
+        rw [hstep]
+        exact overdue_run is (fun j hj => ⟨(hno' j hj).1, (hno' j hj).2.1⟩)
 
 /-- Deployment-certified hold-floor policy (D-R1A: "only the minimum
     reversible measures necessary to prevent an immediate protection

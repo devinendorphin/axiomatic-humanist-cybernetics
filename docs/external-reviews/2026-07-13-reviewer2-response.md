@@ -10,8 +10,11 @@ since landed as kernel **v0.8** (typed `PIOClaim` language, attestation-bearing
 Documentation items 1–4 are also fixed. The R2-01 repair has landed as
 kernel **v0.9** (`pioAuthorizesC`, `CHoldPolicy`, theorems W10–W18; the
 legacy mechanism-granularity layer is quarantined by theorem W17),
-CI-verified at 102 audited theorems / 46 axiom-free. Remaining:
-R2-03/05/06/07/08/09 model-and-prose items and packaging items 5–7.
+CI-verified at 102 audited theorems / 46 axiom-free. The R2-03/R2-06
+repairs have landed as kernel **v0.10** (typed `Layer0Disposition`,
+clocked hold with flagged `overdue` state, theorems E12–E15; E1/E2
+strengthened), CI-verified at 107 audited theorems / 46 axiom-free.
+Remaining: R2-05/07/08/09 prose-and-model items and packaging items 5–7.
 
 ## Preamble: what this review did and did not find
 

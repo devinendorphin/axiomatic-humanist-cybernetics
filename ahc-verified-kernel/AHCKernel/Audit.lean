@@ -40,7 +40,7 @@ open AHC
 #print axioms episode_single_issuance
 #print axioms expiry_routes_by_risk
 #print axioms reonset_refloors
-#print axioms hold_persists
+#print axioms floor_persists
 #print axioms hold_resolution_iff
 #print axioms novel_restart_from_spent
 #print axioms novel_restart_from_hold
@@ -48,6 +48,13 @@ open AHC
 #print axioms hold_floor_reversible
 #print axioms hold_floor_severity
 #print axioms hold_grants_no_more_than_pio
+-- Typed dispositions and the clocked hold (E12-E15, adopted v0.10;
+-- findings R2-03, R2-06)
+#print axioms close_cannot_launder
+#print axioms hold_clock_bounded
+#print axioms overdue_absorbing
+#print axioms overdue_resolution_iff
+#print axioms unreviewed_hold_expires
 -- Certified reversibility envelopes (W1-W9, adopted v0.4; rulings D-R2A + D-R3)
 #print axioms cert_tier_monotone
 #print axioms cert_severity_le_evidence

@@ -58,7 +58,7 @@ structure SensorHour (f : Nat) where
   issue   : Bool
   confirm : Bool
   novel   : Bool
-  layer0  : Bool
+  layer0  : Option Layer0Disposition
 
 /-- Certified exceedance: at least f+1 sensors report at or above the
     danger threshold θ — the weakest quorum at which B2 guarantees an
@@ -109,29 +109,34 @@ theorem derived_exceedance_not_forgeable {f : Nat} (s : SensorHour f)
     danger. Protective authority persists only over hazard the honest
     sensors themselves report. -/
 theorem hold_sustained_only_by_witnessed_danger {f : Nat} (s : SensorHour f)
-    (hl : s.layer0 = false) (hni : (s.novel && s.issue) = false)
-    (hhold : estep .hold s.toEpInput = .hold) :
+    (k k' : Nat)
+    (hl : s.layer0 = none) (hni : (s.novel && s.issue) = false)
+    (hhold : estep (.hold k) s.toEpInput = .hold k') :
     ∃ sen, sen ∈ s.ensemble.sensors ∧ sen.2 = true ∧ s.threshold ≤ sen.1 := by
   cases hx : s.exceedance with
   | true => exact derived_exceedance_honest_witnessed s hx
   | false =>
       exfalso
-      have hspent : estep .hold s.toEpInput = .spent := by
-        simp [estep, SensorHour.toEpInput, hl, hni, hx]
+      have hspent : estep (.hold k) s.toEpInput = .spent := by
+        by_cases hd : k + 1 < holdReviewDeadline <;>
+          simp [estep, SensorHour.toEpInput, hl, hni, hx, hd]
       rw [hspent] at hhold
-      exact absurd hhold (by decide)
+      exact EpState.noConfusion hhold
 
 /-- **X4 (Manufactured Danger Cannot Sustain a Hold).** The dual of X3:
     if every honest sensor reads below the danger threshold, the episode
-    machine drops the subgraph out of the continuity-hold to `spent`. A
-    captured minority cannot keep a community under protective authority
-    by fabricating an alarm — the laundering path, closed at the
+    machine drops the subgraph out of the continuity-hold to `spent` —
+    at any clock value, before or at the review deadline. A captured
+    minority cannot keep a community under protective authority by
+    fabricating an alarm — the laundering path, closed at the
     measurement layer. -/
 theorem manufactured_danger_cannot_sustain_hold {f : Nat} (s : SensorHour f)
-    (hl : s.layer0 = false) (hni : (s.novel && s.issue) = false)
+    (k : Nat)
+    (hl : s.layer0 = none) (hni : (s.novel && s.issue) = false)
     (hhonest : ∀ sen ∈ s.ensemble.sensors, sen.2 = true → sen.1 < s.threshold) :
-    estep .hold s.toEpInput = .spent := by
+    estep (.hold k) s.toEpInput = .spent := by
   have hx : s.exceedance = false := derived_exceedance_not_forgeable s hhonest
-  simp [estep, SensorHour.toEpInput, hl, hni, hx]
+  by_cases hd : k + 1 < holdReviewDeadline <;>
+    simp [estep, SensorHour.toEpInput, hl, hni, hx, hd]
 
 end AHC

@@ -480,7 +480,8 @@ theorem attested_budget_accurate (B : BudgetAttestation) :
     authorization layer cannot drift apart on the one figure that
     measures how much unreviewed protection an incident has consumed. -/
 theorem attested_budget_bounded (B : BudgetAttestation)
-    (hno : ∀ i ∈ B.history, i.novel = false ∧ i.layer0 = false) :
+    (hno : ∀ i ∈ B.history,
+      i.novel = false ∧ i.layer0 ≠ some Layer0Disposition.newEpisode) :
     B.claimedHours ≤ reviewDeadline := by
   rw [B.accurate]
   exact episode_no_relitigation B.history hno
@@ -626,7 +627,8 @@ theorem pio_budget_no_drift {Claim : Type} (D : PIOEvent Claim)
     span: P9's constitutional bound, restated of the number the
     community actually reads. -/
 theorem pio_disclosed_budget_bounded {Claim : Type} (D : PIOEvent Claim)
-    (hno : ∀ i ∈ D.attestation.history, i.novel = false ∧ i.layer0 = false) :
+    (hno : ∀ i ∈ D.attestation.history,
+      i.novel = false ∧ i.layer0 ≠ some Layer0Disposition.newEpisode) :
     D.attestation.claimedHours ≤ reviewDeadline :=
   attested_budget_bounded D.attestation hno
 
