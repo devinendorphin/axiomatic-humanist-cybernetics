@@ -51,7 +51,7 @@ P1-P16 except the two cross-module budget bounds — attested_budget_bounded
 
 SOURCE INTEGRITY
   sha256 over sorted source files (*.lean, lakefile.toml, lean-toolchain):
-  075d4d99f4e6f55f7687c4e849dafaea148f16ea1ebfcc6db2304a33513bda0f
+  a8b7d54505130cba56fdbc258323104b4eb1457e2c830ebc2ac27c2429fafed0
   v0.7 digest (superseded):   8d262152c5f9036b20de9ea1c395a8edf31b4bfd2df893e8a4466d65b56736d0
   v0.6 digest (superseded):   ec3dc5ade185f48644e6d662aa0b28b9dab16c096e776fe2f5270a3408311f93
   v0.5 digest (superseded):   a49ec2bc8f4a1490679a1842e3a2dee85c0594277aca621da4a63c23d750e5a9

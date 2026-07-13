@@ -594,9 +594,9 @@ theorem pio_roles_distinct {Claim : Type} (D : PIOEvent Claim) :
     D.basisClaim ≠ D.toEvent.falsifier ∧
     D.noveltyClaim ≠ D.toEvent.falsifier ∧
     D.budgetClaim ≠ D.toEvent.falsifier := by
+  unfold PIOEvent.basisClaim PIOEvent.noveltyClaim PIOEvent.budgetClaim
   rw [D.falsifier_typed]
-  exact ⟨fun h => nomatch h, fun h => nomatch h, fun h => nomatch h,
-         fun h => nomatch h, fun h => nomatch h, fun h => nomatch h⟩
+  exact ⟨nofun, nofun, nofun, nofun, nofun, nofun⟩
 
 /-- **P15 (The Register Carries the Machine's Figure).** Every record
     compliant against a PIO event contains the budget claim whose figure
