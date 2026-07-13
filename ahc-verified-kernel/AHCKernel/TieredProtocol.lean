@@ -154,6 +154,45 @@
                                   certified floor exists for EVERY
                                   envelope, including the zero envelope
 
+  Exposure-indexed certificates and trace safety (adopted in v0.12;
+  external review finding R2-07, Reviewer #2 report 2026-07-13, per the
+  reviewer's own prescription: a state-transition certificate whose
+  authorization consumes and produces an exposure state, with a theorem
+  over finite action traces):
+
+    W19 trace_tier_monotone      — T1/W1 at trace altitude: stronger
+                                  evidence never de-authorizes a trace
+    W20 trace_head_certificate_backed — each action of a sub-causal
+                                  trace is certificate-backed AT ITS OWN
+                                  EXPOSURE POINT
+    W21 trace_stays_inside       — the R2-07 headline: a finite trace
+                                  authorized below Tier 3 from inside
+                                  the certified region keeps the
+                                  exposure inside the region — joint
+                                  threshold-crossing by individually
+                                  certified actions is unconstructible
+    W22 trace_stays_inside_prefix — W21 at every intermediate point
+    W23 pointwise_degenerate     — every W1–W18 envelope is the trivial-
+                                  exposure special case: old deployments
+                                  are conserved; the exposure obligation
+                                  is what was missing, not a new burden
+    W24 budget_binds_traces      — the reviewer's liquidity example,
+                                  formalized: under the cumulative-
+                                  budget certificate, TOTAL routed
+                                  volume over any authorized trace is
+                                  within budget
+    W25 pointwise_admits_joint_crossing — the contrast witness: two
+                                  actions each certified at frozen zero
+                                  exposure whose two-action trace is
+                                  refused — exactly the failure R2-07
+                                  exhibited, now provably excluded by
+                                  the trace regime and provably present
+                                  in the pointwise one
+    W26 pio_trace_stays_inside   — the emergency channel composes: a
+                                  Tier-1 (PIO-grade) authorized sequence
+                                  keeps the exposure invariant — R2-01's
+                                  closure and R2-07's compose
+
   Modeling choices for E1–E11 (ruling D-R1A + D-R4):
   · `novel` is an ATG/Layer 0 attestation attached to a claim identity
     (D-R4): rewording, republication, or repetition of the same
@@ -1719,5 +1758,256 @@ theorem cert_hold_floor_constructible (δ : Type) (E : Envelope δ) :
   | route d     => exact Bool.noConfusion ha
   | severance d => exact Bool.noConfusion ha
   | sanction    => exact Bool.noConfusion ha
+
+/-! ## Exposure-indexed certificates and trace safety — adopted v0.12,
+finding R2-07 (Reviewer #2 report, 2026-07-13)
+
+The W1–W18 envelope is POINTWISE: two Boolean predicates over single
+action descriptors. Nothing required monotonicity, cumulative
+accounting, or safety under sequences, so ten individually certified
+routing actions could jointly cross a liquidity, dependency, or cascade
+threshold — the constitutional guarantee rested on an unstated
+deployment convention of encoding history in the descriptor (finding
+R2-07).
+
+This section adopts the reviewer's prescribed repair: a STATE-TRANSITION
+certificate. A deployment carries an exposure state σ (cumulative routed
+volume, dependency load, cascade budget, restoration capacity, …);
+certification judges an action AT the current exposure and produces the
+exposure after it; and the certificate's constitutive obligations —
+carried as structure fields, per the house norm — are that certification
+is only ever granted where the step keeps the exposure inside the
+demonstrated-reversible region `Inv`. Authorization of a TRACE re-judges
+every action at the exposure its predecessors accumulated, through the
+same pointwise `Envelope` the deployment presents at that state — so all
+of W1–W18, including the certified emergency layer, applies at every
+step unchanged.
+
+What σ measures, and whether `Inv` describes the deployment's true
+reversible region, are certification questions at the seam, as always.
+What the kernel proves is that the GATING composes: crossing a certified
+threshold means leaving `Inv`, every certified step preserves `Inv`, so
+no authorized finite trace crosses (W21) — and the pointwise regime is
+recovered exactly as the degenerate case where exposure carries no
+information (W23), so no existing deployment is invalidated. -/
+
+/-- A state-transition (exposure-indexed) reversibility certificate
+    (v0.12, finding R2-07). `routeOk s d` certifies that routing `d` is
+    demonstrably reversible GIVEN the exposure `s` already outstanding;
+    `routeNext s d` is the exposure after it (likewise severance). The
+    preservation fields are the certificate's constitutive obligations:
+    a certificate that grants an action whose performance exits the
+    certified region is unconstructible. -/
+structure TEnvelope (σ δ : Type) where
+  routeOk   : σ → δ → Bool
+  sevOk     : σ → δ → Bool
+  routeNext : σ → δ → σ
+  sevNext   : σ → δ → σ
+  Inv       : σ → Prop
+  route_preserves :
+    ∀ s d, Inv s → routeOk s d = true → Inv (routeNext s d)
+  sev_preserves :
+    ∀ s d, Inv s → sevOk s d = true → Inv (sevNext s d)
+
+/-- The pointwise envelope a state-transition certificate presents at a
+    given exposure: the W1–W18 layer, instantiated at the current
+    state. -/
+def TEnvelope.envAt {σ δ : Type} (E : TEnvelope σ δ) (s : σ) :
+    Envelope δ :=
+  ⟨E.routeOk s, E.sevOk s⟩
+
+/-- Exposure evolution: routing and severance consume exposure;
+    the broadcast does not, and a sanction is Tier-3 causal territory
+    outside every sub-causal trace (W21's hypothesis). -/
+def TEnvelope.step {σ δ : Type} (E : TEnvelope σ δ) (s : σ) :
+    CAction δ → σ
+  | .route d => E.routeNext s d
+  | .severance d => E.sevNext s d
+  | _ => s
+
+/-- Run the exposure state over a finite action trace. -/
+def TEnvelope.run {σ δ : Type} (E : TEnvelope σ δ) :
+    σ → List (CAction δ) → σ
+  | s, [] => s
+  | s, a :: as => E.run (E.step s a) as
+
+/-- Authorization of a finite action trace at tier `t` from exposure
+    `s`: each successive action is authorized (in the W1–W18 sense)
+    under the pointwise envelope AT the exposure accumulated by its
+    predecessors. The object finding R2-07 asked for: authorization
+    consumes and produces exposure. -/
+inductive TraceAuthorized {σ δ : Type} (E : TEnvelope σ δ) (t : Tier) :
+    σ → List (CAction δ) → Prop
+  | nil (s : σ) : TraceAuthorized E t s []
+  | cons {s : σ} {a : CAction δ} {as : List (CAction δ)} :
+      authorizesC (E.envAt s) t a →
+      TraceAuthorized E t (E.step s a) as →
+      TraceAuthorized E t s (a :: as)
+
+/-- One certified sub-causal step preserves the exposure invariant:
+    the discharge of the certificate obligations through the W-family
+    gating. -/
+theorem step_preserves_inv {σ δ : Type} (E : TEnvelope σ δ) {t : Tier}
+    {s : σ} (a : CAction δ) (ha : authorizesC (E.envAt s) t a)
+    (ht : t < .t3) (hs : E.Inv s) : E.Inv (E.step s a) := by
+  cases a with
+  | broadcast => exact hs
+  | sanction =>
+      exact absurd (Nat.lt_of_lt_of_le ht ha) (Nat.lt_irrefl _)
+  | route d =>
+      have hc : E.routeOk s d = true :=
+        cert_sub_causal_reversible (E.envAt s) t (.route d) ha ht
+      exact E.route_preserves s d hs hc
+  | severance d =>
+      have hc : E.sevOk s d = true :=
+        cert_sub_causal_reversible (E.envAt s) t (.severance d) ha ht
+      exact E.sev_preserves s d hs hc
+
+/-- **W19 (Trace Tier Monotonicity).** T1/W1 at trace altitude:
+    strengthening the evidence never de-authorizes a trace. -/
+theorem trace_tier_monotone {σ δ : Type} (E : TEnvelope σ δ)
+    {t t' : Tier} {s : σ} {tr : List (CAction δ)}
+    (h : TraceAuthorized E t s tr) (ht : t ≤ t') :
+    TraceAuthorized E t' s tr := by
+  induction h with
+  | nil s => exact .nil s
+  | cons ha _ ih =>
+      exact .cons (cert_tier_monotone _ _ _ _ ha ht) ih
+
+/-- **W20 (Every Step Is Certificate-Backed).** The head action of a
+    sub-causally authorized trace is reversible in the envelope the
+    deployment presents at its own exposure point, and the tail is
+    authorized from the exposure it leaves behind — inductively, every
+    action of the trace is certificate-backed at the exposure its
+    predecessors accumulated. -/
+theorem trace_head_certificate_backed {σ δ : Type} (E : TEnvelope σ δ)
+    {t : Tier} {s : σ} {a : CAction δ} {as : List (CAction δ)}
+    (h : TraceAuthorized E t s (a :: as)) (ht : t < .t3) :
+    a.reversibleIn (E.envAt s) = true ∧
+    TraceAuthorized E t (E.step s a) as := by
+  cases h with
+  | cons ha htail =>
+      exact ⟨cert_sub_causal_reversible (E.envAt s) t a ha ht, htail⟩
+
+/-- **W21 (Sub-Causal Traces Stay Inside the Reversible Region).** The
+    R2-07 headline: any finite action trace authorized below Tier 3
+    from an exposure inside the certified region ends inside the
+    region. Ten individually certified actions cannot jointly cross a
+    liquidity, dependency, or cascade threshold: crossing means leaving
+    `Inv`, and every certified step provably preserves `Inv`. -/
+theorem trace_stays_inside {σ δ : Type} (E : TEnvelope σ δ)
+    {t : Tier} {s : σ} {tr : List (CAction δ)}
+    (h : TraceAuthorized E t s tr) (ht : t < .t3) :
+    E.Inv s → E.Inv (E.run s tr) := by
+  induction h with
+  | nil s => exact id
+  | cons ha _ ih =>
+      intro hs
+      exact ih (step_preserves_inv E _ ha ht hs)
+
+/-- Any prefix of an authorized trace is authorized. -/
+theorem traceAuthorized_take {σ δ : Type} (E : TEnvelope σ δ)
+    {t : Tier} :
+    ∀ (n : Nat) {s : σ} {tr : List (CAction δ)},
+      TraceAuthorized E t s tr → TraceAuthorized E t s (tr.take n) := by
+  intro n
+  induction n with
+  | zero => intro s tr _; exact .nil s
+  | succ n ih =>
+      intro s tr h
+      cases h with
+      | nil => exact .nil s
+      | cons ha htail => exact .cons ha (ih htail)
+
+/-- **W22 (Every Intermediate Exposure Stays Inside).** W21 holds not
+    only at the end of the trace but at every point along it: the
+    exposure after any prefix of an authorized sub-causal trace is
+    inside the certified region. -/
+theorem trace_stays_inside_prefix {σ δ : Type} (E : TEnvelope σ δ)
+    {t : Tier} {s : σ} {tr : List (CAction δ)}
+    (h : TraceAuthorized E t s tr) (ht : t < .t3) (hs : E.Inv s)
+    (n : Nat) : E.Inv (E.run s (tr.take n)) :=
+  trace_stays_inside E (traceAuthorized_take E n h) ht hs
+
+/-- The trivial-exposure lift of a pointwise envelope. -/
+def Envelope.toTEnvelope {δ : Type} (E : Envelope δ) :
+    TEnvelope Unit δ where
+  routeOk _ d := E.routeInside d
+  sevOk _ d := E.sevInside d
+  routeNext _ _ := ()
+  sevNext _ _ := ()
+  Inv _ := True
+  route_preserves := fun _ _ _ _ => trivial
+  sev_preserves := fun _ _ _ _ => trivial
+
+/-- **W23 (Pointwise Envelopes Are the Degenerate Case).** Every W1–W18
+    envelope is an exposure-indexed certificate over the trivial
+    exposure state, authorizing exactly what it authorized before: the
+    pointwise regime is conserved, and what v0.12 adds is exactly the
+    obligation that was missing — not a new constraint on existing
+    deployments. -/
+theorem pointwise_degenerate {δ : Type} (E : Envelope δ) (s : Unit)
+    (t : Tier) (a : CAction δ) :
+    authorizesC (E.toTEnvelope.envAt s) t a ↔ authorizesC E t a := by
+  cases a <;> exact Iff.rfl
+
+/-- The cumulative-budget certificate: exposure is total routed volume,
+    the certified region is `≤ B`, and certification of each routing
+    action is judged against the ACCUMULATED total — the liquidity
+    example of finding R2-07, formalized. Severance is never certified
+    in this instance. -/
+def budgetTEnvelope {δ : Type} (B : Nat) (volume : δ → Nat) :
+    TEnvelope Nat δ where
+  routeOk s d := decide (s + volume d ≤ B)
+  sevOk _ _ := false
+  routeNext s d := s + volume d
+  sevNext s _ := s
+  Inv s := s ≤ B
+  route_preserves := fun _ _ _ h => of_decide_eq_true h
+  sev_preserves := fun _ _ _ h => Bool.noConfusion h
+
+/-- **W24 (The Cumulative Budget Binds Over Traces).** Under the budget
+    certificate, the TOTAL routed volume of any trace authorized below
+    Tier 3 from zero exposure is at most the budget — not merely each
+    action's volume individually. -/
+theorem budget_binds_traces {δ : Type} (B : Nat) (volume : δ → Nat)
+    {t : Tier} {tr : List (CAction δ)}
+    (h : TraceAuthorized (budgetTEnvelope B volume) t 0 tr)
+    (ht : t < .t3) :
+    (budgetTEnvelope B volume).run 0 tr ≤ B :=
+  trace_stays_inside _ h ht (Nat.zero_le B)
+
+/-- **W25 (Pointwise Certification Admits Joint Crossing — the
+    contrast).** The R2-07 failure mode, exhibited as a witness in the
+    style of A1e: a budget of 10 and two routing actions of volume 6.
+    Each is individually certified at zero exposure — a pointwise
+    regime frozen there would authorize both — yet the two-action TRACE
+    is refused, because the second action is re-judged at the exposure
+    the first consumed. Together with W21, this is the formal reason
+    certification is exposure-indexed rather than pointwise. -/
+theorem pointwise_admits_joint_crossing :
+    ∃ (B : Nat) (volume : Nat → Nat) (d₁ d₂ : Nat),
+      (budgetTEnvelope B volume).routeOk 0 d₁ = true ∧
+      (budgetTEnvelope B volume).routeOk 0 d₂ = true ∧
+      ¬ TraceAuthorized (budgetTEnvelope B volume) .t1 0
+          [.route d₁, .route d₂] := by
+  refine ⟨10, fun _ => 6, 0, 1, rfl, rfl, ?_⟩
+  intro h
+  cases h with
+  | cons ha htail =>
+      cases htail with
+      | cons ha2 _ => exact absurd ha2 (by decide)
+
+/-- **W26 (The Emergency Channel Composes).** A sequence of actions
+    each authorized at Tier-1 grade — what a pending PIO or a certified
+    hold floor may grant at its own exposure point (W10–W16) — is a
+    sub-causal trace, so the exposure invariant holds throughout:
+    R2-01's closure and R2-07's compose, and the emergency path cannot
+    accumulate its way across a certified threshold either. -/
+theorem pio_trace_stays_inside {σ δ : Type} (E : TEnvelope σ δ)
+    {s : σ} {tr : List (CAction δ)}
+    (h : TraceAuthorized E .t1 s tr) (hs : E.Inv s) :
+    E.Inv (E.run s tr) :=
+  trace_stays_inside E h (by decide) hs
 
 end AHC

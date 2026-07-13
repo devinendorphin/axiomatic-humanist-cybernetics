@@ -77,6 +77,17 @@ open AHC
 #print axioms hold_cert_grants_no_more_than_pio
 #print axioms cert_pio_refines_mech_pio
 #print axioms cert_hold_floor_constructible
+-- Exposure-indexed certificates and trace safety (W19-W26, adopted v0.12;
+-- finding R2-07)
+#print axioms step_preserves_inv
+#print axioms trace_tier_monotone
+#print axioms trace_head_certificate_backed
+#print axioms trace_stays_inside
+#print axioms trace_stays_inside_prefix
+#print axioms pointwise_degenerate
+#print axioms budget_binds_traces
+#print axioms pointwise_admits_joint_crossing
+#print axioms pio_trace_stays_inside
 
 -- Module 2: Crisis Frequency Cap & Structural Review (§12.3); Axiom II (§4.2)
 #print axioms window_head_bound

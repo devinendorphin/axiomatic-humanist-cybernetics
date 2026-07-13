@@ -18,9 +18,12 @@ claim-surface items have landed as kernel **v0.11** (R2-05/R2-08/R2-09
 narrowed in source and brief; R2-10/R2-11 boundaries stated; renames
 `residual_divergence_noncritical` / `later_residual_divergence_noncritical`;
 new circulation brief `AHC_VerifiedKernel_v0.11_Brief.md` with the full
-disposition table in Part II.J). Remaining: R2-07 (compositional
-envelopes — the named principal formal candidate) and packaging items
-5–7 plus PDF/DOCX regeneration.
+disposition table in Part II.J). The R2-07 repair has landed as kernel
+**v0.12** (`TEnvelope` exposure-indexed certificates, trace-safety
+theorems W19–W26, per the report's own prescription), CI-verified at
+116 audited theorems / 49 axiom-free — every formal finding of the
+report is now closed. Remaining: packaging items 5–7 plus PDF/DOCX
+regeneration.
 
 ## Preamble: what this review did and did not find
 

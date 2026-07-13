@@ -1,5 +1,56 @@
 # AHC Verified Constitutional Kernel — Errata & Amendments
 
+## v0.11 → v0.12 (2026-07-13) — exposure-indexed certificates and trace safety (Module 1; finding R2-07)
+
+Closes the last open formal finding of the Reviewer #2 report, per the
+reviewer's own prescription: "a state-transition certificate or
+resource-indexed envelope: authorization should depend on current
+exposure and produce a new exposure state … add an explicit
+compositionality obligation and a theorem covering finite action
+traces."
+
+`TieredProtocol.lean` gains `TEnvelope σ δ`: a deployment carries an
+exposure state σ (cumulative routed volume, dependency load, cascade
+budget, …); certification judges an action AT the current exposure and
+yields the exposure after it; and the constitutive obligations —
+structure fields, per the house norm — are that certification is only
+granted where the step keeps exposure inside the demonstrated-reversible
+region `Inv`. `TraceAuthorized` re-judges every action of a finite trace
+at the exposure its predecessors accumulated, through the pointwise
+`Envelope` presented at that state (`envAt`) — so W1–W18, including the
+certified emergency layer, applies at every step unchanged. Theorems:
+
+- **W19 `trace_tier_monotone`** — T1/W1 at trace altitude.
+- **W20 `trace_head_certificate_backed`** — every action of a
+  sub-causal trace is certificate-backed at its own exposure point.
+- **W21 `trace_stays_inside`** (headline) — a finite trace authorized
+  below Tier 3 from inside the certified region ends inside it: joint
+  threshold-crossing by individually certified actions is
+  unconstructible.
+- **W22 `trace_stays_inside_prefix`** — W21 at every intermediate point.
+- **W23 `pointwise_degenerate`** — every pointwise envelope is the
+  trivial-exposure special case, authorizing exactly what it did:
+  existing deployments are conserved.
+- **W24 `budget_binds_traces`** — the reviewer's liquidity example,
+  formalized: under the cumulative-budget certificate, TOTAL routed
+  volume over any authorized trace is within budget.
+- **W25 `pointwise_admits_joint_crossing`** — the contrast witness (in
+  the style of A1e): two actions each certified at frozen zero exposure
+  whose two-action trace is refused.
+- **W26 `pio_trace_stays_inside`** — a Tier-1 (PIO-grade) authorized
+  sequence keeps the invariant: the R2-01 and R2-07 closures compose.
+
+Seam unchanged in kind: what σ measures and whether `Inv` describes the
+true reversible region are certification questions; what is now proved
+is that the gating COMPOSES. Part III's F-3 solicitation shifts from
+proposing this construction to reviewing it.
+
+Footprint: **116 audited theorems, 49 axiom-free**. Digest in
+`MANIFEST_v0.12.txt`. The uncirculated v0.11 brief is superseded by
+`AHC_VerifiedKernel_v0.12_Brief.md` (renamed in place).
+
+---
+
 ## v0.10 → v0.11 (2026-07-13) — claim-surface alignment (findings R2-05, R2-08, R2-09; clarifications R2-10, R2-11)
 
 The prose pass of the Reviewer #2 response: every English claim surface —

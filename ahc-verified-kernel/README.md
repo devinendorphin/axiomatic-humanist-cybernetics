@@ -1,7 +1,15 @@
 # AHC Verified Constitutional Kernel
 
-**Version 0.11** — the claim-surface alignment pass (Reviewer #2
-findings R2-05, R2-08, R2-09): `residual_divergence_harmless` and its
+**Version 0.12** — closes finding R2-07, the last open formal item of
+the Reviewer #2 report, with exposure-indexed certificates: a
+state-transition `TEnvelope` whose certification judges each action at
+the deployment's accumulated exposure, an invariant-preservation
+obligation carried as structure fields, and trace-safety theorems
+W19–W26 — sub-causal traces provably stay inside the certified region
+(W21), the pointwise regime is the conserved degenerate case (W23), and
+the reviewer's liquidity example is formalized both as the bound (W24)
+and as the contrast witness (W25). v0.11 was the claim-surface alignment
+pass (findings R2-05, R2-08, R2-09): `residual_divergence_harmless` and its
 later-register form are renamed `_noncritical` to state exactly what
 they prove, with the completeness of the critical classification now an
 explicit seam obligation; the exceedance bridge's glosses are narrowed
@@ -30,7 +38,7 @@ technical records, P10–P13); v0.4 implemented the four ratified
 dispositions (episode machine E1–E11; reversibility envelopes W1–W9);
 v0.5 formalized the D-R4 disclosures (P7–P9). Change record in
 `ERRATA_AND_AMENDMENTS.md`; source digest and audit footprint in the
-version manifest — `docs/MANIFEST_v0.11.txt` in the source repository,
+version manifest — `docs/MANIFEST_v0.12.txt` in the source repository,
 shipped as `MANIFEST.txt` alongside this project directory in the
 circulation packet.
 
@@ -44,8 +52,8 @@ register-invariance guarantees.
 **Toolchain:** Lean 4.15.0, core only — **no Mathlib dependency**. Every
 proof is self-contained. **Zero `sorry`s.** No theorem depends on
 `Classical.choice`; the complete axiom footprint is `propext` and
-`Quot.sound` (standard Lean kernel axioms), and forty-six of the
-one hundred seven audited theorems depend on no axioms at all — including the
+`Quot.sound` (standard Lean kernel axioms), and forty-nine of the
+one hundred sixteen audited theorems depend on no axioms at all — including the
 PLOL module's register-invariance and disclosure theorems (P1–P8,
 P10–P16; the two cross-module budget bounds P9 and P17 route through
 Module 1 and so carry `[propext, Quot.sound]`).
@@ -109,6 +117,13 @@ nothing here substitutes for it.
 | `hold_cert_grants_no_more_than_pio` (W16) | §5.4 | E11 lifted: the certified floor is a remnant of PIO authority under the same envelope |
 | `cert_pio_refines_mech_pio` (W17) | §5.4 | Quarantine: the certified layer never grants an action whose mechanism the Phase 1 table would refuse |
 | `cert_hold_floor_constructible` (W18) | §5.4 | Non-vacuity: a broadcast-only certified floor exists for every envelope, including the zero envelope |
+| `trace_tier_monotone` (W19) | §5.4 | T1/W1 at trace altitude: stronger evidence never de-authorizes a trace |
+| `trace_head_certificate_backed` (W20) | §5.4 | Every action of a sub-causal trace is certificate-backed at its own exposure point |
+| `trace_stays_inside` / `_prefix` (W21–W22) | §5.4 | A finite trace authorized below Tier 3 from inside the certified region stays inside it, at every intermediate point: joint threshold-crossing by individually certified actions is unconstructible (R2-07) |
+| `pointwise_degenerate` (W23) | §5.4 | Every pointwise envelope is the trivial-exposure special case, authorizing exactly what it did: existing deployments are conserved |
+| `budget_binds_traces` (W24) | §5.4 | Under the cumulative-budget certificate, total routed volume over any authorized trace is within budget |
+| `pointwise_admits_joint_crossing` (W25) | §5.4 | Contrast witness: two actions each certified at frozen zero exposure whose two-action trace is refused |
+| `pio_trace_stays_inside` (W26) | §5.4 | Tier-1 (PIO-grade) authorized sequences keep the exposure invariant: the R2-01 and R2-07 closures compose |
 
 ### Module 2 — `AHCKernel/CrisisCap.lean`
 
@@ -212,9 +227,9 @@ The build elaborates all proofs and prints the axiom audit
 the `sorryAx` axiom in that output. Expected audit result:
 
 ```
-107 audited theorems: every one at most [propext, Quot.sound];
+116 audited theorems: every one at most [propext, Quot.sound];
 never Classical.choice
-no axioms at all (46): the T1–T7 gating theorems, the hold-floor and
+no axioms at all (49): the T1–T7 gating theorems, the hold-floor and
   certificate-envelope theorems (hold_floor_reversible, hold_floor_severity,
   hold_grants_no_more_than_pio, cert_tier_monotone,
   cert_refinement_conservative, no_certificate_no_presumption,
@@ -222,6 +237,9 @@ no axioms at all (46): the T1–T7 gating theorems, the hold-floor and
   certified_severance_at_t2), the certified-emergency quarantine and
   constructibility theorems (hold_cert_grants_no_more_than_pio,
   cert_pio_refines_mech_pio, cert_hold_floor_constructible), the
+  trace-layer monotonicity, degeneracy, and contrast theorems
+  (trace_tier_monotone, pointwise_degenerate,
+  pointwise_admits_joint_crossing), the
   composed-machine soundness theorems (dayStep_valid, dayRun_valid),
   the Axiom I intersection theorems, and the PLOL invariance/disclosure
   theorems P1–P8, P10–P16.
@@ -252,7 +270,10 @@ a mandatory-review clock whose constant (72h) is a flagged deployment
 choice pending ratification (E12–E15); reversibility envelopes over opaque deployment descriptors,
 judged by external certificates the kernel gates on but does not verify
 (W1–W9), with the PIO and hold floor authorizing only certified
-actions under those envelopes since v0.9 (W10–W18); the typed D-R4
+actions under those envelopes since v0.9 (W10–W18), and certification
+exposure-indexed with invariant preservation as the constitutive
+obligation since v0.12 — what the exposure state measures is at the
+seam (W19–W26); the typed D-R4
 claim language, with the budget attestation
 carried inside the PIO event and role occupancy formal while claim
 content stays at the seam (P14–P17). These choices are the right places

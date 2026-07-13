@@ -2,12 +2,12 @@
 ## Machine-Checked Invariants of Axiomatic Humanist Cybernetics v3.1
 
 **Plain Language Summary · Formal Appendix · Reviewer Brief**
-**Kernel version 0.11 — 2026-07-13**
+**Kernel version 0.12 — 2026-07-13**
 
 Companion artifact to AHC v3.1 and Companion A (integrated).
-**107 theorems · 4 modules + a cross-module bridge · Lean 4.15.0, core only · zero unproven claims.**
+**116 theorems · 4 modules + a cross-module bridge · Lean 4.15.0, core only · zero unproven claims.**
 Source digest (sha256 over sorted sources):
-`92f66405021a25bbf6bf452f526f8c862357ceb730b4e191f8547ac7ebae104b`
+`88ea65837352877ce5d3ad94c78ea244f41b7a1ffc743fce99b172019c490830`
 
 Circulated under Principle 19.2 (Complexity Ceiling): this artifact adds no
 new specification. It verifies specification that already exists and
@@ -39,17 +39,18 @@ when the system may act and how hard, about how long an emergency may last,
 about how measurements are combined, about what the public record of a
 decision must contain. We translated four families of those rules into a
 language a computer can check with complete rigor — a proof assistant called
-Lean — and proved 107 statements about them. A proof assistant does not test a
+Lean — and proved 116 statements about them. A proof assistant does not test a
 rule on examples; it verifies that no counterexample can exist, anywhere,
 ever, within the rules as written.
 
-This is the eleventh iteration of the kernel and the third to result from
+This is the twelfth iteration of the kernel and the third to result from
 external review. The most recent review did exactly what review is for: it
 found no broken proof, but it found two places where two of our own formal
 objects should have constrained each other and did not, two places where the
 machine's behavior was weaker than this document's English, and several
-sentences that claimed more than the mathematics delivered. All of the first
-four are now closed by new machine-checked theorems. The sentences have been
+sentences that claimed more than the mathematics delivered. All five — including the
+compositionality gap, the review's structural centerpiece — are now
+closed by new machine-checked theorems. The sentences have been
 rewritten — in this document and in the source itself — to say exactly what is
 proved, no more. The four families:
 
@@ -195,15 +196,15 @@ v3.1: enforcement gating and the evidence–action ladder (§5.4, §9.2–9.3),
 emergency time and the crisis cap (Companion A §12.3, AHC §10.3, §4.2),
 measurement and aggregation (§8.3, §4.1–4.2, §1.1), and output-register
 invariance (§10.4; Companion A §5, §19.4, Appendix B). The claim is exact and
-limited: the specification, as modeled, provably possesses the 107 properties
+limited: the specification, as modeled, provably possesses the 116 properties
 below. **The proofs verify the specification, not the world.**
 
 **Toolchain:** Lean 4.15.0, core library only — no Mathlib, no external
 dependencies. **Zero `sorry` placeholders.** No theorem uses classical choice;
 the total axiom footprint is `propext` and `Quot.sound` (the standard Lean
-kernel axioms), and **46 of 107 theorems depend on no axioms at all**.
+kernel axioms), and **49 of 116 theorems depend on no axioms at all**.
 `decCompliant` is a verified `Decidable` instance, checked by elaboration and
-additional to the 107.
+additional to the 116.
 
 ### B. Module 1 — Tiered Evidence-Action Protocol (`TieredProtocol.lean`)
 
@@ -277,6 +278,28 @@ authorization APIs, no theorem forcing the stricter one. Closed:
 | `hold_cert_grants_no_more_than_pio` (W16) | The certified floor is a remnant of PIO authority under the same envelope. |
 | `cert_pio_refines_mech_pio` (W17) | Quarantine: the certified layer never grants an action whose mechanism the Phase 1 table would refuse — the legacy layer survives exactly as an outer presumptive bound. |
 | `cert_hold_floor_constructible` (W18) | Non-vacuity: a broadcast-only certified floor exists for every envelope, including the zero envelope. |
+
+**Exposure-indexed certificates and trace safety — W19–W26 (adopted v0.12,
+finding R2-07).** The third review's structural centerpiece: pointwise
+envelopes let ten individually certified actions jointly cross a liquidity,
+dependency, or cascade threshold. Closed with the reviewer's prescribed
+repair — a state-transition certificate. `TEnvelope` carries an exposure
+state σ; certification judges each action *at* the accumulated exposure and
+produces the exposure after it; the constitutive obligation (a structure
+field) is that certification is only granted where the step keeps exposure
+inside the demonstrated-reversible region. What σ measures, and whether the
+region describes reality, are certification questions at the seam; what is
+proved is that the gating composes.
+
+| Theorem | Verified guarantee |
+|---|---|
+| `trace_tier_monotone` (W19) | T1/W1 at trace altitude: stronger evidence never de-authorizes a trace. |
+| `trace_head_certificate_backed` (W20) | Every action of a sub-causal trace is certificate-backed at its own exposure point. |
+| `trace_stays_inside` / `_prefix` (W21, W22) | **Headline:** a finite trace authorized below Tier 3 from inside the certified region stays inside it — at the end and at every intermediate point. Joint threshold-crossing by individually certified actions is unconstructible. |
+| `pointwise_degenerate` (W23) | Every pointwise envelope is the trivial-exposure special case, authorizing exactly what it did: existing deployments are conserved; the obligation is what was missing, not a new burden. |
+| `budget_binds_traces` (W24) | The review's liquidity example, formalized: under the cumulative-budget certificate, TOTAL routed volume over any authorized trace is within budget. |
+| `pointwise_admits_joint_crossing` (W25) | The contrast witness (in the style of A1e): two actions each certified at frozen zero exposure whose two-action trace is refused — the old reading's failure mode, exhibited and excluded. |
+| `pio_trace_stays_inside` (W26) | Tier-1 (PIO-grade) authorized sequences keep the exposure invariant: the emergency channel cannot accumulate its way across a certified threshold either. |
 
 ### C. Module 2 — Crisis Frequency Cap, Structural Review, Axiom II (`CrisisCap.lean`)
 
@@ -419,8 +442,10 @@ its module. The most load-bearing:
   reality. Since v0.9 the PIO and hold floor authorize only certified
   actions (`pioAuthorizesC`, `CHoldPolicy`), and W17 proves the legacy
   mechanism table is an outer bound, not an authorization channel.
-  Envelope predicates are *pointwise*: nothing yet requires compositional
-  safety over action sequences (finding R2-07 — the named formal candidate).
+  Since v0.12 certification is exposure-indexed (`TEnvelope`, W19–W26):
+  each action is certified against the deployment's accumulated exposure,
+  with invariant preservation the constitutive obligation. What the
+  exposure state measures is a certification question at the seam.
 - **The danger threshold θ is a free per-hour input** the deployment must
   bind institutionally (finding R2-05); the quorum property is
   one-honest-witness non-fabrication, not consensus.
@@ -466,10 +491,10 @@ lake build
 
 The build elaborates every proof and prints the axiom audit
 (`AHCKernel/Audit.lean`) to the log. A missing or broken proof fails the
-build; a placeholder surfaces as the `sorryAx` axiom. **Expected:** 107
+build; a placeholder surfaces as the `sorryAx` axiom. **Expected:** 116
 audited theorems, each at most `[propext, Quot.sound]`; never
-`Classical.choice`; 46 axiom-free. A continuous-integration workflow re-runs
-this check on every change and fails on any deviation from the 107/46
+`Classical.choice`; 49 axiom-free. A continuous-integration workflow re-runs
+this check on every change and fails on any deviation from the 116/49
 footprint.
 
 ### J. Disposition of the third review round (Reviewer #2, 2026-07-13)
@@ -482,7 +507,7 @@ footprint.
 | R2-04 four disclosure fields may be one atom | High | **Closed in Lean** — v0.8, P14 (constructor disjointness). |
 | R2-05 exceedance overclaimed as consensus; θ free | High | **Claims narrowed** (v0.11, Part II.F); θ-binding and median-derived exceedance are named candidates. |
 | R2-06 continuity-hold unbounded | High | **Closed in Lean** — v0.10, clocked hold, `overdue`, E13–E15. |
-| R2-07 envelope predicates not compositional | High | **Open, named** — the principal formal candidate (Part III, F-3). |
+| R2-07 envelope predicates not compositional | High | **Closed in Lean** — v0.12, `TEnvelope` and W19–W26, per the report's prescribed repair. |
 | R2-08 "harmless" ≠ "not marked critical" | Medium | **Renamed and re-scoped** (v0.11, P4/P13); completeness stated as a seam obligation. |
 | R2-09 Axiom II dichotomy near-tautological | Medium | **Re-glossed as well-formedness** (v0.11); operational theorem is a named candidate. |
 | R2-10 crisis cap not evidence-bridged; constants generic | Medium | **Boundary stated** (Part II.C); bridge and concrete instance are named candidates. |
@@ -523,15 +548,17 @@ carry structure? From `overdue`, exceedance subsiding returns the subgraph to
 `spent`: does the review obligation rightly evaporate with the risk, or
 should a breach flag survive into the record's ordinary posture?
 
-**F-3 (Certificate compositionality — the principal candidate, R2-07).**
-Envelope predicates are pointwise Booleans over descriptors. Ten individually
-certified actions may jointly cross a liquidity, dependency, or cascade
-threshold; nothing requires monotonicity, cumulative accounting, or safety
-over action sequences. The identified repair is a resource-indexed or
-state-transition certificate — authorization consumes and produces an
-exposure state — with a theorem over finite action traces. Reviewers are
-solicited on the right structure for that state, and on whether pointwise
-certification plus institutional accounting is instead the intended design.
+**F-3 (The exposure-indexed certificate — review of the R2-07 repair).**
+v0.12 implements the report's prescribed state-transition certificate
+(`TEnvelope`, W19–W26): certification consumes and produces an exposure
+state, and invariant preservation is the constitutive obligation. Solicited:
+is a single per-deployment exposure state the right altitude, or do distinct
+resources (liquidity, dependency, cascade) need distinct, jointly-constrained
+states? Should exposure *decay* (rollbacks and restorations reducing it), and
+what does a sound decay obligation look like? Is `Inv`-preservation the right
+obligation, or should the certificate carry a quantitative margin? And does
+anything in D-R2A/D-R3's intent require the trace regime to be mandatory
+rather than the pointwise degenerate case remaining constructible (W23)?
 
 **F-4 (Strengthening candidates, updated).** Named and open: (i) exceedance
 from a robust aggregate (B3) with a quantified honest-corroboration level, and

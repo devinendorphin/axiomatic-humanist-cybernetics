@@ -35,13 +35,13 @@ jobs:
           ! grep -q 'Classical.choice' build.log
           ! grep 'depends on axioms' build.log | grep -Ev '\[propext(, Quot\.sound)?\]'
       - name: Assert audit coverage and axiom-free count
-        # 107 audited declarations, 46 of them axiom-free — kernel v0.11's
-        # exact published footprint (docs/MANIFEST_v0.11.txt). A theorem
+        # 116 audited declarations, 49 of them axiom-free — kernel v0.12's
+        # exact published footprint (docs/MANIFEST_v0.12.txt). A theorem
         # silently dropped from Audit.lean, or one acquiring an axiom,
         # fails this step.
         run: |
           total=$(grep -c 'depend' build.log)
           free=$(grep -c 'does not depend on any axioms' build.log)
           echo "audit entries: $total  axiom-free: $free"
-          test "$total" -eq 107
-          test "$free" -eq 46
+          test "$total" -eq 116
+          test "$free" -eq 49
