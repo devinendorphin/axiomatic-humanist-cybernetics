@@ -1,16 +1,19 @@
 # AHC Verified Constitutional Kernel
 
-**Version 0.7** — closes the two F-4 formalization candidates from the
-v0.5 circulation brief: v0.6 derives the episode machine's `exceedance`
-hazard signal from Module 3's Byzantine measurement layer (bridge module
-`ExceedanceBridge.lean`, X1–X4), and v0.7 extends register invariance to
-the later civic and technical records (P10–P13). v0.4 implemented the
-four ratified dispositions (episode machine E1–E11; reversibility
-envelopes W1–W9); v0.5 formalized the D-R4 disclosures (P7–P9). Change
-record in `ERRATA_AND_AMENDMENTS.md`; source digest and audit footprint
-in the version manifest — `docs/MANIFEST_v0.7.txt` in the source
-repository, shipped as `MANIFEST.txt` alongside this project directory in
-the circulation packet.
+**Version 0.8** — closes Reviewer #2 findings R2-02 and R2-04: a typed
+D-R4 claim language ties the disclosed episode budget to the attestation
+that proves it — disclosed, attested, and machine-computed are one term —
+and makes the four disclosure roles distinct by construction (P14–P17).
+Earlier: v0.6/v0.7 closed the two F-4 formalization candidates from the
+v0.5 circulation brief (exceedance derived from the Byzantine measurement
+layer, X1–X4; register invariance extended to the later civic and
+technical records, P10–P13); v0.4 implemented the four ratified
+dispositions (episode machine E1–E11; reversibility envelopes W1–W9);
+v0.5 formalized the D-R4 disclosures (P7–P9). Change record in
+`ERRATA_AND_AMENDMENTS.md`; source digest and audit footprint in the
+version manifest — `docs/MANIFEST_v0.8.txt` in the source repository,
+shipped as `MANIFEST.txt` alongside this project directory in the
+circulation packet.
 
 Machine-checked formalization (Lean 4) of the order-theoretic core of
 **Axiomatic Humanist Cybernetics v3.1** — the Tiered Evidence-Action
@@ -22,11 +25,11 @@ register-invariance guarantees.
 **Toolchain:** Lean 4.15.0, core only — **no Mathlib dependency**. Every
 proof is self-contained. **Zero `sorry`s.** No theorem depends on
 `Classical.choice`; the complete axiom footprint is `propext` and
-`Quot.sound` (standard Lean kernel axioms), and forty of the
-eighty-nine audited theorems depend on no axioms at all — including all
-thirteen register-invariance and disclosure theorems of the PLOL module
-(P1–P8, P10–P13; the cross-module P9 routes through Module 1 and so
-carries `[propext, Quot.sound]`).
+`Quot.sound` (standard Lean kernel axioms), and forty-three of the
+ninety-three audited theorems depend on no axioms at all — including the
+PLOL module's register-invariance and disclosure theorems (P1–P8,
+P10–P16; the two cross-module budget bounds P9 and P17 route through
+Module 1 and so carry `[propext, Quot.sound]`).
 
 ## What is and is not verified
 
@@ -131,6 +134,10 @@ nothing here substitutes for it.
 | `later_registers_no_hostage` (P11) | §19.4 | Every critical claim is present in the civic and technical records too |
 | `shipped_pio_disclosure_all_registers` (P12) | D-R4 | The four D-R4 fields appear in all three registers of a shipped PIO release |
 | `later_residual_divergence_harmless` (P13) | §19.4.1 | Any claim differing between the later registers is provably non-critical |
+| `pio_roles_distinct` (P14) | D-R4 | The four D-R4 disclosure roles are pairwise distinct claims, by constructor disjointness of the typed claim language |
+| `pio_register_budget_accurate` (P15) | D-R4 | Every compliant register contains the budget claim whose figure IS the episode machine's count over the attested history |
+| `pio_budget_no_drift` (P16) | D-R4 | Any budget-role claim in the critical set carries the machine's figure: conflicting critical budget disclosures are unconstructible |
+| `pio_disclosed_budget_bounded` (P17) | D-R4 | The published figure inherits E1's 72h bound: P9, restated of the disclosed number |
 
 ### Bridge — `AHCKernel/ExceedanceBridge.lean` (Module 1 × Module 3)
 
@@ -175,19 +182,20 @@ The build elaborates all proofs and prints the axiom audit
 the `sorryAx` axiom in that output. Expected audit result:
 
 ```
-89 audited theorems: every one at most [propext, Quot.sound];
+93 audited theorems: every one at most [propext, Quot.sound];
 never Classical.choice
-no axioms at all (40): the T1–T7 gating theorems, the hold-floor and
+no axioms at all (43): the T1–T7 gating theorems, the hold-floor and
   certificate-envelope theorems (hold_floor_reversible, hold_floor_severity,
   hold_grants_no_more_than_pio, cert_tier_monotone,
   cert_refinement_conservative, no_certificate_no_presumption,
   zero_envelope_constructible, certified_route_at_t1,
   certified_severance_at_t2), the composed-machine soundness theorems
   (dayStep_valid, dayRun_valid), the Axiom I intersection theorems, and
-  all thirteen PLOL invariance/disclosure theorems P1–P8, P10–P13.
-  The four exceedance-bridge theorems (X1–X4) and the cross-module
-  attested_budget_bounded (P9) route through Module 3 / Module 1 and
-  carry [propext, Quot.sound].
+  the PLOL invariance/disclosure theorems P1–P8, P10–P16.
+  The four exceedance-bridge theorems (X1–X4) and the two cross-module
+  budget bounds attested_budget_bounded (P9) and
+  pio_disclosed_budget_bounded (P17) route through Module 3 / Module 1
+  and carry [propext, Quot.sound].
 ```
 
 (Counts are audit-log entries — one per `#print axioms` result;
@@ -208,7 +216,10 @@ input (G1–G7); the two-clock separation with `novel` as a contestable
 Layer 0 attestation and the hold floor as a deployment-certified policy
 (E1–E11); reversibility envelopes over opaque deployment descriptors,
 judged by external certificates the kernel gates on but does not verify
-(W1–W9). These choices are the right places to aim contestation.
+(W1–W9); the typed D-R4 claim language, with the budget attestation
+carried inside the PIO event and role occupancy formal while claim
+content stays at the seam (P14–P17). These choices are the right places
+to aim contestation.
 
 ## Status and non-goals
 

@@ -1,0 +1,72 @@
+AHC VERIFIED CONSTITUTIONAL KERNEL — MANIFEST
+Version 0.8 — 2026-07-13
+Supersedes v0.7 (MANIFEST_v0.7.txt) and earlier;
+change record in ERRATA_AND_AMENDMENTS.md
+external review: Reviewer #2 report (2026-07-13); author response in
+external-reviews/2026-07-13-reviewer2-response.md
+
+CONTENTS
+  ahc-verified-kernel/
+      Lean 4 project: 5 source modules, 93 audited theorems, zero
+      sorries, core-only. v0.8 closes Reviewer #2 findings R2-02
+      (Critical) and R2-04 (High): the disclosed episode budget was an
+      arbitrary atom never connected to the attestation whose accuracy
+      P8 proves, and the four D-R4 disclosure "fields" were untyped
+      roles one claim could fill simultaneously.
+
+      Module 4 gains the typed claim language PIOClaim (basis, novelty,
+      budget-with-figure, falsif, free: role is type, not content).
+      PIOEvent now carries its BudgetAttestation and requires the
+      critical set to contain the budget claim bearing THE attested
+      figure, the falsifier to occupy the falsif role, and (via
+      budget_unique) no conflicting critical budget claim to exist.
+      P14: the four D-R4 roles are pairwise distinct claims, by
+      constructor disjointness. P15: every compliant register contains
+      the budget claim whose figure IS the episode machine's count over
+      the attested history — disclosed = attested = computed, one term.
+      P16: any budget-role claim in the critical set carries the
+      machine's figure. P17: the published figure inherits E1's 72-hour
+      bound.
+
+      Module 1  TieredProtocol.lean   (§5.4, §9.2-9.3)
+                T1-T9 + S1-S3 + E1-E11 + W1-W9
+      Module 2  CrisisCap.lean        (§12.3; §4.2, §10.3) + G1-G7
+      Module 3  SensorsAndKernel.lean (§8.3, §4.1, §1.1)   [unchanged]
+      Module 4  PLOL.lean             (§10.4; Comp. A §5, §19.4, App. B)
+                P1-P6 + P7-P9 + P10-P13 + P14-P17
+      Bridge    ExceedanceBridge.lean (§5.4 x §8.3)        X1-X4
+      Audit.lean re-verifies the axiom footprint on every build.
+      CI fails any build containing a sorry, any Classical.choice, any
+      unexpected axiom, or any deviation from the footprint below.
+
+VERIFY (requires elan; no other dependencies, no Mathlib):
+  cd ahc-verified-kernel && lake build
+
+EXPECTED: build succeeds; audit log shows 93 audited theorems, every one
+at most [propext, Quot.sound]; never Classical.choice; 43 of 93 depend on
+no axioms at all, including the PLOL disclosure/invariance theorems
+P1-P16 except the two cross-module budget bounds — attested_budget_bounded
+(P9) and pio_disclosed_budget_bounded (P17), which route through Module 1.
+(decCompliant is a verified Decidable instance additional to the count.)
+
+SOURCE INTEGRITY
+  sha256 over sorted source files (*.lean, lakefile.toml, lean-toolchain):
+  075d4d99f4e6f55f7687c4e849dafaea148f16ea1ebfcc6db2304a33513bda0f
+  v0.7 digest (superseded):   8d262152c5f9036b20de9ea1c395a8edf31b4bfd2df893e8a4466d65b56736d0
+  v0.6 digest (superseded):   ec3dc5ade185f48644e6d662aa0b28b9dab16c096e776fe2f5270a3408311f93
+  v0.5 digest (superseded):   a49ec2bc8f4a1490679a1842e3a2dee85c0594277aca621da4a63c23d750e5a9
+  v0.4 digest (superseded):   fc7c5c6727dfe671364b38d3c51effc76b88b06f9a388e268e7b57f7864cf1c0
+  v0.3.1 digest (superseded): 324a11065b4891ae0b0310d51f912fbd27ecd2239739f190ca15baa0df74104b
+  v0.3.0 digest (superseded): 82d22e5865811a45331b8b206cb8d8dd6a51817ca14299ab1cd133e1a1e3790b
+  v0.2 digest (superseded):   4d44fb1835c732c3cf876b50b0042ff8da793afdfd57f70c120da45a4fef651e
+  v0.1 digest (superseded):   2b51cac67e278c54003bbf2d5974da19d581caeaa4bc6f3f8f23043cffea7609
+  Per Module 4 (bridge_proves_origin_not_consistency): this digest
+  proves origin, not consistency. Consistency you verify by building.
+
+CIRCULATED UNDER
+  Companion A Principle 19.2 (Complexity Ceiling): v0.8 introduces no new
+  mechanism — it types the disclosure obligations D-R4 already imposed,
+  so that role occupancy and figure identity are checked by construction
+  rather than convention. What remains outside the machine: claim
+  extraction from each register's text (the seam) and the integrity of
+  the recorded incident history (L-2), unchanged.

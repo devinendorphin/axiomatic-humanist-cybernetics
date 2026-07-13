@@ -113,6 +113,11 @@ open AHC
 #print axioms AHC.PLOL.later_registers_no_hostage
 #print axioms AHC.PLOL.shipped_pio_disclosure_all_registers
 #print axioms AHC.PLOL.later_residual_divergence_harmless
+-- Typed D-R4 claim language (P14-P17, adopted v0.8; findings R2-02, R2-04)
+#print axioms AHC.PLOL.pio_roles_distinct
+#print axioms AHC.PLOL.pio_register_budget_accurate
+#print axioms AHC.PLOL.pio_budget_no_drift
+#print axioms AHC.PLOL.pio_disclosed_budget_bounded
 -- Exceedance derivation: Module 1 x Module 3 (X1-X4, adopted v0.6)
 #print axioms AHC.derived_exceedance_honest_witnessed
 #print axioms AHC.derived_exceedance_not_forgeable

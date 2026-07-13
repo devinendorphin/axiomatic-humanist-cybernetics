@@ -1,5 +1,49 @@
 # AHC Verified Constitutional Kernel — Errata & Amendments
 
+## v0.7 → v0.8 (2026-07-13) — typed D-R4 claims (Module 4; findings R2-02, R2-04)
+
+Closes two findings of the Reviewer #2 report (2026-07-13; author
+response in `external-reviews/2026-07-13-reviewer2-response.md`):
+
+- **R2-02 (Critical):** the disclosed `budgetClaim` was an arbitrary
+  atom, never connected to the `BudgetAttestation` whose accuracy P8
+  proves — all of P7–P9 could hold while the published figure said
+  "0 hours" and an unattached attestation correctly proved "72".
+- **R2-04 (High):** the four D-R4 "fields" were untyped roles that one
+  claim could fill simultaneously.
+
+`PLOL.lean` gains the typed claim language `PIOClaim` (constructors
+`basis`, `novelty`, `budget (hours : Nat)`, `falsif`, `free` — role is
+type, not content, and the budget role carries its figure as a number).
+`PIOEvent` now extends `Event (PIOClaim Claim)`, carries its
+`BudgetAttestation` as a field, requires the critical set to contain
+`budget attestation.claimedHours` (so the disclosed and proven figures
+are one term), requires the mandatory falsifier to occupy the `falsif`
+role, and carries `budget_unique` (no second, conflicting critical
+budget claim is constructible). Four theorems state the closure:
+
+- **P14 `pio_roles_distinct`** — the four D-R4 roles are pairwise
+  distinct claims, by constructor disjointness.
+- **P15 `pio_register_budget_accurate`** — every compliant register
+  contains the budget claim whose figure IS `epPendingHours` over the
+  attested history: disclosed = attested = machine accounting.
+- **P16 `pio_budget_no_drift`** — any budget-role claim in the critical
+  set carries the machine's figure.
+- **P17 `pio_disclosed_budget_bounded`** — the published figure inherits
+  E1's 72-hour bound (P9, restated of the disclosed number).
+
+Statements of P7/P7'/P12 are unchanged up to the typed claim parameter;
+`basisClaim`/`noveltyClaim`/`budgetClaim` survive as definitions (the
+budget one now defined FROM the attestation). Seam movement: whether a
+claim occupies a D-R4 role is now formal; WHAT the basis/novelty/falsif
+claims say remains at the seam, and anchoring the attested history to an
+append-only log head remains institutional (L-2) — the next candidate.
+
+Footprint: **93 audited theorems, 43 axiom-free**. Digest in
+`MANIFEST_v0.8.txt`.
+
+---
+
 ## v0.6 → v0.7 (2026-07-12) — later-register compliance (Module 4)
 
 Closes the second F-4 reviewer solicitation. Phase 1 made only the T+0

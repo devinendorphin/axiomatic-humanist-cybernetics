@@ -91,6 +91,25 @@
                                    provably non-critical: later-register
                                    differences are framing, never findings
 
+  Typed D-R4 claim theorems (adopted in v0.8; external review findings
+  R2-02 and R2-04, Reviewer #2 report of 2026-07-13):
+
+    P14 pio_roles_distinct       — the four D-R4 disclosure roles are
+                                   distinct typed constructors: no single
+                                   claim can fill two roles
+    P15 pio_register_budget_accurate — the budget figure in every
+                                   compliant register IS the episode
+                                   machine's count over the attested
+                                   history: disclosed = attested =
+                                   machine accounting, one term
+    P16 pio_budget_no_drift      — ANY budget-role claim in the critical
+                                   set carries the machine's figure: two
+                                   conflicting critical budget disclosures
+                                   are unconstructible
+    P17 pio_disclosed_budget_bounded — the disclosed figure inherits E1's
+                                   72-hour bound: P9, now provably about
+                                   the published number
+
   ── THE SEAM (what this module does not and cannot prove) ──────────────
 
   Every theorem above operates on claim sets: abstract, register-neutral
@@ -138,9 +157,24 @@
     kernel's contribution is P7 — the novelty basis is public at hour
     zero, so contestation never waits.
 
+  Modeling changes for P14–P17 (v0.8, closing findings R2-02/R2-04):
+  · PIO events now speak a TYPED claim language, `PIOClaim`: the four
+    D-R4 roles are distinct constructors, so one atom cannot fill two
+    roles (R2-04), and the budget constructor carries its figure as a
+    number in the type, not as uninterpreted content.
+  · The `BudgetAttestation` now lives INSIDE `PIOEvent`, and the
+    disclosed budget claim is DEFINED from it: the figure P8 proves
+    accurate and the field P7 proves disclosed are the same term
+    (R2-02). `budget_unique` makes a second, conflicting critical
+    budget claim unconstructible.
+  · WHAT the basis, novelty, and falsification claims say remains at
+    the seam, as always; anchoring the attested history to an
+    append-only log head remains institutional (L-2) and is the next
+    formalization candidate.
+
   Scope disclaimer: these proofs verify the specification, not the world.
 
-  Toolchain: Lean 4.15.0, core only (no Mathlib). Checked 2026-07-12 (v0.7).
+  Toolchain: Lean 4.15.0, core only (no Mathlib). Checked 2026-07-13 (v0.8).
 -/
 import AHCKernel.TieredProtocol
 
@@ -338,21 +372,65 @@ those obligations are structure fields: an event that withholds them is
 unconstructible, and by the Module 4 invariance theorems they are public
 at hour zero and their omission from any register convicts it. -/
 
-/-- A PIO-related classification event: an `Event` whose
-    contestation-critical set is REQUIRED to contain the D-R4 fields.
-    `basisClaim` states whether authorization rests on evidentiary
-    freshness, continuing risk, or both; `noveltyClaim` states the basis
-    and lineage of any novelty determination (contestable through
-    Layer 0); `budgetClaim` states the incident's cumulative unconfirmed
-    protection. The falsification condition is already mandatory on
-    every `Event`. -/
-structure PIOEvent (Claim : Type) extends Event Claim where
-  basisClaim   : Claim
-  noveltyClaim : Claim
-  budgetClaim  : Claim
-  basis_critical   : basisClaim ∈ critical
-  novelty_critical : noveltyClaim ∈ critical
-  budget_critical  : budgetClaim ∈ critical
+/-- A machine-checkable budget attestation: the claimed cumulative
+    unconfirmed protection for an incident, carried WITH the proof that
+    it equals the episode machine's accounting over the incident's input
+    history. Given the history, a misstated figure is unconstructible;
+    whether the history is true is an institutional question (append-only
+    logs, Layer 0 audit) at the seam. -/
+structure BudgetAttestation where
+  history : List EpInput
+  claimedHours : Nat
+  accurate : claimedHours = epPendingHours .idle history
+
+/-- The typed D-R4 claim language (adopted v0.8, findings R2-02/R2-04).
+    The four mandatory disclosure roles are distinct CONSTRUCTORS — a
+    role is part of a claim's type, not a reading of its content — and
+    the budget role carries its figure as a number the kernel can
+    inspect. `free` carries all other content. WHAT a basis, novelty,
+    or falsification claim says remains at the seam; THAT it occupies
+    its role no longer does. -/
+inductive PIOClaim (Claim : Type) where
+  | basis   (c : Claim)     -- authorization basis (freshness, risk, or both)
+  | novelty (c : Claim)     -- novelty determination: basis and lineage
+  | budget  (hours : Nat)   -- cumulative unconfirmed protection, in hours
+  | falsif  (c : Claim)     -- falsification condition
+  | free    (c : Claim)     -- any other substantive content
+deriving DecidableEq
+
+/-- A PIO-related classification event: an `Event` over the TYPED claim
+    language whose contestation-critical set is REQUIRED to contain all
+    four D-R4 roles. The budget attestation lives inside the event, and
+    the critical budget claim is required to carry ITS figure — the
+    disclosed number and the proven number are one term (R2-02).
+    `budget_unique` closes the drift path from the other side: a second
+    critical budget claim with a different figure is unconstructible.
+    `falsifier_typed` requires the mandatory falsifier to occupy the
+    falsification role, completing the four-role instantiation. -/
+structure PIOEvent (Claim : Type) extends Event (PIOClaim Claim) where
+  basisBody    : Claim
+  noveltyBody  : Claim
+  falsifBody   : Claim
+  attestation  : BudgetAttestation
+  basis_critical   : PIOClaim.basis basisBody ∈ critical
+  novelty_critical : PIOClaim.novelty noveltyBody ∈ critical
+  budget_critical  : PIOClaim.budget attestation.claimedHours ∈ critical
+  falsifier_typed  : falsifier = PIOClaim.falsif falsifBody
+  budget_unique    : ∀ h, PIOClaim.budget h ∈ critical →
+                       h = attestation.claimedHours
+
+/-- The disclosed authorization-basis claim. -/
+def PIOEvent.basisClaim {Claim : Type} (D : PIOEvent Claim) : PIOClaim Claim :=
+  .basis D.basisBody
+
+/-- The disclosed novelty-basis claim. -/
+def PIOEvent.noveltyClaim {Claim : Type} (D : PIOEvent Claim) : PIOClaim Claim :=
+  .novelty D.noveltyBody
+
+/-- The disclosed episode-budget claim — DEFINED from the attestation:
+    there is no second place the published figure could live (R2-02). -/
+def PIOEvent.budgetClaim {Claim : Type} (D : PIOEvent Claim) : PIOClaim Claim :=
+  .budget D.attestation.claimedHours
 
 /-- **P7 (D-R4 Disclosure at Breach).** A valid tripartite release over
     a PIO-related event ships all four D-R4 fields in the T+0 semantic
@@ -360,8 +438,9 @@ structure PIOEvent (Claim : Type) extends Event Claim where
     the episode budget, and the falsification condition are public
     before any later register exists. Contestation of a PIO — including
     of the novelty determination itself — never waits. -/
-theorem pio_disclosure_at_breach {Claim : Type} {H : HashScheme (Event Claim)}
-    (D : PIOEvent Claim) (T : Tripartite Claim H)
+theorem pio_disclosure_at_breach {Claim : Type}
+    {H : HashScheme (Event (PIOClaim Claim))}
+    (D : PIOEvent Claim) (T : Tripartite (PIOClaim Claim) H)
     (hT : T.event = D.toEvent) :
     (D.basisClaim ∈ T.scr.claims ∧ D.noveltyClaim ∈ T.scr.claims ∧
      D.budgetClaim ∈ T.scr.claims ∧ D.falsifier ∈ T.scr.claims)
@@ -377,7 +456,7 @@ theorem pio_disclosure_at_breach {Claim : Type} {H : HashScheme (Event Claim)}
     omission is a conviction, not an editorial difference (P3',
     instantiated at the fields ruling D-R4 makes mandatory). -/
 theorem pio_disclosure_divergence_convicts {Claim : Type}
-    (D : PIOEvent Claim) (r : Record Claim)
+    (D : PIOEvent Claim) (r : Record (PIOClaim Claim))
     (h : D.basisClaim ∉ r.claims ∨ D.noveltyClaim ∉ r.claims ∨
          D.budgetClaim ∉ r.claims ∨ D.falsifier ∉ r.claims) :
     ¬ Compliant D.toEvent r :=
@@ -386,17 +465,6 @@ theorem pio_disclosure_divergence_convicts {Claim : Type}
   | .inr (.inl h) => h (hc.1 _ D.novelty_critical)
   | .inr (.inr (.inl h)) => h (hc.1 _ D.budget_critical)
   | .inr (.inr (.inr h)) => h (hc.1 _ D.toEvent.falsifier_critical)
-
-/-- A machine-checkable budget attestation: the claimed cumulative
-    unconfirmed protection for an incident, carried WITH the proof that
-    it equals the episode machine's accounting over the incident's input
-    history. Given the history, a misstated figure is unconstructible;
-    whether the history is true is an institutional question (append-only
-    logs, Layer 0 audit) at the seam. -/
-structure BudgetAttestation where
-  history : List EpInput
-  claimedHours : Nat
-  accurate : claimedHours = epPendingHours .idle history
 
 /-- **P8 (The Figure Carries Its Proof).** A well-formed budget
     attestation cannot misstate the episode machine's accounting. -/
@@ -465,7 +533,7 @@ theorem later_registers_no_hostage {Claim : Type}
 /-- The four D-R4 fields are present in any register compliant against a
     PIO-related event. -/
 theorem pio_fields_in_compliant {Claim : Type} (D : PIOEvent Claim)
-    (r : Record Claim) (hc : Compliant D.toEvent r) :
+    (r : Record (PIOClaim Claim)) (hc : Compliant D.toEvent r) :
     D.basisClaim ∈ r.claims ∧ D.noveltyClaim ∈ r.claims ∧
     D.budgetClaim ∈ r.claims ∧ D.falsifier ∈ r.claims :=
   ⟨hc.1 _ D.basis_critical, hc.1 _ D.novelty_critical,
@@ -477,8 +545,8 @@ theorem pio_fields_in_compliant {Claim : Type} (D : PIOEvent Claim)
     registers, not the T+0 record alone. Whichever register a contestant
     reads, the accountability fields are there. -/
 theorem shipped_pio_disclosure_all_registers {Claim : Type}
-    {H : HashScheme (Event Claim)} (D : PIOEvent Claim)
-    (T : ShippedTripartite Claim H) (hT : T.event = D.toEvent) :
+    {H : HashScheme (Event (PIOClaim Claim))} (D : PIOEvent Claim)
+    (T : ShippedTripartite (PIOClaim Claim) H) (hT : T.event = D.toEvent) :
     (D.basisClaim ∈ T.scr.claims ∧ D.noveltyClaim ∈ T.scr.claims ∧
       D.budgetClaim ∈ T.scr.claims ∧ D.falsifier ∈ T.scr.claims) ∧
     (D.basisClaim ∈ T.civic.claims ∧ D.noveltyClaim ∈ T.civic.claims ∧
@@ -503,5 +571,63 @@ theorem later_residual_divergence_harmless {Claim : Type}
     c ∈ T.event.claims ∧ c ∉ T.event.critical :=
   residual_divergence_harmless T.event T.civic T.tech
     T.civic_compliant T.tech_compliant c hin hout
+
+/-! ## Typed D-R4 claims (P14–P17) — adopted v0.8, findings R2-02/R2-04
+
+Reviewer #2 (report of 2026-07-13) exhibited two gaps in the v0.5–v0.7
+disclosure layer: the four D-R4 "fields" were untyped atoms that one
+claim could fill simultaneously (R2-04), and the disclosed budget claim
+was never connected to the `BudgetAttestation` whose accuracy P8
+proves — all of P7–P9 could hold while the published figure said zero
+(R2-02). The typed claim language and the attestation-bearing
+`PIOEvent` close both: the theorems below are the closure, stated. -/
+
+/-- **P14 (The Four Roles Are Four Roles).** The disclosed basis,
+    novelty, and budget claims and the mandatory falsifier are pairwise
+    distinct claims — by constructor disjointness of the typed language,
+    not by convention. A single claim filling two D-R4 roles is
+    unconstructible (finding R2-04). -/
+theorem pio_roles_distinct {Claim : Type} (D : PIOEvent Claim) :
+    D.basisClaim ≠ D.noveltyClaim ∧
+    D.basisClaim ≠ D.budgetClaim ∧
+    D.noveltyClaim ≠ D.budgetClaim ∧
+    D.basisClaim ≠ D.toEvent.falsifier ∧
+    D.noveltyClaim ≠ D.toEvent.falsifier ∧
+    D.budgetClaim ≠ D.toEvent.falsifier := by
+  rw [D.falsifier_typed]
+  exact ⟨fun h => nomatch h, fun h => nomatch h, fun h => nomatch h,
+         fun h => nomatch h, fun h => nomatch h, fun h => nomatch h⟩
+
+/-- **P15 (The Register Carries the Machine's Figure).** Every record
+    compliant against a PIO event contains the budget claim whose figure
+    IS the episode machine's accounting over the attested history —
+    disclosed, attested, and computed are one term (finding R2-02). By
+    P10/P12 this holds of all three registers of a shipped release. -/
+theorem pio_register_budget_accurate {Claim : Type} (D : PIOEvent Claim)
+    (r : Record (PIOClaim Claim)) (hc : Compliant D.toEvent r) :
+    PIOClaim.budget (epPendingHours .idle D.attestation.history)
+      ∈ r.claims := by
+  have h := hc.1 _ D.budget_critical
+  rwa [← D.attestation.accurate]
+
+/-- **P16 (No Drift, From Either Side).** ANY budget-role claim in the
+    critical set carries the machine's figure: not only is the accurate
+    figure disclosed (P15), a conflicting figure cannot be marked
+    critical at all. Two critical budget disclosures that disagree are
+    unconstructible. -/
+theorem pio_budget_no_drift {Claim : Type} (D : PIOEvent Claim)
+    (h : Nat) (hmem : PIOClaim.budget h ∈ D.toEvent.critical) :
+    h = epPendingHours .idle D.attestation.history :=
+  (D.budget_unique h hmem).trans D.attestation.accurate
+
+/-- **P17 (The Published Number Inherits the Bound).** The disclosed
+    budget figure — now provably the attestation's figure — is at most
+    the 72-hour deadline over any novelty-free, review-free incident
+    span: P9's constitutional bound, restated of the number the
+    community actually reads. -/
+theorem pio_disclosed_budget_bounded {Claim : Type} (D : PIOEvent Claim)
+    (hno : ∀ i ∈ D.attestation.history, i.novel = false ∧ i.layer0 = false) :
+    D.attestation.claimedHours ≤ reviewDeadline :=
+  attested_budget_bounded D.attestation hno
 
 end AHC.PLOL
