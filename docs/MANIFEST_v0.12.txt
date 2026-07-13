@@ -63,6 +63,9 @@ SOURCE INTEGRITY
   v0.1 digest (superseded):   2b51cac67e278c54003bbf2d5974da19d581caeaa4bc6f3f8f23043cffea7609
   Per Module 4 (bridge_proves_origin_not_consistency): this digest
   proves origin, not consistency. Consistency you verify by building.
+  The concatenated digest binds bytes, not filenames or boundaries
+  (packaging item 5): the packet's SHA256SUMS is the per-file manifest,
+  and it includes the CI workflow.
 
 CIRCULATED UNDER
   Companion A Principle 19.2 (Complexity Ceiling): v0.12 introduces no

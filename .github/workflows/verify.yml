@@ -11,10 +11,13 @@ jobs:
         shell: bash
         working-directory: ahc-verified-kernel
     steps:
-      - uses: actions/checkout@v4
+      # Pinned by commit SHA (packaging item 7: no mutable action tags).
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
       - name: Install elan
         run: |
-          curl -sSfL https://github.com/leanprover/elan/releases/latest/download/elan-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          # Pinned elan release (packaging item 7: no 'latest' in the bootstrap
+          # chain; the Lean toolchain itself is pinned by lean-toolchain).
+          curl -sSfL https://github.com/leanprover/elan/releases/download/v4.1.2/elan-x86_64-unknown-linux-gnu.tar.gz | tar xz
           ./elan-init -y --default-toolchain none
           echo "$HOME/.elan/bin" >> $GITHUB_PATH
       - name: Report source integrity digest
