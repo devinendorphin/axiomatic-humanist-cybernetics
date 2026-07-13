@@ -25,12 +25,13 @@
                                    and absent from another PROVES the
                                    omitting register violates B.4. Divergence
                                    is not a judgment call; it is a conviction
-    P4  residual_divergence_harmless
+    P4  residual_divergence_noncritical
                                  — whatever divergence survives compliance is
-                                   confined to true-but-noncritical content:
-                                   §19.4.1's defense made formal — differences
-                                   in framing are provably not inconsistency
-                                   in findings
+                                   confined to genuine claims not MARKED
+                                   critical (renamed in v0.11, finding R2-08:
+                                   §19.4.1's "framing, never findings" defense
+                                   is earned only under the completeness
+                                   assumption stated below)
     P5  no_hostage               — every contestation-critical claim is public
                                    at hour zero of a valid release: the
                                    community's record never waits on the
@@ -86,10 +87,10 @@
                                    appear in ALL THREE registers of a
                                    shipped PIO release, not the T+0
                                    record alone
-    P13 later_residual_divergence_harmless — any claim differing between
-                                   the civic and technical records is
-                                   provably non-critical: later-register
-                                   differences are framing, never findings
+    P13 later_residual_divergence_noncritical — any claim differing
+                                   between the civic and technical records
+                                   is provably a genuine claim not marked
+                                   critical (renamed in v0.11; see P4)
 
   Typed D-R4 claim theorems (adopted in v0.8; external review findings
   R2-02 and R2-04, Reviewer #2 report of 2026-07-13):
@@ -134,6 +135,12 @@
     fields, abstracted). `Event.critical_sub` and
     `Event.falsifier_critical` are carried as proof obligations.
   · B.4 compliance for a register = no critical omission ∧ no fabrication.
+  · COMPLETENESS of the critical classification — that every material
+    finding is in fact marked contestation-critical by the event
+    constructor — is an extraction/Layer 0 obligation AT THE SEAM, not a
+    theorem (v0.11, finding R2-08). P4/P13 prove residual divergence is
+    confined to unmarked content; whether unmarked content is genuinely
+    non-finding is exactly as trustworthy as the classification.
   · Collision-freeness of the digest function is a CRYPTOGRAPHIC
     assumption, not a logical fact; it is carried honestly as a field of
     `HashScheme`, so every theorem that uses it displays its dependence.
@@ -174,7 +181,7 @@
 
   Scope disclaimer: these proofs verify the specification, not the world.
 
-  Toolchain: Lean 4.15.0, core only (no Mathlib). Checked 2026-07-13 (v0.8).
+  Toolchain: Lean 4.15.0, core only (no Mathlib). Checked 2026-07-13 (v0.11).
 -/
 import AHCKernel.TieredProtocol
 
@@ -280,14 +287,20 @@ theorem divergence_convicts {Claim : Type}
     ¬ Compliant e r₂ :=
   fun h => h₂ (h.1 c hc)
 
-/-- **P4 (Residual Divergence Is Harmless).** Whatever difference survives
-    between two compliant registers is confined to claims that are (a)
-    genuine claims of the event and (b) not contestation-critical.
-    §19.4.1 anticipates hostile actors characterizing register differences
-    as inconsistency in findings; this theorem is the reply: under
-    compliance, differences between registers are provably framing, never
-    findings. -/
-theorem residual_divergence_harmless {Claim : Type}
+/-- **P4 (Residual Divergence Is Non-Critical).** Whatever difference
+    survives between two compliant registers is confined to claims that
+    are (a) genuine claims of the event and (b) not marked
+    contestation-critical. RENAMED in v0.11 (finding R2-08; formerly
+    `residual_divergence_harmless`) to state exactly what is proved:
+    the theorem establishes that a divergent claim was not LABELLED
+    critical by the event constructor — not that it is harmless.
+    §19.4.1's reply to hostile actors ("differences between registers
+    are framing, never findings") is earned only under the additional
+    assumption that the critical classification is COMPLETE — that
+    every material finding is in fact marked critical. That completeness
+    is an extraction/Layer 0 obligation at the seam, stated in the
+    module header, not a theorem. -/
+theorem residual_divergence_noncritical {Claim : Type}
     (e : Event Claim) (r₁ r₂ : Record Claim)
     (h₁ : Compliant e r₁) (h₂ : Compliant e r₂) (c : Claim)
     (hin : c ∈ r₁.claims) (hout : c ∉ r₂.claims) :
@@ -561,16 +574,19 @@ theorem shipped_pio_disclosure_all_registers {Claim : Type}
   · rw [← hT]; exact T.civic_compliant
   · rw [← hT]; exact T.tech_compliant
 
-/-- **P13 (Later Residual Divergence Is Harmless).** Any claim present in
-    the civic record but absent from the technical record (or vice versa)
-    is provably a genuine, non-critical claim: differences between the
-    later registers are framing, never findings. `residual_divergence_
-    harmless` (P4), applied across the release timeline. -/
-theorem later_residual_divergence_harmless {Claim : Type}
+/-- **P13 (Later Residual Divergence Is Non-Critical).** Any claim
+    present in the civic record but absent from the technical record (or
+    vice versa) is provably a genuine claim that was not marked
+    critical: P4, applied across the release timeline. RENAMED in v0.11
+    (finding R2-08; formerly `later_residual_divergence_harmless`) —
+    see P4's caveat: "framing, never findings" additionally requires
+    completeness of the critical classification, which lives at the
+    seam. -/
+theorem later_residual_divergence_noncritical {Claim : Type}
     {H : HashScheme (Event Claim)} (T : ShippedTripartite Claim H)
     (c : Claim) (hin : c ∈ T.civic.claims) (hout : c ∉ T.tech.claims) :
     c ∈ T.event.claims ∧ c ∉ T.event.critical :=
-  residual_divergence_harmless T.event T.civic T.tech
+  residual_divergence_noncritical T.event T.civic T.tech
     T.civic_compliant T.tech_compliant c hin hout
 
 /-! ## Typed D-R4 claims (P14–P17) — adopted v0.8, findings R2-02/R2-04

@@ -13,8 +13,14 @@ legacy mechanism-granularity layer is quarantined by theorem W17),
 CI-verified at 102 audited theorems / 46 axiom-free. The R2-03/R2-06
 repairs have landed as kernel **v0.10** (typed `Layer0Disposition`,
 clocked hold with flagged `overdue` state, theorems E12–E15; E1/E2
-strengthened), CI-verified at 107 audited theorems / 46 axiom-free.
-Remaining: R2-05/07/08/09 prose-and-model items and packaging items 5–7.
+strengthened), CI-verified at 107 audited theorems / 46 axiom-free. The
+claim-surface items have landed as kernel **v0.11** (R2-05/R2-08/R2-09
+narrowed in source and brief; R2-10/R2-11 boundaries stated; renames
+`residual_divergence_noncritical` / `later_residual_divergence_noncritical`;
+new circulation brief `AHC_VerifiedKernel_v0.11_Brief.md` with the full
+disposition table in Part II.J). Remaining: R2-07 (compositional
+envelopes — the named principal formal candidate) and packaging items
+5–7 plus PDF/DOCX regeneration.
 
 ## Preamble: what this review did and did not find
 

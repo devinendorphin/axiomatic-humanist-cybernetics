@@ -1,5 +1,49 @@
 # AHC Verified Constitutional Kernel — Errata & Amendments
 
+## v0.10 → v0.11 (2026-07-13) — claim-surface alignment (findings R2-05, R2-08, R2-09; clarifications R2-10, R2-11)
+
+The prose pass of the Reviewer #2 response: every English claim surface —
+theorem names, doc-comment glosses, module headers, README rows, and the
+circulation brief — is narrowed to exactly what the Lean proves. **No
+proof changed**; the footprint stays 107 audited / 46 axiom-free.
+
+- **R2-08:** `residual_divergence_harmless` → `residual_divergence_noncritical`
+  and `later_residual_divergence_harmless` →
+  `later_residual_divergence_noncritical`. The theorems prove divergence
+  is confined to genuine claims NOT MARKED critical; "framing, never
+  findings" is earned only under completeness of the critical
+  classification, now stated as an explicit seam obligation in the
+  module header.
+- **R2-05:** the exceedance bridge's header, X3 gloss, and modeling
+  notes now state ONE-HONEST-WITNESS NON-FABRICATION, not consensus or
+  corroboration; "closes the last free input" is retracted — the danger
+  threshold θ is named a free per-hour input the deployment must bind
+  to an attested configuration, and median-derived exceedance (B3) with
+  a quantified corroboration level is the named strengthening candidate.
+- **R2-09:** `axiomII_dichotomy` is re-glossed as a well-formedness
+  lemma (linear-order dichotomy on the two latencies); the operational
+  content of Axiom II is a named formalization candidate, not a claim.
+- **R2-10 / R2-11:** the module boundaries are now stated in the brief:
+  the crisis cap's `requested` input is not evidence-bridged (bridge and
+  concrete W = 730 / T_cap = 180 instance are named candidates), and
+  P10–P13 are postconditions of an externally attested shipped release,
+  not a verified publication workflow.
+
+New circulation brief `AHC_VerifiedKernel_v0.11_Brief.md`: Part I
+rewritten with the narrowed measurement language and the v0.8–v0.10
+guarantees; Part II gains the W10–W18, E12–E15, and P14–P17 tables, the
+boundary statements, and a full disposition table for the third review
+round (II.J); Part III's solicitations are refreshed (F-3 is now the
+R2-07 compositionality candidate; D-5 raises disposition governance and
+ratification of the 72h hold-review constant; L-2 is updated for
+P15/P16). The v0.7 brief is retained as the circulated artifact of its
+round.
+
+Footprint: **107 audited theorems, 46 axiom-free** (unchanged). Digest
+in `MANIFEST_v0.11.txt`.
+
+---
+
 ## v0.9 → v0.10 (2026-07-13) — typed dispositions and the clocked hold (Module 1; findings R2-03, R2-06)
 
 Closes the two remaining High-severity model findings of the Reviewer #2

@@ -1,0 +1,67 @@
+AHC VERIFIED CONSTITUTIONAL KERNEL — MANIFEST
+Version 0.11 — 2026-07-13
+Supersedes v0.10 (MANIFEST_v0.10.txt) and earlier;
+change record in ERRATA_AND_AMENDMENTS.md
+external review: Reviewer #2 report (2026-07-13); author response in
+external-reviews/2026-07-13-reviewer2-response.md
+
+CONTENTS
+  ahc-verified-kernel/
+      Lean 4 project: 5 source modules, 107 audited theorems, zero
+      sorries, core-only. v0.11 is the CLAIM-SURFACE ALIGNMENT pass
+      (Reviewer #2 findings R2-05, R2-08, R2-09; clarifications R2-10,
+      R2-11): no proof changed. residual_divergence_harmless and its
+      later-register form are renamed _noncritical, with completeness
+      of the critical classification an explicit seam obligation; the
+      exceedance bridge's glosses state one-honest-witness
+      non-fabrication with the free threshold θ a named deployment
+      obligation; axiomII_dichotomy is re-glossed as a well-formedness
+      lemma; the crisis-cap evidence boundary and the shipped-release
+      postcondition reading are stated in the new circulation brief
+      (AHC_VerifiedKernel_v0.11_Brief.md), which also carries the full
+      third-round disposition table.
+
+      Module 1  TieredProtocol.lean   (§5.4, §9.2-9.3)
+                T1-T9 + S1-S3 + E1-E15 + W1-W18
+      Module 2  CrisisCap.lean        (§12.3; §4.2, §10.3) + G1-G7
+      Module 3  SensorsAndKernel.lean (§8.3, §4.1, §1.1)   [unchanged]
+      Module 4  PLOL.lean             (§10.4; Comp. A §5, §19.4, App. B)
+                P1-P6 + P7-P9 + P10-P13 + P14-P17
+      Bridge    ExceedanceBridge.lean (§5.4 x §8.3)        X1-X4
+      Audit.lean re-verifies the axiom footprint on every build.
+      CI fails any build containing a sorry, any Classical.choice, any
+      unexpected axiom, or any deviation from the footprint below.
+
+VERIFY (requires elan; no other dependencies, no Mathlib):
+  cd ahc-verified-kernel && lake build
+
+EXPECTED: build succeeds; audit log shows 107 audited theorems, every
+one at most [propext, Quot.sound]; never Classical.choice; 46 of 107
+depend on no axioms at all. (decCompliant is a verified Decidable
+instance additional to the count.)
+
+SOURCE INTEGRITY
+  sha256 over sorted source files (*.lean, lakefile.toml, lean-toolchain):
+  92f66405021a25bbf6bf452f526f8c862357ceb730b4e191f8547ac7ebae104b
+  v0.10 digest (superseded):  1c56ddce0fe1fa431f2d47b564a9db325e66f037af05854b75a3608ab6902e39
+  v0.9 digest (superseded):   f3cb3ef6f5276e8f59764884fc885f6a8195434bcbf966eb57bd84a5a681e3ff
+  v0.8 digest (superseded):   a8b7d54505130cba56fdbc258323104b4eb1457e2c830ebc2ac27c2429fafed0
+  v0.7 digest (superseded):   8d262152c5f9036b20de9ea1c395a8edf31b4bfd2df893e8a4466d65b56736d0
+  v0.6 digest (superseded):   ec3dc5ade185f48644e6d662aa0b28b9dab16c096e776fe2f5270a3408311f93
+  v0.5 digest (superseded):   a49ec2bc8f4a1490679a1842e3a2dee85c0594277aca621da4a63c23d750e5a9
+  v0.4 digest (superseded):   fc7c5c6727dfe671364b38d3c51effc76b88b06f9a388e268e7b57f7864cf1c0
+  v0.3.1 digest (superseded): 324a11065b4891ae0b0310d51f912fbd27ecd2239739f190ca15baa0df74104b
+  v0.3.0 digest (superseded): 82d22e5865811a45331b8b206cb8d8dd6a51817ca14299ab1cd133e1a1e3790b
+  v0.2 digest (superseded):   4d44fb1835c732c3cf876b50b0042ff8da793afdfd57f70c120da45a4fef651e
+  v0.1 digest (superseded):   2b51cac67e278c54003bbf2d5974da19d581caeaa4bc6f3f8f23043cffea7609
+  Per Module 4 (bridge_proves_origin_not_consistency): this digest
+  proves origin, not consistency. Consistency you verify by building.
+
+CIRCULATED UNDER
+  Companion A Principle 19.2 (Complexity Ceiling): v0.11 introduces no
+  new mechanism and no new proof -- it aligns names, glosses, and the
+  circulation brief with exactly what the kernel proves, per the PLOL's
+  own norm that the plain-language record may not overstate the formal
+  one. What remains outside the machine is now stated more completely:
+  disposition substance, threshold binding, critical-set completeness,
+  history integrity -- all named, all at the seam.

@@ -378,12 +378,18 @@ def reversibilityClaimHolds (e : Episode) : Prop := e.response ≤ e.decay
     outruns the correction. -/
 def locallyTerminal (e : Episode) : Prop := e.decay < e.response
 
-/-- **A2a (Axiom II Dichotomy).** Every episode is exactly one of the two:
-    the classification is exhaustive (no episode escapes evaluation) and
-    exclusive (no episode can be spun as both corrected-in-time and
-    terminal). "The system corrected itself eventually" and "the harm was
-    irreversible" cannot both be true of the same episode — which is the
-    formal content of §4.2's rejection of that sentence as a defense. -/
+/-- **A2a (Axiom II Dichotomy — a well-formedness lemma).** Every episode
+    is exactly one of the two: the classification is exhaustive (no
+    episode escapes evaluation) and exclusive (no episode can be spun as
+    both corrected-in-time and terminal). GLOSS NARROWED in v0.11
+    (finding R2-09): this is the linear-order dichotomy on the two
+    latencies — it guarantees §4.2's CLASSIFICATION is well-posed, and
+    that "the system corrected itself eventually" and "the harm was
+    irreversible" cannot both be asserted of one episode. It does NOT
+    prove that terminality is detected, that iteration halts, or that a
+    locally terminal finding forces any change of decision procedure —
+    the operational content of Axiom II is a named formalization
+    candidate, not a theorem of this kernel. -/
 theorem axiomII_dichotomy (e : Episode) :
     (reversibilityClaimHolds e ∨ locallyTerminal e)
     ∧ ¬(reversibilityClaimHolds e ∧ locallyTerminal e) := by

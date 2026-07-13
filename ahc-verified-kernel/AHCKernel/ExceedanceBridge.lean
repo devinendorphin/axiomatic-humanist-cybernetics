@@ -4,16 +4,23 @@
 
   The episode machine (Module 1) consumes `exceedance` — the raw hazard
   signal that sustains a continuity-hold — as a free Boolean input. This
-  module DERIVES it from the Byzantine-robust measurement layer
-  (Module 3), closing the last free input in the emergency loop
-  (reviewer solicitation F-4).
+  module DERIVES it from the measurement layer (Module 3), grounding
+  the alarm bit in sensor readings (reviewer solicitation F-4).
 
   A certified exceedance requires at least f+1 sensors reporting at or
   above the danger threshold. By the pigeonhole core B2
   (`exists_honest_ge`), any such quorum contains an honest sensor — so a
-  derived exceedance is always witnessed by honest measurement. The
-  constitutional payoff is a cross-module guarantee on the hazard clock
-  itself: a captured minority of at most f sensors can neither
+  derived exceedance is always witnessed by AT LEAST ONE honest
+  measurement. The property proved is ONE-HONEST-WITNESS
+  NON-FABRICATION, not consensus (v0.11 gloss narrowing, finding
+  R2-05): an f+1 quorum can be met by the corrupt coalition plus a
+  single honest outlier while most honest sensors read below threshold,
+  and the danger threshold θ itself remains a free per-hour input that
+  a deployment must bind to a fixed, versioned, publicly attested
+  configuration — binding θ, and deriving exceedance from a robust
+  aggregate (B3 `median_bracketed` is the in-kernel candidate), are the
+  named strengthening candidates. What IS proved: a captured minority
+  of at most f sensors can neither
 
     · fabricate the exceedance that would sustain a continuity-hold
       (X4 `manufactured_danger_cannot_sustain_hold`), nor
@@ -23,17 +30,23 @@
 
   X3 `hold_sustained_only_by_witnessed_danger` is the direct
   Module 1 × Module 3 statement: whenever the episode machine keeps a
-  subgraph in protective hold on a derived input, honest sensors
-  corroborate the danger.
+  subgraph in protective hold on a derived input, at least one honest
+  sensor witnesses the danger.
 
   Modeling choices (per the framework's norm):
   · A `SensorHour` carries the ensemble and danger threshold that DERIVE
     the exceedance bit, alongside the remaining episode inputs (issue,
     confirm, novel, layer0), which stay institutional / Layer 0 signals.
   · "Certified exceedance" is the f+1-quorum reading: it is the weakest
-    threshold at which B2 guarantees an honest witness. A deployment may
+    threshold at which B2 guarantees an honest witness — and only that.
+    It does not guarantee that honest sensors generally corroborate the
+    alarm, nor that a robust aggregate exceeds θ. A deployment may
     require a stronger quorum; the honest-witness guarantee is monotone
     in that choice.
+  · The danger threshold θ is carried per `SensorHour` and is NOT fixed
+    by the kernel across time or bound to a policy version: a system
+    able to lower θ can raise the alarm without corrupting any sensor.
+    Binding θ institutionally is a deployment obligation (R2-05).
   · Honesty remains a ghost variable (Module 3): the theorems quantify
     over all placements of at most f corrupted sensors via the ensemble's
     `faultBound`.
@@ -42,7 +55,7 @@
   Whether the sensors are in fact independent (the ≤ f fault bound) is an
   institutional achievement (OP.1), not a theorem.
 
-  Toolchain: Lean 4.15.0, core only (no Mathlib). Checked 2026-07-12 (v0.6).
+  Toolchain: Lean 4.15.0, core only (no Mathlib). Checked 2026-07-13 (v0.11).
 -/
 import AHCKernel.TieredProtocol
 import AHCKernel.SensorsAndKernel
@@ -104,10 +117,10 @@ theorem derived_exceedance_not_forgeable {f : Nat} (s : SensorHour f)
 
 /-- **X3 (The Hold Is Sustained Only by Witnessed Danger).** The direct
     Module 1 × Module 3 guarantee: whenever the episode machine keeps a
-    subgraph in a continuity-hold on a derived input (no Layer 0
-    resolution, no novel filing), honest measurement corroborates the
-    danger. Protective authority persists only over hazard the honest
-    sensors themselves report. -/
+    subgraph in a continuity-hold on a derived input (no disposition,
+    no novel filing), AT LEAST ONE honest sensor reports the danger.
+    One-honest-witness non-fabrication — not majority corroboration:
+    protective authority cannot rest on corrupted sensors alone. -/
 theorem hold_sustained_only_by_witnessed_danger {f : Nat} (s : SensorHour f)
     (k k' : Nat)
     (hl : s.layer0 = none) (hni : (s.novel && s.issue) = false)

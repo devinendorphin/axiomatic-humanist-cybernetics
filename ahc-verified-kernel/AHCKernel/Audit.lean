@@ -115,7 +115,7 @@ open AHC
 #print axioms AHC.PLOL.bridge_proves_origin_not_consistency
 #print axioms AHC.PLOL.compliant_registers_agree
 #print axioms AHC.PLOL.divergence_convicts
-#print axioms AHC.PLOL.residual_divergence_harmless
+#print axioms AHC.PLOL.residual_divergence_noncritical
 #print axioms AHC.PLOL.tripartite_single_origin
 #print axioms AHC.PLOL.no_hostage
 #print axioms AHC.PLOL.contestability_at_breach
@@ -129,7 +129,7 @@ open AHC
 #print axioms AHC.PLOL.tripartite_critical_consensus
 #print axioms AHC.PLOL.later_registers_no_hostage
 #print axioms AHC.PLOL.shipped_pio_disclosure_all_registers
-#print axioms AHC.PLOL.later_residual_divergence_harmless
+#print axioms AHC.PLOL.later_residual_divergence_noncritical
 -- Typed D-R4 claim language (P14-P17, adopted v0.8; findings R2-02, R2-04)
 #print axioms AHC.PLOL.pio_roles_distinct
 #print axioms AHC.PLOL.pio_register_budget_accurate

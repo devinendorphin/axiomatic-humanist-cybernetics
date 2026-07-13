@@ -1,6 +1,14 @@
 # AHC Verified Constitutional Kernel
 
-**Version 0.10** — closes Reviewer #2 findings R2-03 and R2-06: Layer 0
+**Version 0.11** — the claim-surface alignment pass (Reviewer #2
+findings R2-05, R2-08, R2-09): `residual_divergence_harmless` and its
+later-register form are renamed `_noncritical` to state exactly what
+they prove, with the completeness of the critical classification now an
+explicit seam obligation; the exceedance bridge's glosses are narrowed
+to one-honest-witness non-fabrication with the free threshold θ named a
+deployment obligation; and Axiom II's dichotomy is reglossed as a
+well-formedness lemma with its operational content a named candidate.
+No proof changed. v0.10 closed findings R2-03 and R2-06: Layer 0
 review outputs are typed dispositions (a denial or close can never reach
 the restart-permitting state; only an explicit new-episode authorization
 can), and the continuity-hold carries a mandatory-review clock — an
@@ -22,7 +30,7 @@ technical records, P10–P13); v0.4 implemented the four ratified
 dispositions (episode machine E1–E11; reversibility envelopes W1–W9);
 v0.5 formalized the D-R4 disclosures (P7–P9). Change record in
 `ERRATA_AND_AMENDMENTS.md`; source digest and audit footprint in the
-version manifest — `docs/MANIFEST_v0.10.txt` in the source repository,
+version manifest — `docs/MANIFEST_v0.11.txt` in the source repository,
 shipped as `MANIFEST.txt` alongside this project directory in the
 circulation packet.
 
@@ -112,7 +120,7 @@ nothing here substitutes for it.
 | `no_emergency_in_review` (C4) | §12.3 | No event grants emergency authority during Structural Review |
 | `review_absorbing` (C5) | §12.3 | Review survives any event sequence lacking a Layer 0 output |
 | `review_gate` (C6) | §12.3 | Across any output-free span, emergency authority is never granted |
-| `axiomII_dichotomy` (A2a) | §4.2 | Every episode is exactly one of: reversibility-claim-valid, or locally terminal |
+| `axiomII_dichotomy` (A2a) | §4.2 | Well-formedness of the §4.2 classification: every episode is exactly one of reversibility-claim-valid or locally terminal; the operational content of Axiom II (terminality forcing a change of procedure) is a named formalization candidate |
 | `dayStep_valid` / `dayRun_valid` (G1) | §12.3 | Every reachable trace of the composed cap × review machine is protocol-valid: C1–C3 apply verbatim |
 | `review_day_never_emergency` (G2) | §12.3 | In review, the appended day is `false` for every input: an emergency day during review is unconstructible |
 | `review_exit_iff_output` (G3) | §12.3 | Review closes exactly on a Layer 0 output |
@@ -144,7 +152,7 @@ nothing here substitutes for it.
 | `bridge_proves_origin_not_consistency` (P2) | §19.4.1 | The spec's own limitation as a theorem-with-witness: equal digests with divergent content exist; the bridge cannot carry consistency |
 | `compliant_registers_agree` (P3) | App. B.4 | Two compliant registers agree exactly on the contestation-critical fragment |
 | `divergence_convicts` (P3') | App. B.4 | A critical claim absent from a register proves that register non-compliant — divergence is a conviction, not a judgment call |
-| `residual_divergence_harmless` (P4) | §19.4.1 | Under compliance, register differences are provably framing, never findings |
+| `residual_divergence_noncritical` (P4) | §19.4.1 | Under compliance, register differences are confined to genuine claims not marked critical; "framing, never findings" additionally requires completeness of the critical classification (a seam obligation) |
 | `no_hostage` (P5) | §19.4 | Every critical claim is public at hour zero; contestation never waits on the litigation track |
 | `contestability_at_breach` (P5') | App. B.2 | The falsification condition ships in the T+0 record: the key ships with the lock |
 | `decCompliant` (P6) | App. B.4 | Compliance is decidable: given extracted claim sets, the divergence audit is mechanical |
@@ -155,7 +163,7 @@ nothing here substitutes for it.
 | `tripartite_critical_consensus` (P10) | §19.4 | The three registers of a shipped compliant release agree on the entire contestation-critical fragment |
 | `later_registers_no_hostage` (P11) | §19.4 | Every critical claim is present in the civic and technical records too |
 | `shipped_pio_disclosure_all_registers` (P12) | D-R4 | The four D-R4 fields appear in all three registers of a shipped PIO release |
-| `later_residual_divergence_harmless` (P13) | §19.4.1 | Any claim differing between the later registers is provably non-critical |
+| `later_residual_divergence_noncritical` (P13) | §19.4.1 | Any claim differing between the later registers is provably a genuine claim not marked critical (see P4's completeness caveat) |
 | `pio_roles_distinct` (P14) | D-R4 | The four D-R4 disclosure roles are pairwise distinct claims, by constructor disjointness of the typed claim language |
 | `pio_register_budget_accurate` (P15) | D-R4 | Every compliant register contains the budget claim whose figure IS the episode machine's count over the attested history |
 | `pio_budget_no_drift` (P16) | D-R4 | Any budget-role claim in the critical set carries the machine's figure: conflicting critical budget disclosures are unconstructible |
@@ -167,7 +175,7 @@ nothing here substitutes for it.
 |---|---|---|
 | `derived_exceedance_honest_witnessed` (X1) | §5.4 × §8.3 | A certified exceedance (f+1 sensors ≥ threshold) always has an honest witness, by B2 |
 | `derived_exceedance_not_forgeable` (X2) | §5.4 × §8.3 | Honest sensors all below threshold ⇒ exceedance cannot be certified: a captured minority cannot raise the hazard signal alone |
-| `hold_sustained_only_by_witnessed_danger` (X3) | §5.4 × §8.3 | Whenever the episode machine keeps a subgraph in a continuity-hold on a derived input, honest sensors corroborate the danger |
+| `hold_sustained_only_by_witnessed_danger` (X3) | §5.4 × §8.3 | Whenever the episode machine keeps a subgraph in a continuity-hold on a derived input, at least one honest sensor witnesses the danger (one-honest-witness non-fabrication, not majority corroboration) |
 | `manufactured_danger_cannot_sustain_hold` (X4) | §5.4 × §8.3 | Fabricated alarm drops the subgraph out of the hold to `spent`: the laundering path closed at the measurement layer |
 
 Module 4 also formally locates **the seam**: every theorem operates on
