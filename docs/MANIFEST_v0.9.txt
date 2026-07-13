@@ -51,7 +51,7 @@ instance additional to the count.)
 
 SOURCE INTEGRITY
   sha256 over sorted source files (*.lean, lakefile.toml, lean-toolchain):
-  07e01b88f9a26c95288651abc5f13bee6fa5afa0f64a0f1aefbb79b882934bfd
+  f3cb3ef6f5276e8f59764884fc885f6a8195434bcbf966eb57bd84a5a681e3ff
   v0.8 digest (superseded):   a8b7d54505130cba56fdbc258323104b4eb1457e2c830ebc2ac27c2429fafed0
   v0.7 digest (superseded):   8d262152c5f9036b20de9ea1c395a8edf31b4bfd2df893e8a4466d65b56736d0
   v0.6 digest (superseded):   ec3dc5ade185f48644e6d662aa0b28b9dab16c096e776fe2f5270a3408311f93

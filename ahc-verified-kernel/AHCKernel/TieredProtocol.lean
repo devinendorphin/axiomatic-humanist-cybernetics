@@ -1300,7 +1300,7 @@ theorem pio_cert_ceiling {δ : Type} (E : Envelope δ) (s : PIO)
   cases s with
   | issued _  => exact cert_severity_le_evidence E .t1 a h
   | confirmed => exact cert_severity_le_evidence E .t1 a h
-  | reversed  => subst h; decide
+  | reversed  => subst h; exact Nat.zero_le _
 
 /-- **W11 (Certified PIO Reversibility — T7 lifted).** Everything a PIO
     can ever authorize at action granularity is reversible IN THE
