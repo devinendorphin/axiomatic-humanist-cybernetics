@@ -7,8 +7,10 @@ hazard signal from Module 3's Byzantine measurement layer (bridge module
 the later civic and technical records (P10–P13). v0.4 implemented the
 four ratified dispositions (episode machine E1–E11; reversibility
 envelopes W1–W9); v0.5 formalized the D-R4 disclosures (P7–P9). Change
-record in `../docs/ERRATA_AND_AMENDMENTS.md`, digest in
-`../docs/MANIFEST_v0.7.txt`.
+record in `ERRATA_AND_AMENDMENTS.md`; source digest and audit footprint
+in the version manifest — `docs/MANIFEST_v0.7.txt` in the source
+repository, shipped as `MANIFEST.txt` alongside this project directory in
+the circulation packet.
 
 Machine-checked formalization (Lean 4) of the order-theoretic core of
 **Axiomatic Humanist Cybernetics v3.1** — the Tiered Evidence-Action
@@ -20,9 +22,11 @@ register-invariance guarantees.
 **Toolchain:** Lean 4.15.0, core only — **no Mathlib dependency**. Every
 proof is self-contained. **Zero `sorry`s.** No theorem depends on
 `Classical.choice`; the complete axiom footprint is `propext` and
-`Quot.sound` (standard Lean kernel axioms), and thirty-six of the
-eighty-one audited theorems depend on no axioms at all — including every
-theorem of the PLOL module.
+`Quot.sound` (standard Lean kernel axioms), and forty of the
+eighty-nine audited theorems depend on no axioms at all — including all
+thirteen register-invariance and disclosure theorems of the PLOL module
+(P1–P8, P10–P13; the cross-module P9 routes through Module 1 and so
+carries `[propext, Quot.sound]`).
 
 ## What is and is not verified
 

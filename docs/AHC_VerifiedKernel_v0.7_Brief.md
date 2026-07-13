@@ -169,7 +169,7 @@ dependencies. **Zero `sorry` placeholders.** No theorem uses classical choice;
 the total axiom footprint is `propext` and `Quot.sound` (the standard Lean
 kernel axioms), and **40 of 89 theorems depend on no axioms at all**, including
 every Phase 1 theorem of the PLOL module. `decCompliant` is a verified
-`Decidable` instance, checked by elaboration and additional to the 81.
+`Decidable` instance, checked by elaboration and additional to the 89.
 
 ### B. Module 1 — Tiered Evidence-Action Protocol (`TieredProtocol.lean`)
 
