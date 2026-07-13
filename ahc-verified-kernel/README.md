@@ -1,17 +1,22 @@
 # AHC Verified Constitutional Kernel
 
-**Version 0.8** — closes Reviewer #2 findings R2-02 and R2-04: a typed
-D-R4 claim language ties the disclosed episode budget to the attestation
-that proves it — disclosed, attested, and machine-computed are one term —
-and makes the four disclosure roles distinct by construction (P14–P17).
-Earlier: v0.6/v0.7 closed the two F-4 formalization candidates from the
+**Version 0.9** — closes Reviewer #2 finding R2-01, the report's most
+severe: PIO and continuity-hold authorization are lifted onto the
+certificate-bearing action layer (`pioAuthorizesC`, `CHoldPolicy`;
+W10–W18), so the emergency path can no longer authorize routing outside
+an envelope certificate, and the legacy mechanism-granularity table is
+quarantined to a proved outer bound (W17). v0.8 closed R2-02/R2-04: a
+typed D-R4 claim language ties the disclosed episode budget to the
+attestation that proves it — disclosed, attested, and machine-computed
+are one term — and makes the four disclosure roles distinct by
+construction (P14–P17). Earlier: v0.6/v0.7 closed the two F-4 formalization candidates from the
 v0.5 circulation brief (exceedance derived from the Byzantine measurement
 layer, X1–X4; register invariance extended to the later civic and
 technical records, P10–P13); v0.4 implemented the four ratified
 dispositions (episode machine E1–E11; reversibility envelopes W1–W9);
 v0.5 formalized the D-R4 disclosures (P7–P9). Change record in
 `ERRATA_AND_AMENDMENTS.md`; source digest and audit footprint in the
-version manifest — `docs/MANIFEST_v0.8.txt` in the source repository,
+version manifest — `docs/MANIFEST_v0.9.txt` in the source repository,
 shipped as `MANIFEST.txt` alongside this project directory in the
 circulation packet.
 
@@ -25,8 +30,8 @@ register-invariance guarantees.
 **Toolchain:** Lean 4.15.0, core only — **no Mathlib dependency**. Every
 proof is self-contained. **Zero `sorry`s.** No theorem depends on
 `Classical.choice`; the complete axiom footprint is `propext` and
-`Quot.sound` (standard Lean kernel axioms), and forty-three of the
-ninety-three audited theorems depend on no axioms at all — including the
+`Quot.sound` (standard Lean kernel axioms), and forty-six of the
+one hundred two audited theorems depend on no axioms at all — including the
 PLOL module's register-invariance and disclosure theorems (P1–P8,
 P10–P16; the two cross-module budget bounds P9 and P17 route through
 Module 1 and so carry `[propext, Quot.sound]`).
@@ -79,6 +84,13 @@ nothing here substitutes for it.
 | `cert_refinement_conservative` (W7) | §5.4 | The §9.3 table is a floor envelopes raise but never lower |
 | `no_certificate_no_presumption` (W8) | §5.4 | Reversibility of routing/severance is exactly its certificate |
 | `zero_envelope_constructible` (W9) | §5.4 | A deployment with no presumptively reversible routing or severance is a legal parameterization |
+| `pio_cert_ceiling` / `pio_cert_reversible` (W10–W11) | §5.4 | T6/T7 lifted to certified actions: the emergency channel is severity-capped and reversible in the envelope sense, not by the Phase 1 table's fiat |
+| `pio_certificate_backed` (W12) | §5.4 | A PIO authorizes routing only inside its envelope certificate, and no severance or sanction in any state (finding R2-01 closed) |
+| `hold_floor_cert_reversible` / `_severity` (W13–W14) | §5.4 | E9/E10 lifted: the certified hold floor's reversibility is a theorem of the gating, not a field |
+| `hold_floor_certificate_backed` (W15) | §5.4 | The floor's routing carries its certificate; severance and sanctions are unconstructible in it |
+| `hold_cert_grants_no_more_than_pio` (W16) | §5.4 | E11 lifted: the certified floor is a remnant of PIO authority under the same envelope |
+| `cert_pio_refines_mech_pio` (W17) | §5.4 | Quarantine: the certified layer never grants an action whose mechanism the Phase 1 table would refuse |
+| `cert_hold_floor_constructible` (W18) | §5.4 | Non-vacuity: a broadcast-only certified floor exists for every envelope, including the zero envelope |
 
 ### Module 2 — `AHCKernel/CrisisCap.lean`
 
@@ -182,16 +194,19 @@ The build elaborates all proofs and prints the axiom audit
 the `sorryAx` axiom in that output. Expected audit result:
 
 ```
-93 audited theorems: every one at most [propext, Quot.sound];
+102 audited theorems: every one at most [propext, Quot.sound];
 never Classical.choice
-no axioms at all (43): the T1–T7 gating theorems, the hold-floor and
+no axioms at all (46): the T1–T7 gating theorems, the hold-floor and
   certificate-envelope theorems (hold_floor_reversible, hold_floor_severity,
   hold_grants_no_more_than_pio, cert_tier_monotone,
   cert_refinement_conservative, no_certificate_no_presumption,
   zero_envelope_constructible, certified_route_at_t1,
-  certified_severance_at_t2), the composed-machine soundness theorems
-  (dayStep_valid, dayRun_valid), the Axiom I intersection theorems, and
-  the PLOL invariance/disclosure theorems P1–P8, P10–P16.
+  certified_severance_at_t2), the certified-emergency quarantine and
+  constructibility theorems (hold_cert_grants_no_more_than_pio,
+  cert_pio_refines_mech_pio, cert_hold_floor_constructible), the
+  composed-machine soundness theorems (dayStep_valid, dayRun_valid),
+  the Axiom I intersection theorems, and the PLOL invariance/disclosure
+  theorems P1–P8, P10–P16.
   The four exceedance-bridge theorems (X1–X4) and the two cross-module
   budget bounds attested_budget_bounded (P9) and
   pio_disclosed_budget_bounded (P17) route through Module 3 / Module 1
@@ -216,7 +231,9 @@ input (G1–G7); the two-clock separation with `novel` as a contestable
 Layer 0 attestation and the hold floor as a deployment-certified policy
 (E1–E11); reversibility envelopes over opaque deployment descriptors,
 judged by external certificates the kernel gates on but does not verify
-(W1–W9); the typed D-R4 claim language, with the budget attestation
+(W1–W9), with the PIO and hold floor authorizing only certified
+actions under those envelopes since v0.9 (W10–W18); the typed D-R4
+claim language, with the budget attestation
 carried inside the PIO event and role occupancy formal while claim
 content stays at the seam (P14–P17). These choices are the right places
 to aim contestation.

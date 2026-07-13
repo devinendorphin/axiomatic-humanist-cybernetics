@@ -1,0 +1,73 @@
+AHC VERIFIED CONSTITUTIONAL KERNEL — MANIFEST
+Version 0.9 — 2026-07-13
+Supersedes v0.8 (MANIFEST_v0.8.txt) and earlier;
+change record in ERRATA_AND_AMENDMENTS.md
+external review: Reviewer #2 report (2026-07-13); author response in
+external-reviews/2026-07-13-reviewer2-response.md
+
+CONTENTS
+  ahc-verified-kernel/
+      Lean 4 project: 5 source modules, 102 audited theorems, zero
+      sorries, core-only. v0.9 closes Reviewer #2 finding R2-01
+      (Critical), the report's most severe: the certificate-bearing
+      action layer (Envelope/CAction/requiredTierC, W1-W9) demanded
+      Tier 3 for uncertified routing while the emergency path still
+      authorized at mechanism granularity through the Phase 1 table --
+      two authorization APIs, no theorem forcing the stricter one.
+
+      Module 1 gains the action-granularity emergency layer:
+      pioAuthorizesC (PIO authorization judged by requiredTierC under
+      an envelope) and CHoldPolicy (envelope-indexed hold floor whose
+      single constitutive field bounds every allowed action at the
+      Tier-1 requirement under requiredTierC; reversibility is a
+      THEOREM of the gating, not an asserted field). W10/W11: T6/T7
+      lifted -- severity-capped and reversible in the envelope sense.
+      W12: a PIO authorizes routing only inside its certificate, and no
+      severance or sanction in any state. W13-W16: E9-E11 lifted to the
+      certified floor. W17 (quarantine): the certified layer never
+      grants an action whose mechanism the Phase 1 table would refuse,
+      so the legacy pioAuthorizes/HoldPolicy objects survive exactly as
+      outer presumptive bounds. W18: a broadcast-only certified floor
+      is constructible for every envelope, including the zero envelope.
+
+      Module 1  TieredProtocol.lean   (§5.4, §9.2-9.3)
+                T1-T9 + S1-S3 + E1-E11 + W1-W18
+      Module 2  CrisisCap.lean        (§12.3; §4.2, §10.3) + G1-G7
+      Module 3  SensorsAndKernel.lean (§8.3, §4.1, §1.1)   [unchanged]
+      Module 4  PLOL.lean             (§10.4; Comp. A §5, §19.4, App. B)
+                P1-P6 + P7-P9 + P10-P13 + P14-P17
+      Bridge    ExceedanceBridge.lean (§5.4 x §8.3)        X1-X4
+      Audit.lean re-verifies the axiom footprint on every build.
+      CI fails any build containing a sorry, any Classical.choice, any
+      unexpected axiom, or any deviation from the footprint below.
+
+VERIFY (requires elan; no other dependencies, no Mathlib):
+  cd ahc-verified-kernel && lake build
+
+EXPECTED: build succeeds; audit log shows 102 audited theorems, every
+one at most [propext, Quot.sound]; never Classical.choice; 46 of 102
+depend on no axioms at all. (decCompliant is a verified Decidable
+instance additional to the count.)
+
+SOURCE INTEGRITY
+  sha256 over sorted source files (*.lean, lakefile.toml, lean-toolchain):
+  07e01b88f9a26c95288651abc5f13bee6fa5afa0f64a0f1aefbb79b882934bfd
+  v0.8 digest (superseded):   a8b7d54505130cba56fdbc258323104b4eb1457e2c830ebc2ac27c2429fafed0
+  v0.7 digest (superseded):   8d262152c5f9036b20de9ea1c395a8edf31b4bfd2df893e8a4466d65b56736d0
+  v0.6 digest (superseded):   ec3dc5ade185f48644e6d662aa0b28b9dab16c096e776fe2f5270a3408311f93
+  v0.5 digest (superseded):   a49ec2bc8f4a1490679a1842e3a2dee85c0594277aca621da4a63c23d750e5a9
+  v0.4 digest (superseded):   fc7c5c6727dfe671364b38d3c51effc76b88b06f9a388e268e7b57f7864cf1c0
+  v0.3.1 digest (superseded): 324a11065b4891ae0b0310d51f912fbd27ecd2239739f190ca15baa0df74104b
+  v0.3.0 digest (superseded): 82d22e5865811a45331b8b206cb8d8dd6a51817ca14299ab1cd133e1a1e3790b
+  v0.2 digest (superseded):   4d44fb1835c732c3cf876b50b0042ff8da793afdfd57f70c120da45a4fef651e
+  v0.1 digest (superseded):   2b51cac67e278c54003bbf2d5974da19d581caeaa4bc6f3f8f23043cffea7609
+  Per Module 4 (bridge_proves_origin_not_consistency): this digest
+  proves origin, not consistency. Consistency you verify by building.
+
+CIRCULATED UNDER
+  Companion A Principle 19.2 (Complexity Ceiling): v0.9 introduces no
+  new mechanism -- it makes the emergency path authorize through the
+  certificate layer the constitution already required (D-R2A/D-R3), so
+  that certificate-backing is part of authorization by construction.
+  What remains outside the machine: whether an envelope describes
+  reality (the certification process, at the seam), unchanged.

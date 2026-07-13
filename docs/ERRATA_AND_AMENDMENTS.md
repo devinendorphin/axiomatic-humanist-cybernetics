@@ -1,5 +1,54 @@
 # AHC Verified Constitutional Kernel — Errata & Amendments
 
+## v0.8 → v0.9 (2026-07-13) — certified PIO and hold authorization (Module 1; finding R2-01)
+
+Closes the Reviewer #2 report's most severe finding. R2-01 (Critical)
+exhibited an internal composition failure: the certificate-bearing
+action layer of D-R2A/D-R3 (`Envelope`, `CAction`, `requiredTierC`,
+W1–W9) demands Tier 3 for uncertified routing, while the emergency path
+still authorized at MECHANISM granularity — `pioAuthorizes` granted M1
+unconditionally via the Phase 1 table, and `HoldPolicy` certified its
+own reversibility through the `Mech.reversible` Boolean that D-R2A
+repudiated. A routing action outside every envelope was thus rejected
+by one API and authorized by the other, with no theorem forcing the
+stricter one.
+
+`TieredProtocol.lean` gains the action-granularity emergency layer:
+`pioAuthorizesC` (PIO authorization judged by `requiredTierC` under an
+envelope; after reversal, only the broadcast) and `CHoldPolicy` (an
+envelope-indexed hold floor whose single constitutive field bounds
+every allowed action at the Tier-1 requirement under `requiredTierC` —
+reversibility is now a THEOREM of the gating, not an asserted field).
+Nine theorems:
+
+- **W10 `pio_cert_ceiling`** / **W11 `pio_cert_reversible`** — T6/T7
+  lifted: severity-capped, and reversible in the ENVELOPE sense.
+- **W12 `pio_certificate_backed`** — the R2-01 witness closed: a PIO
+  authorizes routing only inside its certificate, and no severance or
+  sanction in any state.
+- **W13–W14 `hold_floor_cert_reversible` / `_severity`** — E9/E10
+  lifted to the certified floor.
+- **W15 `hold_floor_certificate_backed`** — the floor's routing carries
+  its certificate; severance and sanctions are unconstructible in it.
+- **W16 `hold_cert_grants_no_more_than_pio`** — E11 lifted.
+- **W17 `cert_pio_refines_mech_pio`** — the QUARANTINE theorem: the
+  certified layer never grants an action whose mechanism the Phase 1
+  table would refuse, so the legacy `pioAuthorizes`/`HoldPolicy`
+  objects survive exactly as outer presumptive bounds. Their doc
+  comments now say so.
+- **W18 `cert_hold_floor_constructible`** — non-vacuity: a
+  broadcast-only certified floor exists for every envelope, including
+  the zero envelope.
+
+T1–T9, E1–E11, and W1–W9 are unchanged. Seam unchanged: whether an
+envelope describes reality remains the certification process's burden;
+what changed is that the emergency path can no longer bypass asking.
+
+Footprint: **102 audited theorems, 46 axiom-free**. Digest in
+`MANIFEST_v0.9.txt`.
+
+---
+
 ## v0.7 → v0.8 (2026-07-13) — typed D-R4 claims (Module 4; findings R2-02, R2-04)
 
 Closes two findings of the Reviewer #2 report (2026-07-13; author

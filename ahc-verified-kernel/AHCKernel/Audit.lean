@@ -60,6 +60,16 @@ open AHC
 #print axioms cert_refinement_conservative
 #print axioms no_certificate_no_presumption
 #print axioms zero_envelope_constructible
+-- Certified PIO and hold authorization (W10-W18, adopted v0.9; finding R2-01)
+#print axioms pio_cert_ceiling
+#print axioms pio_cert_reversible
+#print axioms pio_certificate_backed
+#print axioms hold_floor_cert_reversible
+#print axioms hold_floor_cert_severity
+#print axioms hold_floor_certificate_backed
+#print axioms hold_cert_grants_no_more_than_pio
+#print axioms cert_pio_refines_mech_pio
+#print axioms cert_hold_floor_constructible
 
 -- Module 2: Crisis Frequency Cap & Structural Review (§12.3); Axiom II (§4.2)
 #print axioms window_head_bound

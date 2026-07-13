@@ -7,8 +7,11 @@
 since landed as kernel **v0.8** (typed `PIOClaim` language, attestation-bearing
 `PIOEvent`, theorems P14–P17; see `ERRATA_AND_AMENDMENTS.md` and
 `MANIFEST_v0.8.txt`), CI-verified at 93 audited theorems / 43 axiom-free.
-Documentation items 1–4 are also fixed. R2-01 and the remaining items are
-still pending.
+Documentation items 1–4 are also fixed. The R2-01 repair has landed as
+kernel **v0.9** (`pioAuthorizesC`, `CHoldPolicy`, theorems W10–W18; the
+legacy mechanism-granularity layer is quarantined by theorem W17),
+CI-verified at 102 audited theorems / 46 axiom-free. Remaining:
+R2-03/05/06/07/08/09 model-and-prose items and packaging items 5–7.
 
 ## Preamble: what this review did and did not find
 

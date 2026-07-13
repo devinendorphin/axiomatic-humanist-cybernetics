@@ -93,6 +93,36 @@
                                   legal parameterization (bound_pos
                                   repealed)
 
+  PIO and hold-floor authorization at action granularity (adopted in
+  v0.9; external review finding R2-01, Reviewer #2 report 2026-07-13):
+
+    W10 pio_cert_ceiling         — T6 lifted: no PIO state authorizes a
+                                  certified action above Tier-1 severity
+    W11 pio_cert_reversible      — T7 lifted: everything a PIO authorizes
+                                  at action granularity is reversible IN
+                                  THE ENVELOPE SENSE — by certificate,
+                                  not by the Phase 1 table's fiat
+    W12 pio_certificate_backed   — a PIO authorizes routing only inside
+                                  its certificate, and can authorize no
+                                  severance and no sanction at all
+    W13 hold_floor_cert_reversible — E9 lifted to the envelope-indexed
+                                  hold policy: floor reversibility is a
+                                  THEOREM of the gating, not a field
+    W14 hold_floor_cert_severity — E10 lifted
+    W15 hold_floor_certificate_backed — the floor's routing is
+                                  certificate-backed; severance and
+                                  sanctions are unconstructible in it
+    W16 hold_cert_grants_no_more_than_pio — E11 lifted
+    W17 cert_pio_refines_mech_pio — QUARANTINE: the certified layer never
+                                  grants an action whose mechanism the
+                                  Phase 1 table would refuse; the legacy
+                                  Mech-granularity layer is an outer
+                                  presumptive bound, not an authorization
+                                  channel
+    W18 cert_hold_floor_constructible — non-vacuity: a broadcast-only
+                                  certified floor exists for EVERY
+                                  envelope, including the zero envelope
+
   Modeling choices for E1–E11 (ruling D-R1A + D-R4):
   · `novel` is an ATG/Layer 0 attestation attached to a claim identity
     (D-R4): rewording, republication, or repetition of the same
@@ -128,7 +158,12 @@
   · The Mech-granularity table (`Mech.reversible`, `requiredTier`) is
     retained as the PRESUMPTIVE Phase 1 floor: T1–T7 remain true of it,
     and W7 proves certificates only raise it. At action granularity the
-    W-family governs.
+    W-family governs. Since v0.9 (finding R2-01) the table is QUARANTINED
+    from deployment-facing use: PIO and hold authorization are judged at
+    action granularity under an envelope (`pioAuthorizesC`, `CHoldPolicy`;
+    W10–W18), and W17 proves that layer never grants beyond the table —
+    the legacy `pioAuthorizes`/`HoldPolicy` objects are outer presumptive
+    bounds, not authorization channels.
 
   Scope disclaimer (constitutionally required, in the spirit of PLOL):
   these proofs verify the SPECIFICATION, not the world. They establish that
@@ -139,7 +174,7 @@
   hysteresis band. Whether measured signals track real harm is an empirical
   question outside the kernel (§2.2, §2.3).
 
-  Toolchain: Lean 4.15.0, core only (no Mathlib). Checked 2026-07-12 (v0.4).
+  Toolchain: Lean 4.15.0, core only (no Mathlib). Checked 2026-07-13 (v0.9).
 -/
 
 namespace AHC
@@ -340,9 +375,14 @@ theorem pio_resolves :
   | confirmed => exact Or.inl rfl
   | reversed => exact Or.inr rfl
 
-/-- What a PIO may authorize in each state. While pending or on
-    confirmation, response is capped at Tier-1 mechanisms; after
-    auto-reversal only the transparency broadcast remains. -/
+/-- What a PIO may authorize in each state, at MECHANISM granularity.
+    While pending or on confirmation, response is capped at Tier-1
+    mechanisms; after auto-reversal only the transparency broadcast
+    remains. QUARANTINED since v0.9 (finding R2-01): this is the Phase 1
+    presumptive outer bound, not a deployment-facing authorization
+    channel — deployments authorize certified actions via
+    `pioAuthorizesC` under an `Envelope`, and W17 proves that layer
+    never grants beyond this table. -/
 abbrev pioAuthorizes (s : PIO) (m : Mech) : Prop :=
   match s with
   | .issued _  => requiredTier m ≤ Tier.t1
@@ -933,7 +973,10 @@ theorem exceedance_cannot_restart (i : EpInput) (hn : i.novel = false)
     determination outside the kernel; the constitutive constraints are
     that everything allowed is reversible and sits at or below the
     Tier-1 evidence requirement — so the floor can never exceed what a
-    live PIO could grant. -/
+    live PIO could grant. QUARANTINED since v0.9 (finding R2-01): this
+    is the Phase 1 mechanism-granularity bound; deployment-facing hold
+    floors are envelope-indexed `CHoldPolicy` values over certified
+    actions (W13–W16, W18). -/
 structure HoldPolicy where
   allowed : Mech → Bool
   allowed_reversible : ∀ m, allowed m = true → m.reversible = true
@@ -1210,5 +1253,186 @@ theorem zero_envelope_constructible (δ : Type) :
     ∃ E : Envelope δ,
       (∀ d, E.routeInside d = false) ∧ (∀ d, E.sevInside d = false) :=
   ⟨⟨fun _ => false, fun _ => false⟩, fun _ => rfl, fun _ => rfl⟩
+
+/-! ## PIO and hold authorization at action granularity — adopted v0.9,
+finding R2-01 (Reviewer #2 report, 2026-07-13)
+
+Phase 1 defined what a PIO and the continuity-hold floor may authorize
+at MECHANISM granularity (`pioAuthorizes`, `HoldPolicy`), where M1's
+reversibility is the §5.4 table's declaration. Rulings D-R2A/D-R3 then
+made reversibility of routing and severance a per-action certificate
+(`Envelope`, W1–W9) — but the emergency path was never lifted onto that
+layer, so a routing action whose descriptor lies OUTSIDE the envelope
+was rejected by `requiredTierC` while remaining authorized by a pending
+PIO and constructible into a hold policy with no certificate at all:
+two authorization APIs, and no theorem forcing the stricter one
+(finding R2-01).
+
+The definitions below close that seam. `pioAuthorizesC` and
+`CHoldPolicy` are the DEPLOYMENT-FACING authorization objects: both are
+judged by `requiredTierC` under an envelope, so certificate-backing is
+part of authorization itself — reversibility of everything the
+emergency path grants is a theorem of the gating (W11, W13), severance
+and sanctions are excluded outright (W12, W15), and the floor remains a
+remnant of PIO authority (W16). The legacy mechanism-granularity layer
+is retained only as the outer presumptive bound it always was: W17
+proves the certified layer never grants an action whose mechanism the
+Phase 1 table would refuse. -/
+
+/-- What a PIO authorizes at action granularity, under an envelope
+    (v0.9, R2-01): while pending or on confirmation, exactly the
+    certified actions whose tier requirement under `requiredTierC` sits
+    at or below Tier 1; after auto-reversal, only the transparency
+    broadcast. Supersedes `pioAuthorizes` for deployment-facing use. -/
+abbrev pioAuthorizesC {δ : Type} (E : Envelope δ) (s : PIO)
+    (a : CAction δ) : Prop :=
+  match s with
+  | .issued _  => requiredTierC E a ≤ Tier.t1
+  | .confirmed => requiredTierC E a ≤ Tier.t1
+  | .reversed  => a = .broadcast
+
+/-- **W10 (Certified PIO Severity Ceiling — T6 lifted).** No state of
+    the PIO lifecycle authorizes a certified action above Tier-1
+    severity. -/
+theorem pio_cert_ceiling {δ : Type} (E : Envelope δ) (s : PIO)
+    (a : CAction δ) (h : pioAuthorizesC E s a) :
+    a.mech.severity ≤ Tier.t1.rank := by
+  cases s with
+  | issued _  => exact cert_severity_le_evidence E .t1 a h
+  | confirmed => exact cert_severity_le_evidence E .t1 a h
+  | reversed  => subst h; decide
+
+/-- **W11 (Certified PIO Reversibility — T7 lifted).** Everything a PIO
+    can ever authorize at action granularity is reversible IN THE
+    ENVELOPE SENSE: the emergency channel's recoverability is now a
+    consequence of certificate gating, not of the Phase 1 table's
+    declaration that M1 is reversible. -/
+theorem pio_cert_reversible {δ : Type} (E : Envelope δ) (s : PIO)
+    (a : CAction δ) (h : pioAuthorizesC E s a) :
+    a.reversibleIn E = true := by
+  cases s with
+  | issued _  => exact cert_sub_causal_reversible E .t1 a h (by decide)
+  | confirmed => exact cert_sub_causal_reversible E .t1 a h (by decide)
+  | reversed  => subst h; rfl
+
+/-- **W12 (PIO Authorization Is Certificate-Backed).** The reviewer's
+    R2-01 witness, closed: a PIO authorizes a routing action ONLY inside
+    its envelope certificate, and authorizes no severance and no
+    sanction in any state. The uncertified-routing-through-the-PIO path
+    is unconstructible. -/
+theorem pio_certificate_backed {δ : Type} (E : Envelope δ) (s : PIO) :
+    (∀ d, pioAuthorizesC E s (.route d) → E.routeInside d = true) ∧
+    (∀ d, ¬ pioAuthorizesC E s (.severance d)) ∧
+    ¬ pioAuthorizesC E s .sanction := by
+  refine ⟨fun d h => pio_cert_reversible E s (.route d) h,
+          fun d h => ?_, fun h => ?_⟩
+  · cases s with
+    | reversed  => exact CAction.noConfusion h
+    | issued _  =>
+        exact absurd
+          (Nat.le_trans (cert_refinement_conservative E (.severance d)) h)
+          (by decide : ¬ (Tier.t2 ≤ Tier.t1))
+    | confirmed =>
+        exact absurd
+          (Nat.le_trans (cert_refinement_conservative E (.severance d)) h)
+          (by decide : ¬ (Tier.t2 ≤ Tier.t1))
+  · cases s with
+    | reversed  => exact CAction.noConfusion h
+    | issued _  =>
+        exact absurd
+          (Nat.le_trans (cert_refinement_conservative E .sanction) h)
+          (by decide : ¬ (Tier.t3 ≤ Tier.t1))
+    | confirmed =>
+        exact absurd
+          (Nat.le_trans (cert_refinement_conservative E .sanction) h)
+          (by decide : ¬ (Tier.t3 ≤ Tier.t1))
+
+/-- Envelope-indexed hold-floor policy at action granularity (v0.9,
+    R2-01): the continuity-hold's floor allows ACTIONS, and its single
+    constitutive constraint is stated against the envelope — everything
+    allowed sits at or below the Tier-1 requirement under
+    `requiredTierC`. Certificate-backing (W15) and reversibility (W13)
+    are THEOREMS of this gating, not fields: the floor cannot assert a
+    reversibility no certificate supports. Supersedes `HoldPolicy` for
+    deployment-facing use. -/
+structure CHoldPolicy (δ : Type) (E : Envelope δ) where
+  allowed : CAction δ → Bool
+  allowed_tier1 : ∀ a, allowed a = true → requiredTierC E a ≤ Tier.t1
+
+/-- What the continuity-hold authorizes under a certified policy. -/
+abbrev holdAuthorizesC {δ : Type} {E : Envelope δ} (P : CHoldPolicy δ E)
+    (a : CAction δ) : Prop :=
+  P.allowed a = true
+
+/-- **W13 (The Certified Floor Is Reversible — E9 lifted).** -/
+theorem hold_floor_cert_reversible {δ : Type} {E : Envelope δ}
+    (P : CHoldPolicy δ E) (a : CAction δ) (h : holdAuthorizesC P a) :
+    a.reversibleIn E = true :=
+  cert_sub_causal_reversible E .t1 a (P.allowed_tier1 a h) (by decide)
+
+/-- **W14 (The Certified Floor Is Severity-Capped — E10 lifted).** -/
+theorem hold_floor_cert_severity {δ : Type} {E : Envelope δ}
+    (P : CHoldPolicy δ E) (a : CAction δ) (h : holdAuthorizesC P a) :
+    a.mech.severity ≤ Tier.t1.rank :=
+  cert_severity_le_evidence E .t1 a (P.allowed_tier1 a h)
+
+/-- **W15 (The Certified Floor Is Certificate-Backed).** The hold-floor
+    half of R2-01, closed: any routing the floor allows carries its
+    envelope certificate, and no severance or sanction is allowable at
+    all — a hold policy over uncertified actions is unconstructible. -/
+theorem hold_floor_certificate_backed {δ : Type} {E : Envelope δ}
+    (P : CHoldPolicy δ E) :
+    (∀ d, holdAuthorizesC P (.route d) → E.routeInside d = true) ∧
+    (∀ d, ¬ holdAuthorizesC P (.severance d)) ∧
+    ¬ holdAuthorizesC P .sanction := by
+  refine ⟨fun d h => hold_floor_cert_reversible P (.route d) h,
+          fun d h => ?_, fun h => ?_⟩
+  · exact absurd
+      (Nat.le_trans (cert_refinement_conservative E (.severance d))
+        (P.allowed_tier1 _ h))
+      (by decide : ¬ (Tier.t2 ≤ Tier.t1))
+  · exact absurd
+      (Nat.le_trans (cert_refinement_conservative E .sanction)
+        (P.allowed_tier1 _ h))
+      (by decide : ¬ (Tier.t3 ≤ Tier.t1))
+
+/-- **W16 (The Certified Floor Grants No More Than a Live PIO — E11
+    lifted).** Everything the certified hold floor can authorize, a
+    pending PIO could already authorize under the same envelope. -/
+theorem hold_cert_grants_no_more_than_pio {δ : Type} {E : Envelope δ}
+    (P : CHoldPolicy δ E) (a : CAction δ) (h : holdAuthorizesC P a) :
+    pioAuthorizesC E (.issued 0) a :=
+  P.allowed_tier1 a h
+
+/-- **W17 (Quarantine: The Certified Layer Refines the Phase 1
+    Table).** The certified emergency layer never grants an action whose
+    mechanism the legacy `pioAuthorizes` table would refuse: the
+    Mech-granularity layer survives exactly as an outer presumptive
+    bound, and consulting it can only ever be conservative. This is the
+    theorem that makes the quarantine of the legacy API a proved
+    property rather than a documentation convention. -/
+theorem cert_pio_refines_mech_pio {δ : Type} (E : Envelope δ) (s : PIO)
+    (a : CAction δ) (h : pioAuthorizesC E s a) :
+    pioAuthorizes s a.mech := by
+  cases s with
+  | issued _  => exact Nat.le_trans (cert_refinement_conservative E a) h
+  | confirmed => exact Nat.le_trans (cert_refinement_conservative E a) h
+  | reversed  => subst h; rfl
+
+/-- **W18 (The Certified Floor Is Constructible).** Non-vacuity guard:
+    a broadcast-only floor is a legal certified hold policy for EVERY
+    envelope — including the zero envelope (W9), where nothing else
+    could be allowed. The strictest deployment still has a floor. -/
+theorem cert_hold_floor_constructible (δ : Type) (E : Envelope δ) :
+    ∃ P : CHoldPolicy δ E, P.allowed .broadcast = true := by
+  refine ⟨⟨fun a => match a with
+    | .broadcast => true
+    | _ => false, ?_⟩, rfl⟩
+  intro a ha
+  cases a with
+  | broadcast   => exact Nat.zero_le _
+  | route d     => exact Bool.noConfusion ha
+  | severance d => exact Bool.noConfusion ha
+  | sanction    => exact Bool.noConfusion ha
 
 end AHC
