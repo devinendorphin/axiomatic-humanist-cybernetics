@@ -1,0 +1,40 @@
+NORMATIVE SOURCES — AHC Verified Constitutional Kernel
+Attached 2026-07-13, discharging Reviewer #2 packaging finding R2-12.
+
+The kernel formalizes AHC v3.1 and Companion A in their INTEGRATED
+versions. Both are attached here in original form, together with the
+component documents they integrate, and plain-text extractions of the
+two cited texts (paragraphs first, then tables prefixed [TABLE];
+extracted with python-docx) against which the quotation-level
+THEOREM_TO_TEXT_MAP.md in this directory was prepared.
+
+CITED TEXTS (the versions the kernel formalizes)
+  Master_AHC_v3_1_Integrated.docx
+    AHC v3.1 master architecture, integrated. Sections formalized:
+    1.1, 4.1, 4.2, 5.4, 5.5, 8.3, 9.2, 9.3, 10.3, 10.4.
+    sha256: 197c894d936b907cf7dcec4104924ea5e87866d0264f1586e9697944fa4bf9d9
+  CompanionA_AHC_L0_v3_1_Integrated.docx
+    Companion A [AHC-L0] v3.1, integrated. Sections formalized:
+    5, 12.3, 19.2, 19.4, 19.4.1, Appendix B (B.2, B.4).
+    sha256: 4417c4fe695c969bcea90b5a0a2648347aef3c90dba074427b660778885f97c2
+
+COMPONENT / PREDECESSOR DOCUMENTS (provenance of the integrated texts)
+  AHC_Whitepaper_v3_1.docx        sha256: 190e2f912d0c455d64a6c371269ff87e8bb4a36b7d4fcbd8daca58f6228e6c73
+  CompanionA_v3_1.docx            sha256: b228a634313b3ad3f79da1fb5367044ffc157e98fe611fe4dd34f090c325e7fe
+  CompanionA_Section19_1.docx     sha256: 6b4db9d6818990297fe9cbfd2f453231f52f65a9b10e718bf578140e2a6f2c01
+  AHC_Amendment_v3_11.docx        sha256: 9d93ef6a50a0722d972440df0de7f9e6d389377114349738f66a99b9c39785a6
+
+EXTRACTIONS (quotation basis for the theorem-to-text map)
+  Master_AHC_v3_1_Integrated.extracted.txt        sha256: 2f69048e5913089ed895d007ebfeef0b62c7374f2b61fc71a95e10a31fa92d29
+  CompanionA_AHC_L0_v3_1_Integrated.extracted.txt sha256: 2b261b5986cd09cf772fbdfaf3c1032ab6e6d85825403c6a9e6137eea04702e3
+
+WHAT THE MAP DOES AND DOES NOT COVER
+  The map quotes the exact sentences the Phase 1 theorem families
+  formalize. The v0.4+ theorem families that formalize CONSTITUTIONAL
+  RULINGS from the review rounds (D-R1A, D-R2A, D-R3, D-R4) and the
+  Reviewer #2 repairs (v0.8-v0.12) are mapped to the amendment record
+  (ERRATA_AND_AMENDMENTS.md) and the archived review exchange, not to
+  the v3.1 text: those constructions are post-text constitutional
+  process, and presenting them as v3.1 sentences would overstate the
+  text. Where the kernel renders a spec quantity in different units or
+  supplies a constant the text does not fix, the map says so.

@@ -1,0 +1,455 @@
+
+AXIOMATIC HUMANIST CYBERNETICS
+Version 3.1  —  Institutional Hardening Revision
+A Constitutional Proposal with Mathematical Implementation Architecture
+
+Working Paper | Second Adversarial Revision
+March 2026
+
+1. Introduction: A Premise, Not a Discovery
+The most important sentence in this paper is one that an earlier draft failed to state clearly: the foundational claim of Axiomatic Humanist Cybernetics is not a mathematical finding. It is a constitutional commitment. The commitment is this: democratic legitimacy requires the sustained viability of every protected demographic subgraph, not merely the aggregate welfare of the majority. No mathematical operation forces this conclusion. It is a rights-prior design axiom — a premise that precedes formalization and upon which the entire technical architecture rests.
+Version 3.1 is the third iteration of this framework, produced in response to two rounds of adversarial review. Version 1.0 was criticized, correctly, for normative laundering: dressing a constitutional choice in the authority of formal necessity. Version 2.0 corrected that structural flaw and introduced formal causal identification, historical backtesting, and explicit counter-majoritarian engagement. The second red team assessment confirmed these corrections but identified a harder class of remaining vulnerabilities: not conceptual confusion, but institutional brittleness. The framework was now clear about what it was — and precisely because of that clarity, it could be attacked on whether it could survive contact with institutional reality: contested data, adaptive adversaries, governance capture, emergency normalization, and the difficulty of building a legitimate Layer 0 actor without creating a new site of domination.
+This version addresses those vulnerabilities directly. Where they are solvable, they are solved. Where they are irreducible — as three of them are — they are named as constitutive tensions inherent to any counter-majoritarian constitutional architecture, with a formal argument that AHC handles each better than its alternatives by a specifiable amount.
+1.1  The Korematsu Illusion
+We retain the term 'Korematsu Illusion' to describe the systematic misidentification of state-sponsored subgraph collapse as a moment of democratic health, produced by aggregate evaluation frameworks. In 1942, all three branches of U.S. government operated normally for the majority population while simultaneously authorizing the mass incarceration of 120,000 persons of Japanese ancestry. Every aggregate democratic health metric registered as normal. The failure occurring within the targeted subgraph was structurally invisible to standard analysis — not concealed, but unmeasurable by the instruments in use. This is the condition AHC is designed to make impossible.
+1.2  Research Program Structure
+A second adversarial reviewer correctly identified that the prior draft attempted to do too many things within a single paper: constitutional theory, cybernetics, causal inference, distributed systems, democratic design, international governance, and emergency doctrine. The response is not to narrow the architecture — the integration is the contribution — but to position this paper explicitly as the master architecture of a formal research program with specified companion papers, each responsible for the depth that the master architecture establishes connections for.
+
+
+1.3  What This Version Claims and Does Not Claim
+AHC makes three claims. First, a formal claim: the mathematical architecture is internally consistent, as demonstrated by coherence testing and two rounds of adversarial simulation. Second, a historical claim: the framework produces correct classifications on four documented cases of democratic subgraph collapse, including two that were genuinely contested at the time of analysis (Sections 12.3 and 12.4). Third, a comparative claim: AHC handles the trust displacement problem, the observability lag problem, and the adversarial adaptation problem better than its single-metric aggregate alternatives, by formally specifiable amounts.
+AHC does not claim: to have solved the trust problem; to eliminate observability lag; to prevent adversarial adaptation; or to specify the full institutional architecture of Layer 0. These are acknowledged as open problems. The companion paper structure is the honest response to that acknowledgment.
+
+2. The Three Irreducible Tensions
+Before developing the formal architecture, this section explicitly identifies the three tensions that no version of this framework can fully resolve — because they are constitutive tensions of any counter-majoritarian constitutional architecture, not defects unique to AHC. Naming them is a precondition for honest engagement.
+2.1  The Trust Displacement Limit
+AHC's Byzantine consensus architecture does not solve the trust problem. It displaces it — relocating the trust requirement from a single domestic state controller to a more structurally diverse ensemble of sensor networks, historical data corpora, and international peer systems. Displacement to a more tractable level is genuine progress. But the regress is real: the sensor networks must be trusted, the independence audit must be trusted, the peer weighting must be trusted. At some point the architecture rests on trust in something.
+The formal comparative claim is this: simultaneous capture of all three ATG pillars without triggering the divergence alarm requires three independent operations succeeding simultaneously. If pillar captures are independent — which the air-gapped design intends — the joint capture probability is P_A · P_B · P_C rather than P_{single}. The framework is structurally harder to capture than any single-threshold alternative by this multiplicative factor. That is the honest extent of the claim.
+2.2  The Observability Lag
+AHC is structurally retrospective with respect to harms that precede administrative legibility. Social intimidation, anticipatory chilling, bureaucratic discouragement, stigma-amplified service denial, and informal police discretion typically precede measurable state-vector collapse by weeks to months. The leading indicator sublayer of Section 6.5 reduces this lag. It does not eliminate it. The framework's temporal resolution is bounded by the measurability of harm at the time of occurrence.
+This is acknowledged as a design parameter, not a solvable engineering problem. Any governance architecture that operates on observable data faces this limitation. The honest argument is that AHC's multi-domain, multi-timescale structure makes the lag shorter and more domain-specific than single-metric alternatives — but the lag exists, and some harms will become legible only after damage has already been done.
+2.3  The Adversarial Adaptation Arms Race
+The Lucas Critique [1976] applied to governance: once the trigger logic of a governance rule becomes legible, rational adversaries adapt their behavior to evade it. This applies to constitutional rights, criminal statutes, financial regulations, and AHC alike. It is irreducible. The response is not to deny it but to argue that AHC's specific architecture is harder to game than its alternatives.
+Gaming AHC simultaneously requires: (a) smoothing harm delivery below the attack discriminant threshold across all three harm-generation mechanism types; (b) doing so while avoiding detection by the causal identification protocol's mechanism-verification step; and (c) simultaneously corrupting or evading all three ATG pillars without triggering the divergence alarm. Each of these is more complex than gaming a single welfare aggregate. The arms race is real and ongoing. AHC's architecture can update its sensor ensemble and causal identification parameters as new gaming strategies become legible. The adversary is nimbler; the measuring apparatus is more robust. That is the honest tradeoff.
+
+3. Philosophical Foundations and Prior Work
+3.1  The Rights-Prior Premise
+AHC's foundational commitment situates the framework within a well-developed tradition in political philosophy. We trace the lineage explicitly, both to acknowledge intellectual debts and to ensure the constitutional premise is argued on its own terms.
+Rawls [1971] establishes through the difference principle and lexical priority of equal basic liberties that no aggregate welfare improvement justifies reducing any group's basic capabilities below the threshold required for equal citizenship. AHC formalizes this as the intersection axiom: the global viability signal cannot compensate for a subgraph below its floor, precisely as Rawls prohibits trading basic liberties for utility gains. Sen [1999] grounds development assessment in capability expansion rather than welfare aggregation — the five-domain state vector directly implements his capability set as observable proxies. Nussbaum [2000, 2011] provides the threshold specification that distinguishes capability reduction from capability deprivation — the viability kernel boundary formalizes this qualitative distinction. Crenshaw [1989, 1991] provides the topological insight that harm is distributed at demographic intersections and that single-axis legal frameworks systematically fail to protect intersection nodes — the intersectionality tensor is the computational implementation.
+3.2  The Tragic Conflict Problem
+A second adversarial reviewer identified that the clarity of v2's normative framing exposed a new vulnerability: the framework is strongest when one subgraph is being forced below its floor by state action, and weaker when multiple subgraphs' protections collide, resources are scarce, or rescue of one domain plausibly constrains another. This is the tragic dimension of politics [Berlin 1969; Nagel 1979]: genuine conflicts between legitimate claims that cannot all be fully honored simultaneously.
+The honest response is that AHC does not resolve tragic conflicts. It detects them and characterizes them formally, providing better inputs to the democratic deliberation that must ultimately adjudicate them. The Inter-Subgraph Conflict Protocol of Section 7.3 specifies the framework's behavior in these cases: enforcement actuation is suspended, the conflict is formally characterized, and the output routes to Layer 0 democratic deliberation. The framework's claim in these cases is modest: it provides a more precise specification of the conflict's structure than existing frameworks, not a resolution of it.
+3.3  Prior Work and Contribution Boundaries
+AHC makes no claim to discovering the problem of aggregate masking. This problem is documented across: public health disparity analysis [Williams & Mohammed 2009], genocide studies [Straus 2006], carceral sociology [Alexander 2010], robust statistics [Huber 1981], minority stress frameworks [Meyer 2003], and constitutional equal protection theory [Ely 1980]. AHC's specific contribution is the integration of these distributed insights into a unified computational architecture that operates at real-time population scale with autonomous threshold generation, formally specified causal identification, and graduated enforcement connectivity. The integration is the contribution.
+
+4. Constitutional Premises and Formal Axioms
+The three axioms are constitutional design choices — specifications of what a democratic evaluation architecture must be capable of detecting and responding to. Each is stated as a normative requirement and a formal specification. Both layers are separable and independently contestable.
+
+4.1  Axiom I — Intersectional Viability
+
+4.2  Axiom II — Thermodynamic Limit of Iteration
+
+4.3  Axiom III — Malicious Injection Classification
+
+5. Layer 1 — Population State Manifold
+5.1  Individual Node State Vectors
+Every person i is represented as a node with state vector xᵢ(t) ∈ ℝᵈ across five capability-derived access domains [Sen 1999; Nussbaum 2000], normalized to [0,1] with 1 = full constitutional access and 0 = complete exclusion:
+    X(t) = [x₁(t), ..., x_N(t)]  ∈  ℝ^{d×N}   (Population State Matrix)
+
+5.2  The Intersectionality Tensor
+The demographic membership tensor M ∈ {0,1}^{N×K×L} encodes overlapping subgraph membership, avoiding the category error of mutual exclusion partitioning. The compound vulnerability index:
+    Ψᵢ(t) = 1 − ∏_{(k,l) ∈ Sᵢ} φ_{kl}(t)   (Compound Vulnerability — Multiplicative per Crenshaw [1989])
+At population scale N=330M, K≈20, d=20, the tensor has ~132 billion entries but is ~99.97% sparse. Sparse tensor operations [Kolda & Bader 2009] reduce computation to O(N·K·d) per timestep. Timescale-matched update frequencies (hourly to weekly by timescale regime) and stratified sentinel sampling of ~50,000 high-vulnerability intersection nodes provide near-real-time early warning within tractable computational bounds.
+5.3  Three Harm-Generation Mechanisms
+Prior drafts modeled harm as the output of a coherent intentional adversary. This anthropomorphizes state intentionality. Three mechanistically distinct harm-generation modes require different detection methodology and different remedial responses:
+
+
+Type A classification requires Tier 3 evidence and full causal identification. Type B requires structural attribution showing the pattern is non-accidental from institutional incentive analysis. Type C requires policy interaction modeling. Conflating types produces both false positives (attributing Type B to Type A) and false negatives (treating Type A as Type C).
+5.4  Tiered Evidence-Action Protocol
+The critical architectural addition of Version 3.1. Prior versions contained a binary structure — observational alert exists, enforcement requires full causal identification — which created a feasibility bind: full causal proof takes weeks to months while acute credential attacks unfold in hours. The Tiered Evidence-Action Protocol resolves this by formally proportioning evidence requirements to response severity and reversibility.
+
+
+The Protective Interim Order (PIO) protocol addresses the acute-attack latency problem directly. For attacks with τ_decay < 72h, a Tier 0 observational signal activates Tier 1 protective responses immediately, subject to mandatory Layer 0 review within 72 hours and automatic reversal if Tier 1 correlational confirmation fails. This is modeled on temporary restraining order doctrine in equity: emergency protection on partial evidence, subject to rapid judicial review. The constitutional logic is identical: the cost of an unjust temporary order is recoverable; the cost of failing to prevent an acute irreversible harm is not.
+5.5  Causal Identification Protocol (Tier 3)
+
+5.6  Leading Indicator Sublayer
+The framework is structurally retrospective with respect to harms that precede administrative legibility. The leading indicator sublayer reduces but does not eliminate this lag by monitoring proxies that typically precede primary state-vector decline:
+
+
+Leading indicator alerts trigger Yellow Protocol (Tier 0) monitoring escalation — increased sentinel sampling frequency for the relevant subgraph — but do not initiate enforcement absent primary state-vector confirmation. They are inputs to the gradient predictor Â_{kl}(t+Δt), shortening the effective prediction horizon by the lead time of the relevant indicator.
+
+
+5.7  Classification Integrity Officer — Operational Specification
+
+The simulation identified a gap between the CIO's formal role (audit trail designation, name in technical record) and the operational requirement created by the Compound Event Review Protocol (real-time availability within 4 hours). The CIO as currently specified is not available for real-time assessment. The simulation rendered this precisely:
+
+"The search returns a name and a department. No phone number. No email. A contact form."
+
+This gap exists independently of the compound event protocol — Marisol's attempt to reach Derek for a Tier 1 methodology concern also failed through the same mechanism. The addition below addresses both:
+
+
+6. Layer 2 — Multi-Timescale Decay Tensor
+For each subgraph (k,l) and access dimension j, the instantaneous decay rate and characteristic decay time:
+    λ_{kl,j}(t) = −φ̇_{kl,j}(t) / φ_{kl,j}(t)   (Instantaneous Decay Rate)
+    τ_{kl,j}^{decay}(t) = 1 / λ_{kl,j}(t)   (Characteristic Decay Time)
+    Terminal_{kl,j}(t) = 𝟙[ τ_{kl,j}^{response}(t)  >  τ_{kl,j}^{decay}(t) ]   (Terminal Status Indicator — implements Axiom II per dimension)
+
+
+
+6.3  Compound Event Interaction Flag
+
+The 4-hour and 6-hour windows are initial specifications subject to calibration during Phase 1 Diagnostic Mode. They are designed to be short enough to prevent the hold from becoming a tool for delaying legitimate emergency responses, and long enough to permit genuine causal assessment by a Classification Integrity Officer.
+Note on Derek: the simulation revealed that the Classification Integrity Officer role as currently specified is not a real-time contact point — it is an audit trail function. The Compound Event Review Protocol requires the Classification Integrity Officer to be reachable within 4 hours for compound event assessment. This implies a duty-officer structure for the CIO role, not just an audit designation. This is a staffing specification that falls to Companion A's institutional architecture.
+7. Layer 3 — Viability Field Computation
+7.1  Subgraph Viability Index
+    φ_{kl}(t) = (1/|V_{kl}|) · ∑_{i∈V_{kl}} min_j( x_{ij}(t) / θ_{kl,j}(t) )   (Subgraph Viability Index)
+The inner min_j identifies each node's binding access constraint, reflecting Sen's [1999] finding that capability deprivation in any single critical dimension cascades to others.
+7.2  Global Viability Field and Proposition 3.1
+    Φ_global(t) = ∏_{k,l} φ_{kl}(t)   (Global Viability Field — Continuous Implementation of Axiom I)
+
+7.3  Inter-Subgraph Conflict Protocol
+Version 3.1 formally addresses the tragic conflict problem [Berlin 1969; Nagel 1979]: what happens when protecting one subgraph's viability directly constrains another's? The framework is strongest when one subgraph is being forced below its floor by the state. It is less definitive when competing subgraph claims are in genuine tension.
+
+7.4  Viability Gradient and Predictive Warning
+    ∇_x Φ_global(t) = ∂Φ_global/∂xᵢ |_{i∈V_{kl}}   (Viability Gradient — Early Warning Signal)
+    Â_{kl}(t+Δt) = A_{kl}(t) + Δt · Ȧ_{kl}(t)   (Attack Trajectory Predictor)
+When Â_{kl}(t+Δt) > A* before the current value crosses threshold, Yellow Protocol initiates: a fully public, cryptographically signed broadcast providing mobilization time for democratic resistance before terminal thresholds are crossed. The leading indicator sublayer feeds Ȧ_{kl}(t) with earlier-moving signals, extending the prediction horizon by the lead time of the dominant leading indicator.
+
+8. Layer 4 — Autonomous Threshold Generator
+8.1  The Ontological Floor Collapse Attack
+If constitutional minimum thresholds θ_{kl,j} are subject to revision by the controller being evaluated, the controller can execute an Ontological Floor Collapse: redefining survival downward until atrocities disappear by measurement convention. Documented in U.S. poverty line methodology frozen since 1963 [Fisher 1992], USDA hunger reporting conventions [Eisinger 1998], and Soviet harvest statistics. The ATG defeats this through three independently grounded derivation pillars.
+8.2  The Formal Tractability Hierarchy
+A second adversarial reviewer correctly pressed that displacing the trust problem is not the same as solving it. Version 3.1 sharpens this into a formal comparative claim:
+
+8.3  Pillar I — Empirical Entropy Limit with Independence Audit
+The biological minimum threshold is the inflection point where resource deprivation transitions from linear damage to cascading phase collapse:
+    θ_j^{(emp)}: ∂²Ψᵢ/∂x²_{ij} |_{x=θ} = 0,   ∂³Ψᵢ/∂x³_{ij} > 0   (Empirical Entropy Limit)
+Computed via Byzantine consensus across m > 2f+1 independent sensor nodes tolerating f corrupted inputs [Lamport et al. 1982]. Sensor independence is continuously audited:
+    Independence_s(t) = 1 − Corr(s, s_state)_{rolling window}   (Sensor Independence Score)
+Sensors with declining independence scores are progressively downweighted before coordinated injection events can be staged. This partially addresses OP.1 (slow sensor capture). Full treatment in Companion B.
+8.4  Pillar II — Historical High-Water Mark with Safe-Period Calibration
+    θ_j^{(hist)}(t) = max[ max_{τ≤t}(φ̄_j(τ)),  max_{t*∈T*}(φ̄_j(t*)) ] − σ_j   (Historical Ratchet with Constitutional Moment Anchors)
+    σ_j = k · Std[φ_j(τ)]_{τ∈T^{safe}},   k ∈ [1.5, 2.0]   (Safe-Period Variance Tolerance)
+Constitutional Moment Anchors T* are immutable verified historical baselines. The variance tolerance is calibrated to safe-period volatility only, preventing attack-period variance from inflating the tolerance band.
+8.5  Pillar III — Exogenous Reference Air-Gap
+    θ_j^{(exo)}(t) = ∑_{e∈E} w_e(t) · φ_j^{(e)}(t)  −  ε_j   (Weighted Exogenous Reference)
+Peer weights are dynamically updated by each nation's own AHC viability score, preventing correlated backsliding from contaminating the reference. Tolerance decomposes as ε_j = ε_j^{(structural)} + ε_j^{(cyclical)}(t) with mean-reverting cyclical component.
+8.6  Max-Function Synthesis and Divergence Alarm
+    θ_{kl,j}(t) = max[ θ_j^{(emp)},  θ_j^{(hist)}(t),  θ_j^{(exo)}(t) ]   (ATG Synthesis — Most Protective Boundary Wins)
+    D_j(t) = Var[ θ_j^{(emp)},  θ_j^{(hist)}(t),  θ_j^{(exo)}(t) ]   (Calibration Divergence Metric)
+When D_j(t) > D*, threshold discrepancy routes to Layer 0 governance audit rather than passing to Layers 3–5. The system fails safe — not open — under measurement attack.
+
+9. Layer 5 — Actuation and Enforcement Matrix
+9.1  The Technocratic Sovereignty Challenge
+The enforcement layer is a gift to hostile critics. Once AHC moves from diagnosis to actuation, it opens itself to the charge that it is building a technocratic sovereignty machine — overriding democratic politics when a specialized system decides the legitimacy floor has been breached. This paper engages this charge directly rather than evading it.
+The AHC response: enforcement mechanisms are constitutionally pre-authorized responses to conditions already prohibited by existing equal protection frameworks. The technical architecture automates detection and graduated response; the constitutional authorization derives from the same sources as existing civil rights enforcement. Every enforcement trigger is fully transparent and cryptographically auditable — more consistent with rule-of-law legitimacy than discretionary executive enforcement, which can be exercised selectively and in secret. The paper's position is that transparent, rule-bound, auditable enforcement is more democratically legitimate than the discretionary alternative — not that it is exempt from the legitimacy requirement entirely.
+9.2  Graduated Enforcement with Formal Hysteresis
+The Tiered Evidence-Action Protocol (Section 5.4) governs what can be authorized at each evidence tier. Within each tier, hysteresis prevents panic cycles:
+    ESCALATE:  A_{kl}(t) > A*  sustained over Δt_{confirm}  AND  causal ID tier satisfied   (Escalation Condition)
+    DE-ESCALATE:  A_{kl}(t) < A_{reset} < A*  sustained over Δt_{cooldown}   (De-escalation with Hysteresis Gap)
+The confirmation window Δt_{confirm} is calibrated by timescale regime (Table 6). The False Alert Rate is a formal design parameter:
+    FAR = P(ESCALATE | no MRI)  ≤  0.01  per subgraph per year   (False Alert Rate Specification — ISA-18.2)
+9.3  The Four Enforcement Mechanisms
+
+
+
+9.4  Compound Event Enforcement Protocol
+
+10. Layer 0 — Legitimacy Substrate
+10.1  The Institutional Birth Problem
+Layer 0 remains the framework's deepest unresolved challenge, and this version is honest about why. The second adversarial reviewer correctly identified that Layers 1–5 ultimately rest on the assumption 'a legitimate anti-capture sovereign exists, then here is how it should reason.' Building that sovereign is exactly the hard part — and it is a problem no mathematical architecture can solve.
+The honest framing: constitutional architectures are designed before the conditions of their full adoption are present. The U.S. Constitution was designed by people who did not know whether the new republic would survive. The IPCC framework was designed before member states had politically committed to the emissions reductions it was designed to support. AHC is designed before the institutional form that could operate it fully exists. That is not a failure condition. It is the normal situation of constitutional thought [Ackerman 1991]. The paper's contribution is specifying what Layer 0 would need to look like with enough precision that the political and institutional work of building it can begin.
+10.2  Three Institutional Candidates for Companion A
+Three distinct institutional logics are proposed as candidates for the companion paper on Layer 0 full specification. They are not mutually exclusive — a hybrid may be optimal — but they represent distinct constitutional theories of how AHC could achieve operational legitimacy:
+
+
+
+10.3  Emergency Authority with Crisis Frequency Cap
+Version 3.1 adds a Crisis Frequency Cap to prevent emergency authority from becoming normalized governance through contiguous or strategically narrated crises:
+    IF ∑_{t-730}^{t} 𝟙[Emergency Active] · dt  >  T_cap   (e.g., 180 days in 24 months)   (Crisis Frequency Threshold)
+When T_{cap} is exceeded, emergency authority for that subgraph is unavailable for renewal. Continued terminal threshold exceedance is instead escalated to Structural Review Protocol: mandatory full Layer 0 review producing one of three outputs: (a) a formal structural remediation plan with timeline; (b) a constitutional amendment process; or (c) an explicit democratic decision that threshold parameters require recalibration. Emergency authority cannot resume until one of these outputs is produced and enacted.
+The constitutional logic: if emergency authority is invoked repeatedly for the same subgraph, the condition is not an emergency. It is a structural failure. Structural failures require structural responses, not perpetual emergency governance. The frequency cap forces this reclassification.
+10.4  Plain Language Output Layer
+Version 3.1 introduces the Plain Language Output Layer (PLOL) as a constitutional requirement, not a communication strategy.
+
+
+11. Complete Architecture — Version 3.1
+
+Full system state evolution:
+    φ̇_{kl}(t) = f_{policy}(t) + f_{market}(t) + f_{attack}(t) − δ_{kl}·φ_{kl}(t)   (Viability Field Dynamics)
+    ALERT_{kl}(t) = 𝟙[ φ_{kl}(t) < θ_{kl}(t)  OR  Â_{kl}(t+Δt) > A*  OR  ∃j: Terminal_{kl,j}(t)=1 ]   (Alert Condition — tiered causal ID required before enforcement actuation)
+
+12. Coherence Testing and Historical Validation
+
+12.1  Internal Coherence Test
+The dual-vector adversarial simulation (Boiling Frog + False Positive Injection) from v2 remains valid as a coherence test and is not reproduced in full here. Summary: Byzantine consensus and divergence alarm quarantine the false positive injection; historical ratchet detects the slow-burn degradation; tiered enforcement prevents flash-crash collateral effects; Layer 0 down-weights compromised sensors. Internal consistency confirmed.
+12.2  Historical Backtest — EO 9066, Japanese American Internment (1942)
+Ground truth: established by Commission on Wartime Relocation [1982], Civil Liberties Act of 1988, Daniels [1993], Robinson [2001].
+
+12.3  Historical Backtest — Post-Shelby County Voter Suppression (2013–2018)
+Ground truth: partially established by subsequent litigation, GAO [2014], Hajnal et al. [2017], Grimmer et al. [2023]. Classification contested in political discourse.
+
+12.4  Historical Backtest — Zero Tolerance Family Separation Policy (2018–2019)
+Version 3.1 adds this case as a genuinely contested real-time test. The classification was politically disputed when the policy was active. Ground truth now partially established by subsequent DOJ IG findings [2020], Flores settlement litigation, and academic research [Linton 2020]. The test is: what would AHC have produced using data available at the time of the policy, before post-hoc consensus existed?
+
+12.5  Historical Backtest — Georgia SB 202 (2021) — Genuinely Contested Case
+This case remains politically contested. No post-hoc consensus has resolved the classification. It is included precisely because it tests the framework in the hardest condition: real-time contested diagnosis without settled ground truth.
+
+
+The SB 202 case illustrates a crucial property of the tiered evidence architecture: the framework can be at maximum alertness without being at maximum enforcement. Yellow Protocol and leading indicator escalation are running; Tier 3 classification has not issued; enforcement has not actuated. This is what honest real-time diagnosis looks like under genuine evidentiary uncertainty.
+
+13. Policy Adoption Pathways
+13.1  The Formal Domain Restriction
+Version 3.1 formally restricts the framework's claimed operational domain in response to the second adversarial reviewer's correct observation that the adoption paradox may be structurally worse than prior drafts acknowledged.
+
+13.2  Phased Adoption Roadmap
+
+13.3  Engaging the Dahl Challenge
+AHC does not resolve the counter-majoritarian tension [Dahl 1957, 1989]. It relocates it — from appointed courts or executive discretion to a distributed technical architecture with democratic governance — and argues the relocation improves formal properties without eliminating political contestation. The specific improvements: transparency (every trigger and parameter is public), rule-boundedness (no discretion at the enforcement layer), auditability (cryptographic proof of every action), and proportionality (tiered evidence-action scaling). These are the properties that make rule-of-law enforcement more democratically legitimate than discretionary enforcement — the same properties AHC inherits from constitutional rights enforcement through court orders.
+
+14. Open Research Problems
+Four open problems constitute the framework's current frontier, each assigned to a companion paper in the research program structure.
+
+
+
+
+
+15. Conclusion
+This paper began from a premise: democratic legitimacy requires the sustained viability of every protected demographic subgraph, not merely the majority. That premise is a constitutional commitment, grounded in the political philosophy of Rawls, Sen, Nussbaum, and Crenshaw. Three rounds of development — each incorporating adversarial critique — have produced a framework that is honest about what it is: a constitutional proposal whose mathematics are an implementation specification, not a justification.
+The three adversarial revisions have been cumulative rather than circular. Version 1.0 established the architecture. Version 2.0 corrected the foundational confusions: normative laundering, set-scalar translation gap, circular simulation. Version 3.1 addresses the harder institutional vulnerabilities: the causal identification feasibility bind (resolved by the Tiered Evidence-Action Protocol with Protective Interim Orders); tragic inter-subgraph conflicts (characterized and routed to deliberation by the ISCP); emergency normalization (bounded by the Crisis Frequency Cap); observability lag (reduced by the leading indicator sublayer); the technocratic sovereignty charge (engaged through the Plain Language Output Layer as constitutional requirement); and the adoption paradox (bounded by formal domain restriction to the declining democracy window).
+Three irreducible tensions remain and are acknowledged as constitutive rather than correctable: the trust displacement limit, the observability lag, and the adversarial adaptation arms race. For each, the framework's honest claim is comparative: it handles these better than its single-metric aggregate alternatives by a formally specifiable amount. That is the claim. Not resolution. Better by a specifiable amount.
+The central unresolved problem is not technical. It is the problem of institutional birth: how does a constitutional architecture come into being with sufficient legitimacy to perform the functions it claims? Courts derive legitimacy from prior constitutional authorization. AHC cannot derive it from a constitution it does not yet exist within. The adoption paradox is therefore not a practical hurdle but the core political philosophy problem that any constitutional innovation faces. The companion paper on Layer 0 — Companion A in the research program structure — is where that problem must be worked. This paper's contribution is specifying, with enough precision, what a solution would need to look like, such that the political and institutional work of building it can begin.
+Constitutional architectures are, historically, designed before the conditions of their adoption are fully present. That has always been the situation of constitutional thought. The specification is worth having before the solution exists — because without the specification, the solution cannot be recognized when it arrives.
+
+Appendix A — Formal Glossary
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+References
+Ackerman, B. (1991). We the People, Vol. 1: Foundations. Harvard University Press.
+Ackerman, B. (2004). The Emergency Constitution. Yale Law Journal, 113(5), 1029–1091.
+Alesina, A. & Summers, L. H. (1993). Central Bank Independence and Macroeconomic Performance. Journal of Money, Credit and Banking, 25(2), 151–162.
+Alexander, M. (2010). The New Jim Crow. New Press.
+Angrist, J. D. & Pischke, J.-S. (2009). Mostly Harmless Econometrics. Princeton University Press.
+Aubin, J.-P. (1991). Viability Theory. Birkhäuser.
+Bauer, G. R. (2014). Incorporating intersectionality theory into population health research methodology. Social Science & Medicine, 110, 10–17.
+Berlin, I. (1969). Two Concepts of Liberty. In Four Essays on Liberty. Oxford University Press.
+Brockett, R. W. (1970). Finite Dimensional Linear Systems. Wiley.
+Commission on Wartime Relocation and Internment of Civilians. (1982). Personal Justice Denied. U.S. Government Printing Office.
+Crenshaw, K. (1989). Demarginalizing the Intersection of Race and Sex. University of Chicago Legal Forum, 1989(1), 139–167.
+Crenshaw, K. (1991). Mapping the Margins. Stanford Law Review, 43(6), 1241–1299.
+Dahl, R. A. (1957). Decision-Making in a Democracy. Journal of Public Law, 6(2), 279–295.
+Dahl, R. A. (1989). Democracy and Its Critics. Yale University Press.
+Daniels, R. (1993). Prisoners Without Trial. Hill and Wang.
+DOJ Office of Inspector General. (2020). Review of the Department's Family Separation Policy. OIG Report.
+Eisinger, P. (1998). Toward an End to Hunger in America. Brookings Institution Press.
+Ely, J. H. (1980). Democracy and Distrust. Harvard University Press.
+Fisher, G. M. (1992). The Development of the Orshansky Poverty Thresholds. Social Security Bulletin, 55(4), 3–14.
+GAO. (2014). Elections: Issues Related to State Voter Identification Laws. GAO-14-634.
+Goodhart, C. (1983). Monetary Theory and Practice. Macmillan.
+Grimmer, J., et al. (2023). Obstacles to Estimating Voter ID Laws' Effect on Turnout. Journal of Politics, 85(2).
+Hajnal, Z., Lajevardi, N. & Nielson, L. (2017). Voter Identification Laws and the Suppression of Minority Votes. Journal of Politics, 79(2), 363–379.
+Huber, P. J. (1981). Robust Statistics. Wiley.
+Imbens, G. W. & Lemieux, T. (2008). Regression Discontinuity Designs. Journal of Econometrics, 142(2), 615–635.
+ISA-18.2. (2016). Management of Alarm Systems for the Process Industries. International Society of Automation.
+Kalman, R. E. (1960). A New Approach to Linear Filtering and Prediction Problems. Journal of Basic Engineering, 82(1), 35–45.
+Kolda, T. G. & Bader, B. W. (2009). Tensor Decompositions and Applications. SIAM Review, 51(3), 455–500.
+Lamport, L., Shostak, R. & Pease, M. (1982). The Byzantine Generals Problem. ACM TOPLAS, 4(3), 382–401.
+Levitsky, S. & Ziblatt, D. (2018). How Democracies Die. Crown.
+Linton, J. M. (2020). Children's Healthcare and the Migrant Family Separation Crisis. Pediatrics, 146(4).
+Lucas, R. E. (1976). Econometric Policy Evaluation: A Critique. Carnegie-Rochester Conference Series, 1, 19–46.
+Lührmann, A. & Lindberg, S. I. (2019). A third wave of autocratization is here. Democratization, 26(7), 1095–1113.
+Meyer, I. H. (2003). Prejudice, Social Stress, and Mental Health in Lesbian, Gay, and Bisexual Populations. Psychological Bulletin, 129(5), 674–697.
+Nagel, T. (1979). Mortal Questions. Cambridge University Press.
+Nussbaum, M. C. (2000). Women and Human Development. Cambridge University Press.
+Nussbaum, M. C. (2011). Creating Capabilities. Harvard University Press.
+Pearl, J. (2009). Causality, 2nd ed. Cambridge University Press.
+Rawls, J. (1971). A Theory of Justice. Harvard University Press.
+Robinson, G. (2001). By Order of the President. Harvard University Press.
+Rothstein, R. (2017). The Color of Law. Liveright.
+Rousseeuw, P. J. & Leroy, A. M. (1987). Robust Regression and Outlier Detection. Wiley.
+Schelling, T. C. (1960). The Strategy of Conflict. Harvard University Press.
+Sen, A. (1999). Development as Freedom. Oxford University Press.
+Shonkoff, J. P., et al. (2012). The Lifelong Effects of Early Childhood Adversity and Toxic Stress. Pediatrics, 129(1), e232–e246.
+Straus, S. (2006). The Order of Genocide. Cornell University Press.
+Williams, D. R. & Mohammed, S. A. (2009). Discrimination and racial disparities in health. Journal of Behavioral Medicine, 32(1), 20–47.
+
+
+
+Revised following second adversarial review. Comments invited to the research program. Not for citation without permission.
+[TABLE]
+ABSTRACT This paper begins from a premise, not a discovery. The premise is constitutional: democratic legitimacy requires the sustained viability of every protected demographic subgraph, not merely the survival and welfare of the majority. This commitment — grounded in the political philosophy of Rawls, Sen, Nussbaum, and the intersectionality framework of Crenshaw — is a rights-prior design choice that precedes formalization. The paper's contribution is to ask what rigorous mathematical architecture follows when this premise is taken seriously as a hard constraint on governance system design. Version 3.0 responds to a second adversarial review of the v2 framework. Following the resolution of foundational critiques in v2 (normative laundering, set-scalar translation gap, circular simulation), the remaining attacks concern institutional brittleness rather than conceptual confusion. This version introduces seven structural additions: a Tiered Evidence-Action Protocol with Protective Interim Orders resolving the causal identification feasibility bind; a formal Inter-Subgraph Conflict Protocol handling tragic rights conflicts; a Plain Language Output Layer established as a constitutional requirement; a Crisis Frequency Cap preventing emergency normalization; a formal Domain Restriction to the declining democracy window; a Leading Indicator sublayer for soft harm precursors; and two additional historical backtests on genuinely contested cases. The paper is positioned as the master architecture of a formal research program with four specified companion papers. The paper's honest claim remains: AHC is a constitutional proposal whose full deployment requires political authorization, institutional investment, and continued technical development. Version 3.0 adds formal acknowledgment of three irreducible tensions — the trust displacement limit, the observability lag, and the adversarial adaptation arms race — and argues that AHC handles each better than existing alternatives by a formally specifiable amount, without claiming to resolve them. Keywords: constitutional design, democratic theory, cybernetics, intersectionality, viability theory, causal inference, Byzantine consensus, counter-majoritarian institutions, declining democracy, tragic conflict, institutional design
+[TABLE]
+Paper | Scope | Key Open Problems | Status
+This paper [AHC-0] | Six-layer architecture; constitutional premise; foundational axioms; causal ID protocol; tiered evidence-action; historical backtests | OP 1–4 | Current
+Companion A [AHC-L0] | Layer 0 full institutional specification: IPCC, CBO, and FSB governance candidates; proof-of-personhood architecture; appeals body design | OP 2 | In preparation
+Companion B [AHC-CI] | Causal identification methodology; historical validation protocol; pre-registration framework; ablation studies; false-positive rate measurement | OP 4 | In preparation
+Companion C [AHC-FED] | Federated global viability; recursive peer-network protocol; stability analysis; international governance architecture | OP 3 | Future work
+Companion D [AHC-IMPL] | Computational implementation; sparse tensor architecture; scalability proofs; sentinel sampling design; update frequency optimization | — | Future work
+[TABLE]
+AX. I Intersectional Viability | Normative: A democratic governance system must be capable of detecting the engineered collapse of any demographic subgraph's viability, regardless of majority effects. A system that cannot detect targeted collapse cannot claim to guarantee equal citizenship. Formal: V_global = ∩_i V_i. If the state trajectory of any subgraph V_i is intentionally forced outside its viability bounds, V_global evaluates to the null kernel regardless of all other subgraphs. 'Intentionally' requires satisfaction of the causal identification criteria in Section 5.4.
+[TABLE]
+AX. II Thermodynamic Limit | Normative: Democratic iteration is only a legitimate corrective for subgraph harm when the iteration can complete before the harm becomes irreversible. 'The system corrected itself eventually' is constitutionally inadequate when the correction arrived after irreversible damage. Formal: If τ_response > τ_decay for the targeted subgraph, the system's reversibility claim is nullified. The system is classified as locally terminal for the affected subgraph during [t_attack, t_response].
+[TABLE]
+AX. III Malicious Injection | Normative: When state-engineered harm is attributed to accident, market forces, or administrative error rather than deliberate policy, accountability is structurally prevented. Classification methodology must distinguish deliberate targeting from other harm-generation mechanisms. Formal: State-engineered routing corruption is classified as a Malicious Routing Injection (MRI) when the three-stage causal identification protocol of Section 5.4 is satisfied. MRI classification requires Tier 3 evidence. Observational signals alone (Tier 0) are insufficient.
+[TABLE]
+Domain | Primary Proxies | Data Sources
+Economic | Income percentile, asset valuation, credit access, employment stability | ACS, SIPP, HMDA
+Legal | Credential validity, incarceration probability, legal standing ratio | BJS, NCVS, court records
+Health | Mortality differential, healthcare access latency, morbidity burden | CDC WONDER, CMS, NHIS
+Housing | Cost burden, displacement probability, tenure security | AHS, HMDA, HUD CHAS
+Political | Franchise score, representation ratio, ballot access friction | EAC EAVS, state voter files
+[TABLE]
+Type | Mechanism | Canonical Examples | AHC Response
+A: Deliberate Centralized | Unified command, explicit authorization, coordinated execution | EO 9066 (1942); family separation policy (2018) | Full three-stage causal ID; MRI eligible; enforcement actuation
+B: Distributed Institutional | Correlated harmful outputs from semi-autonomous agencies; no central coordination | Redlining (FHA + banks + insurers); mass incarceration | Structural attribution methodology; policy reform response
+C: Emergent Structural | Harm from interaction of individually neutral policies; no targeting intent | Compounding effects of zoning + credit scoring + background checks | Policy interaction analysis; Axiom III does not apply; redesign response
+[TABLE]
+Evidence Tier | Threshold Condition | Authorized Response | Typical Latency
+Tier 0 | A_{kl}(t) > A* sustained over Δt_confirm | Yellow Protocol (M4) only: cryptographic broadcast, zero enforcement | Immediate on signal confirmation
+Tier 1 | Tier 0 + matched control shows differential trajectory (Correlational) | M1 graduated capital routing begins; API monitoring initiated; all reversible | Days to weeks
+Tier 2 | Tier 1 + RD discontinuity confirmed at policy timestamp (Quasi-Experimental) | M2 selective dimensional severance eligible; still reversible on Layer 0 review | Weeks
+Tier 3 | Full DiD + RD + mechanism verification satisfied (Causal) | Full enforcement: M3 sanctions eligible; formal MRI classification issued | Months for standard cases
+Tier 0-PIO | Acute attack: τ_decay < 72h; Tier 0 signal confirmed | Protective Interim Order: Tier 1 response authorized; automatic Layer 0 review within 72h; auto-reversal if Tier 1 fails | Hours
+[TABLE]
+Three-Stage Causal Identification for MRI Classification Stage 1 — Difference-in-Differences: Estimate counterfactual trajectory by comparing V_{kl} to matched control subgraph V_{control} with similar pre-event characteristics. Causal estimate: τ̂ = (φ_{kl,post} − φ_{kl,pre}) − (φ_{control,post} − φ_{control,pre}). Parallel trends assumption tested in pre-period [Angrist & Pischke 2009]. Failure to confirm parallel trends: classification reverts to Type B or C. Stage 2 — Regression Discontinuity: Test for discontinuous φ_{kl}(t) change at policy implementation date using local polynomial estimator with cross-validated bandwidth. Continuous evolution across policy timestamp, or non-selective discontinuity, falsifies Type A classification [Imbens & Lemieux 2008]. Stage 3 — Mechanism Verification: The causal effect must be traceable through at least one specified institutional mechanism that altered routing conditions specifically for V_{kl} nodes. Absent specified mechanism: classification reverts to Type B regardless of Δ_{kl} magnitude [Pearl 2009, Ch. 7].
+[TABLE]
+Soft Harm Precursor | Leading Indicator Proxy | Typical Lead Time | Data Source
+Anticipatory chilling | Civic participation rate: meetings, public comment filings, permit applications | 4–12 weeks | Government records, NGO monitoring
+Bureaucratic discouragement | Benefits/permit application abandonment rates before completion | 2–8 weeks | Agency administrative data
+Informal police discretion | Stop/contact rate differential before arrest or charge | 2–12 weeks | Police admin data; ACLU monitoring
+Service denial (informal) | Wait time differentials; complaint rates; callback completion rates | 1–6 weeks | Administrative records; complaint registries
+Housing market chilling | Search inquiry rates; showing request differentials by subgraph | 4–16 weeks | Real estate platform data; HMDA
+[TABLE]
+SECTION 5.7  Classification Integrity Officer — Operational Specification (New — v3.1) Principle 5.7.1 Dual Function: The Classification Integrity Officer serves two functions that must be structurally distinguished: (a) Audit Function: retrospective audit trail designation, review of sensor anomalies, parameter drift monitoring — this function operates on standard administrative timelines; (b) Duty Function: real-time availability for compound event assessment, time-sensitive classification integrity questions, and acute jurisdiction escalations — this function requires a duty-officer rotation structure. Principle 5.7.2 Contact Transparency: The PLOL Technical Reproducibility Record must distinguish between the CIO's audit designation (name included for record purposes) and the duty contact channel (a functional contact point that routes to the duty CIO, not a specific named individual). The current practice of including only the audit CIO's name creates a false contact point that communities attempt to use for duty functions. Principle 5.7.3 Response Windows: The duty CIO must be reachable within: 4 hours for compound event independence assessments; 48 hours for Tier 1 methodology escalations that have not received a web-form response acknowledgment within 5 business days; 24 hours for all Tier 2 and above classification integrity questions. These windows are operational minimums, not performance targets.
+[TABLE]
+Timescale | Damage Type | Documented Example | PIO Eligible?
+τ < 72h | Acute credential invalidation; arrest; asset freeze | EO 9066 departure window (1942); family separation (2018) | Yes — PIO activates
+72h < τ < 30d | Economic network disruption; forced business closure | Internment pre-departure economic destruction (1942) | Tier 1 fast-track
+1mo < τ < 2yr | Housing displacement; neighborhood destruction | Post-Katrina displacement (2005–2007); redevelopment displacement | Standard tiered protocol
+2yr < τ < 20yr | Generational wealth erosion; educational exclusion | Redlining accumulation period (1934–1968) | Structural review; no PIO
+τ > 20yr | Epigenetic and intergenerational harm | Documented: Williams & Mohammed [2009] | Structural redesign horizon
+[TABLE]
+SECTION 6.3  Compound Event Interaction Flag (New — v3.1) Definition 6.3.1 Compound Event: A compound event is an acute event (τ_{decay} < 72h) occurring in a building, block, or jurisdiction that has an active slow-decay classification (Tier 1 or above) in any overlapping access domain at the time of the acute event. Definition 6.3.2 Compound Event Flag: A compound event flag is a procedural marker automatically applied to any acute event that meets the compound event definition, triggering the Compound Event Review Protocol before the acute event is processed as an isolated classification. Proposition 6.3.1: An acute event occurring within an active slow-decay classification jurisdiction cannot be assumed to be causally independent of the slow-decay harm pattern without satisfying the Compound Event Independence Test. Compound Event Independence Test: A flagged acute event may be processed as an independent classification if and only if: (a) the acute event affects a domain with no overlap with the active slow-decay classification domains; OR (b) the causal pathway between the acute event and the slow-decay pattern is independently assessed as implausible by the Classification Integrity Officer within 4 hours of flagging. If neither condition is satisfied within 4 hours, the compound event routes to Compound Review. Compound Review Protocol: Under Compound Review: (1) The acute event's PIO processing is held pending compound assessment. Maximum hold: 6 hours for habitability events, 2 hours for safety events. (2) The Classification Integrity Officer assesses whether the acute event is plausibly a tool of the active slow-decay targeting. (3) If plausible: the acute event is reclassified as a compound event component; its resolution is attached to the slow-decay classification; PIO issues with compound cause notation. (4) If not plausible: the acute event proceeds as independent classification with a compound flag retained in the audit record.
+[TABLE]
+PROPOSITION 3.1  Set-Scalar Translation The product formulation Φ_global(t) = ∏_{k,l}φ_{kl}(t) is a continuous relaxation of the intersection axiom V_global = ∩_i V_i with three formal properties: (a) Null preservation: Φ_global = 0 iff ∃(k,l) with φ_{kl}(t) = 0, consistent with set-theoretic null condition. (b) Strict monotonicity: Φ_global is strictly decreasing in each φ_{kl}. (c) Intermediate divergence: the product can read as 'critical' through moderate degradation across many subgraphs even when no single subgraph has collapsed — a behavior absent from the binary intersection. This divergence is managed by the terminal status tensor T(t), which provides the binary collapse detection the product alone cannot guarantee. Operators must formally distinguish low-Φ produced by distributed moderate degradation from low-Φ produced by a single catastrophic collapse, as these require different responses: structural reform versus enforcement actuation respectively.
+[TABLE]
+◆  Inter-Subgraph Conflict Protocol (ISCP) When ∇Φ_global shows simultaneously declining φ_{kl} and causally connected rising φ_{k'l'} for two subgraphs — a conflict signature — the framework executes the following protocol instead of standard enforcement routing: Flag explicitly:  The system issues a CONFLICT classification rather than an ALERT, suspending enforcement actuation pending deliberative resolution. Characterize formally:  Output includes: which access dimensions are in tension, estimated tradeoff magnitudes (∂φ_{kl}/∂φ_{k'l'}), terminal status indicators for each subgraph, and causal attribution for each directional effect. Route to deliberation:  CONFLICT output routes to Layer 0 democratic deliberation, not Layer 5 enforcement. The framework provides structured inputs to the deliberative body — not a resolution. Scope limitation:  ISCP applies only when the causal connection between subgraph trajectories is confirmed at Tier 2 or above. Uncorrelated simultaneous declines in two subgraphs trigger independent ALERT processing for each. The constitutional claim is bounded: AHC can detect and characterize inter-subgraph conflicts with greater precision than existing frameworks. It cannot resolve them. That resolution requires democratic deliberation with better-structured information — exactly what ISCP provides.
+[TABLE]
+▶  Trust Displacement Tractability Hierarchy The probability of undetected simultaneous capture of all three ATG pillars is P_capture(A) · P_capture(B) · P_capture(C) · P_undetected, where each capture event requires an independent coordinated operation on a different institutional type (sensor network, historical record, peer system). If captures are independent — which the air-gapped design intends — this compounds multiplicatively. This makes AHC's threshold architecture structurally harder to capture than: Single-source threshold (e.g., frozen statutory poverty line): requires capturing one actor or one methodology. P_capture. Dual-source threshold (e.g., statutory + international standard): requires two simultaneous captures. P² where the two captures are independent. AHC three-pillar ATG: requires simultaneous capture of f+1 sensor nodes in Pillar I AND corruption of historical anchor data in Pillar II AND capture of f+1 peer-network sources in Pillar III AND evasion of the cross-pillar divergence alarm. Four independent conditions, compounding multiplicatively. This is a resistance claim, not a security proof. It holds insofar as the three pillars are genuinely epistemically independent. The sensor independence audit of Section 8.3 is the mechanism for verifying and maintaining that independence over time.
+[TABLE]
+Mechanism | Trigger | Action | Key Constraint
+M4: Gradient Warning | Â_{kl}(t+Δt) > A* (predicted); OR leading indicators escalating | Yellow Protocol: cryptographic broadcast. Zero enforcement. | Transparent; mobilization function only
+M1: Graduated Capital | Tier 1 confirmed; 2A* < A < 5A* | Exponential ramp aid routing; graduated ESG divestment | Flash-crash dampeners; ramp proportional to market depth
+M2: Selective Severance | Terminal_{kl,j} = 1; Tier 2 confirmed for attack dimensions | Protocol Zero on specific compromised APIs only — dimensional specificity required | No full infrastructure severance; civilian collateral constraint
+M3: Exogenous Sanctions | A > 5A* sustained; Tier 3 causal ID satisfied | Node-level sanctions on attack authorization chain; state-level tariff ratchet | Granular node targeting preferred; aggregate state sanctions for large states only
+[TABLE]
+SECTION 9.4  Compound Event Enforcement (New — v3.1) When a compound event is confirmed under Section 6.3, Layer 5 enforcement responds under the following modified protocol: Hold on displacement: Any displacement, eviction, or forced exit associated with the acute event is subject to a 72-hour hold pending Compound Review completion. This hold is issued as a Compound Protective Hold, distinct from the standard PIO, and operates even if the standard PIO mechanism is not available for the slow-decay timescale. Compound cause notation: All enforcement records for the acute event carry a compound cause notation visible in the PLOL output for the affected community, stating that the acute event has been assessed in relation to the active slow-decay classification. Audit attachment: The compound event and its resolution are permanently attached to the slow-decay classification record, such that any review of the slow-decay classification has full access to the compound event history. Principle 9.4.1: The architecture may not process an acute event as causally isolated from an active slow-decay classification in the same jurisdiction and domain without satisfying the Compound Event Independence Test. Failure to apply the compound event flag where conditions are met constitutes a classification integrity failure subject to Integrity Review.
+[TABLE]
+Candidate A — The IPCC Model: Scientific Authority A scientific body producing outputs that member states are politically obligated to engage with but not technically bound by in the first instance. AHC's measurement outputs and viability field reports function analogously to IPCC Assessment Reports: politically authoritative, methodologically transparent, produced by independent experts, requiring state response without mandating specific state action. Enforcement authority accretes as the outputs build a track record. Suitable for Phase 1–2 adoption where pure diagnostic capacity is politically achievable.
+[TABLE]
+Candidate B — The CBO Model: Procedural Embedding A congressional or parliamentary office with mandate independence whose outputs are formal required inputs to legislative deliberation. AHC's viability field and threshold outputs become mandatory inputs to civil rights enforcement proceedings, legislative impact assessments, and agency rulemaking — not binding, but procedurally unavoidable. Models: Congressional Budget Office (1974), Government Accountability Office, Office of Technology Assessment. Suitable for integration into existing legislative infrastructure without requiring treaty or constitutional amendment.
+[TABLE]
+Candidate C — The Financial Stability Board Model: International Treaty Authority A post-crisis international body with standing to issue binding recommendations to member states, funded by member contributions, with a secretariat outside any single state's control. Models: Financial Stability Board (2009), Basel Committee on Banking Supervision. AHC's terminal status tensor outputs trigger treaty-bound state obligations. Suitable for the international enforcement components of Layer 5, especially the exogenous tariff ratchet and peer-network sanctions. Requires treaty ratification — higher political barrier but more durable enforcement authority.
+[TABLE]
+⬡  Plain Language Output Layer — Constitutional Requirement Every AHC output — at every evidence tier — must have a corresponding plain language summary satisfying three criteria: Explainability:  Readable and understandable by a literate non-expert in under 3 minutes. No technical notation. States what decision was made and why in plain terms. Contestability:  States explicitly what evidence would falsify the classification, in non-technical terms. A person who believes the classification is wrong must be able to understand how to challenge it. Auditability:  Links to the full technical record for expert review. Plain language summary is a navigation entry point, not a substitute for technical transparency. Rationale: A governance system whose outputs cannot be understood in plain language by the populations it governs cannot claim democratic legitimacy, regardless of the sophistication of its internal architecture. When the public must trust operators rather than understand reasons, the framework reproduces the legitimacy crisis it was designed to prevent — with technical operators in place of political ones. The PLOL is therefore not optional. It is the mechanism by which AHC's democratic legitimacy claim is operationalized at the output layer. Model: Federal Reserve FOMC communications architecture (technical research + accessible press conferences + public summary documents).
+[TABLE]
+LAYER 0: LEGITIMACY SUBSTRATE Proof-of-personhood governance  |  Emergency authority + Crisis Frequency Cap  |  Plain Language Output Layer  |  Three institutional candidates (Companion A)  |  International appeals body
+↕  constitutionally authorizes, audits, and receives plain-language outputs from  ↕
+LAYER 5: ACTUATION & ENFORCEMENT Tiered evidence-action protocol (Tier 0–3 + PIO)  |  Hysteresis + FAR spec  |  M4 Gradient Warning  |  M1 Graduated Capital  |  M2 Selective Severance  |  M3 Node-Level Sanctions
+↕  triggered by confirmed alerts; ISCP conflicts routed to Layer 0  ↕
+LAYER 4: AUTONOMOUS THRESHOLD GENERATOR θ = max[θ^emp, θ^hist, θ^exo]  |  Formal tractability hierarchy  |  Byzantine consensus + independence audit  |  Constitutional anchors  |  Divergence alarm  |  Divergence routes to Layer 0
+↕  calibrates viability floors for  ↕
+LAYER 3: VIABILITY FIELD φ_{kl}(t)  |  Φ_global = ∏φ_{kl} [Prop. 3.1]  |  Terminal tensor T(t)  |  ∇Φ early warning  |  Â trajectory predictor  |  Inter-Subgraph Conflict Protocol
+↕  evaluated against  ↕
+LAYER 2: MULTI-TIMESCALE DECAY TENSOR λ_{kl,j}(t)  |  Timescale regimes  |  Terminal status tensor T(t)  |  τ^response vs τ^decay  |  PIO eligibility by timescale
+↕  applied to  ↕
+LAYER 1: POPULATION STATE MANIFOLD x_i(t) five-domain state vectors  |  Intersectionality tensor M (sparse)  |  Three harm mechanisms  |  Tiered causal ID protocol  |  A_{kl}(t)  |  Leading indicator sublayer  |  Sentinel sampling
+[TABLE]
+⚠  Epistemic Status of This Section Section 12.1 presents an internal coherence test — the adversarial simulation demonstrates that the framework's components interact consistently, not that the model correctly describes the world. Sections 12.2–12.5 present four historical backtests against cases with varying degrees of established ground truth. Sections 12.4 and 12.5 address cases that were genuinely contested at their time of analysis — the harder and more important diagnostic test. None of these constitutes rigorous validation. Companion B specifies the pre-registration validation methodology required for that standard.
+[TABLE]
+Backtest: EO 9066 — Expected: Type A MRI / Terminal / V_global = 0 Causal ID: (1) DiD: V_{JA} diverges catastrophically from matched non-Japanese minority populations at Feb 19, 1942 implementation date; parallel pre-trends confirmed. (2) RD: Discontinuous state-vector collapse at policy timestamp. (3) Mechanism: EO 9066 names Japanese ancestry explicitly. All three Tier 3 criteria satisfied. Decay/Response: τ_decay (housing, economic): 72h–2 weeks. τ_response (Korematsu reversal): 32 months. τ_response (Civil Liberties Act): 46 years. Terminal_{JA,j} = 1 across housing, economic, legal dimensions within weeks. PIO would have triggered within 72h of executive order. AHC Verdict: Type A MRI confirmed. V_global → 0. Locally terminal. Consistent with Commission finding of 'race prejudice, war hysteria, and failure of political leadership.' Type A classification (deliberate centralized targeting) consistent with documented command structure and explicit demographic designation.
+[TABLE]
+Backtest: Post-Shelby — Expected: Mixed Type A/B; Partial Alert; No Terminal Causal ID: DiD shows differential franchise score decline in covered vs. non-covered jurisdictions post-June 25, 2013 (Shelby decision); parallel pre-trends confirmed. RD confirms discontinuity at decision date. Mechanism: state legislative actions explicitly timed to Shelby ruling, documented in legislative records. Type A for states with documented legislative coordination; Type B for emergent closures without coordination evidence. AHC Verdict: Partial MRI. Yellow Protocol through Tier 1. No terminal classification. φ_{Black_voter} and φ_{Latino_voter} decline below θ^{hist} in affected jurisdictions. Graduated capital routing and leading indicator escalation triggered. Consistent with academic consensus: serious constitutional harm, not catastrophic collapse. The graduated architecture correctly preserves this distinction.
+[TABLE]
+Backtest: Zero Tolerance (2018) — Expected: Type A MRI; PIO Eligible; Terminal on Health/Legal Context: Zero Tolerance policy announced April 6, 2018. V_{target}: asylum-seeking families at southern border. Administration characterized as standard law enforcement; critics characterized as deliberate harm. DOJ internal communications, published in May 2018, stated deterrence through family separation as explicit policy objective. Causal ID at time of policy: (1) DiD: V_{asylum_seekers} family separation rate jumps from ~0% to ~100% at April 6 policy date; non-asylum immigration enforcement shows no equivalent family separation rate change. (2) RD: Discontinuous jump at policy timestamp confirmed by Border Patrol data available at the time. (3) Mechanism: DOJ memorandum explicitly specifying deterrence through separation available in real time as mechanism documentation. All three Tier 3 criteria satisfiable within weeks of policy announcement using contemporaneous data. AHC Verdict at time of policy: Type A MRI. PIO triggers within 72h on legal standing and health dimensions. τ_decay (parent-child separation harm): hours to days, per established developmental psychology [Shonkoff et al. 2012]. τ_response (judicial injunction): Ms. L v. ICE injunction issued June 26, 2018 — 81 days after policy initiation. Terminal_{health,legal} = 1 within days. This case demonstrates the framework would have produced the correct classification before political consensus existed, using the mechanism-documentation criterion.
+[TABLE]
+Backtest: Georgia SB 202 (2021) — Expected: Mixed; Genuine Classification Uncertainty Context: SB 202 enacted March 25, 2021. Provisions: shortened early voting window, restricted absentee ballots, criminalized distributing food/water to voters in line, added ID requirements. Primary affected subgraphs: V_{Black_voter_GA}, V_{Latino_voter_GA}. Administration characterized as election security; opponents characterized as targeted suppression. Causal ID challenges: (1) DiD: Identifying a matched control jurisdiction is non-trivial — no other Southern state with comparable recent VRA history passed equivalent legislation at the same time. Synthetic control methods required. (2) RD: Franchise score effects will not be measurable until the 2022 election cycle — RD is temporally delayed relative to policy passage. (3) Mechanism: SB 202 does not name race explicitly. Circumstantial evidence of targeting intent exists (timing after record Black turnout in 2020 Georgia runoffs); legislative history shows discussion of that turnout as motivation. Mechanism verification is contestable. AHC Verdict: Tier 1 Correlational classification only. Full Tier 3 causal ID not satisfiable at time of policy passage. Yellow Protocol and enhanced monitoring appropriate. The framework produces an honest 'classification pending' output — neither dismissing the concern nor overclaiming certainty. This is the correct behavior for a genuinely contested case. The ISCP does not trigger because the conflict is not inter-subgraph; it is between the state's articulated security rationale and the subgraph's franchise access claim. That conflict routes to legal challenge, not ISCP.
+[TABLE]
+◆  Formal Domain Restriction: The Declining Democracy Window AHC is designed for the declining democracy window — the interval during which: (a) institutional capacity for measurement and governance remains partially intact; (b) political authorization for adoption is achievable through normal legislative or treaty processes; and (c) subgraph targeting has not yet achieved full institutional capture of the enforcement mechanisms themselves. AHC is not designed for: (1) fully captured authoritarian states where measurement infrastructure is already compromised and political authorization is unavailable; (2) stable high-functioning democracies with no imminent degradation (where it functions as precautionary maintenance, not active rescue). This restriction makes the framework more credible, not less ambitious. The declining democracy window is precisely the condition where effective intervention is most possible and most consequential — and where most documented democratic backsliding occurs [Levitsky & Ziblatt 2018; Lührmann & Lindberg 2019]. Knowing what a governance tool is for is a sign of intellectual seriousness.
+[TABLE]
+Phase | Scope | Institutional Form | Political Requirement | Duration
+Phase 1: Diagnostic | Layers 1–3 + PLOL. Measurement and reporting only. No enforcement. | Enhanced GAO or new independent office; annual subgraph viability reports | Simple legislative majority. Low executive resistance for pure reporting. | 2–3 years
+Phase 2: Threshold Autonomy | Add Layer 4 ATG + Independence Audit. Byzantine sensor network construction. Constitutional Anchor verification. | Independent congressional office; international data-sharing treaties; peer enrollment | Bipartisan threshold mechanism support; treaty ratification for international air-gap | 3–5 years
+Phase 3: Graduated Enforcement | Add Layer 5 Tiered Protocol + Layer 0 governance with Crisis Frequency Cap. | Layer 0 institutional form (Candidate A, B, or C); international arbitration standing | Significant political authorization; most viable after Phase 1–2 demonstrated accuracy | 5–10 years
+[TABLE]
+OP. 1  Slow Sensor Independence Corruption [Companion B] Characterize the minimum time horizon T_{preposition} over which Independence_s(t) provides detectable early warning of gradual sensor capture through funding flows, methodological influence, and personnel placement. Design a Byzantine consensus protocol maintaining m > 2f+1 fault tolerance as effective independent sensor count decreases due to detected capture. Identify institutional structural features — funding diversity requirements, methodological independence standards, personnel rotation mandates — that structurally resist pre-positioning, analogous to central bank independence design features [Alesina & Summers 1993].
+[TABLE]
+OP. 2  Layer 0 Legitimacy Under Procedural Capture [Companion A] Specify the minimum Layer 0 governance structure satisfying three simultaneous constraints: (a) democratically legitimate under proof-of-personhood weighting; (b) resistant to capture through mass registration campaigns and procedural delay tactics; and (c) capable of operating within the thermodynamic time constraints of Axiom II — i.e., τ_governance < τ_decay for each timescale regime. Formally derive the governance latency requirements implied by the decay tensor for each timescale regime and identify constitutional design features — supermajority thresholds, standing requirements, pre-authorization scope, emergency authority bounds — that satisfy these constraints while preserving democratic legitimacy.
+[TABLE]
+OP. 3  Federated Global Viability Under Correlated Backsliding [Companion C] Design a recursive AHC federation protocol in which each national instance's viability signals update the peer weights w_e(t) of all other instances, such that globally correlated authoritarian backsliding is detected as a coordinated attack rather than absorbed into the exogenous threshold baseline. Address: (a) computational tractability of mutual signal exchange across n instances; (b) stability of recursive weighting against oscillation and weight concentration; (c) governance architecture for a federated body with standing to reclassify peer members as compromised without creating a mechanism for geopolitical capture.
+[TABLE]
+OP. 4  Rigorous Validation and Adversarial Mimicry [Companion B] Two connected problems: First, specify the pre-registration methodology for rigorous historical validation — the set of cases with independently established ground-truth classifications tested blind, including ablation studies and false-positive rate measurement against the FAR specification. Second, formally characterize adversarial mimicry under legible trigger logic [Lucas 1976; Goodhart 1983]: can threshold gaming (harm smoothed below A*), timing randomization (to evade simultaneity metrics), accountability fragmentation (across jurisdictions), and coordinated exogenous signal spoofing be detected by the current tiered causal identification architecture? Specify the modifications required to maintain detection under these adaptive strategies and estimate the resulting arms-race equilibrium detection threshold.
+[TABLE]
+Attack Discriminant A_{kl}(t) | Observational score. Necessary but not sufficient for MRI classification; requires Tier 2 or Tier 3 causal ID confirmation. Sec. 5.4.
+[TABLE]
+Autonomous Threshold Generator (ATG) | Three-pillar threshold derivation system independent of domestic state control. Sec. 8. Formal tractability hierarchy: Sec. 8.2.
+[TABLE]
+Byzantine Measurement Consensus | Threshold derivation requiring m > 2f+1 independent sensors tolerating f corrupted inputs [Lamport et al. 1982]. Sec. 8.3. Independence audit: continuous Corr(s, s_state) monitoring.
+[TABLE]
+Causal Identification Protocol | Three-stage procedure (DiD + RD + mechanism verification) for Tier 3 MRI classification [Pearl 2009; Angrist & Pischke 2009]. Sec. 5.5.
+[TABLE]
+Constitutional Moment Anchors T* | Immutable verified historical snapshots used as permanent floor references in the Historical Ratchet. Sec. 8.4.
+[TABLE]
+Crisis Frequency Cap | Constraint preventing emergency authority renewal when emergency has been active > T_cap days in a rolling 24-month window. Triggers Structural Review Protocol. Sec. 10.3.
+[TABLE]
+Declining Democracy Window | AHC's formal operational domain: systems with partially intact institutions, available political authorization, and incomplete institutional capture. Sec. 13.1.
+[TABLE]
+Divergence Alarm D_j(t) | Variance of ATG pillar outputs. High divergence routes to Layer 0 audit; system fails safe rather than open under measurement attack. Sec. 8.6.
+[TABLE]
+False Alert Rate (FAR) | Design parameter: P(ESCALATE | no MRI) ≤ 0.01 per subgraph per year. Calibrated per ISA-18.2 alarm management standards. Sec. 9.2.
+[TABLE]
+Global Viability Field Φ_global(t) | Product of all subgraph viability indices. Continuous relaxation of intersection axiom. Intermediate divergence from set-theoretic axiom managed by terminal status tensor T(t). Sec. 7.2 + Prop. 3.1.
+[TABLE]
+Inter-Subgraph Conflict Protocol (ISCP) | Protocol for cases where protecting one subgraph constrains another. Suspends enforcement; formally characterizes conflict; routes to Layer 0 deliberation. Sec. 7.3.
+[TABLE]
+Intersectionality Tensor M | Sparse binary tensor M ∈ {0,1}^{N×K×L} encoding overlapping demographic membership. Formalizes Crenshaw [1989, 1991]. Sec. 5.2.
+[TABLE]
+Korematsu Illusion | Systematic misidentification of state-sponsored subgraph collapse as democratic health, produced by aggregate evaluation frameworks. Sec. 1.1.
+[TABLE]
+Leading Indicator Sublayer | Proxies leading primary state-vector decline by 1–16 weeks: civic participation, application abandonment, informal police contacts, service wait differentials. Sec. 5.6.
+[TABLE]
+Malicious Routing Injection (MRI) | Classification issued when three-stage Tier 3 causal identification criteria are satisfied. Observational signals alone (Tier 0) are insufficient. Sec. 4.3 + 5.4.
+[TABLE]
+Ontological Floor Collapse | State strategy of redefining threshold parameters downward to erase detection of atrocity. Defeated by ATG independence architecture. Fisher [1992]; Eisinger [1998]. Sec. 8.1.
+[TABLE]
+Plain Language Output Layer (PLOL) | Constitutional requirement: every AHC output must have a plain language summary satisfying explainability, contestability, and auditability criteria. Not optional. Sec. 10.4.
+[TABLE]
+Protective Interim Order (PIO) | Emergency Tier 1 response for acute attacks (τ_decay < 72h) authorized on Tier 0 observational evidence; subject to mandatory Layer 0 review within 72h and automatic reversal if Tier 1 confirmation fails. Sec. 5.4.
+[TABLE]
+Structural Review Protocol | Mandatory full Layer 0 constitutional review triggered when Crisis Frequency Cap is exceeded. Produces formal remediation plan, constitutional amendment process, or explicit threshold recalibration decision. Sec. 10.3.
+[TABLE]
+Terminal Status Tensor T(t) | Binary tensor in {0,1}^{K×L×d} flagging subgraph-dimension pairs where τ_response > τ_decay. Implements Axiom II per dimension; provides binary collapse detection that product formulation cannot guarantee alone. Sec. 6.
+[TABLE]
+Tiered Evidence-Action Protocol | Five-tier (0, 1, 2, 3, PIO) proportionality structure matching evidence requirements to authorized response severity and reversibility. Core architectural addition of v3.0. Sec. 5.4.
+[TABLE]
+Trust Displacement Tractability Hierarchy | Formal comparative claim that three-pillar ATG is structurally harder to capture than single- or dual-source alternatives by a multiplicative probability factor. Sec. 8.2.

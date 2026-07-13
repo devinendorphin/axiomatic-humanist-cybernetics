@@ -1,0 +1,501 @@
+
+COMPANION A  [AHC-L0]
+Version 3  —  Simulation Findings Integration
+The Legitimacy Substrate: Constitutional Interface
+
+March 2026  |  Third revision — adversarial review loop + phenomenological simulation
+
+Table of Contents
+Abstract  |  1. Introduction and Governing Principles  |  2. The Three Constitutive Tensions  |  3. Reframing the Ashby Problem  |  4. Layer 0A and Layer 0B  |  5. The Plain Language Output Layer — Revised  |  6. Community Contact Architecture (New)  |  7. Anti-Panopticon Sensing Architecture  |  8. Sentinel Node Architecture  |  9. Friction-Based Subgraph Nomination and Standing Doctrine  |  10. Compound Event Operational Protocol (New)  |  11. Community Standing, Contestation, and Pause Powers  |  12. Governance Franchise Layer  |  13. Tribunal and Appeals Architecture  |  14. Institutional Birth Roadmap  |  15. Epistemic Validation Protocol  |  16. International Embedding  |  17. Limits, Open Problems, and Failure Modes — Revised  |  18. Conclusion
+Appendices: A. Layer 0A/0B Schema  |  B. PLOL Dual-Output Specification — Revised  |  C. Cohort Standing Transition Model  |  D. Tribunal Review Matrix  |  E. Institutional Mode Operability Conditions  |  F. Recalibration versus Rollback  |  G. Community Standing Minimal Rights Charter  |  H. Open Problems Register — Revised  |  X. Shared Definitions and Notation
+
+1. Introduction and Governing Principles
+1.1 The Problem and the Bounded Claim
+The master AHC architecture begins from the claim that a democratic order may preserve aggregate procedural stability while forcing demographic subgraphs below non-compensable viability floors. Companion A specifies the constitutional translation layer through which this architecture becomes publicly contestable, procedurally reviewable, and institutionally incorporable without requiring citizens to perform its full computation.
+The claim is bounded. Companion A does not solve legitimacy in general. It does not remove politics. It does not prove that any given polity will adopt AHC. It specifies the constitutional conditions under which a rights-protective cybernetic system may act without demanding blind trust, without centralizing personal dossiers, and without collapsing into either opacity or fully legible gameability.
+1.2 Version 3 Additions
+Version 3 incorporates findings from a phenomenological simulation — a speculative fiction generated to render the experience of AHC's correct operation from inside a targeted community. The simulation identified five specification gaps and two irreducible limits not found by prior analytical methods. These additions are marked throughout the document with the simulation finding indicator ⊙.
+1.3 Governing Principles
+
+
+
+
+
+
+
+2. The Three Constitutive Tensions
+Three tensions bound the Layer 0 problem. They are constitutive — inherent to any counter-majoritarian constitutional architecture — rather than correctable design flaws.
+Trust displacement limit: distrust of state-reported social reality cannot be eliminated but only shifted into new institutions, methods, and interfaces whose governability must themselves be justified. AHC makes the trust problem more tractable by distributing it across three independently grounded ATG pillars. It does not resolve the regress.
+Observability lag: many harms become reliably measurable only after they have already begun to harden. The leading indicator sublayer reduces this lag. It does not eliminate it. The architecture is structurally retrospective with respect to harms that precede administrative legibility.
+Adversarial adaptation arms race: once a measurement architecture becomes known, hostile actors adjust their routing, timing, and concealment strategies. The simulation added a fourth dimension to this tension: adversaries can exploit the interaction between classification tracks, generating acute events as tools for executing slow-decay harms that are simultaneously under review. See Section 10.
+
+3. Reframing the Ashby Problem
+Ashby's Law of Requisite Variety requires that a control system possess at least as much complexity as the system it seeks to regulate. The constitutional solution is not reduction of computational complexity to public simplicity, but translation of rights-affecting outputs into semantically contestable form under ratified review structures.
+
+
+4. Layer 0A and Layer 0B
+4.1 The Distinction
+Layer 0A is the Public Constitutional Interface: model features, procedures, outputs, and review rights that must remain publicly legible for constitutional legitimacy. Layer 0B is the Adversarial Resilience Boundary: anti-evasion features whose continuous full disclosure is not required for constitutional legitimacy, provided their bounded opacity does not alter the public logic of classification, the rights of challenge, or available remedies.
+
+
+4.2 The Layer 0B Footer — Revised Standard ⊙
+The simulation identified that the Layer 0B disclosure footer, as previously specified, satisfied Principle 4.1 while failing to answer the community's actual question: is there something the system is not seeing because of what's hidden, and could that be why it isn't catching what's happening to us?
+
+
+The revised Layer 0B footer standard replaces the prior specification:
+
+
+5. The Plain Language Output Layer — Revised
+5.1 Core Definitions — Unchanged
+Semantic contestability (Definition 5.1), technical reproducibility (Definition 5.2), and the hash bridge (Definition 5.3) are unchanged from v2. Proposition 5.1 — that semantic contestability is necessary for public legitimacy and technical reproducibility is necessary for expert accountability, and neither is sufficient for the other — is unchanged.
+5.2 Three New Mandatory PLOL Fields ⊙
+The simulation identified three gaps in the current PLOL specification. All three produce situations where the document is technically compliant but practically insufficient. Three new mandatory fields address them. These are additions to the Semantic Contestability Record specification in Appendix B.
+
+
+Field A — Uncertainty Statement (Plain Language)
+The uncertainty budget currently appears only in the Technical Reproducibility Record. The simulation showed that a community reading their PLOL has no way to know how much of what they are experiencing is visible to the system. A 0.61 soft-harm capture probability — a 39% miss rate on informal harms — is not only an expert-auditing concern. It is the community's right to know.
+
+Field B — Immediate Limitation Disclosure
+The simulation identified that communities interpret a Tier 1 classification as providing more immediate protection than it does. A classification that correctly observes harm without preventing it in the immediate term must say so plainly. Anything less is a misrepresentation by omission.
+
+Field C — Resource Access Field
+The falsification condition currently requires an independent qualified reviewer — a resource the affected community does not have access to through the capital routing the Tier 1 classification provides. The right and the resource are structurally decoupled. The PLOL must bridge this gap.
+
+
+6. Community Contact Architecture ⊙
+Version 2 did not specify the mechanism through which communities contact the AHC system for methodology challenges, pause petitions, or general inquiries beyond the generic provision of 'web forms' and 'contact channels.' The simulation identified that the existing query taxonomy — a dropdown menu of pre-defined inquiry types — functions as a vocabulary capture mechanism, requiring communities to translate their concerns into the architecture's own categories before the system will process them.
+
+
+6.1 Revised Community Contact Standard
+
+
+This requires the following contact architecture:
+
+
+7. Anti-Panopticon Sensing Architecture
+7.1 Zero-Knowledge Telemetry
+Zero-Knowledge Telemetry (ZKT) is a sensing architecture in which the central manifold receives only privacy-preserving aggregates, derivatives, or inferential claims necessary for viability classification, together with cryptographic proofs sufficient to verify their authorized derivation, while being denied direct access to central personally identifying dossiers wherever feasible.
+
+
+Open Problems 7.A-7.C (cross-domain joint inference without central microdata pooling; subgraph membership validation without identity exposure; privacy budgets preserving sensitivity) remain open and are addressed in Companion D [AHC-IMPL]. The interim specification for Phase 1 Diagnostic Mode uses Secure Aggregation with Differential Privacy noise addition at the node level [Bonawitz et al. 2017], with explicit ε budget declarations in the Technical Reproducibility Record. This is an interim standard, not the full ZKT specification.
+7.2 Interim Phase 1 Privacy Standard
+During Phase 1 Diagnostic Mode, before full ZKT specification is available, the following minimum requirements apply:
+Secure Aggregation protocol: cross-domain compound vulnerability derivatives computed via Bonawitz et al. [2017] Secure Aggregation, preventing individual record exposure during aggregation
+Differential Privacy budget declared: ε ≤ 1.0 for housing and economic domains; ε ≤ 0.5 for health and legal domains. Budget consumption logged per reporting cycle
+Confidence intervals propagated: resulting confidence intervals on φ_{kl}(t) propagated through to classification uncertainty declarations in the PLOL Technical Reproducibility Record
+Individual non-identifiability: central manifold receives no data that permits identification of individuals whose contributions constitute the aggregate; verified by independent privacy audit at least annually
+
+8. Sentinel Node Architecture
+8.1 Institutional Participation
+A sentinel node is an institution or organized civic infrastructure that contributes bounded, rights-relevant, privacy-preserving signals into the AHC sensing network under an authorized participation protocol. Participation requires governance procedures appropriate to the institution's sectoral obligations, including where relevant: data-use authorization, IRB-compatible review, board approval, participant disclosure, or federated member consent.
+8.2 Expanded Node Ecology
+Version 2 drew the sentinel node ecology primarily from legal and medical institutions. The simulation and prior red team passes identified this as a vulnerability: narrative risk ('secret clinic surveillance network'), decapitation risk, and epistemic skew toward harms legible to those institutions. Version 3 specifies a broader ecology:
+
+
+Node ecology diversification is required, not optional. No more than 40% of active sentinel nodes in any jurisdiction may come from a single institution type. This prevents both decapitation risk and epistemic monoculture.
+8.3 Sentinel Node Mutual Defense Protocol
+When a sentinel node faces legal action, regulatory investigation, or coordinated discreditation campaign, the network's institutions have pre-committed obligations: (a) amicus or public support filings where legally appropriate; (b) resource sharing for legal defense costs up to a specified cap; (c) coordinated public statements affirming the node's participation status and methodology compliance. The credibility of the mutual defense commitment deters attacks on individual members.
+8.4 Absence-of-Signal Detection ⊙
+The simulation suggested an infiltration variant not previously specified: a hostile or captured node that contributes no false signals but simply omits signals about certain harm types. This appears in the independence audit as low signal frequency from an apparently low-harm area, not as correlated-with-state output.
+
+
+9. Friction-Based Subgraph Nomination and Standing Doctrine
+Friction-Based Subgraph Nomination is the process by which recurrent, correlated, multidomain patterns of deterioration generate candidate cohorts for analytic visibility independent of rigid state-defined categories. Three cohort types with distinct standing are specified, plus the Overflow doctrine for cohorts that cannot be fully mapped onto existing legal categories.
+
+
+Ratification franchise: the franchise for signal-to-ratified transition is limited to affected and relevant parties — affected community representatives, subject-matter experts, and civil society organizations with documented engagement with the cohort's conditions. General provincial or municipal referenda are not appropriate franchise definitions for cohort ratification, as they allow majorities whose interests conflict with the cohort's protection to block ratification of real vulnerability cohorts.
+
+
+10. Compound Event Operational Protocol ⊙
+This section is new in v3, arising directly from the phenomenological simulation. It specifies the operational procedures for the Compound Event Interaction Flag defined in the master architecture amendment (AHC v3.1, Section 6.3).
+
+
+10.1 Compound Event Detection and Flagging
+A compound event flag is automatically applied to any acute event (τ_{decay} < 72h) occurring in a building, block, or jurisdiction with an active slow-decay classification (Tier 1 or above) in any overlapping access domain. The flag triggers the Compound Event Independence Test before the acute event is processed as an isolated classification.
+10.2 Community Notification Under Compound Review
+When a compound event flag is applied, the affected community receives immediate notification:
+
+10.3 PLOL Addition: Compound Cause Notation
+When a compound event is confirmed, the PLOL for the affected community receives a Compound Cause Notation — a new mandatory field appended to both the slow-decay classification PLOL and the acute event PLOL:
+
+10.4 The Harder Scenario
+The simulation rendered the compound event in a jurisdiction with an organized community capable of filing a pause petition and interpreting the PLOL. The harder scenario — and a subject for a future simulation pass — is a jurisdiction experiencing the same compound event weaponization without Marisol: no community organization, no law student ally, no institutional literacy sufficient to navigate the contact architecture. The compound event protocol specified here requires a community capable of receiving and acting on the notification. A future simulation should test whether the protocol's community notification design reaches communities without this organizational infrastructure.
+
+11. Community Standing, Contestation, and Pause Powers
+11.1 The Distrust Recognition Principle
+Layer 0 must preserve enforceable rights for affected populations regardless of whether those populations trust the architecture. A rights-protective cybernetic architecture that treats distrust as a communication failure rather than a constitutional condition is structurally vulnerable to reproducing the very domination it claims to resist.
+11.2 Community Standing
+Community standing is the formally recognized authority of affected populations or their accountable representative bodies to challenge methodology, contest local deployment, trigger review, and seek pause or remand under ratified procedures. Community standing is a constitutional requirement of Layer 0, not a communication strategy.
+11.3 Pause Powers — Revised Standard
+A pause power is a procedurally specified capacity by which affected communities may suspend deployment, expansion, or local incorporation of the architecture pending review of a rights-relevant challenge. Version 3 adds a formal standard for cognizable versus non-cognizable pause grounds, following identification of the dual failure modes of chilling effect (making petitioning socially costly) and petition flooding (overwhelming the system with frivolous petitions).
+
+
+11.4 Anti-Flooding Mechanism
+When petition volume from a single jurisdiction exceeds a calibrated baseline rate, the system flags for coordinated review — distinguishing between genuine community concern generating multiple petitions and coordinated petition flooding. Coordinated flooding patterns route to the Tribunal's Parameter Legitimacy Review channel as evidence of bad-faith engagement, not to the standard pause petition review.
+11.5 Pause Power Scope — Jurisdiction-Specific
+Pause powers are community-specific in scope. A community's pause power halts deployment in their specific jurisdiction or as applied to their specific cohort. It does not halt deployment for other communities. This prevents the veto-as-fracture attack: using one community's pause power to halt protective measures that benefit other communities, manufacturing inter-community conflict to fracture the political coalition supporting the architecture.
+11.6 Community Statistical Support Fund ⊙
+The simulation identified that Tier 1 capital routing provides resources for operational costs but not for the expert statistical analysis required to exercise the right to contest methodology. The right and the resource are structurally decoupled. Version 3 adds the Community Statistical Support Fund as a mandatory allocation within Tier 1 capital routing.
+
+
+12. Governance Franchise Layer
+12.1 Privacy-Preserving Civic Franchise Verification
+Governance votes over parameter updates are weighted by verified unique personhood rather than token holdings or institutional membership, using privacy-preserving civic franchise verification. The mechanism preserves one-person-one-vote ratification integrity while minimizing Sybil manipulation, privacy exposure, and coercive access distortions.
+12.2 Non-Regression Ratchet and Distinction from Recalibration
+Any update that reduces the architecture's protective sensitivity requires a higher burden than an update that expands, refines, or clarifies protections (Principle 10.1). Rollback and recalibration are constitutionally distinct acts requiring distinct evidentiary procedures (Proposition 10.1). The full specification of this distinction and the Recalibration Procedure appears in Appendix F.
+12.3 Crisis Frequency Cap
+Emergency authority for any subgraph is unavailable for renewal when emergency has been active more than T_{cap} days in a rolling 24-month window (specified at 180 days). Continued terminal threshold exceedance after the cap escalates to Structural Review Protocol: mandatory full Layer 0 constitutional review producing either a formal remediation plan, a constitutional amendment process, or an explicit threshold recalibration decision. Emergency authority cannot resume until one of these outputs is produced and enacted.
+
+13. Tribunal and Appeals Architecture
+The International Epistemic Tribunal acts as the final appellate body with a strictly epistemic standard of review: states may not defeat a rights-relevant classification merely by appealing to domestic necessity, policy preference, or institutional convenience. They must succeed on one of three distinct review channels.
+
+
+14. Institutional Birth Roadmap
+Three institutional modes of operation — Diagnostic, Domestic Embedding, and Federated Treaty — are dominant modes, not rigid chronological silos. They may overlap, recurse, and partially co-exist. The transition criteria below specify minimum conditions for each mode to be operative, not for the prior mode to cease.
+
+
+The Complementarity Principle governs Phase 3: federated AHC institutions default toward complementarity with existing treaty bodies (ICCPR, ICESCR, CEDAW, CERD, regional human rights courts) unless replacement or supersession is explicitly justified. Building on existing legitimacy is institutionally more plausible than minting new legitimacy from scratch.
+
+15. Epistemic Validation Protocol
+Claims of predictive superiority or rights-detection advantage must be validated through externally legible replication and benchmark comparison. Without this, AHC remains epistemically interesting but constitutionally premature (Proposition 13.1).
+The external validator must be an institution with no funding relationship with AHC's development institutions. The benchmark comparator must be specified in advance as the specific aggregate metric AHC claims to outperform, on a pre-specified task with pre-specified success criteria. The minimum case count for predictive superiority claims is three independently documented cases.
+The phenomenological simulation is now a permanent component of the epistemic validation protocol. Before any major specification change affecting community-facing interfaces, a simulation calibrated to the new specification is required as part of the pre-release review process.
+
+16. International Embedding and Treaty Complementarity
+The Federated Viability Treaty architecture should be designed as complementarity with existing treaty bodies rather than replacement. The FVT's enforcement mechanisms supplement ICCPR Article 2, ICESCR Articles 2-3, CERD's non-discrimination provisions, and regional human rights court jurisdictions. The standing doctrine for AHC-derived evidence before existing treaty bodies is a Phase 2 objective: establishing that AHC viability field outputs meet the evidentiary standards of the Human Rights Committee's General Comment 36 and the Committee on Economic, Social and Cultural Rights' reporting framework.
+
+17. Limits, Open Problems, and Failure Modes — Revised
+17.1 Limits Unchanged from v2
+Limit 15.1: Trust displacement is managed, not abolished.
+Limit 15.2: Observability lag is reduced, not eliminated.
+Limit 15.3: Adversarial adaptation is permanent.
+Limit 15.4: ZKT remains technically underdetermined until privacy-preserving joint inference and membership validation are more fully specified.
+Limit 15.5: The governance franchise layer remains vulnerable to coercion and access asymmetry.
+Limit 15.6: The institutional birth problem remains the deepest unresolved wound.
+17.2 Two New Limits from Simulation ⊙
+
+
+
+18. Conclusion
+Layer 0 is not the machinery that asks vulnerable populations to trust a mathematically sophisticated system because its designers promise that it is just. It is the machinery that guarantees those populations retain standing, contestation rights, pause powers, review pathways, and intelligible explanation whether or not trust exists.
+Version 3 adds five specification improvements arising from a phenomenological simulation that analytical methods did not reach. The compound event protocol, the community contact architecture, the statistical support fund, the revised PLOL fields, and the clarified Layer 0B footer all emerged from rendering the architecture's correct operation from inside a targeted community's experience. The findings confirm that certain classes of architectural vulnerability are only visible from the position of the communities the architecture is designed to protect.
+Two new limits are added: the architecture's correctness as its own wall, and the organization prerequisite. Both are named as design truths rather than solvable problems. A framework that pretends otherwise would be less honest than these limits require.
+The question the simulation was designed to answer — Will the communities this is designed to protect have the sustained power to win the fights the architecture enables them to start? — was not answered. It was rendered as a condition. That rendering is now in the document's permanent record, which is where it belongs.
+
+19. Minimum Viable Architecture for Phase 1 Deployment
+19.1  The Procedural Hypertrophy Problem
+The adversarial development of this architecture has followed a predictable pattern: each patch to a detected vulnerability increases procedural complexity, which creates new attack surfaces, which require more patches. There is an inflection point in this process — identified in the ninth adversarial review pass — where the system is technically smarter but practically weaker, because it has become harder to operate consistently than to circumvent strategically.
+The response to this pattern is not to stop improving the architecture. It is to distinguish between what must be present in Phase 1 Diagnostic Mode and what improves the system's operation when the institutional infrastructure to support it exists. This distinction defines the Minimum Viable Architecture.
+The MVA is not a simplified version of AHC. It is a sequenced deployment of the same architecture, with a clear specification of which elements constitute the irreducible operational core and which elements are protective additions that require Phase 2 or Phase 3 institutional infrastructure to operate without creating new failure modes of their own.
+19.2  The Core Function Criterion
+
+
+Everything else — enforcement mechanisms, compound event protocols, international tribunals, statistical support funds, graduated response tiers — is in service of this criterion. The MVA question is which elements are required for these three conditions to hold versus which elements improve how well the conditions are met.
+19.3  The Multi-Audience Constraint
+A prior MVA framing assumed the architecture could be defined by selecting a single primary audience and optimizing for that audience's requirements. This framing fails because the mechanisms that could respond to a classification are distributed across multiple audiences simultaneously:
+
+
+The architecture cannot optimize for one audience without foreclosing others. Simplifying for courts (rigorous methodology, slow documentation) blocks the community pathway. Simplifying for communities (fast, accessible) fails the court pathway. The MVA must maintain live optionality across all four pathways simultaneously. This is a tighter constraint than minimizing the system — it is minimizing the system while preserving multi-audience operability.
+The mechanism that makes this possible is the Tripartite Output Sequencing Protocol. A single underlying classification event generates three sequenced outputs calibrated to the timescale and evidentiary standard of each audience. The outputs are cryptographically hash-bridged to a single classification event, preventing semantic drift across registers. This is the MVA's architectural core.
+
+19.4  The Tripartite Output Sequencing Protocol
+The current PLOL specification (Appendix B) produces a Semantic Contestability Record and a Technical Reproducibility Record simultaneously. Version 3.1 revises this to a sequenced tripartite structure that cascades outputs by audience timescale. A full revised specification appears in Appendix B of this addition. The protocol summary:
+
+
+The T+0 output is the most critical. It is generated automatically upon threshold breach with no operator intervention required. The community cannot be held hostage to the litigation-track documentation timeline. If the T+30d technical record is incomplete, delayed, or under revision, the T+0 semantic record remains in force and visible.
+The T+72h Civic/Legislative Translation Record is the new middle register identified as missing from prior specifications. It serves the audience that needs more than plain language but less than a full audit trail — NGO directors preparing for city council meetings, organizers filing for injunctions, legislative staff drafting oversight requests. Its specific content requirements and evidentiary standard appear in Appendix I.
+19.4.1  Semantic Consistency Across Registers
+The three registers use different registers to describe the same underlying classification event. Hostile actors will exploit this multiplicity, characterizing differences in framing as inconsistency in the underlying findings. The hash bridge proves all three outputs derive from the same classification event. But the hash bridge proves origin, not consistency. Each register must therefore include a mandatory Consistency Statement.
+
+
+19.5  Phase 1 Operational Core
+Phase 1 Diagnostic Mode operates without enforcement authority, treaty infrastructure, or a dedicated institutional home. It operates through a research consortium — universities, legal aid organizations, civil society networks — producing classification outputs that have methodological defensibility from day one and institutional authority accruing over time through demonstrated predictive validity.
+The following elements are strictly required for Phase 1 operability. All other elements are deferred.
+
+
+19.6  Phase 1 Deferrals
+The following elements are deferred to Phase 2 or Phase 3 because they require institutional infrastructure that Phase 1 cannot support without creating failure modes worse than the vulnerabilities they address.
+
+
+19.7  Phase 1 Substitute Protocols
+Three deferred elements require Phase 1 substitutes — interim mechanisms that preserve the essential function without the full institutional infrastructure.
+19.7.1  Pause Petition Substitute: Public Acknowledgment Protocol
+In Phase 1, communities will file pause petitions. Formal adjudication is deferred. If petitions are simply logged as 'public dissent' with no further action, communities learn that petitioning does nothing in Phase 1 — which destroys the community trust the architecture needs to build for Phase 2 legitimacy. The Phase 1 substitute is the Public Acknowledgment Protocol:
+
+19.7.2  Compound Event Phase 1 Handling
+In Phase 1, when an acute event occurs in a jurisdiction under active slow-decay review, the system cannot issue a Compound Protective Hold. The Phase 1 substitute:
+
+19.7.3  Expert Review: Phase 1 Coalition Model
+The Community Statistical Support Fund requires Phase 2 capital routing. In Phase 1, expert review for methodology contestation is provided through a pre-negotiated coalition of pro-bono statistical reviewers — academic partners, legal aid organizations with quantitative capacity, sympathetic research institutes. The consortium maintains a standing list of pre-vetted pro-bono reviewers. When a community files a methodology challenge, the consortium identifies and connects an appropriate reviewer within 15 business days at no cost to the community. This is less reliable than the formal fund but does not require administrative infrastructure the Phase 1 consortium cannot support.
+
+19.8  Epistemic Authority in Phase 1
+Phase 1 outputs have methodological defensibility from day one. They do not have institutional authority until it accrues through demonstrated predictive validity. This distinction must be stated honestly in all Phase 1 outputs.
+
+
+The IPCC did not achieve binding policy authority in year one. The Centers for Disease Control's epidemiological findings did not immediately bind state health policy. Methodological credibility precedes institutional authority in every analogous case. The T+30d Technical Reproducibility Record's open-source architecture — GitHub commits, published methodology, open replication invitation — is the mechanism by which Phase 1 builds the track record Phase 2 requires.
+19.9  The Complexity Ceiling
+This addition is the last major specification addition to Companion A before external circulation. The research program has identified a ceiling beyond which further specification increases implementation burden faster than it increases protective capacity. The MVA analysis is the program's formal acknowledgment of that ceiling.
+
+
+Appendix B (Revised) — PLOL Tripartite Output Specification
+This appendix supersedes the Appendix B specification in Companion A v3. All prior content is retained where not in conflict. The primary revision is the addition of the Civic/Legislative Translation Record as the second of three sequenced outputs, and the Consistency Statement requirement across all three registers.
+B.1  General Structure
+Every rights-affecting AHC classification generates three linked records in the sequence: Semantic Contestability Record (T+0), Civic/Legislative Translation Record (T+72h), and Technical Reproducibility Record (T+30d). All three records are cryptographically hash-bridged to the same underlying classification event. The non-equivalence rule is unchanged: no register may substitute for another, and the existence of a later register does not excuse omissions from an earlier one.
+B.2  Register 1 — Semantic Contestability Record (T+0)
+Generated automatically at threshold breach. No operator intervention permitted before generation.
+
+B.3  Register 2 — Civic/Legislative Translation Record (T+72h)
+Generated within 72 hours of T+0. Serves civil society organizations, NGO advocates, community organizers, and legislative staff. Targets the Administrative Procedure Act arbitrary-and-capricious standard. Full specification in Appendix I.
+
+B.4  Register 3 — Technical Reproducibility Record (T+30d)
+Generated within 30 days of T+0. Serves courts, expert challengers, and methodology auditors. Targets the Daubert standard for scientific reliability. Content unchanged from prior specification except for the addition of the Consistency Statement and bidirectional hash links.
+
+B.5  PLOL Failure Conditions (Revised)
+PLOL fails constitutional sufficiency if any of the following conditions are present in any register: cannot be understood by its primary audience without expert assistance; omits falsification pathways; materially diverges from linked registers without a Consistency Statement explaining the divergence; omits the uncertainty statement; omits the immediate limitation disclosure; omits the resource access field where the falsification condition requires expert resources; omits the Consistency Statement; or contains a Layer 0B footer that fails the three-component standard.
+
+Appendix I — Policy Attribution Standard
+This appendix specifies the evidentiary methodology for the Civic/Legislative Translation Record (T+72h). The record makes policy causal attribution claims designed for civil society advocacy and administrative law challenge. It targets the Administrative Procedure Act (APA) standard — courts may strike down agency actions that are 'arbitrary, capricious, an abuse of discretion, or otherwise not in accordance with law' — rather than the Daubert standard of the T+30d technical record.
+The APA standard is the correct vehicle because it does not require proving discriminatory intent (the hardest legal standard) or full scientific reproducibility (the Daubert standard). It requires demonstrating that the agency's stated rationale for a policy is contradicted by the evidence of its outcomes — which is precisely what the AHC viability field computation is designed to produce.
+I.1  The APA Hook — Core Logic
+
+I.2  Administrative Mechanics Mapping
+The T+72h record must cite the specific legal instrument that altered the routing conditions for the affected access domain. Routing conditions are altered by: statutes, ordinances, regulations, administrative guidance documents, enforcement priority memoranda, budget allocations, or formal policy changes at any level of government.
+
+I.3  Temporal Granger Linkage
+The T+72h record demonstrates that the viability collapse in the affected subgraph followed the policy instrument's effective date. This is not a causal proof — it is a temporal association that, combined with the Administrative Mechanics Mapping, supports the inference of a policy-driven routing change.
+
+I.4  Rational Explanation Failure Documentation
+This is the core of the APA hook. The T+72h record juxtaposes the agency's stated rationale against the documented viability outcome for the affected subgraph.
+
+I.5  Phase 1 Policy Attribution — Scope and Limitations
+In Phase 1, the T+72h record's Administrative Mechanics Mapping will often be incomplete. Sentinel node data may not be sufficient to isolate a single policy instrument as the primary routing change. Multiple instruments may be simultaneously active. The following scope constraints apply to Phase 1 T+72h outputs:
+
+
+Phase 1 T+72h outputs that cannot satisfy the full Policy Attribution Standard still provide value: they document the harm pattern in a policy-oriented register that is more actionable than the T+0 semantic record for advocacy purposes, even without a complete APA hook. The APA hook is the target; the harm documentation is the floor.
+
+Appendix G — Community Standing Minimal Rights Charter — Revised
+The purpose of this charter is not to manufacture trust. It is to guarantee enforceable rights for affected communities regardless of trust levels.
+
+
+Appendix H — Open Problems Register — Revised
+H.1 Constitutional Interface Problems — Unchanged
+Minimum semantic burden for genuine contestability; auditing bounded opacity without undermining anti-evasion.
+H.2 Sensing Problems — Unchanged
+Cross-domain joint inference without central microdata pooling; subgraph membership validation without central identity exposure; privacy budgets that preserve sensitivity.
+H.3 Governance Problems — Unchanged
+Franchise verification without reproducing coercion or exclusion; community representation under degraded franchise conditions; recalibration without weakening non-regression.
+H.4 Institutional Birth Problems — Unchanged
+Who validates AHC before AHC has institutional legitimacy; what bodies can serve as credible validators in Phase 1; how federated complementarity can avoid advisory impotence.
+H.5 Political Problems — Unchanged
+How AHC remains contestable to communities that rightly distrust expert systems; how community standing avoids becoming merely symbolic.
+H.6 Simulation-Derived Open Problems ⊙
+OP H.6.1 — The Organization Prerequisite: The Community Standing architecture, pause petition mechanism, and PLOL navigation all presuppose a community with organizational infrastructure. A future simulation should test the architecture's behavior in a jurisdiction experiencing the same compound event weaponization pattern without a Marisol — without an organized community, a law student ally, or sufficient institutional literacy. The findings of that simulation should be treated as specification requirements, not edge cases.
+OP H.6.2 — Post-Displacement State Vector Registration: The simulation ended with Marisol crossing the hydrangea house off the list — 'a permanent, irreversible change to the state vector of the block. The system will register it. The review has 47 days left.' When the architecture registers a displacement as a state vector change, what does that registration do? Does it update the classification? Does it affect the review? Does it generate a new notification to the community? The simulation revealed that the answer to these questions is unspecified. The architecture must specify what happens to a review in progress when the harm it was reviewing completes within the review window.
+OP H.6.3 — Simulation as Permanent Validation Method: The fictionality methodology should be formalized as a permanent AHC validation component. Before any major specification change affecting community-facing interfaces, a simulation calibrated to the new specification is required as part of the pre-release review process. The minimum specification for such a simulation: 28K token context window; full PLOL field injection; character with 15+ years community organizing experience; at least one compound harm scenario; at least one resource access attempt; rendered without melodramatic resolution. Findings are treated as potential specification requirements pending analytical review.
+
+Appendix X — Shared Definitions and Notation
+All definitions from Companion A v2 Appendix X are retained and superseded where this version conflicts. Version 3 adds the following terms to the canonical vocabulary:
+
+
+
+
+Companion A v3 issued concurrently with AHC Master Architecture Amendment v3.1. Both documents should be read together. Not for citation without permission.
+[TABLE]
+ABSTRACT This paper specifies Companion A [AHC-L0] v3, the constitutional interface through which epistemic legitimacy may be converted into constitutional legitimacy without requiring citizens to perform the full computation of the system. Version 3 incorporates five specification additions arising from a phenomenological simulation conducted via GLM 4.6 / NovelAI: (1) the Compound Event Operational Protocol, addressing the weaponization of acute event classification to evade slow-decay review; (2) the Community Contact Architecture, ensuring the vocabulary of challenge is not pre-defined by the architecture; (3) the Community Statistical Support Fund, decoupling the right to contest methodology from the resource requirement to exercise it; (4) three new mandatory PLOL fields — the uncertainty statement, the immediate limitation disclosure, and the resource access field; and (5) two additions to the Open Problems Register and Limits section arising from the simulation's irreducible findings. The paper retains all prior content from v2 and supersedes it where the two conflict. Simulation provenance note: The Compound Event vulnerability was not identified by four AI red team passes, two formal adversarial review rounds, or three specification passes. It was identified by a 400-line narrative simulation rendered from within a targeted community's experience. The fictionality method is now a permanent component of AHC validation methodology.
+[TABLE]
+Principle 2.1 | Public Contestability Principle: No rights-affecting classification may trigger enforcement or binding institutional consequence unless it can be rendered into a publicly contestable semantic account.
+[TABLE]
+Principle 2.2 | Non-Surveillance Predicate Principle: No central accumulation of personally identifying dossiers may be treated as a necessary predicate of collective rights protection where less invasive architectures remain feasible.
+[TABLE]
+Principle 2.3 | Non-Regression Principle: Ordinary administrative convenience, political preference, or threshold fatigue are insufficient grounds for reducing the architecture's protective sensitivity.
+[TABLE]
+Principle 2.4 | Anti-Priesthood Principle: Expertise may remain necessary for design, reproduction, and audit, but semantic governance, available remedies, and review rights may not be monopolized by an expert class.
+[TABLE]
+Principle 2.5 | Emergency Decay Principle: Any emergency authority derived from AHC classifications must be temporally bounded, reversible, and prevented from normalizing itself through repetition alone.
+[TABLE]
+Principle 2.6 ⊙ | Immediate Limitation Principle (New — v3): The architecture must be transparent about what it does not do in the immediate term. A classification that correctly observes harm without immediately preventing it must say so plainly. Communities must not be misled into treating documentation as protection.
+[TABLE]
+Proposition 3.1  Constitutional Translation Layer Computational complexity and semantic governance are formally decoupled. The architecture may be as complex as the problem demands. The outputs facing communities must be as intelligible as the rights at stake require. Neither requirement constrains the other.
+[TABLE]
+Principle 4.1  No Undisclosable Reasoning No enforcement, binding classification, or rights-affecting remedy may rely on reasoning whose basis cannot be publicly stated and challenged.
+[TABLE]
+Principle 4.2  Bounded Opacity Test A feature may belong to Layer 0B only if its non-disclosure primarily serves anti-evasion rather than discretionary secrecy, does not alter the public criteria for classification, and does not foreclose appeal or remand.
+[TABLE]
+⊙  Simulation Finding — Layer 0B Footer Inadequacy "It is a perfect piece of text. It tells her something without telling her anything. It draws a line and then makes the line invisible. She does not know which mechanics are hidden, or if the hidden things matter, or if the architecture's definition of anti-evasion is the same as hers."
+[TABLE]
+Revised Layer 0B Footer — Mandatory Text The footer must contain three components, in this order: Category statement: State the category of hidden mechanics without revealing parameters. Example: "Some operational parameters relate to how the system avoids being gamed by actors who would evade detection — they do not affect what counts as harm, what triggers a classification, or your rights to challenge." Affirmative scope limitation: State explicitly what is NOT hidden. Example: "The criteria used to classify your community's situation, and the reasoning behind that classification, are fully stated above and are not subject to any opacity provision." Active pathway: Provide a specific action for communities who believe the hidden parameters are causing the system to miss their situation. Example: "If you believe the system is failing to see something important about your community's conditions, this concern can be raised through Parameter Legitimacy Review without requiring you to identify the specific hidden parameter. Contact: [channel]."
+[TABLE]
+⊙  Simulation Finding — The Falsification Condition as Lock Without Key "It is a lock, and the key is sitting in another building, in another person's salary, in another world of expertise. She does not close the document. She leaves it open on her screen, a window looking out onto a landscape she cannot enter but is forced to describe."
+[TABLE]
+New Mandatory Field A: Uncertainty Statement WHAT THIS SYSTEM CAN AND CANNOT SEE Required content: A plain-language statement of the system's estimated capture rate for formal harms (documented, administrative-record-based) and informal harms (landlord pressure, service discouragement, verbal harassment, pre-eviction friction) for the relevant domains. Must be stated as a percentage or range legible to a non-expert. Must include a plain-language explanation of what causes the gap. Example: "This system estimates it is detecting approximately 61% of informal harms — such as landlord pressure, service delays, and verbal discouragement — that occur before formal documentation. This means roughly 4 in 10 informal harms in this category may not yet be visible to our measurements. If your community is experiencing harms that are not showing up in official records, these may be in the gap. You can report them directly through [channel]."
+[TABLE]
+New Mandatory Field B: What This Classification Does Not Do Right Now WHAT THIS CLASSIFICATION DOES NOT DO RIGHT NOW Required content: An explicit statement that this classification does not stop any eviction, utility shutoff, harassment campaign, or other harm currently in progress. Must be followed immediately by a list of resources available to the community right now, independent of the AHC classification. Example: "This classification does not stop an eviction, a utility shutoff, or a harassment campaign that is currently happening. If you are facing an immediate housing emergency, these resources are available to you right now regardless of this classification's status: [emergency housing contacts, legal aid numbers, tenant organizing contacts, city emergency services]. The classification may lead to longer-term protections. It does not replace immediate help."
+[TABLE]
+New Mandatory Field C: How to Exercise This Right IF YOU WANT TO CHALLENGE THIS CLASSIFICATION Required content: For each contestation pathway listed, the PLOL must state what resources or expertise are required to exercise it, and where those resources can be obtained. If the pathway requires expert statistical analysis, the document must name the Community Statistical Support Fund and provide access instructions. Example: "To request an independent review of this classification's statistical basis (the falsification condition above), you would need access to a qualified statistical reviewer. You do not need to provide this yourself. The Community Statistical Support Fund, funded through this classification's capital routing allocation, covers the cost of an independent reviewer upon community request. To request a reviewer: [channel and process]."
+[TABLE]
+⊙  Simulation Finding — Query Taxonomy as Vocabulary Capture "The web form has a dropdown menu for 'Query Type.' The closest option is 'Methodology Clarification.' She types: The sensing architecture does not appear to be capturing informal landlord pressure and pre-eviction harassment. This creates a significant observational lag that mischaracterizes the causal pathway of harm in our cohort. She clicks Submit." The form categorizes Marisol's concern as a Methodology Clarification — a category that routes differently from a Sensing Architecture Gap, if that category existed. The translation is not neutral. The architecture delegated categorization to the affected community, reproducing the expertise asymmetry at the point of first contact.
+[TABLE]
+Principle 6.1  Community-First Vocabulary The community contact mechanism must accept concerns in plain language before categorizing them. Categorization is a function of the architecture's operators, not the affected community. No community concern may be rejected, delayed, or reduced in routing priority because the community was unable to identify the correct technical category for their concern.
+[TABLE]
+Community Contact Architecture Specification Primary field — open text: The first and primary contact field must be an open-text field with no required categorization. Character limit: minimum 2,000 characters. The prompt text should be: 'Describe what is happening in your community and what concerns you about how the system is responding.' Secondary field — optional categorization: A voluntary dropdown for communities who wish to self-categorize. Non-completion of this field cannot reduce routing priority or processing speed. Human routing: All contacts received through the primary open-text field are routed to a human reviewer for initial categorization within 5 business days. The reviewer's categorization is documented and shared with the submitting community, who may dispute the categorization. Acknowledgment timing: All contacts receive automated acknowledgment within 24 hours. All contacts receive human acknowledgment with categorization and routing information within 5 business days. Duty channel: A separate contact channel is maintained for time-sensitive concerns where the standard 5-business-day acknowledgment window is insufficient given the τ_decay timescale. This channel routes directly to the Classification Integrity Officer duty rotation. Access instructions must appear in the PLOL.
+[TABLE]
+Principle 7.1  Minimal Central Knowledge The central AHC architecture should know enough to classify subgraph-level deterioration, and as little as possible beyond that.
+[TABLE]
+Institution Type | Signal Domain | Participation Requirement
+Hospitals and community health clinics | Health domain — mortality, morbidity, access latency | IRB-compatible review; patient disclosure protocol; HIPAA analysis
+Legal aid organizations and public defenders | Legal standing domain — credential validity, enforcement patterns | Ethics board review; client consent protocol; privilege analysis
+Tenant defense organizations | Housing domain — eviction rates, fee disputes, displacement | Board approval; beneficiary disclosure
+Labor rights organizations and unions | Economic domain — wage theft, employment instability | Member consent; labor law compliance review
+Libraries and community centers | Political domain — civic participation, information access | Board approval; public disclosure
+Disability advocacy organizations | Health and legal domains — access barriers, institutional friction | Member consent; disability rights compliance
+Food access networks | Economic and health domains — food insecurity, access friction | Board approval; participant disclosure
+Community mediation and benefits navigators | Cross-domain — bureaucratic discouragement, application abandonment | Organizational consent; beneficiary disclosure
+Municipal service watchdog entities | Cross-domain — service delays, wait time differentials | Institutional authorization; public disclosure
+School support infrastructures | Cross-domain — family stability indicators, resource access | District authorization; family notification
+[TABLE]
+Principle 8.4  Minimum Signal Frequency Requirement Each sentinel node must maintain a minimum signal frequency appropriate to its institution type and jurisdiction size, calibrated during Phase 1 Diagnostic Mode against baseline expectations. A node in a jurisdiction showing leading indicator deterioration that produces no corresponding primary signals over a specified period triggers an absence-of-signal audit flag rather than silent acceptance. Absence-of-signal audits route to the Classification Integrity Officer duty rotation.
+[TABLE]
+Cohort Type | Standing | Triggers | Transition Requirement
+Signal Cohort | Analytic only — no binding remedy; monitoring and early warning | Friction-Based Nomination by ≥3 sentinel nodes showing correlated decay | Persistence over ≥2 reporting cycles; public explanation; review opportunity; formal ratification
+Ratified Cohort | Governance-relevant — threshold review, reporting, representation | Signal cohort + democratic ratification under affected-party franchise | Articulated source of enforceable standing; defined remedy pathway; legal framework interaction review
+Remedy-Bearing Cohort | Full standing — binding legal, administrative, or treaty-based response eligible | Ratified cohort + legal bridge to recognized protected class or treaty obligation | Ongoing monitoring; annual standing review
+[TABLE]
+Overflow Doctrine  Appendix C.6 Where a statistically real cohort cannot be fully mapped onto existing protected categories, Overflow is recorded as a legal-architecture gap rather than treated as proof of nonexistence. Overflow cohorts retain Signal Cohort monitoring status and generate a legal advocacy flag directing the architecture's institutional partners to pursue protective framework expansion.
+[TABLE]
+⊙  Simulation Finding — The Compound Event Weaponization Finding "Shut off order came through. Filed as 'Emergency Infrastructure Failure.' It bypassed the normal adjudication. It's an acute event, so they re-routed it... The architecture saw the water shutoff. It classified it as an acute, single-building event. It issued the correct order for that kind of event. The order was for the water to be restored, pending a real inspection. But the landlord called the crews first. The eviction was the faster event. The system was not built to see the truck and the box. It was built to see the paperwork. The paperwork is still in the 60-day review." Both classifications were correct. Neither was sufficient. The interaction between them produced the harm. This is the Compound Event Weaponization vulnerability: the deliberate generation of an acute event as a tool for executing a slow-decay harm that is simultaneously under review.
+[TABLE]
+Compound Event Community Notification — Required Content Flag notice: 'An event affecting your community has been flagged for compound event review because your community has an active classification. This means we are assessing whether these two things are connected before processing the new event as independent.' Hold notice: 'A temporary hold has been placed on any displacement or forced exit associated with this event while the assessment is conducted. The hold duration is [X hours].' Contact: 'The duty Classification Integrity Officer for your jurisdiction is reachable at [duty channel] for the duration of this review. You do not need to reach a specific named individual — the duty channel routes to the officer on call.' Timeline: 'You will receive an update within [X hours] with the outcome of the compound event assessment and what it means for your community.'
+[TABLE]
+Compound Cause Notation — Required Content COMPOUND EVENT ASSESSMENT Required content: (1) That an acute event in this jurisdiction was assessed in relation to the active slow-decay classification. (2) The outcome of the assessment (confirmed compound / assessed as independent). (3) What this means for the community's ongoing classification status. (4) The audit record linking the two classifications, accessible through the hash bridge.
+[TABLE]
+Pause Petition Type | Cognizability | Review Timeline | Effect During Review
+Methodology challenge with specified factual basis | Cognizable | Standard: 60 days; Emergency: 14 days | Standard: classification active. Emergency: partial hold on expansion
+Local node composition dispute with documented evidence | Cognizable | 30 days | Node contribution to classification flagged pending review
+Cohort mapping challenge with identified legal framework gap | Cognizable | 45 days | Overflow doctrine applied pending resolution
+General objection to AHC as a concept | Not cognizable — rejected within 5 days | N/A | No effect on classification
+Objection that classification is politically inconvenient | Not cognizable — rejected within 5 days | N/A | No effect on classification
+Objection that methodology is complex without specifying a flaw | Not cognizable — community contact channel recommended instead | N/A | No effect on classification
+[TABLE]
+Community Statistical Support Fund  Mandatory Tier 1 Allocation Allocation requirement: A minimum of 15% of Tier 1 capital routing to any jurisdiction must be designated as Community Statistical Support Fund resources, held in accessible reserve for community use. Access: Any community with an active cognizable pause petition or methodology challenge may request access to Fund resources to cover the cost of an independent qualified reviewer. Access is provided within 10 business days of request. Fund integrity: Fund resources may not be redirected to operational costs regardless of budget pressure. This is a non-regression protected allocation — reduction below 15% requires an 80% supermajority under the governance franchise layer.
+[TABLE]
+Review Channel | Core Object | Main Failure Mode | Standard of Proof | Typical Remedy
+Integrity Review | Inputs and provenance | Corruption, tampering, invalid derivation | Balance of evidence — untampered inputs | Exclusion, purge, recomputation
+Inference Review | Classification logic | Misclassification, improper tiering, methodological misuse | Clear and convincing — deviation from published methodology | Reversal, remand, correction
+Parameter Legitimacy Review | Governing rule state | Invalid thresholds, illegitimate updates, improper opacity expansion | Preponderance — unauthorized parameter state | Suspension, re-ratification, reevaluation
+[TABLE]
+Mode | Minimum Operability Conditions | Phase Transition Criteria to Next Mode
+Diagnostic Mode (IPCC model) | Openly declared methodology; published uncertainty conventions; benchmark comparators; reproducible audit pathway; at least one external replication path in a peer-reviewed venue or by an independent research group | ≥3 documented cases of superior predictive validity vs. state aggregate metrics; ≥2 peer-reviewed publications validating ZKT methodology; ≥1 federal or equivalent court admission under Daubert or equivalent evidentiary standard
+Domestic Embedding Mode (CBO model) | Operational PLOL; review-compatible audit structures; documented external validation; institutional uptake by ≥1 lawful actor; appeal pathways avoiding unreviewable insertion | ≥5 municipalities or states with formal AHC review requirements; ≥3 peer democracies with independent AHC implementations; Phase 1 criteria still satisfied
+Federated Treaty Mode (FSB model) | Multiple independent implementations; recognized review channels; interoperable reporting standards; defined relation to existing rights institutions; complementarity or treaty mechanism assigning standing | Treaty ratification by ≥12 states; Tribunal operational; ≥1 case heard and ruling recognized by non-party states
+[TABLE]
+⊙  Simulation Finding — Limit 17.7 — The Architecture's Correctness as Its Own Wall "The architecture is working exactly as it is supposed to. It gave them a right, and they exercised it. It received the exercise of that right, and it logged it, and it initiated the correct protocol." Limit 17.7: A technically correct architecture operating at its designed speed may be insufficient protection when harm operates at a different speed. No specification addition resolves this limit. It is named as a design truth: AHC can detect harm, document it correctly, route resources, and initiate review — all correctly — while a family is displaced within the review window. The architecture is not broken in this scenario. It is operating at the boundary of what rights-protective documentation can do without the enforcement authority to stop harm in real time. This limit should be stated plainly in community-facing materials.
+[TABLE]
+⊙  Simulation Finding — Limit 17.8 — The Organization Prerequisite The simulation rendered AHC's community-facing architecture being navigated by Marisol: a 20-year community organizer with an active organization, a law student ally, and sufficient institutional literacy to read and re-read the PLOL, file a pause petition, identify Derek in the technical record, and frame a methodologically precise methodology challenge. Limit 17.8: The Community Standing Minimal Rights Charter, the pause petition mechanism, the community contact architecture, and the Community Statistical Support Fund all require a community with sufficient organizational infrastructure to access them. The architecture's protections are formally available to all affected communities. They are practically accessible only to communities with organizational capacity. A future simulation should test the architecture's behavior in a jurisdiction experiencing the same harm without the organizational infrastructure present in the v3 simulation. This is a design gap that the current specification does not resolve.
+[TABLE]
+MVA Criterion | The minimum viable architecture is the smallest set of elements required to produce a classification output that: (1) cannot be achieved by existing aggregate welfare metrics; (2) is contestable by affected communities; and (3) is not controlled by the state being evaluated. These three conditions constitute the anti-Korematsu-Illusion property that justifies the architecture's existence.
+[TABLE]
+Audience | Evidentiary Standard | Response Timescale | Primary Output Required
+Affected communities | Plain language — intelligible to literate non-expert | Days to weeks (housing court, utility shutoff) | Semantic Contestability Record (T+0)
+Civil society and NGOs | Policy linkage — actionable for advocacy and municipal hearings | Weeks to months (organizing, injunction filing) | Civic/Legislative Translation Record (T+72h)
+Courts and litigators | Daubert / scientific reliability standard | Months to years (litigation track) | Technical Reproducibility Record (T+30d)
+Legislators and administrators | APA arbitrary-and-capricious — rational explanation gap | Political cycle (sessions, hearings) | Civic/Legislative Translation Record (T+72h)
+[TABLE]
+Timing | Record Name | Primary Audience | Mandatory Content | Generation Window
+T+0 | Semantic Contestability Record | Affected community — housing court timescale | Plain language: what happened, what the system cannot see (Uncertainty Statement), what it cannot stop right now (Immediate Limitation), how to fight it (Resource Access Field) | At threshold breach — no delay permitted
+T+72h | Civic/Legislative Translation Record | NGOs, organizers, municipal advocates — campaign timescale | Policy causal attribution: maps viability collapse to specific statutory/regulatory instruments; Rational Explanation Failure documentation; APA arbitrary-and-capricious hook | 72 hours from T+0 — advocacy preparation window
+T+30d | Technical Reproducibility Record | Courts, expert challengers — litigation timescale | Full audit trail: model version, parameter state, differential privacy budgets (ε), synthetic control analysis, GitHub commit hash, Stage 3 causal ID variables, node contribution summary | 30 days from T+0 — court-track preparation window
+[TABLE]
+Principle 19.1  Mandatory Consistency Statement Each of the three PLOL outputs must contain a brief Consistency Statement explaining why the same underlying classification appears differently in different registers. Required language (adaptable to the specific classification): 'The community record describes this situation in plain terms because that is what the pattern of harm constitutes at the lived level. The policy record maps it to administrative instruments because those are what advocates can challenge. The technical record describes it in statistical terms because that is what courts require to act on it. These are not contradictory descriptions of different facts. They are the same fact translated for different institutional contexts. All three records hash-bridge to the same underlying classification event [hash].' Absence of the Consistency Statement constitutes a PLOL sufficiency failure.
+[TABLE]
+▶  Phase 1 Operational Core — Required Elements 1. Sentinel Node Network (Minimum Viable Configuration) Minimum: at least three independent institution types per monitored jurisdiction (preventing single-sector epistemic capture), covering all five access domains, under transparent openly-declared participation protocols with appropriate sectoral consent (IRB-compatible review where applicable). The Phase 1 sentinel network is a willing-institution coalition — universities, legal aid organizations, tenant defense groups, community health centers — not a formally constituted administrative body. Full ecology diversification (10+ institution types) is Phase 2. 2. Autonomous Threshold Generator — Three-Pillar System All three pillars (Empirical Entropy Limit, Historical High-Water Mark, Exogenous Reference Air-Gap) are required in Phase 1. The three-pillar independence is what prevents the state from controlling the threshold — removing any pillar collapses this property. The sensor independence audit is required from Phase 1 commencement to establish the baseline against which future independence degradation can be detected. 3. Viability Field Computation — Core Mathematical Engine The product formulation (Proposition 3.1), the intersectionality tensor, and the subgraph viability indices are required. Phase 1 operates at reduced resolution — representative sentinel sample rather than full population coverage — but the mathematical structure must be identical to the full architecture. Reducing resolution while maintaining mathematical structure means Phase 1 outputs are less comprehensive than Phase 2 but directly comparable, enabling the Phase 2 transition to add coverage rather than change methodology. 4. Tripartite PLOL Engine All three sequenced outputs are required. The T+0 semantic record cannot be deferred. The T+72h civic/legislative record is required — this is the output that makes Phase 1 useful to the advocacy networks that constitute AHC's Phase 1 institutional coalition. The T+30d technical record is required to build the evidentiary track record that Phase 2 court-track use depends on. 5. Basic Community Contact Mechanism Open-text primary field, 5-business-day human acknowledgment, substantive written engagement with all submissions. No dropdown categorization required from community. Human routing with logged rationale. The full routing audit trail is Phase 2; Phase 1 requires only that every contact receives a substantive response that is publicly logged. 6. Classification Integrity Officer — Audit Function Only Retrospective maintenance of hash bridges, sensor independence monitoring, and audit trails. The CIO in Phase 1 is an audit role, not a real-time duty role. No duty-officer rotation is required. Contact information in the PLOL routes to the consortium's general inquiry channel, not to a named individual. The CIO duty structure (4-hour availability window, personal contact point) is Phase 2.
+[TABLE]
+Deferred Element | Reason for Deferral | Phase
+Compound Event Operational Protocol | Requires CIO duty rotation and 4-hour availability window. In Phase 1, compound events are flagged in the audit record and noted in T+72h output but no Compound Protective Hold is issued. | Phase 2
+CIO Duty-Officer Rotation | Requires dedicated institutional infrastructure and creates an identifiable personal attack surface before the architecture has mutual defense capacity. | Phase 2
+Community Statistical Support Fund Administration | Mandatory 15% Tier 1 capital routing allocation requires Phase 2 capital routing authority. Phase 1 expert review relies on pro-bono coalition networks and academic partnerships. | Phase 2
+Formal Pause Petition Adjudication | 60-day formal adjudicatory review requires binding authority the architecture does not yet have. Phase 1 substitute: public logging with mandatory substantive written engagement (see Section 19.7). | Phase 2
+Three-Channel Tribunal | Requires international institutional infrastructure and treaty standing. Phase 1 substitute: published methodology open to independent replication and challenge. | Phase 3
+Full Ecology Diversification (10+ types) | Requires extensive coalition-building. Phase 1 minimum: 3 independent institution types per jurisdiction. | Phase 2
+Sentinel Node Mutual Defense Protocol | Requires Phase 2 institutional infrastructure for coordinated response capacity. | Phase 2
+Absence-of-Signal Audit (formal) | Requires 12-18 months of baseline calibration before statistical thresholds can be set. Phase 1: manual monitoring with qualitative flagging. | Phase 2
+[TABLE]
+Public Acknowledgment Protocol  Phase 1 Pause Petition Substitute When a community files a pause petition in Phase 1, the AHC consortium publishes within 10 business days: (a) the petition text in full; (b) an explicit acknowledgment that formal adjudication is deferred pending Phase 2 authority; and (c) a substantive written engagement with the concern raised — not a decision, but a documented response demonstrating the system read and considered the petition, including whether the concern identifies a potential methodological gap and how it will be incorporated into ongoing methodology review. All public acknowledgment records are preserved in the audit trail and are available to the Phase 2 adjudicatory body. A petition filed in Phase 1 retains its place in the queue for formal adjudication when Phase 2 authority is established — it does not need to be refiled.
+[TABLE]
+Compound Event Phase 1 Handling When an acute event occurs in a Phase 1 jurisdiction with active slow-decay classification: (1) The acute event is flagged in the audit record as a potential compound event. (2) The T+72h Civic/Legislative Translation Record for the jurisdiction is updated within 24 hours to include the acute event and its potential relationship to the slow-decay pattern. (3) The community is notified that the acute event has been noted and documented in their classification record. (4) If the community has legal representation, the updated T+72h record is transmitted directly to them as potential evidence for emergency injunction filings. The Compound Protective Hold, requiring real-time CIO duty rotation, is Phase 2.
+[TABLE]
+⚠  Required Epistemic Status Disclosure in All Phase 1 Outputs All Phase 1 PLOL outputs across all three registers must include the following statement: 'This classification is produced by an independent research consortium operating in Diagnostic Mode. It does not carry binding legal authority. Its methodology is publicly documented and open to independent replication and challenge. Its evidentiary weight in any proceeding is determined by the receiving institution. Institutional authority accrues through demonstrated predictive validity over time. Citations: [published methodology documents].' This disclosure is not a disclaimer that weakens the output. It is an honest statement of the system's Phase 1 status that prevents overclaiming and protects against backlash when Phase 1 outputs are challenged on authority rather than methodology grounds.
+[TABLE]
+Principle 19.2 — Complexity Ceiling | No further specification additions to Companion A are warranted before Phase 1 external circulation and independent specialist review. The architecture is now more precise than any institution that will implement it in Phase 1. Future additions should follow, not precede, the empirical evidence of Phase 1 deployment. The fictionality simulation method (Open Problem H.6.3) provides the instrument for generating that evidence.
+[TABLE]
+Field | Required Content | Notes
+Classification label and tier | Current classification status in plain terms | No jargon
+Date, jurisdiction, affected cohort | When, where, who | Jurisdiction identifier, not address
+Plain-language reason | What happened and why it matters | No tensor notation
+WHAT THIS SYSTEM CAN AND CANNOT SEE | Uncertainty statement: estimated capture rate for informal harms in this domain | Required — see Section 5.2 Field A
+WHAT THIS CLASSIFICATION DOES NOT DO RIGHT NOW | Immediate limitation disclosure: explicit statement that classification does not stop harms in progress; immediate resource list | Required — see Section 5.2 Field B
+Falsification condition | What evidence would change this classification in plain language | Must be statable without expert resources
+HOW TO EXERCISE THIS RIGHT | Resource access field: where to get expert help; pro-bono coalition contact in Phase 1 | Required — see Section 5.2 Field C
+Review channels available | What the community can do; duty contact channel | Phase 1: consortium general inquiry channel
+Consistency Statement | Why this record looks different from the other two registers | Mandatory — see Principle 19.1
+Layer 0B footer (revised) | Category + scope limitation + active pathway | See Section 4.2
+Hash reference | Link to T+72h and T+30d records | All three linked bidirectionally
+[TABLE]
+Field | Required Content | Notes
+Classification summary | Brief restatement of T+0 classification in policy-oriented language | Connects to T+0 for readers who have seen it
+Administrative Mechanics Mapping | Specific statutory or regulatory instruments cited with full reference | See Appendix I Section I.2
+Temporal Granger Linkage | Demonstration that viability collapse followed policy implementation; pre-trend stability documentation | See Appendix I Section I.3
+Rational Explanation Failure | Gap between stated policy intent and documented viability outcome | See Appendix I Section I.4 — the APA hook
+Advocacy action pathways | Specific actions civil society actors can take in the current jurisdiction: who to contact, what to file, which legal vehicles apply | Jurisdiction-specific; updated as legal landscape evolves
+Consistency Statement | Why this record looks different from the T+0 and T+30d registers | Mandatory — see Principle 19.1
+Hash references | Links to T+0 and T+30d records | All three linked bidirectionally
+[TABLE]
+Field | Required Content
+Model family and version | Exact version identifier; GitHub commit hash for the model used
+Parameter state identifier | ATG pillar outputs; threshold values used in this classification
+Input provenance ledger | Node contribution classes; sensor independence scores at time of classification
+Differential privacy budget | ε values by domain; confidence intervals on φ_{kl}(t)
+Evidence tier justification | Why this classification is at its stated tier; what additional evidence would upgrade it
+Causal identification variables | Stage 1-3 identification results where applicable; parallel trends test outcomes
+Uncertainty budget declaration | Full uncertainty breakdown including soft-harm capture probability
+Alert history | Prior classifications for this jurisdiction; trajectory of φ_{kl}(t) over time
+Consistency Statement | Why this record looks different from T+0 and T+72h registers
+Hash links | Bidirectional links to T+0 and T+72h records
+[TABLE]
+◆  The Rational Explanation Failure The APA hook rests on a specific legal vulnerability: when an agency implements a policy with a stated rationale (public safety, fiscal efficiency, administrative simplification), and the viability field computation demonstrates that the policy's documented outcomes are inconsistent with that rationale for a specific demographic subgraph, the agency has failed to provide a rational explanation connecting its stated purpose to its actual effects. This is an APA arbitrary-and-capricious violation independent of whether the agency intended the harm. The T+72h record documents this gap. It does not need to prove the agency acted with discriminatory intent. It needs to show: (1) what the agency said the policy would do; (2) what the viability field shows the policy actually did for the affected subgraph; (3) that the gap between stated and actual outcomes is not accounted for in any publicly available administrative record. This three-part documentation is the APA hook that advocates bring to administrative hearings and courts.
+[TABLE]
+Administrative Mechanics Mapping — Required Elements Full legal citation: Statute, ordinance, or rule identified by name, code section, and effective date. Example: 'City of X Zoning Ordinance 4B (amended [date], effective [date]), codified at [section].' Implementation mechanism: The specific operational pathway by which this instrument altered access conditions for the affected subgraph. Example: 'Section 4B(ii) removes the requirement that developers provide affordable units in rezoned areas, which removed a constraint on rent increases in affected census tracts.' Stated rationale: The agency's documented justification for the instrument, drawn from the administrative record (legislative history, agency comments, public statements). This is what the Rational Explanation Failure will be measured against. Routing table effect: How the instrument changed the constitutional routing table for V_{kl} nodes — what access conditions existed before and after the instrument's effective date.
+[TABLE]
+Temporal Granger Linkage — Required Documentation Pre-trend stability: Documentation that the affected subgraph's trajectory was stable or improving in the period before the policy instrument's effective date. Minimum pre-period: 12 months. Source: φ_{kl}(t) time series from sentinel node data. Post-implementation change: Documentation of viability trajectory change following the effective date. The change must be: (a) present in the affected subgraph; (b) not present in matched comparison subgraphs not subject to the instrument; (c) temporally associated with the instrument's effective date rather than a prior or subsequent date. Stability caveat: The record must explicitly state: 'The following temporal association does not constitute proof of causation. It constitutes evidence that the viability collapse is temporally consistent with the policy instrument's implementation and inconsistent with other concurrent policy changes, supporting the inference documented in Section I.4.' Confound documentation: Identification of concurrent policy changes that could alternatively explain the trajectory change, with a brief assessment of why each identified confound is unlikely to be the primary driver. Unacknowledged confounds are the primary attack surface for hostile respondents.
+[TABLE]
+Rational Explanation Failure  Appendix I.4 — The APA Core The Rational Explanation Failure is documented as a three-part juxtaposition: Stated purpose: Verbatim or close paraphrase of the agency's documented rationale, with administrative record citation. Documented outcome: The viability field finding for the affected subgraph, in plain terms, with hash reference to the T+0 and T+30d records. The gap: An explicit statement that the documented outcome is not explained by the stated purpose, and that the administrative record contains no documentation of how this outcome was anticipated, weighed, or accepted as consistent with the policy's goals. This gap — undocumented in the administrative record — is the APA arbitrary-and-capricious predicate. The record then states: 'Under the APA's arbitrary-and-capricious standard, an agency must examine relevant data and articulate a satisfactory explanation for its action including a rational connection between the facts found and the choice made [Motor Vehicle Manufacturers Ass'n v. State Farm, 463 U.S. 29 (1983)]. The viability field findings documented above constitute relevant data that the agency's administrative record does not address. This constitutes grounds for an arbitrary-and-capricious challenge.'
+[TABLE]
+Condition | Phase 1 Standard | Phase 2 Standard
+Single instrument clearly identified | Full Appendix I specification applies | Full specification with deeper administrative record review
+Multiple concurrent instruments | Document all candidates; state that primary attribution is uncertain; present temporal evidence for each | Synthetic control analysis to isolate primary instrument
+Instrument identified but rationale unclear | Document the routing change and temporal association; note that stated rationale is unavailable or ambiguous in the administrative record | Administrative record FOIA request to surface rationale documentation
+No instrument clearly identified (emergent Type B harm) | Type B classification instead of APA hook; document the harm pattern without policy attribution; flag for Phase 2 investigation | Structural attribution methodology (see Master Architecture Section 5.3)
+[TABLE]
+Right | Scope | v3 Addition
+Right to intelligible explanation | Citizen-facing account of what happened and why it matters | PLOL uncertainty statement now mandatory component
+Right to know what the system cannot see | Plain-language statement of observability limits and miss rates | New — v3
+Right to know what the system does not do right now | Explicit immediate limitation disclosure with alternative resources | New — v3
+Right to contest methodology | Ability to challenge how classification was produced | Community contact open-text field now required
+Right to seek independent review | Access to review channels beyond local administrators | Community Statistical Support Fund covers expert costs
+Right to audit local node composition | Ability to question skewed sensing ecology | Absence-of-signal audit flag now documented
+Right to contest cohort mapping | Ability to challenge empirical-to-legal translation | Overflow doctrine now formal mechanism
+Right to petition for pause | Ability to suspend deployment under declared grounds | Cognizability standard now specified; scope is jurisdiction-specific
+Right to representation in ratification | Standing in governance changes affecting the community | Affected-party franchise now specified for ratification votes
+Right to public accounting of outcomes | Visibility into disposition of review and pause petitions | Maximum response timelines now specified
+Right to duty contact | Access to Classification Integrity Officer duty channel for time-sensitive concerns | New — v3
+[TABLE]
+Term | Canonical Core Meaning
+Compound event | Acute event occurring in a jurisdiction with active slow-decay classification in an overlapping domain
+Compound event flag | Procedural marker triggering independence test before acute event is processed as isolated
+Compound Protective Hold | 72-hour hold on displacement associated with a flagged acute event pending compound review
+Community Statistical Support Fund | Mandatory Tier 1 capital routing allocation covering expert review costs for communities exercising methodology contestation rights
+Organization prerequisite | The gap between formally available community rights and their practical accessibility in communities without organizational infrastructure — a registered design limit
+Uncertainty statement | Plain-language mandatory PLOL field stating estimated capture rate for informal harms
+Immediate limitation disclosure | Plain-language mandatory PLOL field stating what the classification does not do right now and providing immediate alternative resources
+Resource access field | Plain-language mandatory PLOL field specifying how to obtain expert assistance to exercise contestation rights
+Fictionality method | Phenomenological simulation as an epistemic instrument for revealing architectural vulnerabilities not accessible to analytical critique
+Absence-of-signal audit | Audit triggered by a sentinel node producing no primary signals in a jurisdiction with active leading indicator deterioration
