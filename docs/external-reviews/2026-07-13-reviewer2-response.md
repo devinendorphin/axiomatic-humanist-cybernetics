@@ -3,6 +3,12 @@
 **Date:** 2026-07-13
 **Re:** Reviewer #2 Report (recommendation: major revision), findings R2-01 – R2-12 plus packaging items.
 **Verification note:** every code claim below was re-checked against the v0.7 sources on branch `claude/chatgpt-assessment-feedback-95xjd1`. Line numbers refer to that tree.
+**Status update (2026-07-13):** the R2-02/R2-04 repairs described below have
+since landed as kernel **v0.8** (typed `PIOClaim` language, attestation-bearing
+`PIOEvent`, theorems P14–P17; see `ERRATA_AND_AMENDMENTS.md` and
+`MANIFEST_v0.8.txt`), CI-verified at 93 audited theorems / 43 axiom-free.
+Documentation items 1–4 are also fixed. R2-01 and the remaining items are
+still pending.
 
 ## Preamble: what this review did and did not find
 
