@@ -12,6 +12,7 @@ import AHCKernel.CrisisCap
 import AHCKernel.SensorsAndKernel
 import AHCKernel.PLOL
 import AHCKernel.ExceedanceBridge
+import AHCKernel.SeamLedger
 
 open AHC
 
@@ -151,3 +152,22 @@ open AHC
 #print axioms AHC.derived_exceedance_not_forgeable
 #print axioms AHC.hold_sustained_only_by_witnessed_danger
 #print axioms AHC.manufactured_danger_cannot_sustain_hold
+
+-- Module 5: Seam Ledger — Contested Attestation Ledger (imported Veriticide
+-- machinery; adopted v0.13). Tier A state-machine invariants (L1-L5) +
+-- Tier B opaque-predicate relations (L6-L9).
+#print axioms AHC.SeamLedger.no_naked_authority_bit
+#print axioms AHC.SeamLedger.naked_issue_no_pending
+#print axioms AHC.SeamLedger.counterrecord_persists
+#print axioms AHC.SeamLedger.counterrecord_persists_run
+#print axioms AHC.SeamLedger.counterrecord_digest_stable
+#print axioms AHC.SeamLedger.step_one_never_implies_step_two
+#print axioms AHC.SeamLedger.remedy_label_not_remedy
+#print axioms AHC.SeamLedger.remedy_stages_distinct
+#print axioms AHC.SeamLedger.contested_cannot_unlock_irreversible
+#print axioms AHC.SeamLedger.contested_blocks_trace
+#print axioms AHC.SeamLedger.seam_trace_stays_inside
+#print axioms AHC.SeamLedger.issuer_not_sole_validator
+#print axioms AHC.SeamLedger.interested_actor_cannot_self_close
+#print axioms AHC.SeamLedger.challenge_requires_merits_response
+#print axioms AHC.SeamLedger.criticality_cannot_suppress_typed_conflict
