@@ -13,6 +13,15 @@ post-text constitutional ruling rather than a v3.1 sentence, this map
 says so — those are the honest deviations a faithfulness reviewer
 should examine first.
 
+The final section, **Derivation provenance**, adds the fourth column the
+v0.12 multi-lens external review asked for (finding V12-07, 2026-07-14):
+for each theorem family it states not only the text's normative condition
+and the formal predicate, but whether that predicate is *derived* inside
+the kernel or *supplied* to it as a trusted input, and — where supplied —
+who is trusted to supply it. That column is where the constitutional
+topology actually lives: it is the difference between what the proofs
+establish and what they assume an institution establishes for them.
+
 ## Module 1 — Tiered Evidence-Action Protocol (T1–T8) ← Master §5.4
 
 > "The Tiered Evidence-Action Protocol resolves this by formally
@@ -247,3 +256,75 @@ overstate the text:
   v3.1 anchor is §8.3's quorum sentence. The property is
   one-honest-witness non-fabrication (finding R2-05); the danger
   threshold θ is a deployment obligation, unfixed by the text.
+
+## Derivation provenance — derived vs. supplied, and who supplies it (finding V12-07)
+
+Added 2026-07-14, discharging finding V12-07 of the v0.12 multi-lens
+external review ("the map should distinguish, for every theorem family:
+the text's normative condition; the formal predicate; whether the
+predicate is derived or supplied as an input; and who is trusted to
+supply it"). The review's charge was that the map, though strong on
+omitted windows, constants, and post-text provenance, did **not** state
+plainly that the PIO's principal eligibility conditions — the acute
+τ_decay < 72h horizon, the Tier-0 observational signal, and actual
+Tier-1 evidentiary confirmation — are **not authorization predicates in
+the kernel** but trusted Boolean inputs. This column says so, and does
+the same for every other family.
+
+Reading key. **Derived** = the kernel computes or proves the predicate
+from more primitive terms it also fixes. **Supplied** = the predicate
+enters as a trusted input (a `Bool`, a structure field, or a
+constructor proof-obligation) that the machine does not itself
+establish; its fidelity to the world is a seam obligation. "Trusted
+supplier" names, in the framework's own vocabulary, whose hand passes
+the input through the seam: **ATG/Layer 0** (novelty, dispositions,
+review outputs, criticality), **deployment** (envelopes/certificates,
+θ-binding, the exposure model, unfixed constants, the interface
+actually invoked), **sensor operators / OP.1** (the ≤ f fault bound and
+independence), or the **v3.1 text** (a modeling fiat).
+
+| Family | Text's normative condition | Formal predicate | Derived / Supplied | Trusted supplier |
+|---|---|---|---|---|
+| **T1–T5** | evidence proportioned to severity & reversibility | `tier_monotone`, `severity_le_evidence`, `sub_causal_reversible`, `irreversible_iff_causal`, `broadcast_universal` | **Derived** invariants of the fixed §5.4/§9.3 tables; the `Mech.reversible` classification is a **supplied** fiat (superseded at action granularity by W1–W18) | Kernel (invariants); v3.1 §5.4 (the reversibility fiat) |
+| **PIO issuance** (entry to `.issued`) | "for attacks with τ_decay < 72h, a Tier-0 observational signal activates Tier-1…" | `estep .idle` / `pioStep` fire on `EpInput.issue : Bool` — **no** decay-horizon predicate, **no** Tier-0 evidence object | **Supplied** (raw Boolean) | **Layer 0 / institution — decisive gate, not a kernel predicate (V12-02)** |
+| **PIO confirmation** | "automatic reversal if Tier-1 correlational confirmation fails" | `EpInput.confirm : Bool` → absorbing `confirmed`; `pioAuthorizesC E .confirmed` keeps granting Tier-1 | **Supplied** (raw Boolean); no evidence certificate, and no modeled exit from `confirmed` | **Layer 0 / institution (V12-02, V12-03)** |
+| **T8** bounded review | mandatory Layer 0 review within 72h | `pio_resolves` over the `reviewDeadline` clock | **Derived** from clock arithmetic; the constant 72 is text-fixed | Kernel; §5.4 (constant) |
+| **T9, S1–S3** hysteresis | escalate/de-escalate with a hysteresis gap | `no_chatter`, `chatter_requires_travel` over `Hysteresis.gap` | **Derived** from the constitutive `gap`; signal `A`, `Astar`, `Areset` and the sustainment windows are **supplied** (windows unmodeled) | Kernel (bounds); sensor/deployment (signal, params) |
+| **C1–C6, G1–G7** crisis cap | rolling cap → Structural Review; "cannot resume until an output is produced **and enacted**" | `Cap`, `Valid`, `modeStep`; the cap trip is **derived** from the window arithmetic | **Derived** trip; **Supplied**: which days count as emergency-active, and the `Layer0Output` that closes review — **any** of the three tokens exits, with **no** enactment/remedy predicate; W/T_cap constants supplied | Kernel (trip); **Layer 0 (review output — V12-06)**; deployment (constants) |
+| **A2a** Axiom II | reversibility nullified if τ_response > τ_decay | `axiomII_dichotomy` | **Derived** dichotomy; `response`, `decay` are **supplied** | Kernel; deployment/measurement |
+| **B1–B4** Byzantine | m > 2f+1 independent nodes tolerating f | counting consequences of `quorum` | **Derived** from `quorum`; the `faultBound` (≤ f corrupt) and sensor honesty are **supplied** (ghost/institutional) | Kernel; **sensor operators / OP.1** |
+| **A1a–A1e** Axiom I | V_global = ∩ V_i; product form; sum admits masking | intersection/product theorems, `sum_admits_masking` | **Derived**; the per-subgraph viability bounds and which subgraph is "forced outside" are **supplied** | Kernel; deployment/measurement |
+| **P1–P6** PLOL | non-substitution; origin ≠ consistency; no critical omission | `Tripartite`, `bridge_proves_origin_not_consistency`, `Compliant`, `divergence_convicts` | **Derived** invariants; membership in the `critical` set, and the **completeness** of that marking, are **supplied** | Kernel; **Layer 0 / event author (criticality — R2-08)** |
+| **P7–P13** D-R4 disclosure | four mandatory fields, in every register | `pio_disclosure_at_breach`, `shipped_pio_disclosure_all_registers` | **Derived** that the *typed* roles are present and (by constructor) distinct; **Supplied**: which underlying `Claim` body fills each role — all three may be the **same sentence** (V12-04) | Kernel (presence); event author (bodies) |
+| **P8, P9, P15–P17** budget | published figure = machine accounting, ≤ 72 | `attested_budget_accurate`/`_bounded`, `pio_register_budget_accurate` | **Derived** end-to-end: `attestation.accurate` makes the disclosed figure the term `epPendingHours .idle history` | **Kernel — the one decisive figure that is derived, not attested** |
+| **P14, P16** uniqueness | one sentence cannot fill two roles; no budget drift | `pio_roles_distinct`, `pio_budget_no_drift` | **Derived** only at the wrapper / **critical-subset** level; global content-uniqueness across the full claim set is **not** enforced (a noncritical contradictory `budget` claim is constructible — V12-04) | Kernel (partial); event author (residual) |
+| **E1–E11** episode machine | two clocks; no relitigation; floor persists | `episode_no_relitigation`, `floor_persists`, `hold_grants_no_more_than_pio` | **Derived** bounds on unconfirmed full-protection hours; `issue`, `confirm`, `novel`, `exceedance`, and the `newEpisode` authorization are all **supplied** | Kernel (bounds); **Layer 0 / ATG (inputs)** |
+| **E12–E15** typed dispositions | review owed; unreviewed hold expires | `unreviewed_hold_expires`, `overdue_absorbing`, `close_cannot_launder` | **Derived** reachability of `overdue`; whether a review *occurred* is the **supplied** disposition, and `overdue → spent` on subsided risk drops the breach flag (V12-06) | Kernel (reachability); **Layer 0 (disposition)** |
+| **W1–W18** certified envelopes | per-action reversibility certificates | `pio_cert_reversible`, `pio_certificate_backed`, W17 quarantine | **Derived** that everything the emergency path grants is reversible-in-envelope and severance/sanction-free; the `Envelope` (`routeInside`/`sevInside`) itself is **supplied** | Kernel (gating); **deployment (certificate)** |
+| **W19–W26** trace safety | many small actions must not jointly cross a threshold | `trace_stays_inside`, `budget_binds_traces`, `pio_trace_stays_inside` | **Derived** that any `TraceAuthorized` sub-causal trace stays in `Inv`; **Supplied**: `Inv`, `routeOk`, the exposure σ — **and whether execution is forced through `TraceAuthorized` at all: it is not**, since the pointwise `pioAuthorizesC`/`CHoldPolicy` remain callable against a fixed `Envelope` (V12-01) | Kernel (composition); **deployment (certificate + interface actually invoked)** |
+| **X1–X4** exceedance bridge | derive the hazard alarm from sensors | `derived_exceedance_honest_witnessed`, `manufactured_danger_cannot_sustain_hold` | **Derived**: *only* `exceedance` (one-honest-witness non-fabrication, via B2); `issue`, `confirm`, `novel`, `layer0` are still **supplied**, and θ and the fault bound are **supplied** | Kernel (exceedance only); **Layer 0 (the rest — V12-02)** |
+
+**The decisive gates, stated plainly (V12-07's specific charge).** Three
+predicates the §5.4 text makes conditions of emergency action are, in the
+kernel, trusted inputs rather than derived predicates: the acute-harm
+horizon (τ_decay < 72h), the Tier-0 observational signal, and Tier-1
+correlational confirmation. The module titled "when the system may act"
+begins *after* the constitutional question — may the order issue? — has
+already been answered by `EpInput.issue`, and the handoff question — is
+the emergency over? — is answered by `EpInput.confirm` into an absorbing
+`confirmed` state. The exceedance bridge (X1–X4) grounds the *hazard*
+bit in the measurement layer, but not these *authorization* bits. This
+is a first-order faithfulness deviation and is not covered by the
+general disclaimer "the proofs verify the rules as modeled."
+
+**What the column also makes visible.** Two rows run the other way and
+deserve equal prominence, because they are the shape a repair takes.
+P8/P15–P17 is a genuine end-to-end *derivation*: the number the
+community reads is the machine's own accounting, `epPendingHours`, not a
+figure an official attests — disclosed, attested, and computed are one
+term. And the cap trip (G-family) is *derived* from window arithmetic
+rather than declared. Where a family already derives its decisive
+quantity, the seam narrows; the finding is that the emergency-authorization
+families (PIO issuance/confirmation, the review-closing output, the
+executed-trace interface) do not yet, and the "supplied / trusted
+supplier" columns above are the punch-list for closing that gap.
