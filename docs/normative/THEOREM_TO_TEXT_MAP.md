@@ -247,3 +247,82 @@ overstate the text:
   v3.1 anchor is §8.3's quorum sentence. The property is
   one-honest-witness non-fabrication (finding R2-05); the danger
   threshold θ is a deployment obligation, unfixed by the text.
+
+## Module 5 — Seam Ledger (L1–L9) ← Veriticide General Ledger (cross-repository origin, NOT AHC v3.1)
+
+Module 5 is the one module whose source text is **not** the AHC v3.1 /
+Companion A corpus. It imports the *machinery* of the **Veriticide General
+Ledger** (`github.com/devinendorphin/veriticide-general-ledger`) — cited as
+origin, not merged. The two repositories cross-reference; the ledger's
+corpus, named parties, and structural-identity claim stay in that
+repository. The correspondence below is therefore **structural** (a
+`SeamClaim` field ↔ a protocol track), not **quotational** (a theorem ↔ a
+v3.1 sentence). This is the honest deviation a faithfulness reviewer should
+examine first: it is a weaker, cross-repository mapping than the Module 1–4
+rows above, and is not to be read as their equal.
+
+Source snapshots are the ledger repo at commit `60aa8a6`:
+**SP** = `docs/documentation-standing-protocol-v0.1.md`,
+**PG** = `docs/provenance-grading-and-absorption-protocol-2026-07-06.md`,
+**CF** = the case-file grammar `cases/*/00-charge-theory.md` …
+`05-custody-manifest.md`.
+
+- **`SeamClaim` (the wrapper)** ← SP §2, the six tracks:
+  > "A — Instrument & Outputs … B — Authorization … C — Trajectory &
+  > Warnings … D — Dismissal & Retaliation … E — Conscription … F —
+  > Custody" (SP §2 table)
+  rendered as the fields `evidenceRefs` (A), `authorizationChain` (B),
+  `warningsAvailable` (C), `counterEvidence`/`conflicts` (D),
+  `custodyStatus`/`sourceBundleDigest` (F). The DELIBERATE OMISSION of a
+  `truth` field renders SP's own thesis: the record "does not require anyone
+  to agree that a crime is occurring" and "makes a pattern visible and
+  preserved," not proven.
+
+- **`CustodyStatus` ladder** ← CF `05-custody-manifest.md` §1:
+  > "IN-LEDGER … CAPTURE-REQUIRED … LOCATOR-VERIFIED …
+  > HASHED-PENDING-BACKUP … VERIFIED" (custody states table)
+  rendered rung-for-rung; only `verified` carries "an off-platform second
+  custodian … the only tribunal-grade state."
+
+- **L3 `step_one_never_implies_step_two`** ← SP §7:
+  > "Step one — the right to act without permission … Step two — what still
+  > requires proof … The affected population's discernment governs naming,
+  > preservation, and the demand for review. A tribunal's proof governs
+  > punishment."
+  rendered as the type-disjointness of `stepOneActs` (preserve / disclose /
+  audit / provisionalRestraint) from the step-two acts (punish /
+  irreversibleEnforce). SP §7-bis (the Forum-Now toggle, "flipping is a
+  logged act") is the register-discipline anchor for L4/L5.
+
+- **L4 `remedy_label_not_remedy`** ← SP §7-bis's "an act, not a mood" and
+  the lifecycle discipline; the six `RemedyStage` constructors formalize the
+  distance between a plan announced and an effect verified.
+
+- **L8 `challenge_requires_merits_response`** ← SP §3, the two mandatory
+  analytical fields:
+  > "ADVERSARIAL CHECK … An entry without an adversarial check is an
+  > assertion, not a record. … COUNTER-EVIDENCE STATUS … the specific
+  > falsification condition."
+  rendered as the `Disposition` type and the evidence-reference obligation
+  on `rebuttedWithEvidence`. The machine checks a linked disposition
+  *exists*, never that it is correct — SP's "verifies structure, not
+  substance," made literal.
+
+- **L9 `criticality_cannot_suppress_typed_conflict`** ← PG §3 counter-
+  register and Module 4 P4's disclosed incompleteness; the
+  `affectedCounterRecord` bound to an event digest is the community's
+  same-hash contradiction, preserved against official re-classification.
+
+- **Cost-to-fake analyses (SEAM_TO_LEDGER_MAP.md column d)** ← PG Part II §5:
+  > "before adding any new discriminator, state what it costs a bad-faith
+  > actor to fake; if the answer is 'nothing,' it is instrumentation, not
+  > evidence."
+  This rule governs every row of the seam map and is the discipline under
+  which each relocated oracle (M5-O1..O9) is disclosed.
+
+Because Module 5's theorems are procedural and its inputs are opaque
+oracles quantified over every valuation, NONE of them asserts any payload
+true, and none maps to a v3.1 constitutional sentence. The mapping is to
+the ledger's *method*, and the method's worth rests — per PG Part II §5 —
+in externally checkable artifacts, which here are the Lean proofs
+themselves.

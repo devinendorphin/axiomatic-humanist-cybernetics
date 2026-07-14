@@ -1,5 +1,96 @@
 # AHC Verified Constitutional Kernel — Errata & Amendments
 
+## v0.12 → v0.13 (2026-07-14) — Module 5: Seam Ledger (Contested Attestation Ledger)
+
+The first module that does not close a Reviewer #2 finding but opens a new
+seam class the review surface did not previously name. Through v0.12 the
+kernel is robust against MALFORMED inputs; it is not robust against
+WELL-TYPED LIES from legitimate authorities. Its trusted inputs — the
+episode signals `issue / confirm / novel`, the danger threshold θ,
+certificate validity, the Module-4 criticality classification, and the
+Layer 0 dispositions and outputs — are naked values an authority can
+cheaply assert, and the kernel reasons only about what follows GIVEN each
+value, never about its truth.
+
+`SeamLedger.lean` (Module 5) imports the **machinery** of the Veriticide
+General Ledger — its Documentation & Standing Protocol v0.1, its
+Provenance Grading & Corpus-Absorption Protocol, and its case-file grammar
+— as a neutral formal object. The corpus, the Convention's named parties,
+and the "one mechanism" structural-identity claim stay in that repository;
+the two repositories cross-reference, they do not merge. `SeamClaim α`
+wraps a load-bearing external input as a dated, attributed, contestable
+object (authorization chain, evidence refs, custody-ladder status,
+warnings-available, counter-evidence, falsification path, affected-
+population counter-record, conflicts, status). **The deliberate omission is
+a `truth` field: the module proves no payload true.** It does not catch
+lies; it converts lying from a single administrative utterance into a
+visible multi-party act with preserved contradictions. Every theorem is
+procedural.
+
+Design record and the full seam-to-ledger map (one row per trusted input,
+with the cost-to-fake analysis and the relocated-oracle disclosures) is
+`docs/module5/SEAM_TO_LEDGER_MAP.md`; the PLOL-conformant circulation
+amendment is `docs/module5/CIRCULATION_AMENDMENT.md`.
+
+Theorems (L1–L9, 15 declarations):
+
+- **Tier A — state-machine invariants.**
+  - **L1 `no_naked_authority_bit`** / **L1' `naked_issue_no_pending`** — an
+    unaccompanied `issue` bit never initiates an emergency transition; bound
+    to the real episode machine, from `idle` a gate-failing claim stays
+    `idle`.
+  - **L2 `counterrecord_persists`(`_run`)** / **L2' `counterrecord_digest_stable`**
+    — no official transition (re-status, add-evidence, re-classify, close)
+    erases an attached counter-record or moves it off its event hash.
+  - **L3 `step_one_never_implies_step_two`** — the non-negotiable firewall:
+    a community/ledger trigger yields only step-one acts (preserve /
+    disclose / audit / demand provisional restraint), never a step-two
+    (punitive / irreversible) authorization. This is what keeps the ledger
+    from becoming a new unconstrained authority; "Veriticide" is never an
+    automatic trigger for coercion.
+  - **L4 `remedy_label_not_remedy`** / `remedy_stages_distinct` — a
+    remediation in stage `planIssued` cannot close a Structural Review; the
+    lifecycle `planIssued / implementationBegun / implementationVerified /
+    effectVerified / failed / contested` is distinct by construction, so a
+    plan announced is never silently read as an effect verified.
+  - **L5 `contested_cannot_unlock_irreversible`** + **L5'
+    `seam_trace_stays_inside`** / L5'' `contested_blocks_trace` — a
+    materially contested claim unlocks nothing on its own, and the guard
+    COMPOSES with the v0.12 exposure layer: an uncontested authorized
+    sub-causal trace still stays inside the certified region (W21 verbatim),
+    a contested one is refused.
+- **Tier B — opaque-predicate relations** (modelled as abstract predicates
+  the theorems quantify over EVERY valuation of, exactly as Module 3 treats
+  sensor honesty; the kernel checks structure, never substance; NO LLM
+  classifier decides any protected-path question):
+  `issuer_not_sole_validator`, `interested_actor_cannot_self_close`,
+  `challenge_requires_merits_response`,
+  `criticality_cannot_suppress_typed_conflict`.
+
+Relocated trust, disclosed: the wrapper relocates trust boundaries, it does
+not remove them. Nine oracles (M5-O1..O9) are named as first-class
+contestation targets in the seam map; weighted community standing (M5-O8)
+is DEFERRED pending governance machinery for representation, revocation,
+and intra-population disagreement — not stubbed with a Boolean.
+
+Deprecation (per prior review: a preserved bypass is technical debt made
+normative): v0.13 ships the wrappers ADDITIVELY alongside the naked
+`EpInput` / `Envelope` / `Event` interfaces, which are marked deprecated
+with a removal target of **v0.14**. The naked interfaces are retained only
+to keep the v0.12 theorems stable through this round; they are scheduled to
+be gated behind the wrapper.
+
+Footprint: **131 audited theorems, 60 axiom-free** — the v0.12 base of
+116/49 plus Module 5's 15 theorems, 11 of them axiom-free; the other four
+depend only on `[propext, Quot.sound]`, never `Classical.choice`. Source
+digest in `MANIFEST_v0.13.txt`. Reflexivity: the Veriticide corpus
+documents Anthropic among its subjects and this module was authored by an
+Anthropic model, IN-FRAMEWORK (near-zero convergence value; the worth is
+in the externally checkable artifacts — the proofs compile core-only with
+the published footprint, or they do not).
+
+---
+
 ## v0.11 → v0.12 (2026-07-13) — exposure-indexed certificates and trace safety (Module 1; finding R2-07)
 
 Closes the last open formal finding of the Reviewer #2 report, per the
