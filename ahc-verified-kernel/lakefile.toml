@@ -4,3 +4,9 @@ defaultTargets = ["AHCKernel"]
 
 [[lean_lib]]
 name = "AHCKernel"
+
+# Prototype repairs for v0.12 review findings V12-01…V12-06. Separate from
+# the audited kernel: not in defaultTargets, so `lake build` leaves the
+# audited build untouched. Build explicitly with `lake build Prototypes`.
+[[lean_lib]]
+name = "Prototypes"
