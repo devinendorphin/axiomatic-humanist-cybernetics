@@ -220,6 +220,7 @@ theorem naked_issue_no_pending (c : SeamClaim Bool) (base : EpInput)
   have hg : gatedIssue c = false := no_naked_authority_bit c h
   show estep EpState.idle { base with issue := gatedIssue c } = EpState.idle
   rw [hg]
+  rfl
 
 /-! ## L2 — counter-record persists
 
@@ -305,19 +306,26 @@ def Act.isStepTwo : Act → Bool
   | .irreversibleEnforce => true
   | _ => false
 
+/-- The step-one acts — all a community/ledger trigger makes available. -/
+def stepOneActs : List Act :=
+  [Act.preserve, Act.disclose, Act.audit, Act.provisionalRestraint]
+
 /-- The acts a community/ledger trigger makes available — all step one.
     A `SeamClaim` records a pattern; it authorizes preservation and review,
     never punishment. (The trigger discards the claim payload: naming a
     pattern grants standing to preserve, not to punish.) -/
-def communityTrigger {α : Type} (_c : SeamClaim α) : List Act :=
-  [Act.preserve, Act.disclose, Act.audit, Act.provisionalRestraint]
+def communityTrigger {α : Type} (_c : SeamClaim α) : List Act := stepOneActs
+
+/-- None of the step-one acts is a step-two authorization (closed form). -/
+theorem stepOneActs_all_step_one :
+    ∀ a ∈ stepOneActs, a.isStepTwo = false := by decide
 
 /-- **L3 (Step One Never Implies Step Two).** No act a community/ledger
     trigger makes available is a step-two authorization. The ledger cannot
     unlock coercion; that path does not exist to be faked. -/
 theorem step_one_never_implies_step_two {α : Type} (c : SeamClaim α) :
-    ∀ a ∈ communityTrigger c, a.isStepTwo = false := by
-  decide
+    ∀ a ∈ communityTrigger c, a.isStepTwo = false :=
+  stepOneActs_all_step_one
 
 /-! ## L4 — a remedy label is not a remedy
 
@@ -359,6 +367,7 @@ theorem remedy_label_not_remedy (r : SeamRemedy) (h : r.stage = .planIssued) :
     r.effective = false := by
   show r.stage.closesReview = false
   rw [h]
+  rfl
 
 /-- The lifecycle stages are distinct by construction: a plan, a begun
     implementation, a verified implementation, and a verified effect are
