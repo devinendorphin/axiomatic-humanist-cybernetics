@@ -227,7 +227,7 @@ The build elaborates all proofs and prints the axiom audit
 the `sorryAx` axiom in that output. Expected audit result:
 
 ```
-131 audited theorems: every one at most [propext, Quot.sound];
+133 audited theorems: every one at most [propext, Quot.sound];
 never Classical.choice
 no axioms at all (60): the T1–T7 gating theorems, the hold-floor and
   certificate-envelope theorems (hold_floor_reversible, hold_floor_severity,
@@ -242,7 +242,7 @@ no axioms at all (60): the T1–T7 gating theorems, the hold-floor and
   pointwise_admits_joint_crossing), the
   composed-machine soundness theorems (dayStep_valid, dayRun_valid),
   the Axiom I intersection theorems, and the PLOL invariance/disclosure
-  theorems P1–P8, P10–P16, and eleven of Module 5's fifteen Seam-Ledger
+  theorems P1–P8, P10–P16, and eleven of Module 5's seventeen Seam-Ledger
   theorems (counterrecord_persists, counterrecord_persists_run,
   counterrecord_digest_stable, step_one_never_implies_step_two,
   remedy_label_not_remedy, remedy_stages_distinct,
@@ -252,10 +252,14 @@ no axioms at all (60): the T1–T7 gating theorems, the hold-floor and
   The four exceedance-bridge theorems (X1–X4) and the two cross-module
   budget bounds attested_budget_bounded (P9) and
   pio_disclosed_budget_bounded (P17) route through Module 3 / Module 1
-  and carry [propext, Quot.sound]; so do Module 5's remaining four
-  (no_naked_authority_bit and its episode-machine binding
-  naked_issue_no_pending; challenge_requires_merits_response; and
-  seam_trace_stays_inside, which composes with Module 1's W21).
+  and carry [propext, Quot.sound]; so does Module 5's
+  seam_trace_stays_inside (which composes with Module 1's W21). Module 5's
+  other five axiom-bearing theorems carry [propext] alone:
+  no_naked_authority_bit and its episode-machine binding
+  naked_issue_no_pending; challenge_requires_merits_response; and the two
+  v0.14 gating theorems seam_no_naked_initiation (L10) and
+  seam_initiation_requires_accompaniment (L11), which route through
+  no_naked_authority_bit.
 ```
 
 (Counts are audit-log entries — one per `#print axioms` result;

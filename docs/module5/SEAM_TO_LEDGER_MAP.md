@@ -489,6 +489,16 @@ theorem program) follow the Tier A / Tier B split above. Two classes of decision
    or *gates* them behind the wrapper immediately changes the CI surface and the
    migration path.
 
+**Resolved (v0.13 → v0.14).** Both decisions above were ratified by the author:
+(1) the Tier B relations are modeled as **opaque predicates quantified over every
+valuation** (à la Module 3 sensor honesty); (2) v0.13 shipped the wrappers
+**additively**, and **v0.14 executed the deprecation** — `seamStep` is the
+sanctioned issuing interface, the naked issuing path is `@[deprecated seamStep]`
+in-code, and theorems L10 (`seam_no_naked_initiation`) and L11
+(`seam_initiation_requires_accompaniment`) prove no unaccompanied bit initiates a
+fresh PIO from any state. The internal `estep`/`EpInput` remain (the machine, not
+the bypass). Footprint moved 131/60 → 133/60.
+
 A third, environment-level constraint is recorded here for the author: the pinned Lean
 toolchain (`leanprover/lean4:v4.15.0` via elan) **cannot currently be installed in this
 session** — the egress policy returns 403 on the GitHub release download. GitHub CI is
