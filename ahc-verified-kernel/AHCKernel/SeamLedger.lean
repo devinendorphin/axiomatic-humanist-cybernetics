@@ -79,6 +79,16 @@
                                           population counter-record bound to
                                           an event hash survives official
                                           re-classification
+    v0.14 — gating the naked issuing interface (executes the v0.13
+    deprecation; `seamStep` is the sanctioned entry, `nakedIssue` is
+    deprecated in-code):
+      L10 seam_no_naked_initiation      — L1' lifted to EVERY episode state:
+                                          no unaccompanied bit initiates a
+                                          fresh PIO from any state
+      L11 seam_initiation_requires_accompaniment — the deployment-facing
+                                          contrapositive: sanctioned
+                                          issuance implies a non-empty
+                                          authorization chain and evidence
 
   REFLEXIVITY. The Veriticide corpus documents Anthropic among its
   subjects and this module was authored by an Anthropic model, IN-FRAMEWORK
@@ -538,5 +548,71 @@ theorem criticality_cannot_suppress_typed_conflict {α : Type} (c : SeamClaim α
     (officialReclassify c newConflicts).affectedCounterRecord = some cr := by
   show c.affectedCounterRecord = some cr
   exact h
+
+/-! ## v0.14 — gating the naked issuing interface
+
+Executes the deprecation scheduled in v0.13 (handoff boundary §6: a
+preserved bypass is technical debt made normative). Through v0.13 the
+`SeamClaim` wrapper shipped ADDITIVELY: a deployment could still build a bare
+`EpInput` and drive `estep` directly, with L1' proving only that the GATED
+path stays idle from `idle`. v0.14 makes the SeamClaim-mediated step the
+SANCTIONED issuing interface and proves the gate holds from EVERY state — no
+unaccompanied bit initiates a fresh PIO anywhere — then marks the naked
+issuing path deprecated in-code.
+
+The kernel's internal `estep`/`EpInput` remain: they are the machine, not the
+bypass. What is deprecated is the deployment act of issuing an emergency
+through an unwrapped input; `seamStep` is its replacement. -/
+
+/-- The sanctioned v0.14 issuing step: the episode machine is driven only
+    through a `SeamClaim`-wrapped input, so the emergency-initiating bit is
+    the gated one (`gatedIssue`) rather than a naked assertion. -/
+def seamStep (s : EpState) (base : EpInput) (c : SeamClaim Bool) : EpState :=
+  estep s (c.toEpInput base)
+
+/-- The naked issuing path, retained only for migration and **deprecated as
+    of v0.14**: deployments must issue through `seamStep`. (Internal kernel
+    reasoning continues to use `estep` directly; this alias names the
+    deployment-facing act that is now gated.) -/
+@[deprecated seamStep (since := "0.14")]
+def nakedIssue (s : EpState) (i : EpInput) : EpState := estep s i
+
+/-- **L10 (No Naked Initiation — general state).** The v0.13 headline L1'
+    lifted from `idle` to EVERY episode state: an unaccompanied claim (no
+    authorization chain, or no evidence) initiates no fresh PIO from any
+    state the machine can be in. The naked bit is gated everywhere, not just
+    at rest. -/
+theorem seam_no_naked_initiation (s : EpState) (base : EpInput)
+    (c : SeamClaim Bool)
+    (h : c.authorizationChain = [] ∨ c.evidenceRefs = []) :
+    epIsIssue s (c.toEpInput base) = false := by
+  have hi : (c.toEpInput base).issue = false := no_naked_authority_bit c h
+  cases s with
+  | idle => exact hi
+  | pending _ => rfl
+  | hold _ =>
+      simp only [epIsIssue]
+      cases (c.toEpInput base).layer0 with
+      | none => simp [hi]
+      | some _ => rfl
+  | overdue => rfl
+  | spent => simp only [epIsIssue, hi, Bool.and_false]
+  | confirmed => rfl
+
+/-- **L11 (Initiation Requires Accompaniment).** The deployment-facing
+    contrapositive: if the sanctioned interface initiates a fresh PIO, the
+    driving claim carried BOTH a non-empty authorization chain and at least
+    one evidence reference. Emergency issuance is now unconstructible from a
+    bare bit at the sanctioned boundary. -/
+theorem seam_initiation_requires_accompaniment (s : EpState) (base : EpInput)
+    (c : SeamClaim Bool) (h : epIsIssue s (c.toEpInput base) = true) :
+    c.authorizationChain ≠ [] ∧ c.evidenceRefs ≠ [] := by
+  refine ⟨?_, ?_⟩
+  · intro hc
+    rw [seam_no_naked_initiation s base c (Or.inl hc)] at h
+    exact Bool.noConfusion h
+  · intro he
+    rw [seam_no_naked_initiation s base c (Or.inr he)] at h
+    exact Bool.noConfusion h
 
 end AHC.SeamLedger

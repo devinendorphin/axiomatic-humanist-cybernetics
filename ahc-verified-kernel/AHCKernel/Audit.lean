@@ -171,3 +171,6 @@ open AHC
 #print axioms AHC.SeamLedger.interested_actor_cannot_self_close
 #print axioms AHC.SeamLedger.challenge_requires_merits_response
 #print axioms AHC.SeamLedger.criticality_cannot_suppress_typed_conflict
+-- v0.14: gating the naked issuing interface (L10-L11)
+#print axioms AHC.SeamLedger.seam_no_naked_initiation
+#print axioms AHC.SeamLedger.seam_initiation_requires_accompaniment
