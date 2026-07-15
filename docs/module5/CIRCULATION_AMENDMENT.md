@@ -109,11 +109,14 @@ attributed attachment, and standing to weight it is future work. If a
 reviewer finds a tenth oracle the module hides, that is a finding against
 the map.
 
-**Deprecation.** v0.13 ships the wrappers additively; the naked
-`EpInput` / `Envelope` / `Event` interfaces are marked deprecated with a
-removal target of **v0.14**. A preserved bypass is technical debt made
-normative; retaining the naked interfaces this round keeps the 116 v0.12
-theorems stable, and the gating migration is scheduled, not indefinite.
+**Deprecation.** v0.13 shipped the wrappers additively; **v0.14 executed the
+deprecation.** The sanctioned issuing interface is now `seamStep` (the
+episode machine driven through a `SeamClaim`), the naked issuing path is
+`@[deprecated seamStep]` in-code, and **L10–L11** prove the gate is total —
+no unaccompanied bit initiates a fresh PIO from any state, and sanctioned
+issuance implies a non-empty authorization chain and evidence. A preserved
+bypass is technical debt made normative; the internal `estep`/`EpInput`
+remain undeprecated (the machine, not the bypass).
 
 **CI expectations (updated).** `docs/MANIFEST_v0.13.txt`. The build asserts
 **131 audited theorems, 60 axiom-free** (v0.12's 116/49 plus Module 5's

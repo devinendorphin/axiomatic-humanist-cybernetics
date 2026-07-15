@@ -1,5 +1,47 @@
 # AHC Verified Constitutional Kernel — Errata & Amendments
 
+## v0.13 → v0.14 (2026-07-15) — gating the naked issuing interface (Module 5; executes the v0.13 deprecation)
+
+Executes the deprecation that v0.13 scheduled (handoff boundary §6: *a
+preserved bypass is technical debt made normative*). Through v0.13 the
+`SeamClaim` wrapper shipped **additively**: a deployment could still build a
+bare `EpInput` and drive `estep` directly, and L1' (`naked_issue_no_pending`)
+proved only that the *gated* path stays `idle` — and only **from** `idle`.
+
+`SeamLedger.lean` gains the sanctioned issuing interface and two theorems
+that make the gate total, plus an in-code deprecation of the naked path:
+
+- **`seamStep`** — the sanctioned v0.14 issuing step: the episode machine is
+  driven through a `SeamClaim`-wrapped input, so the emergency-initiating bit
+  is the gated one (`gatedIssue`), not a naked assertion.
+- **`nakedIssue`** — the naked issuing path, retained for migration and
+  marked **`@[deprecated seamStep (since := "0.14")]`**. The kernel's internal
+  `estep`/`EpInput` are unchanged and undeprecated — they are the machine, not
+  the bypass; what is deprecated is the *deployment act* of issuing an
+  emergency through an unwrapped input.
+- **L10 `seam_no_naked_initiation`** — L1' lifted from `idle` to EVERY
+  episode state: an unaccompanied claim (no authorization chain, or no
+  evidence) initiates no fresh PIO from `idle`, `pending`, `hold`, `overdue`,
+  `spent`, or `confirmed`. The naked bit is gated everywhere, not just at rest.
+- **L11 `seam_initiation_requires_accompaniment`** — the deployment-facing
+  contrapositive: if the sanctioned interface initiates a fresh PIO, the
+  driving claim carried BOTH a non-empty authorization chain AND at least one
+  evidence reference. Emergency issuance from a bare bit is unconstructible at
+  the sanctioned boundary.
+
+What is unchanged: the wrapper still proves no payload true (no `truth`
+field), and the nine relocated oracles M5-O1..O9 and the deferral of weighted
+community standing (M5-O8) stand as in v0.13. What changed is that the naked
+issuing surface is no longer a silent alternative — it is deprecated in-code,
+with the sanctioned interface proved to admit no unaccompanied initiation.
+
+Footprint: **133 audited theorems, 60 axiom-free** — the v0.13 footprint of
+131/60 plus L10/L11, both of which route through `no_naked_authority_bit` and
+so carry `[propext]` (never `Classical.choice`, zero `sorry`). Source digest
+in `MANIFEST_v0.14.txt`.
+
+---
+
 ## v0.12 → v0.13 (2026-07-14) — Module 5: Seam Ledger (Contested Attestation Ledger)
 
 The first module that does not close a Reviewer #2 finding but opens a new
