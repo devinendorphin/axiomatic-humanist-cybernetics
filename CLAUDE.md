@@ -24,7 +24,7 @@ verified order-theoretic core — the AHC Verified Constitutional Kernel.
 
 ## The harness
 
-The canonical working agreements, the atlas of all 20 repos, and the shared glossary live in
+The canonical working agreements, the atlas of all repos, and the shared glossary live in
 **`devinendorphin/claude-at-claude`**. Pull it in when you need the full map:
 
 ```
